@@ -1,0 +1,512 @@
+components:
+  schemas:
+    CreateResourceRequest:
+      additionalProperties: false
+      properties:
+        content:
+          type: string
+        content_type:
+          type: string
+        name:
+          type: string
+        trigger:
+          type: string
+      required:
+      - name
+      - trigger
+      - content_type
+      - content
+      type: object
+    CreateServiceRequest:
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+      required:
+      - name
+      type: object
+    ResourceDetail:
+      additionalProperties: false
+      properties:
+        content:
+          type: string
+        content_type:
+          type: string
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
+      required:
+      - id
+      - name
+      - type
+      - content
+      - content_type
+      type: object
+    ResourceResponse:
+      additionalProperties: false
+      properties:
+        content_type:
+          type: string
+        id:
+          format: int64
+          type: integer
+        last_editor:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        updated_at:
+          type: string
+      required:
+      - id
+      - name
+      - type
+      - content_type
+      - last_editor
+      - updated_at
+      type: object
+    ResourceResponseWithTotal:
+      additionalProperties: false
+      properties:
+        resources:
+          items:
+            $ref: '#/components/schemas/ResourceResponse'
+          type: array
+        total:
+          format: int64
+          type: integer
+      required:
+      - resources
+      - total
+      type: object
+    ServiceResponse:
+      additionalProperties: false
+      properties:
+        active:
+          type: boolean
+        bound_nodes:
+          format: int64
+          type: integer
+        id:
+          format: int64
+          type: integer
+        last_editor:
+          type: string
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        updated_at:
+          type: string
+        variables:
+          items:
+            $ref: '#/components/schemas/Variable'
+          type: array
+      required:
+      - id
+      - name
+      - updated_at
+      - last_editor
+      - active
+      - bound_nodes
+      - permissions
+      type: object
+    ServiceResponseWithTotals:
+      additionalProperties: false
+      properties:
+        services:
+          items:
+            $ref: '#/components/schemas/ServiceResponse'
+          type: array
+        total:
+          format: int64
+          type: integer
+      required:
+      - services
+      - total
+      type: object
+    UpdateResourceRequest:
+      additionalProperties: false
+      properties:
+        content:
+          type: string
+        content_type:
+          type: string
+        name:
+          type: string
+        trigger:
+          type: string
+      type: object
+    UpdateServiceRequest:
+      additionalProperties: false
+      properties:
+        active:
+          type: boolean
+        name:
+          type: string
+        variables:
+          items:
+            $ref: '#/components/schemas/Variable'
+          type: array
+      type: object
+    Variable:
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      required:
+      - name
+      - value
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+info:
+  description: Azion Services
+  title: Services API
+  version: 2.0.0
+openapi: 3.0.0
+paths:
+  /edge_services/:
+    get:
+      operationId: getServices
+      parameters:
+      - in: query
+        name: page
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: page_size
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: filter
+        schema:
+          type: string
+      - in: query
+        name: order_by
+        schema:
+          type: string
+      - in: query
+        name: sort
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            'application/json; version=3':
+              schema:
+                $ref: '#/components/schemas/ServiceResponseWithTotals'
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Return Services by page
+    post:
+      operationId: newService
+      requestBody:
+        content:
+          'application/json; version=3':
+            schema:
+              $ref: '#/components/schemas/CreateServiceRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            'application/json; version=3':
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+      summary: Create Service
+  /edge_services/{id}:
+    delete:
+      operationId: deleteService
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+      summary: Delete Service by ID
+    get:
+      operationId: getService
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: with_vars
+        schema:
+          type: boolean
+      responses:
+        "200":
+          content:
+            'application/json; version=3':
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Return Service by ID
+    patch:
+      operationId: patchService
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          'application/json; version=3':
+            schema:
+              $ref: '#/components/schemas/UpdateServiceRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            'application/json; version=3':
+              schema:
+                $ref: '#/components/schemas/ServiceResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+      summary: Update Service by ID
+  /edge_services/{serviceId}/resources:
+    get:
+      operationId: getResources
+      parameters:
+      - in: path
+        name: serviceId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: page
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: page_size
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: filter
+        schema:
+          type: string
+      - in: query
+        name: order_by
+        schema:
+          type: string
+      - in: query
+        name: sort
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            'application/json; version=3':
+              schema:
+                $ref: '#/components/schemas/ResourceResponseWithTotal'
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Return Service Resources by page
+    post:
+      operationId: postResource
+      parameters:
+      - in: path
+        name: serviceId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          'application/json; version=3':
+            schema:
+              $ref: '#/components/schemas/CreateResourceRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            'application/json; version=3':
+              schema:
+                $ref: '#/components/schemas/ResourceDetail'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+      summary: Create Service Resource
+  /edge_services/{serviceId}/resources/{resourceId}:
+    delete:
+      operationId: deleteResource
+      parameters:
+      - in: path
+        name: serviceId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: path
+        name: resourceId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+      summary: Delete Service Resource by ID
+    get:
+      operationId: getResource
+      parameters:
+      - in: path
+        name: serviceId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: path
+        name: resourceId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      responses:
+        "200":
+          content:
+            'application/json; version=3':
+              schema:
+                $ref: '#/components/schemas/ResourceDetail'
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Return Service Resource by ID
+    patch:
+      operationId: patchServiceResource
+      parameters:
+      - in: path
+        name: serviceId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      - in: path
+        name: resourceId
+        required: true
+        schema:
+          format: int64
+          type: integer
+      requestBody:
+        content:
+          'application/json; version=3':
+            schema:
+              $ref: '#/components/schemas/UpdateResourceRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            'application/json; version=3':
+              schema:
+                $ref: '#/components/schemas/ResourceDetail'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+      summary: Update Service Resource by ID
+security:
+- bearerAuth: []
+servers:
+- description: Local Dev
+  url: http://localhost:3002
+- description: Staging
+  url: https://stage-api.azion.net
+- description: Production
+  url: https://api.azionapi.net
