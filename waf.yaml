@@ -1,0 +1,172 @@
+openapi: 3.0.0
+info:
+  description: "Azion Web Application Firewall API"
+  version: 3.0.0
+  title: WAF
+servers:
+- url: https://api.azionapi.net
+- url: https://stage-api.azionapi.net
+tags:
+- name: WAF
+  description: WAF Product
+paths:
+  /waf/{wafId}/domains:
+    get:
+      tags:
+      - WAF
+      summary: Find domains attached to a WAF
+      operationId: getWAFDomains
+      parameters:
+      - in: path
+        name: wafId
+        description: ID of WAF to return
+        required: true
+        schema:
+            format: int64
+            type: integer
+      - in: query
+        name: name
+        description: searches WAF for name
+        required: false
+        schema:
+            type: string
+      security:
+      - JWT: []
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/WAFDomains200'
+        
+  /waf/{wafId}/waf_events:
+    get:
+      tags:
+      - WAF
+      summary: Find WAF log events
+      operationId: getWAFEvents
+      parameters:
+      - in: path
+        name: wafId
+        description: ID of WAF to return
+        required: true
+        schema:
+            format: int64
+            type: integer
+      - in: query
+        name: hour_range
+        description: Last log hours since now (it must be a integer number ranging between 1 and 72)
+        required: true
+        schema:
+            format: int64
+            type: integer
+      - name: network_list_id
+        in: query
+        description: Id of a network list
+        required: false
+        schema:
+            format: int64
+            type: integer
+      - name: domains_ids
+        in: query
+        description: Multiple domain's id (they must be separated by comma like 1233,1234)
+        required: true
+        schema:
+            type: string
+      security:
+      - JWT: []
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/WAFEvents200'
+        "400":
+          description: Bad request
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/WAFEvents400'
+        "404":
+          description: data not found
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/WAFEvents404'
+components:
+  schemas:
+    WAFDomains200:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            example:
+              id: 28852
+              name: Domain Name
+              domain: 28852f.ha.azioncdn.net
+              cnames:
+              - www.example2.io
+              - www.example.com
+            properties: {}
+        schema_version:
+          type: integer
+          example: 3
+    WAFEvents400:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            example:
+              message: Bad Request
+              error: bad_request
+            properties: {}
+        schema_version:
+          type: integer
+          example: 3
+    WAFEvents404:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            example:
+              message: Network List not found
+              error: not_found
+            properties: {}
+        schema_version:
+          type: integer
+          example: 3
+    WAFEvents200:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            example:
+              hit_count: 9290
+              rule_id: 1005
+              ip_count: 217
+              match_zone: cookies
+              path_count: 798
+              matches_on: value
+              rule_description: 'Possible SQL Injection attack: MySQL keyword (|) found in Cookies'
+            properties: {}
+        schema_version:
+          type: integer
+          example: 3
+  securitySchemes:
+    JWT:
+      description: |
+        You must inform a token to auth.
+        Usage format: `Token <TOKEN>`
+      in: header
+      name: Authorization
+      type: apiKey
