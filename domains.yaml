@@ -308,6 +308,7 @@ info:
   version: 1.0.0
 servers:
   - url: https://api.azionapi.net
+  - url: https://stage-api.azionapi.net
 components:
   schemas:
     CreateDomainRequest:
@@ -507,11 +508,6 @@ paths:
           schema:
             type: string
           example: application/json; version=3
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Token [TOKEN VALUE]
       responses:
         '200':
           description: Successful response
@@ -554,11 +550,6 @@ paths:
           schema:
             type: string
           example: application/json; version=3
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Token [TOKEN VALUE]
         - name: Content-Type
           in: header
           schema:
@@ -596,11 +587,6 @@ paths:
           schema:
             type: string
           example: application/json; version=3
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Token [TOKEN VALUE]
         - name: id
           in: path
           schema:
@@ -638,11 +624,6 @@ paths:
           schema:
             type: string
           example: application/json; version=3
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Token [TOKEN VALUE]
         - name: id
           in: path
           schema:
@@ -696,11 +677,6 @@ paths:
           schema:
             type: string
           example: application/json; version=3
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Token [TOKEN VALUE]
         - name: Content-Type
           in: header
           schema:
@@ -756,11 +732,6 @@ paths:
           schema:
             type: string
           example: application/json; version=3
-        - name: Authorization
-          in: header
-          schema:
-            type: string
-          example: Token [TOKEN VALUE]
         - name: Content-Type
           in: header
           schema:
