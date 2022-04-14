@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  description: "Azion Network List API"
+  version: 3.0.0
+  title: Network List
+servers:
+- url: https://api.azionapi.net
+- url: https://stage-api.azionapi.net
+tags:
+- name: Network List
+  description: Network List
+paths:
+  /network_lists:
+    get:
+      tags:
+      - Network List
+      summary: Find Network Lists
+      description: Addition to Network Lists existing API endpoint
+      operationId: getNetworkLists
+      parameters:
+      - name: pagination
+        in: query
+        description: Return the results paginated or not
+        required: false
+        schema:
+            type: boolean
+      security:
+      - JWT: []
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/NetworkList200'
+        "401":
+          description: unauthorized operation
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/NetworkList401'
+
+components:
+  schemas:
+    NetworkList200:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            type: object
+            example:
+              id: 2
+              last_editor: azionbrand@azion.com
+              last_modified: 2021-08-09T19:30:39.200464Z
+              list_type: countries
+              name: Azion IP Tor Exit Nodes
+            properties: {}
+        schema_version:
+          type: integer
+          example: 3
+    NetworkList401:
+      type: object
+      properties:
+        detail:
+          type: string
+          example:
+            "Authentication credentials were not provided."
+  securitySchemes:
+    JWT:
+      description: |
+        You must inform a token to auth.
+        Usage format: `Token <TOKEN>`
+      in: header
+      name: Authorization
+      type: apiKey
