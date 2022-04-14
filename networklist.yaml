@@ -33,6 +33,13 @@ paths:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/NetworkList200'
+        "401":
+          description: unauthorized operation
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/NetworkList401'
+
 components:
   schemas:
     NetworkList200:
@@ -52,6 +59,13 @@ components:
         schema_version:
           type: integer
           example: 3
+    NetworkList401:
+      type: object
+      properties:
+        detail:
+          type: string
+          example:
+            "Authentication credentials were not provided."
   securitySchemes:
     JWT:
       description: |

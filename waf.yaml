@@ -95,6 +95,12 @@ paths:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/WAFEvents404'
+        "401":
+          description: unauthorized operation
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/WAFEvents401'
 components:
   schemas:
     WAFDomains200:
@@ -162,6 +168,13 @@ components:
         schema_version:
           type: integer
           example: 3
+    WAFEvents401:
+      type: object
+      properties:
+        detail:
+          type: string
+          example:
+            "Authentication credentials were not provided."
   securitySchemes:
     JWT:
       description: |
