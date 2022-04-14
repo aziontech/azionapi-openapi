@@ -8,4 +8,5 @@ Repository containing the OpenAPI Specification YAML files for Azion APIs.
 |`domains.yaml`|Domains API, used by Edge Applications|
 |`edgefunctions.yaml`|Edge Functions API|
 |`edgenode.yaml`|Edge Node API, part of the Orchestration Architecture|
+|`realtimepurge.yaml`|Real Time Purge API|
 |`services.yaml`|Edge Services API, part of the Orchestration Architecture|
