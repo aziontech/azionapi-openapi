@@ -13,6 +13,7 @@ OpenAPI 3.0 specification for Azion APIs.
 |`services.yaml`|Edge Services API, part of the Orchestration Architecture.|
 |`waf.yaml`|WAF API, the WAF self-calibration enables you to create allowed rules that are meaningful to your application.| 
 
+
 ## License
 
 This repository is licensed under the terms of the [MIT](LICENSE.md) license.
