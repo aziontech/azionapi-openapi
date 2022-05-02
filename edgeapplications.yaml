@@ -396,6 +396,8 @@ components:
         id:
           format: int64
           type: integer
+        name:
+          type: string
         next:
           type: string
         active:
@@ -548,9 +550,6 @@ components:
     ApplicationUpdateRequest:
       additionalProperties: false
       properties:
-        id:
-          format: int64
-          type: integer
         name:
           type: string
         delivery_protocol:
@@ -660,9 +659,6 @@ components:
     ApplicationPutRequest:
       additionalProperties: false
       properties:
-        id:
-          format: int64
-          type: integer
         name:
           type: string
         delivery_protocol:
@@ -1124,9 +1120,7 @@ components:
       additionalProperties: false
       properties:
         results:
-          items:
-            $ref: '#/components/schemas/ApplicationInstancesResults'
-          type: array
+          $ref: '#/components/schemas/ApplicationInstancesResults'
         schema_version:
           format: int64
           type: integer
@@ -2442,7 +2436,7 @@ paths:
           content:
             application/json; version=3:
               schema:
-                $ref: "#/components/schemas/ApplicationInstancesGetResponse"
+                $ref: "#/components/schemas/ApplicationInstancesGetOneResponse"
         "400":
           description: Bad Request
         "403":
@@ -2522,6 +2516,132 @@ paths:
             application/json; version=3:
               schema:
                 $ref: "#/components/schemas/ApplicationInstanceResults"
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+    patch:
+      tags:
+        - Edge Applications > Edge Functions Instances
+      summary: >-
+        /edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:
+      requestBody:
+        content:
+          application/json; version=3:
+            schema:
+              $ref: '#/components/schemas/ApplicationUpdateInstanceRequest'
+              example:
+                name: Edge Function2
+                edge_function_id: 978
+                args:
+                  param:
+                    cookie:
+                      name: azion_abtes2t
+                      expiration: Wed, 04 May 2011 10:16:00 GMT
+                      max_age: 600
+                      domain: localhost
+                      path: /
+                    a:
+                      cookie_value: A_TEST
+                      prob: 0.5
+                      addresses_list: localhost:2006
+                      originid: uuid1
+                      live_ingest: false
+                      protocol_policy: http
+                      path: ''
+                      cache_key: test_a
+                      host: localhost
+      security:
+        - JWT: []
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json; version=3
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+
+            Example:
+            Content-Type: application/json
+          example: application/json
+        - name: edge_application_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: "The id of the edge application you plan to overwrite\t"
+        - name: functions_instances_id
+          in: path
+          schema:
+            type: string
+          required: true
+          description: The id of the edge function instance you plan to overwrite.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json; version=3:
+              schema:
+                $ref: "#/components/schemas/ApplicationInstanceResults"
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+    delete:
+      tags:
+        - Edge Applications > Edge Functions Instances
+      summary: >-
+        /edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:
+      security:
+        - JWT: []
+      parameters:
+        - name: edge_application_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: functions_instances_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json; version=3
+        - name: Content-Type
+          in: header
+          schema:
+            type: string
+          description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+
+            Example:
+            Content-Type: application/json
+          example: application/json
+      responses:
+        '204':
+          description: No response
         "400":
           description: Bad Request
         "403":
