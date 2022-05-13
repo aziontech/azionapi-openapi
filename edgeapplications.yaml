@@ -1429,13 +1429,8 @@ components:
         behaviors:
           type: array
           items:
-            type: object
-            properties:
-              name:
-                type: string
-              target: {}
-            required:
-            - name
+            type: object 
+            $ref: '#/components/schemas/RulesEngineBehavior'
       required:
       - name
       - criteria 
@@ -1455,13 +1450,8 @@ components:
         behaviors:
           type: array
           items:
-            type: object
-            additionalProperties: false
-            properties:
-              name:
-                type: string
-            required:
-            - name
+            type: object 
+            $ref: '#/components/schemas/RulesEngineBehavior'
       required:
       - name
       - criteria 
@@ -1482,13 +1472,8 @@ components:
         behaviors:
           type: array
           items:
-            type: object
-            additionalProperties: false
-            properties:
-              name:
-                type: string
-            required:
-            - name
+            type: object 
+            $ref: '#/components/schemas/RulesEngineBehavior'
     RulesEngineResultResponse:
       type: object
       properties:
@@ -1543,6 +1528,14 @@ components:
       - conditional
       - variable
       - operator
+    RulesEngineBehavior:
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        target: {}
+      required:
+      - name
     RulesEngineResponse:
       type: object
       additionalProperties: false
