@@ -100,9 +100,7 @@ paths:
                   type: string
                 code:
                   type: string
-                json_args:
-                  properties: {}
-                  type: object
+                json_args: {}
                 active:
                   type: boolean
               type: object
@@ -245,9 +243,7 @@ paths:
                   type: string
                 code:
                   type: string
-                json_args:
-                  properties: {}
-                  type: object
+                json_args: {}
                 active:
                   type: boolean
               type: object
@@ -333,9 +329,7 @@ paths:
                   type: string
                 code:
                   type: string
-                json_args:
-                  properties: {}
-                  type: object
+                json_args: {}
                 active:
                   type: boolean
               type: object
@@ -457,9 +451,7 @@ components:
           type: string
         code:
           type: string
-        json_args:
-          properties: {}
-          type: object
+        json_args: {}
         function_to_run:
           type: string
         initiator_type:
@@ -530,13 +522,9 @@ components:
           type: string
         code:
           type: string
-        json_args:
-          properties: {}
-          type: object
+        json_args: {}
         active:
           type: boolean
-        initiator_type:
-          type: string
       type: object
     BadRequestResponse:
       properties:
@@ -584,9 +572,7 @@ components:
           type: string
         code:
           type: string
-        json_args:
-          properties: {}
-          type: object
+        json_args: {}
         active:
           type: boolean
         initiator_type:
@@ -600,9 +586,7 @@ components:
           type: string
         code:
           type: string
-        json_args:
-          properties: {}
-          type: object
+        json_args: {}
         active:
           type: boolean
       type: object
