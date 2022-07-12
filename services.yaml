@@ -7,7 +7,7 @@ servers:
 - description: Local Dev
   url: http://localhost:3002
 - description: Staging
-  url: http://stage-api-azion.net
+  url: http://it -m -api-azion.net
 - description: Production
   url: http://api.azionapi.net
 security:
