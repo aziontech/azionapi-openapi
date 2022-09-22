@@ -1631,6 +1631,7 @@ paths:
       tags:
         - Edge Applications > Main Settings
       summary: /edge_applications
+      operationId: getApplications
       security:
         - JWT: []
       parameters:
@@ -1682,6 +1683,7 @@ paths:
       tags:
         - Edge Applications > Main Settings
       summary: /edge_applications
+      operationId: postApplication
       requestBody:
         content:
           application/json; version=3:
@@ -1743,6 +1745,7 @@ paths:
       tags:
         - Edge Applications > Main Settings
       summary: /edge_applications/:id
+      operationId: getApplication
       security:
         - JWT: []
       parameters:
@@ -1777,6 +1780,7 @@ paths:
       tags:
         - Edge Applications > Main Settings
       summary: /edge_applications/:id
+      operationId: deleteApplication
       security:
         - JWT: []
       parameters:
@@ -1808,6 +1812,7 @@ paths:
       tags:
         - Edge Applications > Main Settings
       summary: /edge_applications/:id
+      operationId: patchApplication
       requestBody:
         content:
           application/json; version=3:
@@ -1876,6 +1881,7 @@ paths:
       tags:
         - Edge Applications > Main Settings
       summary: /edge_applications/:id
+      operationId: putApplication
       requestBody:
         content:
           application/json; version=3:
@@ -1946,6 +1952,7 @@ paths:
       tags:
         - Edge Applications > Cache Settings
       summary: /edge_applications/{edge_application_id}/cache_settings
+      operationId: getCacheSettings
       security:
         - JWT: []
       parameters:
@@ -2003,6 +2010,7 @@ paths:
       tags:
         - Edge Applications > Cache Settings
       summary: /edge_applications/:edge_application_id:/cache_settings
+      operationId: postCacheSettings
       requestBody:
         content:
           application/json; version=3:
@@ -2069,6 +2077,7 @@ paths:
         - Edge Applications > Cache Settings
       summary: >-
         /edge_applications/:edge_application_id:/cache_settings/:cache_settings_id:
+      operationId: getCacheSetting
       security:
         - JWT: []
       parameters:
@@ -2110,6 +2119,7 @@ paths:
       tags:
         - Edge Applications > Cache Settings
       summary: /edge_applications/:edge_application_id:/cache_settings/ca
+      operationId: putCacheSetting
       requestBody:
         content:
           application/json; version=3:
@@ -2175,11 +2185,11 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-  /edge_applications/{edge_application_id}/cache_settings/{cache_settings}:
     delete:
       tags:
         - Edge Applications > Cache Settings
       summary: '/edge_applications/:edge_application_id:/cache_settings/:cache_settings:'
+      operationId: deleteCacheSetting
       security:
         - JWT: []
       parameters:
@@ -2189,7 +2199,7 @@ paths:
           schema:
             format: int64
             type: integer
-        - name: cache_settings
+        - name: cache_settings_id
           in: path
           required: true
           schema:
@@ -2229,6 +2239,7 @@ paths:
         - Edge Applications > Cache Settings
       summary: >-
         /edge_applications/:edge_application_id:/cache_settings/:cache_settings_id:
+      operationId: patchCacheSetting
       requestBody:
         content:
           application/json; version=3:
@@ -2255,7 +2266,7 @@ paths:
           schema:
             format: int64
             type: integer
-        - name: cache_settings
+        - name: cache_settings_id
           in: path
           required: true
           schema:
@@ -2288,6 +2299,7 @@ paths:
       tags:
         - Edge Applications > Edge Functions Instances
       summary: /edge_applications/:edge_application_id:/functions_instances
+      operationId: getFunctionInstances
       security:
         - JWT: []
       parameters:
@@ -2345,6 +2357,7 @@ paths:
       tags:
         - Edge Applications > Edge Functions Instances
       summary: edge_application/:edge_application_id:/functions_instances
+      operationId: postFunctionInstances
       requestBody:
         content:
           application/json; version=3:
@@ -2402,6 +2415,7 @@ paths:
         - Edge Applications > Edge Functions Instances
       summary: >-
         /edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:
+      operationId: getFunctionInstance
       security:
         - JWT: []
       parameters:
@@ -2445,6 +2459,7 @@ paths:
         - Edge Applications > Edge Functions Instances
       summary: >-
         /edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:
+      operationId: putFunctionInstance
       requestBody:
         content:
           application/json; version=3:
@@ -2524,6 +2539,7 @@ paths:
         - Edge Applications > Edge Functions Instances
       summary: >-
         /edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:
+      operationId: patchFunctionInstance
       requestBody:
         content:
           application/json; version=3:
@@ -2603,6 +2619,7 @@ paths:
         - Edge Applications > Edge Functions Instances
       summary: >-
         /edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:
+      operationId: deleteFunctionInstance
       security:
         - JWT: []
       parameters:
@@ -2650,6 +2667,7 @@ paths:
       tags:
         - Edge Applications > Origins
       summary: '/edge_applications/{edge_application_id}/origins'
+      operationId: getOrigins
       security:
         - JWT: []
       parameters:
@@ -2685,6 +2703,7 @@ paths:
       tags:
         - Edge Applications > Origins
       summary: /edge_applications/{edge_application_id}/origins
+      operationId: postOrigins
       requestBody:
         content:
           application/json; version=3:
@@ -2749,6 +2768,7 @@ paths:
       tags:
         - Edge Applications > Origins
       summary: '/edge_applications/{edge_application_id}/origins/{origin_key}'
+      operationId: getOrigin
       security:
         - JWT: []
       parameters:
@@ -2790,6 +2810,7 @@ paths:
       tags:
         - Edge Applications > Origins
       summary: '/edge_applications/{edge_application_id}/origins/{origin_id}'
+      operationId: deleteOrigin
       security:
         - JWT: []
       parameters:
@@ -2827,6 +2848,7 @@ paths:
       tags:
         - Edge Applications > Origins
       summary: '/edge_applications/{edge_application_id}/origins/{origin_id}'
+      operationId: putOrigin
       requestBody:
         content:
           application/json; version=3:
@@ -2895,6 +2917,7 @@ paths:
       tags:
         - Edge Applications > Origins
       summary: '/edge_applications/:edge_application_id:/origins/:origin_id:'
+      operationId: patchOrigin
       requestBody:
         content:
           application/json; version=3:
@@ -2964,6 +2987,7 @@ paths:
       tags:
         - Edge Applications > Rules Engine
       summary: '/edge_applications/{edge_application_id}/rules_engine/{phase}/rules'
+      operationId: getRules
       security:
         - JWT: []
       parameters:
@@ -3026,6 +3050,7 @@ paths:
       tags:
         - Edge Applications > Rules Engine
       summary: /edge_applications/{edge_application_id}/rules_engine/{phase}/rules
+      operationId: postRules
       description: |-
         Check below the list of behaviors that can be applied:
 
@@ -3124,6 +3149,7 @@ paths:
       tags:
         - Edge Applications > Rules Engine
       summary: /edge_applications/{edge_application_id}/rules_engine/{phase}/rules
+      operationId: deleteRule
       security:
         - JWT: []
       parameters:
@@ -3169,6 +3195,7 @@ paths:
         - Edge Applications > Rules Engine
       summary: >-
         /edge_applications/:edge_application_id:/rules_engine/:phase:/rules/:rule_id:
+      operationId: putRule
       requestBody:
         content:
           application/json; version=3:
@@ -3245,6 +3272,7 @@ paths:
         - Edge Applications > Rules Engine
       summary: >-
         /edge_applications/:edge_application_id:/rules_engine/:phase:/rules/:rule_id:
+      operationId: patchRule
       requestBody:
         content:
           application/json; version=3:

@@ -643,12 +643,10 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-          
-  /domains/{domain_id}:
     put:
       tags:
         - Domains
-      summary: /domains:/:domain_id
+      summary: /domains:/:id
       description: >-
         It overwrites all fields of a domain, while preserving the id. Optional
         fields not filled in will be replaced by the default values.
@@ -682,7 +680,7 @@ paths:
           schema:
             type: string
           example: application/json
-        - name: domain_id
+        - name: id
           in: path
           schema:
             type: string
@@ -707,7 +705,7 @@ paths:
     patch:
       tags:
         - Domains
-      summary: /domains/:domain_id
+      summary: /domains/:id
       description: >-
         It updates one or more fields in a Domain, preserving the value of the
         fields not informed.
@@ -737,7 +735,7 @@ paths:
           schema:
             type: string
           example: application/json
-        - name: domain_id
+        - name: id
           in: path
           schema:
             type: string
