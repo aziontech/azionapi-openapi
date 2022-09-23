@@ -16,6 +16,9 @@ jobs:
     container:
       image: ubuntu:18.04
     steps:
+      - name: Setup Env
+        run: apt-get update && apt-get install git
+
       - name: Setting GIT
         run: git config --global url."https://${{ secrets.GLOBAL_TOKEN }}:x-oauth-basic@github.com/aziontech".insteadOf "https://github.com/aziontech"
 
