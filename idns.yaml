@@ -1,0 +1,558 @@
+openapi: 3.0.0
+
+info:
+  title: Intelligent DNS
+  version: 3.0.0
+  description: Azion Intelligent DNS API
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
+
+servers:
+- url: https://api.azionapi.net
+
+tags:
+  - name: Zones
+    description: Intelligent DNS hosted zones
+  - name: Records
+    description: Intelligent DNS zone records
+  - name: DNSSEC
+    description: Options for the Domain Name System Security Extensions
+
+components:
+  schemas:
+    Zone:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Hosted zone id
+        name:
+          type: string
+          description: Hosted zone name
+        domain:
+          type: string
+          description: Hosted zone domain
+        is_active:
+          type: boolean
+          description: If hosted zone is active
+        retry:
+          type: integer
+          nullable: true
+        nx_ttl:
+          type: integer
+          nullable: true
+        soa_ttl:
+          type: integer
+          nullable: true
+        refresh:
+          type: integer
+          nullable: true
+        expiry:
+          type: integer
+          nullable: true
+        nameservers:
+          type: array
+          description: List of nameservers
+          nullable: true
+          items:
+            type: string
+
+    GetZonesResponse:
+      type: object
+      description: Object returned by get zones
+      properties:
+        schema_version:
+          type: integer
+          description: The schema version
+        count:
+          type: integer
+          description: Number of records
+        total_pages:
+          type: integer
+          description: The total pages
+        links:
+          type: object
+          properties:
+            previous:
+              type: string
+              nullable: true
+            next:
+              type: string
+              nullable: true
+        results:
+          type: array
+          description: Hosted zones collection
+          items:
+            $ref: '#/components/schemas/Zone'
+
+    GetZoneResponse:
+      type: object
+      description: Object returned by get zone
+      properties:
+        schema_version:
+          type: integer
+          description: The schema version
+        results:
+          $ref: '#/components/schemas/Zone'
+
+    PostOrPutZoneResponse:
+      type: object
+      description: Object returned by create or update zone
+      properties:
+        schema_version:
+          type: integer
+          description: The schema version
+        results:
+          type: array
+          description: The created hosted zone
+          items:
+            $ref: '#/components/schemas/Zone'
+
+    Record:
+      type: object
+      properties:
+        record_id:
+          type: integer
+        entry:
+          type: string
+        description:
+          type: string
+        answers_list:
+          type: array
+          items:
+            type: string
+        policy:
+          type: string
+        record_type:
+          type: string
+        ttl:
+          type: integer
+
+    GetRecordsResponse:
+      type: object
+      description: Object returned by get zone record
+      properties:
+        schema_version:
+          type: integer
+          description: The schema version
+        count:
+          type: integer
+          description: Number of records
+        total_pages:
+          type: integer
+          description: The total pages
+        links:
+          type: object
+          properties:
+            previous:
+              type: string
+              nullable: true
+            next:
+              type: string
+              nullable: true
+        results:
+          type: object
+          properties:
+            zone_id:
+              type: integer
+            domain:
+              type: string
+            records:
+              type: array
+              description: Zone records collection
+              items:
+                $ref: '#/components/schemas/Record'
+
+    PostOrPutRecordResponse:
+      type: object
+      description: Object returned by create or update zone record
+      properties:
+        schema_version:
+          type: integer
+          description: The schema version
+        results:
+          $ref: '#/components/schemas/Record'
+
+    DnsSec:
+      type: object
+      properties:
+        is_enabled:
+          type: boolean
+        status:
+          type: string
+          enum: [unconfigured, waiting, ready]
+        delegation_signer:
+          type: object
+          properties:
+            digest_type:
+              type: object
+              properties:
+                id:
+                  type: integer
+                slug:
+                  type: string
+        algorithm_type:
+          type: object
+          properties:
+            id:
+              type: integer
+            slug:
+              type: string
+        digest:
+          type: string
+        key_tag:
+          type: integer
+          minimum: 1
+          maximum: 65535
+
+    GetOrPatchDnsSecResponse:
+      type: object
+      description: Object returned by get zone DNSSEC
+      properties:
+        schema_version:
+          type: integer
+          description: The schema version
+        results:
+          $ref: '#/components/schemas/DnsSec'
+
+    ErrorsResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: string
+
+    ErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+
+  parameters:
+    ZoneId:
+      name: zone_id
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The hosted zone id
+
+    RecordId:
+      name: record_id
+      in: path
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The zone record id
+
+  securitySchemes:
+    tokenAuth:
+      in: header
+      type: apiKey
+      name: Authorization
+      description: |
+        You must inform a token to auth.
+        Usage format: `Token <TOKEN>`
+
+security:
+  - tokenAuth: []
+
+paths:
+  /intelligent_dns:
+    get:
+      summary: Get a collection of Intelligent DNS zones
+      tags: [Zones]
+      operationId: getZones
+      responses:
+        '200':
+          description: Zones collection retrieved
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/GetZonesResponse'
+        '400':
+          description: Error
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorsResponse'
+
+    post:
+      summary: Add a new Intelligent DNS zone
+      tags: [Zones]
+      operationId: postZone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zone'
+            example:
+              name: New Intelligent DNS zone
+              domain: new.domain.com
+              is_active: true
+      responses:
+        '201':
+          description: Zone added
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/PostOrPutZoneResponse'
+        '400':
+          description: Error
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorsResponse'
+
+  /intelligent_dns/{zone_id}:
+    parameters:
+      - $ref: '#/components/parameters/ZoneId'
+
+    get:
+      summary: Get an Intelligent DNS hosted zone
+      tags: [Zones]
+      operationId: getZone
+      responses:
+        '200':
+          description: Zone retrieved
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/GetZoneResponse'
+        '404':
+          description: Zone not found
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    put:
+      summary: Update an Intelligent DNS hosted zone
+      tags: [Zones]
+      operationId: putZone
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zone'
+            example:
+              name: Update Intelligent DNS zone
+              domain: other.domain.com
+              is_active: true
+      responses:
+        '201':
+          description: Zone updated
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/PostOrPutZoneResponse'
+        '400':
+          description: Zone update error
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorsResponse'
+
+    delete:
+      summary: Remove an Intelligent DNS hosted zone
+      tags: [Zones]
+      operationId: deleteZone
+      responses:
+        '204':
+          description: Zone removed
+          content:
+            application/json; version=3:
+              schema:
+                type: string
+                nullable: true
+        '404':
+          description: Zone not found
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+# NOTE: Although the PATCH method exists in the Azion's API,
+#       the server does not implement it. Leaving here for
+#       future reference.
+#
+#    patch:
+#      summary: Change an Intelligent DNS hosted zone
+#      requestBody:
+#        content:
+#          application/json:
+#            schema:
+#              $ref: '#/components/schemas/Zone'
+#            example:
+#              name: Change Intelligent DNS zone
+#              domain: new.domain.com
+#              is_active: false
+#      responses:
+#        '201':
+#          description: Zone changed
+#          content:
+#            application/json; version=3:
+#              schema:
+#                $ref: '#/components/schemas/PostOrPutZoneResponse'
+#        '400':
+#          description: Zone change error
+#          content:
+#            application/json; version=3:
+#              schema:
+#                $ref: '#/components/schemas/ErrorsResponse'
+
+  /intelligent_dns/{zone_id}/records:
+    parameters:
+      - $ref: '#/components/parameters/ZoneId'
+
+    get:
+      summary: Get a collection of Intelligent DNS zone records
+      tags: [Records]
+      operationId: getZoneRecords
+      responses:
+        '200':
+          description: Zones collection retrieved
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/GetRecordsResponse'
+        '400':
+          description: Error
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorsResponse'
+
+    post:
+      summary: Create a new Intelligent DNS zone record
+      tags: [Records]
+      operationId: postZoneRecord
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Record'
+            example:
+              record_type: A
+              entry: site
+              description: Site record
+              ttl: 3600
+              answers_list: [1.2.3.4, 5.6.7.8]
+      responses:
+        '201':
+          description: Record added
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/PostOrPutRecordResponse'
+        '400':
+          description: Error
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorsResponse'
+
+  /intelligent_dns/{zone_id}/records/{record_id}:
+    parameters:
+      - $ref: '#/components/parameters/ZoneId'
+      - $ref: '#/components/parameters/RecordId'
+
+    put:
+      summary: Update an Intelligent DNS zone record
+      tags: [Records]
+      operationId: putZoneRecord
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Record'
+            example:
+              record_type: A
+              entry: site
+              description: Site record
+              ttl: 3600
+              answers_list: [1.2.3.4, 5.6.7.8, 1.1.2.2]
+      responses:
+        '200':
+          description: Record updated
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/PostOrPutRecordResponse'
+        '400':
+          description: Record update error
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorsResponse'
+
+    delete:
+      summary: Remove an Intelligent DNS zone record
+      tags: [Records]
+      operationId: deleteZoneRecord
+      responses:
+        '204':
+          description: Record removed
+          content:
+            application/json; version=3:
+              schema:
+                type: string
+                nullable: true
+        '404':
+          description: Record not found
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /intelligent_dns/{zone_id}/dnssec:
+    parameters:
+      - $ref: '#/components/parameters/ZoneId'
+
+    get:
+      summary: Retrieve the DNSSEC zone status
+      tags: [DNSSEC]
+      operationId: getZoneDnsSec
+      responses:
+        '200':
+          description: DNSSEC status retrieved
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/GetOrPatchDnsSecResponse'
+        '400':
+          description: Error
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorsResponse'
+
+    patch:
+      summary: Update the DNSSEC zone
+      tags: [DNSSEC]
+      operationId: putZoneDnsSec
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DnsSec'
+            example:
+              is_enabled: true
+      responses:
+        '201':
+          description: Zone updated
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/GetOrPatchDnsSecResponse'
+        '400':
+          description: Zone update error
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorsResponse'
+
