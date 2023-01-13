@@ -10,9 +10,10 @@ OpenAPI 3.0 specification for Azion APIs.
 |`edgeapplications.yaml`|Edge Applications allows you to check, remove and/or update your existing settings, as well as creating new ones.|
 |`edgefunctions.yaml`|Edge Functions API.|
 |`edgenode.yaml`|Edge Node API, part of the Orchestration Architecture.|
+|`idns.yaml`|Intelligent DNS API.|
 |`realtimepurge.yaml`|Real-Time Purge API enables you to purge a cache entry before its TTL for Edge Caching or L2 Caching|
 |`services.yaml`|Edge Services API, part of the Orchestration Architecture.|
-|`waf.yaml`|WAF API, the WAF self-calibration enables you to create allowed rules that are meaningful to your application.| 
+|`waf.yaml`|WAF API, the WAF self-calibration enables you to create allowed rules that are meaningful to your application.|
 
 ## License
 
