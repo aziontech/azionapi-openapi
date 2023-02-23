@@ -156,7 +156,7 @@ components:
           properties:
             zone_id:
               type: integer
-            domain:
+            zone_domain:
               type: string
             records:
               type: array
