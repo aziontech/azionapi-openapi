@@ -161,7 +161,7 @@ info:
     *   **X-ratelimit-reset:** is the date and time, in IOS 8601 format, which
     represents the point in the future when the time-frame will be closed and
     when the limits will, therefore, be reset.
-        
+
 
     Example of HTTP response headers and a request:
 
@@ -193,7 +193,7 @@ info:
 
 
     *   **X-ratelimit-limit by product**
-        
+
 
     The *X-ratelimit limit* variations by product are the following:
 
@@ -202,7 +202,7 @@ info:
 
     *   **Real-Time Purge:** 200 requests per minute; except for the Wildcard,
     which is 2000 a day.
-        
+
 
     > The rate-limit values are based on the client_id.
 
@@ -232,7 +232,7 @@ info:
     default ordering is ascending. | Depends on the fields available from the
     endpoint structure |
 
-    | sort | Defines which ordering to be used: ascending or descending. | asc 
+    | sort | Defines which ordering to be used: ascending or descending. | asc
     <br>  <br>desc |
 
     | page | Identifies which page should be returned, if the return is
@@ -362,7 +362,7 @@ components:
       required:
       - previous
       - next
-      type: object  
+      type: object
     ApplicationOrigins:
       additionalProperties: false
       properties:
@@ -403,11 +403,21 @@ components:
         delivery_protocol:
           type: string
         http_port:
-          format: int64
-          type: integer
+          oneOf:
+            - type: integer
+              format: int64
+            - type: array
+              items:
+                type: integer
+                format: int64
         https_port:
-          format: int64
-          type: integer
+          oneOf:
+            - type: array
+              items:
+                type: integer
+                format: int64
+            - type: integer
+              format: int64
         minimum_tls_version:
           type: string
         application_acceleration:
@@ -502,11 +512,21 @@ components:
         delivery_protocol:
           type: string
         http_port:
-          format: int64
-          type: integer
+          oneOf:
+            - type: integer
+              format: int64
+            - type: array
+              items:
+                type: integer
+                format: int64
         https_port:
-          format: int64
-          type: integer
+          oneOf:
+            - type: array
+              items:
+                type: integer
+                format: int64
+            - type: integer
+              format: int64
         minimum_tls_version:
           type: string
         application_acceleration:
@@ -553,11 +573,21 @@ components:
         delivery_protocol:
           type: string
         http_port:
-          format: int64
-          type: integer
+          oneOf:
+            - type: integer
+              format: int64
+            - type: array
+              items:
+                type: integer
+                format: int64
         https_port:
-          format: int64
-          type: integer
+          oneOf:
+            - type: array
+              items:
+                type: integer
+                format: int64
+            - type: integer
+              format: int64
         minimum_tls_version:
           type: string
         active:
@@ -606,11 +636,21 @@ components:
         delivery_protocol:
           type: string
         http_port:
-          format: int64
-          type: integer
+          oneOf:
+            - type: integer
+              format: int64
+            - type: array
+              items:
+                type: integer
+                format: int64
         https_port:
-          format: int64
-          type: integer
+          oneOf:
+            - type: array
+              items:
+                type: integer
+                format: int64
+            - type: integer
+              format: int64
         minimum_tls_version:
           type: string
         active:
@@ -662,11 +702,21 @@ components:
         delivery_protocol:
           type: string
         http_port:
-          format: int64
-          type: integer
+          oneOf:
+            - type: integer
+              format: int64
+            - type: array
+              items:
+                type: integer
+                format: int64
         https_port:
-          format: int64
-          type: integer
+          oneOf:
+            - type: array
+              items:
+                type: integer
+                format: int64
+            - type: integer
+              format: int64
         minimum_tls_version:
           type: string
         active:
@@ -1418,20 +1468,20 @@ components:
       properties:
         name:
           type: string
-        criteria: 
-          type: array 
+        criteria:
+          type: array
           items:
-            type: array 
+            type: array
             items:
               $ref: '#/components/schemas/RulesEngineCriteria'
         behaviors:
           type: array
           items:
-            type: object 
+            type: object
             $ref: '#/components/schemas/RulesEngineBehavior'
       required:
       - name
-      - criteria 
+      - criteria
       - behaviors
     UpdateRulesEngineRequest:
       type: object
@@ -1439,20 +1489,20 @@ components:
       properties:
         name:
           type: string
-        criteria: 
-          type: array 
+        criteria:
+          type: array
           items:
-            type: array 
+            type: array
             items:
               $ref: '#/components/schemas/RulesEngineCriteria'
         behaviors:
           type: array
           items:
-            type: object 
+            type: object
             $ref: '#/components/schemas/RulesEngineBehavior'
       required:
       - name
-      - criteria 
+      - criteria
       - behaviors
 
     PatchRulesEngineRequest:
@@ -1461,16 +1511,16 @@ components:
       properties:
         name:
           type: string
-        criteria: 
-          type: array 
+        criteria:
+          type: array
           items:
-            type: array 
+            type: array
             items:
               $ref: '#/components/schemas/RulesEngineCriteria'
         behaviors:
           type: array
           items:
-            type: object 
+            type: object
             $ref: '#/components/schemas/RulesEngineBehavior'
     RulesEngineResultResponse:
       type: object
@@ -1483,7 +1533,7 @@ components:
         phase:
           type: string
         behaviors:
-          type: array 
+          type: array
           items:
             type: object
             properties:
@@ -1492,13 +1542,13 @@ components:
               target: {}
             required:
             - name
-        criteria: 
-          type: array 
+        criteria:
+          type: array
           items:
-            type: array 
+            type: array
             items:
               $ref: '#/components/schemas/RulesEngineCriteria'
-        is_active: 
+        is_active:
           type: boolean
         order:
           type: integer
@@ -1580,7 +1630,7 @@ components:
           format: int64
       required:
       - results
-      - schema_version    
+      - schema_version
   securitySchemes:
     JWT:
       description: |
