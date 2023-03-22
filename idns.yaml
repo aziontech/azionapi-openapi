@@ -109,7 +109,7 @@ components:
           items:
             $ref: '#/components/schemas/Zone'
 
-    Record:
+    RecordGet:
       type: object
       properties:
         record_id:
@@ -124,6 +124,30 @@ components:
             type: string
         policy:
           type: string
+        weight:
+          type: integer
+        record_type:
+          type: string
+        ttl:
+          type: integer
+
+    RecordPostOrPut:
+      type: object
+      properties:
+        id:
+          type: integer
+        entry:
+          type: string
+        description:
+          type: string
+        answers_list:
+          type: array
+          items:
+            type: string
+        policy:
+          type: string
+        weight:
+          type: integer
         record_type:
           type: string
         ttl:
@@ -162,7 +186,7 @@ components:
               type: array
               description: Zone records collection
               items:
-                $ref: '#/components/schemas/Record'
+                $ref: '#/components/schemas/RecordGet'
 
     PostOrPutRecordResponse:
       type: object
@@ -172,7 +196,7 @@ components:
           type: integer
           description: The schema version
         results:
-          $ref: '#/components/schemas/Record'
+          $ref: '#/components/schemas/RecordPostOrPut'
 
     DnsSec:
       type: object
@@ -192,19 +216,19 @@ components:
                   type: integer
                 slug:
                   type: string
-        algorithm_type:
-          type: object
-          properties:
-            id:
-              type: integer
-            slug:
+            algorithm_type:
+              type: object
+              properties:
+                id:
+                  type: integer
+                slug:
+                  type: string
+            digest:
               type: string
-        digest:
-          type: string
-        key_tag:
-          type: integer
-          minimum: 1
-          maximum: 65535
+            key_tag:
+              type: integer
+              minimum: 1
+              maximum: 65535
 
     GetOrPatchDnsSecResponse:
       type: object
@@ -435,7 +459,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Record'
+              $ref: '#/components/schemas/RecordPostOrPut'
             example:
               record_type: A
               entry: site
@@ -469,7 +493,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Record'
+              $ref: '#/components/schemas/RecordPostOrPut'
             example:
               record_type: A
               entry: site
