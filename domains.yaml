@@ -409,10 +409,6 @@ components:
         schema_version:
           format: int64
           type: integer
-        domain_name:
-          type: string
-        environment:
-          type: string
         links:
           $ref: '#/components/schemas/DomainLinks'
           type: object
@@ -424,8 +420,6 @@ components:
       - count
       - total_pages
       - schema_version
-      - domain_name
-      - environment
       - links
       - results
       type: object
