@@ -430,6 +430,8 @@ components:
           type: boolean
         web_application_firewall:
           type: boolean
+        supported_ciphers:
+          type: string
       type: object
       required:
       - id
@@ -527,6 +529,8 @@ components:
           type: boolean
         web_application_firewall:
           type: boolean
+        supported_ciphers:
+          type: string
       type: object
       required:
       - id
@@ -582,6 +586,8 @@ components:
           type: boolean
         web_application_firewall:
           type: boolean
+        supported_ciphers:
+          type: string
       type: object
     ApplicationUpdateResponse:
       additionalProperties: false
@@ -635,6 +641,8 @@ components:
           type: boolean
         web_application_firewall:
           type: boolean
+        supported_ciphers:
+          type: string
       type: object
       required:
       - id
@@ -691,6 +699,8 @@ components:
           type: boolean
         web_application_firewall:
           type: boolean
+        supported_ciphers:
+          type: string
       type: object
       required:
       - name
