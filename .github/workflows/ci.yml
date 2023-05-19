@@ -27,6 +27,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
       - name: OpenAPI Lint Checks
         uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
         with:
