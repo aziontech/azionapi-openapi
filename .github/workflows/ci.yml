@@ -33,7 +33,7 @@ jobs:
 
       - name: Git Version
         id: version
-        uses: codacy/git-version@2.18.0
+        uses: codacy/git-version@2.7.1
 
       - name: OpenAPI Lint Checks
         uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
