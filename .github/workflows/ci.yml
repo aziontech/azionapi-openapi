@@ -19,6 +19,9 @@ jobs:
       - name: Setup Env
         run: apt-get update && apt-get install -y git nodejs npm
 
+      - name: test git version
+        run: git --version
+
       - name: Setting GIT
         run: git config --global url."https://${{ secrets.GLOBAL_TOKEN }}:x-oauth-basic@github.com/aziontech".insteadOf "https://github.com/aziontech"
 
@@ -30,10 +33,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-
-      - name: Git Version
-        id: version
-        uses: codacy/git-version@2.7.1
 
       - name: OpenAPI Lint Checks
         uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
