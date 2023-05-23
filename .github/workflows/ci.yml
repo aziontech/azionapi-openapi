@@ -29,6 +29,8 @@ jobs:
           make prefix=/usr/local all
           sudo make prefix=/usr/local install
           exec bash
+          cd ..
+          cd ..
 
       - name: test git version
         run: git --version
