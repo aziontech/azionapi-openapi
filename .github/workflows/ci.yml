@@ -17,7 +17,18 @@ jobs:
       image: ubuntu:18.04
     steps:
       - name: Setup Env
-        run: apt-get update && apt-get install -y git nodejs npm
+        run: apt-get update && apt-get install -y nodejs npm libz-dev libssl-dev libcurl4-gnutls-dev libexpat1-dev gettext cmake gcc
+
+      - name: Install git
+        run: |
+          mkdir tmp
+          cd /tmp
+          curl -o git.tar.gz https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.26.2.tar.gz
+          tar -zxf git.tar.gz
+          cd git-*
+          make prefix=/usr/local all
+          sudo make prefix=/usr/local install
+          exec bash
 
       - name: test git version
         run: git --version
