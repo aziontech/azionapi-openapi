@@ -54,7 +54,10 @@ jobs:
           path: './gosdk'
 
       - name: test (pwd
-        run: pwd
+        run: |
+          pwd
+          cd gosdk
+          pwd
 
       - uses: actions/setup-node@v3
         with:
