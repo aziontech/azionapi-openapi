@@ -47,6 +47,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: aziontech/azionapi-go-sdk
+          path: './gosdk'
+
+      - name: test (pwd
+        run: pwd
+
       - uses: actions/setup-node@v3
         with:
           node-version: 14
