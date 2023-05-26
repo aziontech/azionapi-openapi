@@ -66,6 +66,8 @@ jobs:
           suffix=".yaml"
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             removed=${file#"$suffix"}
-            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./gosdk/$removed --package-name $removed;\
+            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./gosdk/test --package-name $removed;\
           done
       
+      - name: test generation
+        run: ls gosdk
