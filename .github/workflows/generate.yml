@@ -15,6 +15,10 @@ jobs:
       - name: Setup Env
         run: apt-get update && apt-get install -y npm git 
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 14
+
       - name: install openapi-generator
         run: npm install @openapitools/openapi-generator-cli -g
 
@@ -45,10 +49,6 @@ jobs:
         with:
           repository: aziontech/azionapi-go-sdk
           path: './gosdk'
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 14
 
       #get all .yaml files which were added/modified
       - name: Get changed files
