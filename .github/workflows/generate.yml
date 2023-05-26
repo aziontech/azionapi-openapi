@@ -13,7 +13,7 @@ jobs:
       image: ubuntu:18.04
     steps:
       - name: Setup Env
-        run: apt-get update && apt-get install -y npm git 
+        run: apt-get update && apt-get install -y npm curl
 
       - uses: actions/setup-node@v3
         with:
@@ -63,6 +63,6 @@ jobs:
           suffix=".yaml"
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             removed=${file#"$suffix"}
-            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./gosdk/$removed;\
+            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./gosdk/$removed --package-name $removed;\
           done
       
