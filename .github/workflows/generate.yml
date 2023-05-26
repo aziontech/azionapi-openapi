@@ -1,5 +1,4 @@
-
-name: CI
+name: Generate
 
 on:
   push:
@@ -7,24 +6,17 @@ on:
   pull_request:
     branches: [ poc-automation ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-env:
-  DIR: $(pwd)
-
 jobs:
   test_job:
     runs-on: ubuntu-latest
     container:
       image: ubuntu:18.04
     steps:
-      - name: test env
-        run: echo $DIR
       - name: Setup Env
-        run: apt-get update && apt-get install -y nodejs npm
-      - name: install dependencies
-        run: apt-get install -y curl dh-autoreconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev install-info
+        run: apt-get update && apt-get install -y npm git 
+
+      - name: install openapi-generator
+        run: npm install @openapitools/openapi-generator-cli -g
 
       - name: Install git
         run: |
@@ -42,23 +34,21 @@ jobs:
       - name: Setting GIT
         run: git config --global url."https://${{ secrets.GLOBAL_TOKEN }}:x-oauth-basic@github.com/aziontech".insteadOf "https://github.com/aziontech"
 
+
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          repository: aziontech/azionapi-go-sdk
+          path: './gosdk'
 
       - uses: actions/setup-node@v3
         with:
           node-version: 14
-
-      - name: OpenAPI Lint Checks
-        uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
-        with:
-          args: 'lint *.yaml'
-
-      - name: Install openapi-linter 
-        run: |
-          npm i -g @superfaceai/openapi-linter
 
       #get all .yaml files which were added/modified
       - name: Get changed files
@@ -67,13 +57,12 @@ jobs:
         with:
           files: |
             **/*.yaml
-        
-      #run openapi-linter for these files 
-      - name: Run linter for all changed files
-        if: steps.changed-files.outputs.any_changed == 'true'
-        run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "running linter for: $file";\
-            oal lint $file -f yaml;\
-          done
 
+      - name: Run openapi-generator for changed files
+        run: |
+          suffix=".yaml"
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            removed=${file#"$suffix"}
+            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./gosdk/$removed;\
+          done
+      
