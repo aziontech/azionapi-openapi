@@ -63,8 +63,8 @@ jobs:
       
       - name: push changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "patrick.menoti@azion.com"
+          git config --local user.name "PatrickMenoti"
           cd ./gosdk/edgenode
           git add .
           git commit -m "Auto-Generated SDK"
