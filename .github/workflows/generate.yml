@@ -58,7 +58,7 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             removed=$(echo ${file} | cut -d. -f1);
-            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./gosdk/${removed} --package-name ${removed};\
+            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./azionapi-go-sdk/${removed} --package-name ${removed};\
           done
       
       - name: push changes
