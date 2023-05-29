@@ -47,8 +47,6 @@ jobs:
         with:
           repository: aziontech/azionapi-go-sdk
           path: 'gosdk'
-          token: ${{secrets.REPO_ACCESS_TOKEN}}
-
 
       #get all .yaml files which were added/modified
       - name: Get changed files
