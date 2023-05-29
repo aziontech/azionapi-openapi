@@ -67,9 +67,13 @@ jobs:
       
       - name: push changes
         run: |
+          echo BEFORE
+          ls
           cd ./azionapi-go-sdk/edgenode
-          git config --global user.email "patrick.menoti@azion.com"
-          git config --global user.name "PatrickMenoti"
+          echo AFTER
+          ls
+          git config user.email "patrick.menoti@azion.com"
+          git config user.name "PatrickMenoti"
           git add .
           git commit -m "Auto-Generated SDK"
-          git push -f
+          git push --force origin master
