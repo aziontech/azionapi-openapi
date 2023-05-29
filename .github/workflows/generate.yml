@@ -66,8 +66,8 @@ jobs:
       - name: push changes
         run: |
           cd ./azionapi-go-sdk/edgenode
-          git config user.email "patrick.menoti@azion.com"
-          git config user.name "PatrickMenoti"
+          git config user.email "krebstiago@gmail.com"
+          git config user.name "tiagokrebs"
           git add .
           git commit -m "Auto-Generated SDK"
           git push https://$USERNAME:$REPO_KEY@github.com/aziontech/azionapi-go-sdk.git
