@@ -34,21 +34,21 @@ jobs:
       - name: Setting GIT
         run: git config --global url."https://${{ secrets.GLOBAL_TOKEN }}:x-oauth-basic@github.com/aziontech".insteadOf "https://github.com/aziontech"
 
-      - name: git glone
-        run: git clone https://${{ secrets.REPO_ACCESS_TOKEN }}@github.com/aziontech/azionapi-go-sdk.git
-
-
+      # - name: git glone
+      #   run: git clone https://${{ secrets.REPO_ACCESS_TOKEN }}@github.com/aziontech/azionapi-go-sdk.git
 
       - name: Checkout code
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
       
-      # - name: Checkout
-      #   uses: actions/checkout@v3
-      #   with:
-      #     repository: aziontech/azionapi-go-sdk
-      #     path: './gosdk'
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          repository: aziontech/azionapi-go-sdk
+          path: 'gosdk'
+          token: ${{secrets.REPO_ACCESS_TOKEN}}
+
 
       #get all .yaml files which were added/modified
       - name: Get changed files
@@ -67,13 +67,12 @@ jobs:
       
       - name: push changes
         run: |
-          echo BEFORE
-          ls
           cd ./azionapi-go-sdk/edgenode
-          echo AFTER
-          ls
           git config user.email "patrick.menoti@azion.com"
           git config user.name "PatrickMenoti"
           git add .
           git commit -m "Auto-Generated SDK"
-          git push --force origin master
+          git push https://$USERNAME:$REPO_KEY@github.com/aziontech/azionapi-go-sdk.git
+        env:
+          REPO_KEY: ${{secrets.REPO_ACCESS_TOKEN}}
+          USERNAME: PatrickMenoti
