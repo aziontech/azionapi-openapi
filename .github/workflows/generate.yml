@@ -10,12 +10,10 @@ jobs:
   test_job:
     runs-on: ubuntu-latest
     container:
-      image: ubuntu:18.04
+      image: ubuntu:22.04
     steps:
       - name: Setup Env
-        run: apt-get update && apt-get install -y npm curl
-      - name: install dependencies
-        run: apt-get install -y dh-autoreconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev install-info
+        run: apt-get update && apt-get install -y npm curl git
 
 
       - uses: actions/setup-node@v3
@@ -29,19 +27,6 @@ jobs:
 
       - name: install openapi-generator
         run: npm install @openapitools/openapi-generator-cli -g
-
-      - name: Install git
-        run: |
-          mkdir tmp
-          cd /tmp
-          curl -o git.tar.gz https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.26.2.tar.gz
-          tar -zxf git.tar.gz
-          cd git-*
-          make prefix=/usr/local all
-          make prefix=/usr/local install
-          exec bash
-          cd ..
-          cd ..
 
       - name: Setting GIT
         run: git config --global url."https://${{ secrets.GLOBAL_TOKEN }}:x-oauth-basic@github.com/aziontech".insteadOf "https://github.com/aziontech"
@@ -73,5 +58,11 @@ jobs:
             npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./gosdk/${removed} --package-name ${removed};\
           done
       
-      - name: test generation
-        run: ls gosdk/edgenode
+      - name: push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          cd ./gosdk/edgenode
+          git add .
+          git commit -m "Auto-Generated SDK"
+          git push -f
