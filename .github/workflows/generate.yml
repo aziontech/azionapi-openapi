@@ -75,4 +75,4 @@ jobs:
           done
       
       - name: test generation
-        run: ls gosdk
+        run: ls gosdk/edgenode
