@@ -68,10 +68,9 @@ jobs:
 
       - name: Run openapi-generator for changed files
         run: |
-          suffix=".yaml"
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            removed=${file#"$suffix"}
-            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./gosdk/$removed --package-name $removed;\
+            echo $REM | cut -d"." -f1
+            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./gosdk/$REM --package-name $REM;\
           done
       
       - name: test generation
