@@ -114,7 +114,7 @@ components:
           example: 1614
         name:
           type: string
-          example: Network List criada pela API
+          example: Network List created using the API
         items_values:
           type: array
           items:
@@ -147,7 +147,7 @@ components:
       properties:
         name:
           type: string
-          example: Network List criada pela API
+          example: Network List created using the API
         items_values:
           type: array
           items:
@@ -184,7 +184,7 @@ components:
       properties:
         name:
           type: string
-          example: Network List criada pela API
+          example: Network List created using the API
         items_values:
           type: array
           items:
