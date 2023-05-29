@@ -41,7 +41,7 @@ jobs:
           fetch-depth: 0
       
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: aziontech/azionapi-go-sdk
           path: './gosdk'
@@ -63,7 +63,8 @@ jobs:
       
       - name: push changes
         run: |
-          cd ./gosdk/edgenode
+          git clone https://${{ secrets.REPO_ACCESS_TOKEN }}@github.com/aziontech/azionapi-go-sdk.git
+          cd ./azionapi-go-sdk/edgenode
           git config --global user.email "patrick.menoti@azion.com"
           git config --global user.name "PatrickMenoti"
           git add .
