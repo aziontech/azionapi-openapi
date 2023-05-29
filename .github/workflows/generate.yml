@@ -34,6 +34,10 @@ jobs:
       - name: Setting GIT
         run: git config --global url."https://${{ secrets.GLOBAL_TOKEN }}:x-oauth-basic@github.com/aziontech".insteadOf "https://github.com/aziontech"
 
+      - name: git glone
+        run: git clone https://${{ secrets.REPO_ACCESS_TOKEN }}@github.com/aziontech/azionapi-go-sdk.git
+
+
 
       - name: Checkout code
         uses: actions/checkout@v3
@@ -63,7 +67,6 @@ jobs:
       
       - name: push changes
         run: |
-          git clone https://${{ secrets.REPO_ACCESS_TOKEN }}@github.com/aziontech/azionapi-go-sdk.git
           cd ./azionapi-go-sdk/edgenode
           git config --global user.email "patrick.menoti@azion.com"
           git config --global user.name "PatrickMenoti"
