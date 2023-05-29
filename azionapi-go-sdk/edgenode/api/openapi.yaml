@@ -1,0 +1,777 @@
+openapi: 3.0.0
+info:
+  description: Azion Orchestration
+  title: Edgenode API
+  version: 2.0.0
+servers:
+- description: Local Dev
+  url: http://localhost:3001
+- description: Staging
+  url: https://stage-api.azion.net
+- description: Production
+  url: https://api.azionapi.net
+security:
+- bearerAuth: []
+paths:
+  /edge_nodes:
+    get:
+      operationId: getEdgeNodes
+      parameters:
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: only_ids
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/EdgeNodeResponseWithTotal'
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Return edge-nodes
+  /edge_nodes/{edgenodeId}:
+    delete:
+      operationId: delEdgeNode
+      parameters:
+      - explode: false
+        in: path
+        name: edgenodeId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete edge-node by ID
+    get:
+      operationId: getEdgeNode
+      parameters:
+      - explode: false
+        in: path
+        name: edgenodeId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/EdgeNodeDetailResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+      summary: Return edge-node by ID
+    patch:
+      operationId: updateEdgeNode
+      parameters:
+      - explode: false
+        in: path
+        name: edgenodeId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/UpdateEdgeNodeResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+      summary: Update edge-node
+  /edge_nodes/{edgenodeId}/services:
+    get:
+      operationId: getEdgeNodeSvcs
+      parameters:
+      - explode: false
+        in: path
+        name: edgenodeId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - explode: true
+        in: query
+        name: is_bound
+        required: false
+        schema:
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: filter
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: order_by
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: sort
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      - explode: true
+        in: query
+        name: page_size
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ServiceResponseWithTotal'
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+      summary: Return edge-node Services association
+    post:
+      operationId: createEdgeNodeSvcs
+      parameters:
+      - explode: false
+        in: path
+        name: edgenodeId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json; version=3:
+            schema:
+              $ref: '#/components/schemas/ServiceBindRequest'
+        required: true
+      responses:
+        "201":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ServiceBindDetailResponse'
+          description: Created
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+      summary: Create an edge-node Service association
+  /edge_nodes/{edgenodeId}/services/{bindId}:
+    delete:
+      operationId: delEdgeNodeSvc
+      parameters:
+      - explode: false
+        in: path
+        name: edgenodeId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: bindId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Delete an edge-node Service association
+    get:
+      operationId: getEdgeNodeSvcDetail
+      parameters:
+      - explode: false
+        in: path
+        name: edgenodeId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: bindId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ServiceBindDetailResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
+      summary: Return edge-node Service association by ID
+    patch:
+      operationId: updateEdgeNodeSvcDetail
+      parameters:
+      - explode: false
+        in: path
+        name: edgenodeId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: bindId
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json; version=3:
+            schema:
+              $ref: '#/components/schemas/UpdateServiceBindRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ServiceBindDetailResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
+      summary: Update edge-node Service association by ID
+  /edge_nodes/authorize:
+    patch:
+      operationId: authorizeEdgeNode
+      requestBody:
+        content:
+          application/json; version=3:
+            schema:
+              $ref: '#/components/schemas/AuthorizeEdgeNodesRequest'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/AuthorizeEdgeNodesResponse'
+          description: OK
+        "400":
+          description: Bad Request
+        "422":
+          description: Unprocessable Entity
+      summary: Authorize edge-node
+  /edge_nodes/groups:
+    get:
+      operationId: getEdgeNodeGroups
+      responses:
+        "200":
+          content:
+            application/json; version=3:
+              schema:
+                items:
+                  $ref: '#/components/schemas/NodeGroupResponse'
+                type: array
+          description: OK
+        "500":
+          description: Internal Server Error
+      summary: Return edge-node groups
+components:
+  schemas:
+    AuthorizeEdgeNodesRequest:
+      additionalProperties: false
+      example:
+        edge_node_ids:
+        - 0
+        - 0
+      properties:
+        edge_node_ids:
+          items:
+            format: int64
+            type: integer
+          type: array
+      required:
+      - edge_node_ids
+      type: object
+    AuthorizeEdgeNodesResponse:
+      additionalProperties: false
+      example:
+        authorized:
+        - 0
+        - 0
+        errors:
+        - reason: reason
+          id: 6
+        - reason: reason
+          id: 6
+      properties:
+        authorized:
+          items:
+            format: int64
+            type: integer
+          type: array
+        errors:
+          items:
+            $ref: '#/components/schemas/UnauthorizedEdgeNodeInfo'
+          type: array
+      required:
+      - authorized
+      - errors
+      type: object
+    EdgeNodeDetailResponse:
+      additionalProperties: false
+      example:
+        name: name
+        groups:
+        - name: name
+          id: 0
+        - name: name
+          id: 0
+        has_services: true
+        id: 0
+        modules:
+          add_services: true
+        hash_id: hash_id
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/NodeGroup'
+          type: array
+        has_services:
+          type: boolean
+        hash_id:
+          type: string
+        id:
+          format: int64
+          type: integer
+        modules:
+          $ref: '#/components/schemas/EdgeNodeModules'
+        name:
+          type: string
+      required:
+      - groups
+      - has_services
+      - hash_id
+      - id
+      - modules
+      - name
+      type: object
+    EdgeNodeModules:
+      additionalProperties: false
+      example:
+        add_services: true
+      properties:
+        add_services:
+          type: boolean
+      required:
+      - add_services
+      type: object
+    EdgeNodeResponse:
+      additionalProperties: false
+      example:
+        name: name
+        groups:
+        - name: name
+          id: 0
+        - name: name
+          id: 0
+        id: 6
+        hash_id: hash_id
+        status: status
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/NodeGroup'
+          type: array
+        hash_id:
+          type: string
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        status:
+          type: string
+      required:
+      - id
+      type: object
+    EdgeNodeResponseWithTotal:
+      additionalProperties: false
+      example:
+        total: 1
+        nodes:
+        - name: name
+          groups:
+          - name: name
+            id: 0
+          - name: name
+            id: 0
+          id: 6
+          hash_id: hash_id
+          status: status
+        - name: name
+          groups:
+          - name: name
+            id: 0
+          - name: name
+            id: 0
+          id: 6
+          hash_id: hash_id
+          status: status
+      properties:
+        nodes:
+          items:
+            $ref: '#/components/schemas/EdgeNodeResponse'
+          type: array
+        total:
+          format: int64
+          type: integer
+      required:
+      - nodes
+      - total
+      type: object
+    NodeGroup:
+      additionalProperties: false
+      example:
+        name: name
+        id: 0
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    NodeGroupResponse:
+      additionalProperties: false
+      example:
+        name: name
+        id: 0
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+      required:
+      - id
+      - name
+      type: object
+    ServiceBindDetailResponse:
+      additionalProperties: false
+      example:
+        variables:
+        - name: name
+          value: value
+        - name: name
+          value: value
+        service_name: service_name
+        service_id: 6
+        id: 0
+      properties:
+        id:
+          format: int64
+          type: integer
+        service_id:
+          format: int64
+          type: integer
+        service_name:
+          type: string
+        variables:
+          items:
+            $ref: '#/components/schemas/Variable'
+          type: array
+      required:
+      - id
+      - service_id
+      - service_name
+      - variables
+      type: object
+    ServiceBindRequest:
+      additionalProperties: false
+      example:
+        variables:
+        - name: name
+          value: value
+        - name: name
+          value: value
+        service_id: 0
+      properties:
+        service_id:
+          format: int64
+          type: integer
+        variables:
+          items:
+            $ref: '#/components/schemas/Variable'
+          type: array
+      required:
+      - service_id
+      - variables
+      type: object
+    ServiceResponse:
+      additionalProperties: false
+      example:
+        bind_id: 0
+        is_bound: 6
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        last_editor: last_editor
+        service_id: 1
+        name: name
+      properties:
+        bind_id:
+          format: int64
+          type: integer
+        is_bound:
+          format: int64
+          type: integer
+        last_editor:
+          type: string
+        name:
+          type: string
+        service_id:
+          format: int64
+          type: integer
+        updated_at:
+          format: date-time
+          type: string
+      required:
+      - bind_id
+      - is_bound
+      - last_editor
+      - name
+      - service_id
+      - updated_at
+      type: object
+    ServiceResponseWithTotal:
+      additionalProperties: false
+      example:
+        total: 5
+        services:
+        - bind_id: 0
+          is_bound: 6
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          last_editor: last_editor
+          service_id: 1
+          name: name
+        - bind_id: 0
+          is_bound: 6
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          last_editor: last_editor
+          service_id: 1
+          name: name
+      properties:
+        services:
+          items:
+            $ref: '#/components/schemas/ServiceResponse'
+          type: array
+        total:
+          format: int64
+          type: integer
+      required:
+      - services
+      - total
+      type: object
+    UnauthorizedEdgeNodeInfo:
+      additionalProperties: false
+      example:
+        reason: reason
+        id: 6
+      properties:
+        id:
+          format: int64
+          type: integer
+        reason:
+          type: string
+      required:
+      - id
+      - reason
+      type: object
+    UpdateEdgeNodeResponse:
+      additionalProperties: false
+      example:
+        name: name
+        groups:
+        - name: name
+          id: 0
+        - name: name
+          id: 0
+        id: 0
+        status: status
+      properties:
+        groups:
+          items:
+            $ref: '#/components/schemas/NodeGroup'
+          type: array
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        status:
+          type: string
+      required:
+      - groups
+      - id
+      - name
+      - status
+      type: object
+    UpdateServiceBindRequest:
+      additionalProperties: false
+      example:
+        variables:
+        - name: name
+          value: value
+        - name: name
+          value: value
+      properties:
+        variables:
+          items:
+            $ref: '#/components/schemas/Variable'
+          type: array
+      required:
+      - variables
+      type: object
+    Variable:
+      additionalProperties: false
+      example:
+        name: name
+        value: value
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      required:
+      - name
+      - value
+      type: object
+  securitySchemes:
+    bearerAuth:
+      in: header
+      name: Authorization
+      type: apiKey
