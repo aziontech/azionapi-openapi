@@ -54,6 +54,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
+          fetch-depth: 0
           repository: aziontech/azionapi-go-sdk
           path: 'gosdk'
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
@@ -81,6 +82,7 @@ jobs:
           git checkout -b generated-sdk
           git add .
           git commit -m "Auto-Generated SDK"
+          git push origin generated-sdk
           gh pr create --body "Auto-generated SDK" --title "Auto-generated SDK" --head origin/generated-sdk --base upstream/master
         env:
           GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
