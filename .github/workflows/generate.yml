@@ -7,10 +7,14 @@ on:
     branches: [ poc-automation ]
 
 jobs:
-  test_job:
+  generate_job:
+    name: generate SDK and push to repositories
     runs-on: ubuntu-latest
     container:
       image: ubuntu:22.04
+    strategy:
+      matrix:
+        types: [ "go", "php" ]
     steps:
       - name: Setup Env
         run: apt-get update && apt-get install -y npm curl git
@@ -84,12 +88,12 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             removed=$(echo ${file} | cut -d. -f1);
-            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./go/${removed} --package-name ${removed};\
+            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./${my_variable}/${removed} --package-name ${removed};\
           done
 
       - name: push changes
         run: |
-          cd go
+          cd ${my_variable}
           git config user.email "patrick.menoti@gmail.com"
           git config user.name "PatrickMenoti"
           git checkout -b generated-sdk
