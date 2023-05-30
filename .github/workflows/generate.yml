@@ -83,6 +83,6 @@ jobs:
           git add .
           git commit -m "Auto-Generated SDK"
           git push origin generated-sdk
-          gh pr create --body "Auto-generated SDK" --title "Auto-generated SDK" --head origin/generated-sdk --base upstream/master
+          gh pr create --body "Auto-generated SDK" --title "Auto-generated SDK"
         env:
           GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
