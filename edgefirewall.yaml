@@ -1,0 +1,333 @@
+openapi: 3.0.0
+info:
+  title: Azion API
+  version: "3.0"
+servers:
+- url: https://api.azionapi.net/
+paths:
+  /edge_firewall:
+    get:
+      summary: List all user edge firewall
+      parameters:
+      - name: page
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: sort
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: order_by
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: A list of edge firewalls
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEdgeFirewallResponse'
+    post:
+      summary: Create a edge firewall
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEdgeFirewallRequest'
+        required: true
+      responses:
+        "201":
+          description: Edge firewall created
+        "400":
+          $ref: '#/components/schemas/BadRequestResponse'
+        "500":
+          $ref: '#/components/schemas/ErrorModel'
+  /edge_firewall/{uuid}:
+    get:
+      summary: Retrieve an edge firewall set by uuid
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: An edge firewall object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeFirewallResponse'
+    put:
+      summary: "Overwrite some edge firewall attributes, like \"active\""
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEdgeFirewallRequest'
+        required: true
+      responses:
+        "200":
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEdgeFirewallResponse'
+        "400":
+          $ref: '#/components/schemas/BadRequestResponse'
+        "500":
+          $ref: '#/components/schemas/ErrorModel'
+    delete:
+      summary: Delete an edge firewall by uuid
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        "204":
+          description: Successfully deleted
+    patch:
+      summary: "Update some edge firewall attributes, like \"active\""
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEdgeFirewallRequest'
+        required: true
+      responses:
+        "200":
+          description: Successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListEdgeFirewallResponse'
+        "400":
+          $ref: '#/components/schemas/BadRequestResponse'
+        "500":
+          $ref: '#/components/schemas/ErrorModel'
+components:
+  schemas:
+    ErrorModel:
+      type: object
+      properties:
+        code:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+    Links:
+      type: object
+      properties:
+        previous:
+          type: string
+        next:
+          type: string
+      example:
+        next: next
+        previous: previous
+    EdgeFirewall:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        is_active:
+          type: boolean
+        last_editor:
+          type: string
+        last_modified:
+          type: string
+        edge_functions_enabled:
+          type: boolean
+        network_protection_enabled:
+          type: boolean
+        waf_enabled:
+          type: boolean
+        debug_rules:
+          type: boolean
+        domains:
+          type: array
+          items:
+            type: integer
+      example:
+        is_active: true
+        last_editor: last_editor
+        name: name
+        waf_enabled: true
+        network_protection_enabled: true
+        domains:
+        - 5
+        - 5
+        edge_functions_enabled: true
+        id: 5
+        last_modified: last_modified
+        debug_rules: true
+    ListEdgeFirewallResponse:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        total_pages:
+          type: integer
+          format: int64
+        schema_version:
+          type: integer
+          format: int64
+        links:
+          $ref: '#/components/schemas/Links'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EdgeFirewall'
+      example:
+        schema_version: 1
+        count: 0
+        links:
+          next: next
+          previous: previous
+        total_pages: 6
+        results:
+        - is_active: true
+          last_editor: last_editor
+          name: name
+          waf_enabled: true
+          network_protection_enabled: true
+          domains:
+          - 5
+          - 5
+          edge_functions_enabled: true
+          id: 5
+          last_modified: last_modified
+          debug_rules: true
+        - is_active: true
+          last_editor: last_editor
+          name: name
+          waf_enabled: true
+          network_protection_enabled: true
+          domains:
+          - 5
+          - 5
+          edge_functions_enabled: true
+          id: 5
+          last_modified: last_modified
+          debug_rules: true
+    CreateEdgeFirewallRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        domains:
+          type: array
+          items:
+            type: integer
+        is_active:
+          type: boolean
+        edge_functions_enabled:
+          type: boolean
+        network_protection_enabled:
+          type: boolean
+        waf_enabled:
+          type: boolean
+    BadRequestResponse:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            type: string
+        is_active:
+          type: array
+          items:
+            type: string
+        domains:
+          type: array
+          items:
+            type: string
+        edge_functions_enabled:
+          type: array
+          items:
+            type: string
+        network_protection_enabled:
+          type: array
+          items:
+            type: string
+        waf_enabled:
+          type: array
+          items:
+            type: string
+    EdgeFirewallResponse:
+      type: object
+      properties:
+        results:
+          $ref: '#/components/schemas/EdgeFirewall'
+        schema_version:
+          type: number
+      example:
+        schema_version: 0.80082819046101150206595775671303272247314453125
+        results:
+          is_active: true
+          last_editor: last_editor
+          name: name
+          waf_enabled: true
+          network_protection_enabled: true
+          domains:
+          - 5
+          - 5
+          edge_functions_enabled: true
+          id: 5
+          last_modified: last_modified
+          debug_rules: true
+    UpdateEdgeFirewallRequest:
+      $ref: '#/components/schemas/ListEdgeFirewallResponse'
+  securitySchemes:
+    JWT:
+      type: apiKey
+      description: |
+        You must inform a token to auth.
+        Usage format: `Token <TOKEN>`
+      name: Authorization
+      in: header
