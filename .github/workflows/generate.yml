@@ -81,6 +81,6 @@ jobs:
           git checkout -b generated-sdk
           git add .
           git commit -m "Auto-Generated SDK"
-          gh pr create --fill --head origin/generated-sdk --base upstream/master
+          gh pr create --body "Auto-generated SDK" --title "Auto-generated SDK" --head origin/generated-sdk --base upstream/master
         env:
           GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
