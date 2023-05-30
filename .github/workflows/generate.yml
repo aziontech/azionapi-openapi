@@ -80,3 +80,5 @@ jobs:
           git add .
           git commit -m "Auto-Generated SDK"
           gh pr create --fill
+        env:
+          GH_TOKEN: ${{ github.token }}
