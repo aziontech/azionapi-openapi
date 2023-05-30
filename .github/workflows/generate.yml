@@ -14,6 +14,7 @@ jobs:
     steps:
       - name: Setup Env
         run: apt-get update && apt-get install -y npm curl git
+        shell: bash
 
       - name: install gh changed-files
         run: |
@@ -23,9 +24,11 @@ jobs:
           && echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | tee /etc/apt/sources.list.d/github-cli.list > /dev/null \
           && apt update \
           && apt install gh -y
+        shell: bash
 
       - name: Git config
         run: git config --global --add safe.directory /__w/azionapi-openapi/azionapi-openapi
+        shell: bash
 
 
       - uses: actions/setup-node@v3
@@ -39,9 +42,11 @@ jobs:
 
       - name: install openapi-generator
         run: npm install @openapitools/openapi-generator-cli -g
+        shell: bash
 
       - name: Setting GIT
         run: git config --global url."https://${{ secrets.GLOBAL_TOKEN }}:x-oauth-basic@github.com/aziontech".insteadOf "https://github.com/aziontech"
+        shell: bash
 
       # - name: git glone
       #   run: git clone https://${{ secrets.REPO_ACCESS_TOKEN }}@github.com/aziontech/azionapi-go-sdk.git
@@ -77,24 +82,26 @@ jobs:
 
       - name: Run openapi-generator for changed files and push them to github
         run: |
-          git config --global user.email "patrick.menoti@gmail.com"
-          git config --global user.name "PatrickMenoti"
+          git config --global user.email "patrick.menoti@gmail.com" \
+          git config --global user.name "PatrickMenoti" \
           while read type; \
           do\
-            for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            for file in ${{ steps.changed-files.outputs.all_changed_files }}; do \
               removed=$(echo ${file} | cut -d. -f1);
               npx @openapitools/openapi-generator-cli generate -i $file -g ${type} -o ./${type}/${removed} --package-name ${removed};\
-              cd ${type}
-              git checkout -b generated-sdk
-              git add .
-              git commit -m "Auto-Generated SDK"
-              git push origin generated-sdk
-              gh pr create --body "Auto-generated SDK" --title "Auto-generated SDK"
-              cd ..
-            done
+            done \
+            cd ${type} \
+            git checkout -b generated-sdk \
+            git add . \
+            git commit -m "Auto-Generated SDK" \
+            git push origin generated-sdk \
+            gh pr create --body "Auto-generated SDK" --title "Auto-generated SDK" \
+            cd .. \
           done < TYPES
         env:
           GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+        shell: bash
+        
       
       # - name: push changes
       #   run: |
