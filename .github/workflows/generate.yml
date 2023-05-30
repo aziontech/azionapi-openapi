@@ -82,4 +82,4 @@ jobs:
           git commit -m "Auto-Generated SDK"
           gh pr create --fill --head generated-sdk
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
