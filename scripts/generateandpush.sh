@@ -5,7 +5,7 @@ types=("go" "php")
 git config --global user.email "patrick.menoti@gmail.com"
 git config --global user.name "PatrickMenoti"
 for type in ${types[@]}; do
-    for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+    for file in ${FILESCHANGED[@]}; do
         removed=$(echo ${file} | cut -d. -f1);
         npx @openapitools/openapi-generator-cli generate -i $file -g ${type} -o ./${type}/${removed} --package-name ${removed};\
     done
