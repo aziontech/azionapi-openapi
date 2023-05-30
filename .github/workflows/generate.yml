@@ -88,12 +88,12 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             removed=$(echo ${file} | cut -d. -f1);
-            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./${types}/${removed} --package-name ${removed};\
+            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./${{ matrix.types }}/${removed} --package-name ${removed};\
           done
 
       - name: push changes
         run: |
-          cd ${types}
+          cd ${{ matrix.types }}
           git config user.email "patrick.menoti@gmail.com"
           git config user.name "PatrickMenoti"
           git checkout -b generated-sdk
