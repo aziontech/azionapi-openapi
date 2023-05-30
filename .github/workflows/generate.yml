@@ -88,7 +88,7 @@ jobs:
           do\
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do 
               removed=$(echo ${file} | cut -d. -f1);
-              npx @openapitools/openapi-generator-cli generate -i $file -g ${type} -o ./${type}/${removed} --package-name ${removed};
+              npx @openapitools/openapi-generator-cli generate -i $file -g ${type} -o ./go/${removed} --package-name ${removed};
             done 
             cd ${type} 
             git checkout -b generated-sdk 
