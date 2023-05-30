@@ -56,7 +56,7 @@ jobs:
         with:
           fetch-depth: 0
           repository: aziontech/azionapi-go-sdk
-          path: 'gosdk'
+          path: 'go'
           token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
       #get all .yaml files which were added/modified
@@ -69,10 +69,13 @@ jobs:
 
       - name: Run openapi-generator for changed files
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            removed=$(echo ${file} | cut -d. -f1);
-            npx @openapitools/openapi-generator-cli generate -i $file -g go -o ./gosdk/${removed} --package-name ${removed};\
-          done
+          while read type; \
+          do\
+            for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+              removed=$(echo ${file} | cut -d. -f1);
+              npx @openapitools/openapi-generator-cli generate -i $file -g ${type} -o ./${type}/${removed} --package-name ${removed};\
+            done
+          done < TYPES
       
       - name: push changes
         run: |
