@@ -77,8 +77,8 @@ jobs:
 
       - name: Run openapi-generator for changed files and push them to github
         run: |
-          git config user.email "patrick.menoti@gmail.com"
-          git config user.name "PatrickMenoti"
+          git config --global user.email "patrick.menoti@gmail.com"
+          git config --global user.name "PatrickMenoti"
           while read type; \
           do\
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
