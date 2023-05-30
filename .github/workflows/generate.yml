@@ -77,8 +77,9 @@ jobs:
           cd ./gosdk/edgenode
           git config user.email "patrick.menoti@gmail.com"
           git config user.name "PatrickMenoti"
+          git checkout -b generated-sdk
           git add .
           git commit -m "Auto-Generated SDK"
-          gh pr create --fill --head
+          gh pr create --fill --head generated-sdk
         env:
           GH_TOKEN: ${{ github.token }}
