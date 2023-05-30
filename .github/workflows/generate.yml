@@ -56,7 +56,7 @@ jobs:
         with:
           repository: aziontech/azionapi-go-sdk
           path: 'gosdk'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
       #get all .yaml files which were added/modified
       - name: Get changed files
@@ -81,6 +81,6 @@ jobs:
           git checkout -b generated-sdk
           git add .
           git commit -m "Auto-Generated SDK"
-          gh pr create --fill --head generated-sdk
+          gh pr create --fill --head generated-sdk --base master
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
