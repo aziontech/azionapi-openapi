@@ -81,6 +81,8 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             removed=$(echo ${file} | cut -d. -f1);
             npx @openapitools/openapi-generator-cli generate -i $file -g ${{ matrix.types }} -o ./${{ matrix.types }}/${removed} --package-name ${removed};\
+            echo 'go.mod' >> ./${{ matrix.types }}/${removed}/.gitignore
+            echo 'go.sum' >> ./${{ matrix.types }}/${removed}/.gitignore
           done
 
       - name: push changes
@@ -89,8 +91,6 @@ jobs:
           git config user.email "patrick.menoti@gmail.com"
           git config user.name "PatrickMenoti"
           git checkout -b generated-sdk
-          echo 'go.mod' >> ./${{ matrix.types }}/${removed}/.gitignore
-          echo 'go.sum' >> ./${{ matrix.types }}/${removed}/.gitignore
           git add .
           git commit -m "Auto-Generated SDK"
           git push origin generated-sdk
