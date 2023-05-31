@@ -2,9 +2,7 @@ name: Generate
 
 on:
   push:
-    branches: [ poc-automation ]
-  pull_request:
-    branches: [ poc-automation ]
+    branches: [ main ]
 
 jobs:
   generate_job:
@@ -98,16 +96,3 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
         
-      
-      # - name: push changes
-      #   run: |
-      #     cd ./gosdk/edgenode
-      #     git config user.email "patrick.menoti@gmail.com"
-      #     git config user.name "PatrickMenoti"
-      #     git checkout -b generated-sdk
-      #     git add .
-      #     git commit -m "Auto-Generated SDK"
-      #     git push origin generated-sdk
-      #     gh pr create --body "Auto-generated SDK" --title "Auto-generated SDK"
-      #   env:
-      #     GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}

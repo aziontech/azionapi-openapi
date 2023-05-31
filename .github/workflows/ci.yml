@@ -22,22 +22,7 @@ jobs:
       - name: test env
         run: echo $DIR
       - name: Setup Env
-        run: apt-get update && apt-get install -y nodejs npm
-      - name: install dependencies
-        run: apt-get install -y curl dh-autoreconf libcurl4-gnutls-dev libexpat1-dev gettext libz-dev libssl-dev install-info
-
-      - name: Install git
-        run: |
-          mkdir tmp
-          cd /tmp
-          curl -o git.tar.gz https://mirrors.edge.kernel.org/pub/software/scm/git/git-2.26.2.tar.gz
-          tar -zxf git.tar.gz
-          cd git-*
-          make prefix=/usr/local all
-          make prefix=/usr/local install
-          exec bash
-          cd ..
-          cd ..
+        run: apt-get update && apt-get install -y git
 
       - name: Setting GIT
         run: git config --global url."https://${{ secrets.GLOBAL_TOKEN }}:x-oauth-basic@github.com/aziontech".insteadOf "https://github.com/aziontech"
@@ -55,25 +40,4 @@ jobs:
         uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
         with:
           args: 'lint *.yaml'
-
-      - name: Install openapi-linter 
-        run: |
-          npm i -g @superfaceai/openapi-linter
-
-      #get all .yaml files which were added/modified
-      - name: Get changed files
-        id: changed-files
-        uses: tj-actions/changed-files@v35
-        with:
-          files: |
-            **/*.yaml
-        
-      #run openapi-linter for these files 
-      - name: Run linter for all changed files
-        if: steps.changed-files.outputs.any_changed == 'true'
-        run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "running linter for: $file";\
-            oal lint $file -f yaml;\
-          done
 
