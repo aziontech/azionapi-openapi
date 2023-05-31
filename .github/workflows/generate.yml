@@ -14,7 +14,7 @@ jobs:
       image: ubuntu:22.04
     strategy:
       matrix:
-        types: [ "go", "php" ]
+        types: [ "go", "php", "python" ]
     steps:
       - name: Setup Env
         run: apt-get update && apt-get install -y npm curl git
@@ -60,7 +60,7 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Checkout go repo
+      - name: Checkout SDK repo
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
@@ -89,6 +89,8 @@ jobs:
           git config user.email "patrick.menoti@gmail.com"
           git config user.name "PatrickMenoti"
           git checkout -b generated-sdk
+          echo 'go.mod' >> ./${{ matrix.types }}/${removed}/.gitignore
+          echo 'go.sum' >> ./${{ matrix.types }}/${removed}/.gitignore
           git add .
           git commit -m "Auto-Generated SDK"
           git push origin generated-sdk
