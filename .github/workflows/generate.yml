@@ -12,7 +12,7 @@ jobs:
       image: ubuntu:22.04
     strategy:
       matrix:
-        types: [ "go", "php", "csharp-netcore", "typescript-node", "java", "rust"]
+        types: [ "go", "php", "csharp-netcore", "typescript-node", "java", "rust", "python", "javascript" ]
     steps:
       - name: Setup Env
         run: apt-get update && apt-get install -y npm curl git
@@ -40,7 +40,7 @@ jobs:
       - uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '11'
 
       - name: install openapi-generator
         run: npm install @openapitools/openapi-generator-cli -g
