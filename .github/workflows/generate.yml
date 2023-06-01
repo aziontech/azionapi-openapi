@@ -2,7 +2,7 @@ name: Generate
 
 on:
   push:
-    branches: [ main ]
+    branches: [ python-js ]
   pull_request:
     branches: [ python-js ]
 
