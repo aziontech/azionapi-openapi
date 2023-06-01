@@ -3,6 +3,8 @@ name: Generate
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ python-js ]
 
 jobs:
   generate_job:
@@ -12,7 +14,7 @@ jobs:
       image: ubuntu:22.04
     strategy:
       matrix:
-        types: [ "go", "php", "csharp-netcore", "typescript-node", "java", "rust"]
+        types: [ "python"]
     steps:
       - name: Setup Env
         run: apt-get update && apt-get install -y npm curl git
