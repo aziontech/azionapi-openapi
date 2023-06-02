@@ -7,13 +7,13 @@ servers:
 - description: Local Dev
   url: http://localhost:3002
 - description: Staging
-  url: http://it -m -api-azion.net
+  url: http://stage-bff-gke.azion.net:3002
 - description: Production
-  url: http://api.azionapi.net
+  url: http://bff.azion.net:3002
 security:
 - bearerAuth: []
 paths:
-  /edge_services:
+  /edge_services/:
     get:
       operationId: getServices
       parameters:
