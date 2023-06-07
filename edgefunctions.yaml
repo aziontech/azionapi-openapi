@@ -407,6 +407,8 @@ components:
         reference_count:
           format: int64
           type: integer
+        is_proprietary_code:
+          type: boolean
       type: object
     ListEdgeFunctionResponse:
       example:
@@ -473,6 +475,8 @@ components:
         json_args: {}
         active:
           type: boolean
+        is_proprietary_code:
+          type: boolean
       type: object
     BadRequestResponse:
       properties:
@@ -534,6 +538,8 @@ components:
           type: string
         language:
           type: string
+        is_proprietary_code:
+          type: boolean
       type: object
     PatchEdgeFunctionRequest:
       example:
@@ -548,6 +554,8 @@ components:
           type: string
         json_args: {}
         active:
+          type: boolean
+        is_proprietary_code:
           type: boolean
       type: object
   securitySchemes:
