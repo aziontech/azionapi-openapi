@@ -28,18 +28,6 @@ paths:
           in: query
           schema:
             type: integer
-        - name: page_size
-          in: query
-          schema:
-            type: integer
-        - name: sort
-          in: query
-          schema:
-            type: string
-        - name: order_by
-          in: query
-          schema:
-            type: string
       responses:
         '200':
           description: A list of Network Lists
