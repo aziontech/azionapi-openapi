@@ -248,10 +248,13 @@ components:
       - value
       type: object
   securitySchemes:
-    bearerAuth:
+    tokenAuth:
       type: apiKey
       name: Authorization
       in: header
+      description: |
+        You must inform a token to auth.
+        Usage format: `Token <TOKEN>`
 info:
   description: Azion Orchestration
   title: Edgenode API
@@ -589,7 +592,7 @@ paths:
           description: Internal Server Error
       summary: Return edge-node groups
 security:
-- bearerAuth: []
+- tokenAuth: []
 servers:
 - description: Local Dev
   url: http://localhost:3001

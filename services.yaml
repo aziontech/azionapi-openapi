@@ -11,7 +11,7 @@ servers:
 - description: Production
   url: http://bff.azion.net:3002
 security:
-- bearerAuth: []
+- tokenAuth: []
 paths:
   /edge_services/:
     get:
@@ -658,6 +658,10 @@ components:
       - value
       type: object
   securitySchemes:
-    bearerAuth:
-      scheme: bearer
-      type: http
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: |
+        You must inform a token to auth.
+        Usage format: `Token <TOKEN>`

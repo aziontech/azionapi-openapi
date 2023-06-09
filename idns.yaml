@@ -846,9 +846,9 @@ components:
       type: object
   securitySchemes:
     tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-      in: header
-      name: Authorization
-      type: apiKey

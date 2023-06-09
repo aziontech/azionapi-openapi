@@ -94,6 +94,8 @@ info:
   version: 1.0.0
 servers:
 - url: https://api.azionapi.net
+security:
+- tokenAuth: []
 paths:
   /edge_applications:
     get:
@@ -160,8 +162,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /edge_applications
       tags:
       - Edge Applications > Main Settings
@@ -211,8 +211,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /edge_applications
       tags:
       - Edge Applications > Main Settings
@@ -248,8 +246,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /edge_applications/:id
       tags:
       - Edge Applications > Main Settings
@@ -287,8 +283,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /edge_applications/:id
       tags:
       - Edge Applications > Main Settings
@@ -345,8 +339,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /edge_applications/:id
       tags:
       - Edge Applications > Main Settings
@@ -404,8 +396,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /edge_applications/:id
       tags:
       - Edge Applications > Main Settings
@@ -482,8 +472,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/cache_settings"
       tags:
       - Edge Applications > Cache Settings
@@ -541,8 +529,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /edge_applications/:edge_application_id:/cache_settings
       tags:
       - Edge Applications > Cache Settings
@@ -590,8 +576,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: '/edge_applications/:edge_application_id:/cache_settings/:cache_settings_id:'
       tags:
       - Edge Applications > Cache Settings
@@ -657,8 +641,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /edge_applications/:edge_application_id:/cache_settings/ca
       tags:
       - Edge Applications > Cache Settings
@@ -716,8 +698,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: '/edge_applications/:edge_application_id:/cache_settings/:cache_settings:'
       tags:
       - Edge Applications > Cache Settings
@@ -769,8 +749,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: '/edge_applications/:edge_application_id:/cache_settings/:cache_settings_id:'
       tags:
       - Edge Applications > Cache Settings
@@ -847,8 +825,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /edge_applications/:edge_application_id:/functions_instances
       tags:
       - Edge Applications > Edge Functions Instances
@@ -906,8 +882,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: edge_application/:edge_application_id:/functions_instances
       tags:
       - Edge Applications > Edge Functions Instances
@@ -963,8 +937,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: '/edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:'
       tags:
       - Edge Applications > Edge Functions Instances
@@ -1012,8 +984,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: '/edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:'
       tags:
       - Edge Applications > Edge Functions Instances
@@ -1079,8 +1049,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: '/edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:'
       tags:
       - Edge Applications > Edge Functions Instances
@@ -1146,8 +1114,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: '/edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:'
       tags:
       - Edge Applications > Edge Functions Instances
@@ -1224,8 +1190,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/origins"
       tags:
       - Edge Applications > Origins
@@ -1283,8 +1247,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/origins"
       tags:
       - Edge Applications > Origins
@@ -1328,8 +1290,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/origins/{origin_id}"
       tags:
       - Edge Applications > Origins
@@ -1376,8 +1336,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/origins/{origin_key}"
       tags:
       - Edge Applications > Origins
@@ -1442,8 +1400,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: '/edge_applications/:edge_application_id:/origins/:origin_id:'
       tags:
       - Edge Applications > Origins
@@ -1508,8 +1464,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/origins/{origin_id}"
       tags:
       - Edge Applications > Origins
@@ -1593,8 +1547,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/rules_engine/{phase}/rules"
       tags:
       - Edge Applications > Rules Engine
@@ -1687,8 +1639,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/rules_engine/{phase}/rules"
       tags:
       - Edge Applications > Rules Engine
@@ -1741,8 +1691,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/rules_engine/{phase}/rules"
       tags:
       - Edge Applications > Rules Engine
@@ -1798,8 +1746,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/rules_engine/{phase}/rules"
       tags:
       - Edge Applications > Rules Engine
@@ -1872,8 +1818,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: '/edge_applications/:edge_application_id:/rules_engine/:phase:/rules/:rule_id:'
       tags:
       - Edge Applications > Rules Engine
@@ -1946,8 +1890,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: '/edge_applications/:edge_application_id:/rules_engine/:phase:/rules/:rule_id:'
       tags:
       - Edge Applications > Rules Engine
@@ -2024,8 +1966,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/device_groups"
       tags:
       - Edge Applications > Device Groups
@@ -2083,8 +2023,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/device_groups"
       tags:
       - Edge Applications > Device Groups
@@ -2129,8 +2067,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/device_groups/{device_group_id}"
       tags:
       - Edge Applications > Device Groups
@@ -2178,8 +2114,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/device_groups/{device_group_id}"
       tags:
       - Edge Applications > Device Groups
@@ -2245,8 +2179,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/device_groups/{device_group_id}"
       tags:
       - Edge Applications > Device Groups
@@ -2312,8 +2244,6 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: "/edge_applications/{edge_application_id}/device_groups/{device_group_id}"
       tags:
       - Edge Applications > Device Groups
@@ -4618,10 +4548,10 @@ components:
       - name
       type: object
   securitySchemes:
-    JWT:
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-      in: header
-      name: Authorization
-      type: apiKey
