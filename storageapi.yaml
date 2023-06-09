@@ -7,6 +7,8 @@ servers:
   url: https://storage-api.azion.com
 - description: stage
   url: https://stage-storage-api.azion.com
+security:
+- tokenAuth: []
 paths:
   /storage/{version_id}:
     post:
@@ -40,8 +42,6 @@ paths:
             application/json:
               schema: {}
           description: ""
-      security:
-      - authToken: []
   /storage/{version_id}/delete:
     delete:
       description: Delete a version. A version is just um path prefix/sub-namespace
@@ -59,8 +59,6 @@ paths:
       responses:
         "204":
           description: The resource was deleted successfully.
-      security:
-      - authToken: []
 components:
   responses:
     "401":

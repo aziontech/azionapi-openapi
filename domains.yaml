@@ -307,6 +307,8 @@ info:
 servers:
   - url: https://api.azionapi.net
   - url: https://stage-api.azionapi.net
+security:
+- tokenAuth: []
 components:
   schemas:
     CreateDomainRequest:
@@ -472,13 +474,13 @@ components:
       - updated_at
       type: object
   securitySchemes:
-    JWT:
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-      in: header
-      name: Authorization
-      type: apiKey
 tags:
   - name: Domains
     description: >-
@@ -491,8 +493,6 @@ paths:
         - Domains
       summary: /domains
       description: It returns the list of domains of an account.
-      security:
-        - JWT: []
       operationId: getDomains
       parameters:
         - name: Accept
@@ -533,8 +533,6 @@ paths:
                 digital_certificate_id: null
                 edge_application_id: 1580476573
                 is_active: true
-      security:
-       - JWT: []
       operationId: createDomain
       parameters:
         - name: Accept
@@ -570,8 +568,6 @@ paths:
         - Domains
       summary: /domains/:id
       description: It returns details of a domain.
-      security:
-        - JWT: []
       operationId: getDomain
       parameters:
         - name: Accept
@@ -607,8 +603,6 @@ paths:
         - Domains
       summary: /domains/:id
       description: It enables you to delete a domain.
-      security:
-        - JWT: []
       operationId: delDomain
       parameters:
         - name: Accept
@@ -658,8 +652,6 @@ paths:
                 digital_certificate_id: null
                 edge_application_id: 1580476573
                 is_active: true
-      security:
-        - JWT: []
       operationId: putDomain
       parameters:
         - name: Accept
@@ -713,8 +705,6 @@ paths:
                 digital_certificate_id: null
                 edge_application_id: 1580476573
                 is_active: true
-      security:
-        - JWT: []
       operationId: updateDomain
       parameters:
         - name: Accept
