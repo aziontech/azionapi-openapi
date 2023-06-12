@@ -137,7 +137,7 @@ info:
 
     ```
 
-    Accept: application/json; version=3
+    Accept: application/json
 
 
     ```
@@ -256,7 +256,7 @@ info:
 
     GET /domains?order_by=name&page_size=20&sort=desc&page=3
 
-    Accept: application/json; version=3
+    Accept: application/json
 
     Authorization: token 2909f3932069047f4736dc87e72baaddd19c9f75
 
@@ -316,12 +316,17 @@ components:
       properties:
         cnames:
           type: array
+          # maxItems: 50 (Is it defined by client plan?)
           items:
             type: string
+            minLength: 1
+            maxLength: 250
         cname_access_only:
           type: boolean
         name:
           type: string
+          minLength: 1
+          maxLength: 100
         is_active:
           type: boolean
         edge_application_id:
@@ -350,6 +355,8 @@ components:
           type: boolean
         name:
           type: string
+          minLength: 1
+          maxLength: 100
         is_active:
           type: boolean
         edge_application_id:
@@ -465,13 +472,21 @@ components:
           type: string
         environment:
           type: string
+        is_mtls_enabled:
+          type: boolean
+        mtls_trusted_ca_certificate_id:
+          format: int64
+          type: integer
+          nullable: true
+        mtls_verification:
+          type: string
       required:
       - id
       - name
-      - type
-      - content_type
-      - last_editor
-      - updated_at
+      # - type
+      # - content_type
+      # - last_editor
+      # - updated_at
       type: object
   securitySchemes:
     tokenAuth:
@@ -494,17 +509,19 @@ paths:
       summary: /domains
       description: It returns the list of domains of an account.
       operationId: getDomains
-      parameters:
-        - name: Accept
-          in: header
-          schema:
-            type: string
-          example: application/json; version=3
+      # parameters:
+      #   - name: Accept
+      #     in: header
+      #     schema:
+      #       type: string
+      #     example: application/json
       responses:
         '200':
           description: Successful response
           content:
             application/json; version=3:
+              {}
+            application/json:
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResults"
         "400":
@@ -534,22 +551,25 @@ paths:
                 edge_application_id: 1580476573
                 is_active: true
       operationId: createDomain
-      parameters:
-        - name: Accept
-          in: header
-          schema:
-            type: string
-          example: application/json; version=3
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          example: application/json
+      # parameters:
+        # https://github.com/OAI/OpenAPI-Specification/blob/main/versions/3.0.2.md#user-content-parametername
+        # - name: Accept
+        #   in: header
+        #   schema:
+        #     type: string
+        #   example: application/json
+        # - name: Content-Type
+        #   in: header
+        #   schema:
+        #     type: string
+        #   example: application/json
       responses:
         '200':
           description: Successful response
           content:
             application/json; version=3:
+              {}
+            application/json:
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
@@ -570,11 +590,11 @@ paths:
       description: It returns details of a domain.
       operationId: getDomain
       parameters:
-        - name: Accept
-          in: header
-          schema:
-            type: string
-          example: application/json; version=3
+        # - name: Accept
+        #   in: header
+        #   schema:
+        #     type: string
+        #   example: application/json
         - name: id
           in: path
           schema:
@@ -586,6 +606,8 @@ paths:
           description: Successful response
           content:
             application/json; version=3:
+              {}
+            application/json:
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
@@ -605,11 +627,11 @@ paths:
       description: It enables you to delete a domain.
       operationId: delDomain
       parameters:
-        - name: Accept
-          in: header
-          schema:
-            type: string
-          example: application/json; version=3
+        # - name: Accept
+        #   in: header
+        #   schema:
+        #     type: string
+        #   example: application/json
         - name: id
           in: path
           schema:
@@ -654,16 +676,16 @@ paths:
                 is_active: true
       operationId: putDomain
       parameters:
-        - name: Accept
-          in: header
-          schema:
-            type: string
-          example: application/json; version=3
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          example: application/json
+        # - name: Accept
+        #   in: header
+        #   schema:
+        #     type: string
+        #   example: application/json
+        # - name: Content-Type
+        #   in: header
+        #   schema:
+        #     type: string
+        #   example: application/json
         - name: id
           in: path
           schema:
@@ -673,7 +695,7 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json; version=3:
+            application/*:
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
@@ -707,16 +729,16 @@ paths:
                 is_active: true
       operationId: updateDomain
       parameters:
-        - name: Accept
-          in: header
-          schema:
-            type: string
-          example: application/json; version=3
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          example: application/json
+        # - name: Accept
+        #   in: header
+        #   schema:
+        #     type: string
+        #   example: application/json
+        # - name: Content-Type
+        #   in: header
+        #   schema:
+        #     type: string
+        #   example: application/json
         - name: id
           in: path
           schema:
@@ -726,7 +748,7 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json; version=3:
+            application/*:
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":

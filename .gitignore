@@ -1,0 +1,17 @@
+# validation files
+.hypothesis
+
+# output directories
+csharp-netcore
+go
+java
+javascript
+php
+python
+rust
+typescript-node
+
+# language specifics
+env
+venv
+node_modules
