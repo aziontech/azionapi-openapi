@@ -137,7 +137,7 @@ info:
 
     ```
 
-    Accept: application/json
+    Accept: application/json; version=3
 
 
     ```
@@ -316,17 +316,12 @@ components:
       properties:
         cnames:
           type: array
-          # maxItems: 50 (Is it defined by client plan?)
           items:
             type: string
-            minLength: 1
-            maxLength: 250
         cname_access_only:
           type: boolean
         name:
           type: string
-          minLength: 1
-          maxLength: 100
         is_active:
           type: boolean
         edge_application_id:
@@ -355,8 +350,6 @@ components:
           type: boolean
         name:
           type: string
-          minLength: 1
-          maxLength: 100
         is_active:
           type: boolean
         edge_application_id:
@@ -695,7 +688,9 @@ paths:
         '200':
           description: Successful response
           content:
-            application/*:
+            application/json; version=3:
+              {}
+            application/json:
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
@@ -748,7 +743,9 @@ paths:
         '200':
           description: Successful response
           content:
-            application/*:
+            application/json; version=3:
+              {}
+            application/json:
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
