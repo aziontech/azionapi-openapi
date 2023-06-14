@@ -31,6 +31,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Git config
+        run: git config --global --add safe.directory /__w/azionapi-openapi/azionapi-openapi
+        shell: bash
+
       - name: install openapi-linter
         run: npm i -g @superfaceai/openapi-linter
 
