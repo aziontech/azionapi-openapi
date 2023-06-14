@@ -2259,46 +2259,34 @@ components:
           previous: previous
         total_pages: 6
         results:
-        - next: next
-          load_balancer: true
-          application_acceleration: true
-          web_application_firewall: true
-          device_detection: true
-          raw_logs: true
-          active: true
-          delivery_protocol: delivery_protocol
-          edge_firewall: true
-          caching: true
-          http_port:
-          - 5
-          https_port:
-          - 2
-          minimum_tls_version: minimum_tls_version
-          name: name
-          edge_functions: true
-          l2_caching: true
-          id: 5
-          image_optimization: true
-        - next: next
-          load_balancer: true
-          application_acceleration: true
-          web_application_firewall: true
-          device_detection: true
-          raw_logs: true
-          active: true
-          delivery_protocol: delivery_protocol
-          edge_firewall: true
-          caching: true
-          http_port:
-          - 5
-          https_port:
-          - 2
-          minimum_tls_version: minimum_tls_version
-          name: name
-          edge_functions: true
-          l2_caching: true
-          id: 5
-          image_optimization: true
+          - next: next
+            id: 5
+            name: name
+            active: true
+            debug_rules: true
+            last_editor: last_editor
+            last_modified: last_editor
+            "origins": [
+              {
+                "name": "Default Origin",
+                "origin_type": "single_origin",
+                "origin_id": "a7210940-b3fa-4d98-a5aa-ecadb4f48f57"
+              }
+            ]
+          - next: next
+            id: 5
+            name: name
+            active: true
+            debug_rules: true
+            last_editor: last_editor
+            last_modified: last_editor
+            "origins": [
+              {
+                "name": "Default Origin",
+                "origin_type": "single_origin",
+                "origin_id": "a7210940-b3fa-4d98-a5aa-ecadb4f48f57"
+              }
+            ]
       properties:
         count:
           format: int64
@@ -2313,7 +2301,7 @@ components:
           $ref: '#/components/schemas/ApplicationLinks'
         results:
           items:
-            $ref: '#/components/schemas/ApplicationResults'
+            $ref: '#/components/schemas/ApplicationsResults'
           type: array
       required:
       - count
@@ -2344,12 +2332,20 @@ components:
         id:
           format: int64
           type: integer
-        next:
+        name:
+          type: string
+        debug_rules:
+          type: string
+        last_editor:
+          type: string
+        last_modified:
           type: string
         active:
           type: boolean
-        links:
-          $ref: '#/components/schemas/ApplicationOrigins'
+        origins:
+          items:
+            $ref: '#/components/schemas/ApplicationOrigins'
+          type: array
       required:
       - next
       - previous
@@ -2437,10 +2433,8 @@ components:
           type: boolean
         delivery_protocol:
           type: string
-        http_port:
-          type: "interface{}"
-        https_port:
-          type: "interface{}"
+        http_port: {}
+        https_port: {}
         minimum_tls_version:
           type: string
         application_acceleration:
@@ -2587,10 +2581,8 @@ components:
           type: boolean
         delivery_protocol:
           type: string
-        http_port:
-          type: "interface{}"
-        https_port:
-          type: "interface{}"
+        http_port: {}
+        https_port: {}
         minimum_tls_version:
           type: string
         application_acceleration:
@@ -2655,10 +2647,8 @@ components:
           type: string
         delivery_protocol:
           type: string
-        http_port:
-          type: "interface{}"
-        https_port:
-          type: "interface{}"
+        http_port: {}
+        https_port: {}
         minimum_tls_version:
           type: string
         active:
@@ -2748,10 +2738,8 @@ components:
           type: string
         delivery_protocol:
           type: string
-        http_port:
-          type: "interface{}"
-        https_port:
-          type: "interface{}"
+        http_port: {}
+        https_port: {}
         minimum_tls_version:
           type: string
         active:
@@ -2821,10 +2809,8 @@ components:
           type: string
         delivery_protocol:
           type: string
-        http_port:
-          type: "interface{}"
-        https_port:
-          type: "interface{}"
+        http_port: {}
+        https_port: {}
         minimum_tls_version:
           type: string
         active:
