@@ -2335,7 +2335,7 @@ components:
         name:
           type: string
         debug_rules:
-          type: string
+          type: boolean
         last_editor:
           type: string
         last_modified:
