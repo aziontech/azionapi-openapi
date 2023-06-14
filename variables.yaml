@@ -1,14 +1,18 @@
 openapi: 3.0.3
 info:
-  title: ''
-  version: 0.0.0
+  title: 'Variables'
+  version: 0.1.0
+tags:
+  - name: Variables
+    description: >-
+      TDB
 paths:
   /api/variables:
     get:
       operationId: api_variables_list
       description: List all user's Variables.
       tags:
-      - api
+      - Variables
       security:
       - tokenAuth: []
       responses:
@@ -27,7 +31,7 @@ paths:
         and no longer viewable after creation.</li><li>If the attribute "secret" is
         not informed the Variable value will be considered as not secret by default.</li></ul>
       tags:
-      - api
+      - Variables
       requestBody:
         content:
           application/json:
@@ -45,12 +49,12 @@ paths:
                   value: My secret value
                   secret: true
                 summary: Secret Variable creation
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/VariableCreate'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/VariableCreate'
+          # application/x-www-form-urlencoded:
+          #   schema:
+          #     $ref: '#/components/schemas/VariableCreate'
+          # multipart/form-data:
+          #   schema:
+          #     $ref: '#/components/schemas/VariableCreate'
         required: true
       security:
       - tokenAuth: []
@@ -61,6 +65,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/VariableGet'
           description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
   /api/variables/{uuid}:
     get:
       operationId: api_variables_retrieve
@@ -73,7 +85,7 @@ paths:
           pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
         required: true
       tags:
-      - api
+      - Variables
       security:
       - tokenAuth: []
       responses:
@@ -83,6 +95,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Variable'
           description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
     put:
       operationId: api_variables_update
       description: Update variable attributes by it's UUID. Keep the Variable UUID
@@ -95,7 +115,7 @@ paths:
           pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
         required: true
       tags:
-      - api
+      - Variables
       requestBody:
         content:
           application/json:
@@ -129,6 +149,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/VariableGet'
           description: ''
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
     delete:
       operationId: api_variables_destroy
       description: Delete a Variable by it's UUID
@@ -140,12 +168,22 @@ paths:
           pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
         required: true
       tags:
-      - api
+      - Variables
       security:
       - tokenAuth: []
       responses:
         '204':
           description: No response body
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
+servers:
+  - url: https://stage-variables.azion.com
 components:
   schemas:
     Variable:
@@ -157,9 +195,12 @@ components:
           readOnly: true
         key:
           type: string
+          minLength: 1
           maxLength: 100
         value:
           type: string
+          minLength: 1
+          maxLength: 32768
         secret:
           type: boolean
           readOnly: true
@@ -185,9 +226,12 @@ components:
       properties:
         key:
           type: string
+          minLength: 1
           maxLength: 100
         value:
           type: string
+          minLength: 1
+          maxLength: 32768
         secret:
           type: boolean
       required:
@@ -202,9 +246,12 @@ components:
           readOnly: true
         key:
           type: string
+          minLength: 1
           maxLength: 100
         value:
           type: string
+          minLength: 1
+          maxLength: 32768
           description: |-
             Given the *incoming* primitive data, return the value for this field
             that should be validated and transformed to a native value.

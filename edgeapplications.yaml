@@ -2335,7 +2335,7 @@ components:
         name:
           type: string
         debug_rules:
-          type: string
+          type: boolean
         last_editor:
           type: string
         last_modified:
@@ -2375,6 +2375,8 @@ components:
           device_detection: true
           raw_logs: true
           active: true
+          debug_rules: true
+          http3: true
           delivery_protocol: delivery_protocol
           edge_firewall: true
           caching: true
@@ -2401,13 +2403,14 @@ components:
     ApplicationResults:
       additionalProperties: false
       example:
-        next: next
         load_balancer: true
         application_acceleration: true
         web_application_firewall: true
         device_detection: true
         raw_logs: true
         active: true
+        http3: true
+        debug_rules: true
         delivery_protocol: delivery_protocol
         edge_firewall: true
         caching: true
@@ -2427,9 +2430,11 @@ components:
           type: integer
         name:
           type: string
-        next:
-          type: string
         active:
+          type: boolean
+        debug_rules:
+          type: boolean
+        http3:
           type: boolean
         delivery_protocol:
           type: string
@@ -2459,6 +2464,8 @@ components:
           type: boolean
       required:
       - active
+      - debug_rules
+      - http3
       - application_acceleration
       - caching
       - delivery_protocol
