@@ -2408,6 +2408,7 @@ components:
         device_detection: true
         raw_logs: true
         active: true
+        debug_rules: true
         delivery_protocol: delivery_protocol
         edge_firewall: true
         caching: true
@@ -2430,6 +2431,8 @@ components:
         next:
           type: string
         active:
+          type: boolean
+        debug_rules:
           type: boolean
         delivery_protocol:
           type: string
@@ -2459,6 +2462,7 @@ components:
           type: boolean
       required:
       - active
+      - debug_rules
       - application_acceleration
       - caching
       - delivery_protocol
