@@ -18,9 +18,17 @@ paths:
         '201':
           description: Network Lists created
         '400':
-          $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
         '500':
-          $ref: '#/components/schemas/ErrorModel'
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
     get:
       summary: List all user Network Lists
       parameters:
@@ -73,9 +81,17 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListNetworkListsResponse'
         '400':
-          $ref: '#/components/schemas/BadRequestResponse'
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
         '500':
-          $ref: '#/components/schemas/ErrorModel'
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorModel'
 components:
   schemas:
     ErrorModel:
