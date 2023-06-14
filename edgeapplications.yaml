@@ -93,58 +93,58 @@ info:
   title: Edge Application
   version: 1.0.0
 servers:
-- url: https://api.azionapi.net
+  - url: https://api.azionapi.net
 security:
-- tokenAuth: []
+  - tokenAuth: []
 paths:
   /edge_applications:
     get:
       parameters:
-      - explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: page_size
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: order_by
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: sort
-        required: false
-        schema:
-          type: string
-        style: form
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: true
+          in: query
+          name: page
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: page_size
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: order_by
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+          style: form
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -164,31 +164,31 @@ paths:
           description: Internal Server Error
       summary: /edge_applications
       tags:
-      - Edge Applications > Main Settings
+        - Edge Applications > Main Settings
     post:
       parameters:
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -213,26 +213,26 @@ paths:
           description: Internal Server Error
       summary: /edge_applications
       tags:
-      - Edge Applications > Main Settings
+        - Edge Applications > Main Settings
   /edge_applications/{id}:
     delete:
       parameters:
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: The id of the edge application that you plan to delete.
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: The id of the edge application that you plan to delete.
+          explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          style: simple
       responses:
         "204":
           description: No response
@@ -248,24 +248,24 @@ paths:
           description: Internal Server Error
       summary: /edge_applications/:id
       tags:
-      - Edge Applications > Main Settings
+        - Edge Applications > Main Settings
     get:
       parameters:
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -285,38 +285,38 @@ paths:
           description: Internal Server Error
       summary: /edge_applications/:id
       tags:
-      - Edge Applications > Main Settings
+        - Edge Applications > Main Settings
     patch:
       parameters:
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
+        - explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -341,39 +341,39 @@ paths:
           description: Internal Server Error
       summary: /edge_applications/:id
       tags:
-      - Edge Applications > Main Settings
+        - Edge Applications > Main Settings
     put:
       parameters:
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: "The Id of the edge application to be overwritten.\t"
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: "The Id of the edge application to be overwritten.\t"
+          explode: false
+          in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -398,63 +398,63 @@ paths:
           description: Internal Server Error
       summary: /edge_applications/:id
       tags:
-      - Edge Applications > Main Settings
+        - Edge Applications > Main Settings
   /edge_applications/{edge_application_id}/cache_settings:
     get:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: page_size
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: order_by
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: sort
-        required: false
-        schema:
-          type: string
-        style: form
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: true
+          in: query
+          name: page
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: page_size
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: order_by
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+          style: form
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -474,39 +474,39 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/cache_settings"
       tags:
-      - Edge Applications > Cache Settings
+        - Edge Applications > Cache Settings
     post:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -531,34 +531,34 @@ paths:
           description: Internal Server Error
       summary: /edge_applications/:edge_application_id:/cache_settings
       tags:
-      - Edge Applications > Cache Settings
+        - Edge Applications > Cache Settings
   /edge_applications/{edge_application_id}/cache_settings/{cache_settings_id}:
     get:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: cache_settings_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: cache_settings_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -578,47 +578,47 @@ paths:
           description: Internal Server Error
       summary: '/edge_applications/:edge_application_id:/cache_settings/:cache_settings_id:'
       tags:
-      - Edge Applications > Cache Settings
+        - Edge Applications > Cache Settings
     put:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: cache_settings_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: cache_settings_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -643,48 +643,48 @@ paths:
           description: Internal Server Error
       summary: /edge_applications/:edge_application_id:/cache_settings/ca
       tags:
-      - Edge Applications > Cache Settings
+        - Edge Applications > Cache Settings
   /edge_applications/{edge_application_id}/cache_settings/{cache_settings}:
     delete:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: cache_settings
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: cache_settings
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "204":
           description: No response
@@ -700,33 +700,33 @@ paths:
           description: Internal Server Error
       summary: '/edge_applications/:edge_application_id:/cache_settings/:cache_settings:'
       tags:
-      - Edge Applications > Cache Settings
+        - Edge Applications > Cache Settings
     patch:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: cache_settings
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: cache_settings
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -751,63 +751,63 @@ paths:
           description: Internal Server Error
       summary: '/edge_applications/:edge_application_id:/cache_settings/:cache_settings_id:'
       tags:
-      - Edge Applications > Cache Settings
+        - Edge Applications > Cache Settings
   /edge_applications/{edge_application_id}/functions_instances:
     get:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: page_size
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: order_by
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: sort
-        required: false
-        schema:
-          type: string
-        style: form
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: true
+          in: query
+          name: page
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: page_size
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: order_by
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+          style: form
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -827,39 +827,39 @@ paths:
           description: Internal Server Error
       summary: /edge_applications/:edge_application_id:/functions_instances
       tags:
-      - Edge Applications > Edge Functions Instances
+        - Edge Applications > Edge Functions Instances
     post:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -884,46 +884,46 @@ paths:
           description: Internal Server Error
       summary: edge_application/:edge_application_id:/functions_instances
       tags:
-      - Edge Applications > Edge Functions Instances
+        - Edge Applications > Edge Functions Instances
   /edge_applications/{edge_application_id}/functions_instances/{functions_instances_id}:
     delete:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: functions_instances_id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            type: string
+          style: simple
+        - explode: false
+          in: path
+          name: functions_instances_id
+          required: true
+          schema:
+            type: string
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "204":
           description: No response
@@ -939,34 +939,34 @@ paths:
           description: Internal Server Error
       summary: '/edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:'
       tags:
-      - Edge Applications > Edge Functions Instances
+        - Edge Applications > Edge Functions Instances
     get:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: functions_instances_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - description: "The id of the edge function instance you plan to query.\t"
-        example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: functions_instances_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - description: "The id of the edge function instance you plan to query.\t"
+          example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -986,47 +986,47 @@ paths:
           description: Internal Server Error
       summary: '/edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:'
       tags:
-      - Edge Applications > Edge Functions Instances
+        - Edge Applications > Edge Functions Instances
     patch:
       parameters:
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: "The id of the edge application you plan to overwrite\t"
-        explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The id of the edge function instance you plan to overwrite.
-        explode: false
-        in: path
-        name: functions_instances_id
-        required: true
-        schema:
-          type: string
-        style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: "The id of the edge application you plan to overwrite\t"
+          explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The id of the edge function instance you plan to overwrite.
+          explode: false
+          in: path
+          name: functions_instances_id
+          required: true
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -1051,47 +1051,47 @@ paths:
           description: Internal Server Error
       summary: '/edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:'
       tags:
-      - Edge Applications > Edge Functions Instances
+        - Edge Applications > Edge Functions Instances
     put:
       parameters:
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: "The id of the edge application you plan to overwrite\t"
-        explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The id of the edge function instance you plan to overwrite.
-        explode: false
-        in: path
-        name: functions_instances_id
-        required: true
-        schema:
-          type: string
-        style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: "The id of the edge application you plan to overwrite\t"
+          explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The id of the edge function instance you plan to overwrite.
+          explode: false
+          in: path
+          name: functions_instances_id
+          required: true
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -1116,63 +1116,63 @@ paths:
           description: Internal Server Error
       summary: '/edge_applications/:edge_application_id:/functions_instances/:functions_instances_id:'
       tags:
-      - Edge Applications > Edge Functions Instances
+        - Edge Applications > Edge Functions Instances
   /edge_applications/{edge_application_id}/origins:
     get:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: page_size
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: order_by
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: sort
-        required: false
-        schema:
-          type: string
-        style: form
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: true
+          in: query
+          name: page
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: page_size
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: order_by
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+          style: form
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -1192,39 +1192,39 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/origins"
       tags:
-      - Edge Applications > Origins
+        - Edge Applications > Origins
     post:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -1249,34 +1249,34 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/origins"
       tags:
-      - Edge Applications > Origins
+        - Edge Applications > Origins
   /edge_applications/{edge_application_id}/origins/{origin_key}:
     delete:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: origin_key
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The id of the Origin that you plan to delete.
-        example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: origin_key
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The id of the Origin that you plan to delete.
+          example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "204":
           description: No response
@@ -1292,33 +1292,33 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/origins/{origin_id}"
       tags:
-      - Edge Applications > Origins
+        - Edge Applications > Origins
     get:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: origin_key
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: The id of the Origin that you plan to query.
-        example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: origin_key
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: The id of the Origin that you plan to query.
+          example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -1338,46 +1338,46 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/origins/{origin_key}"
       tags:
-      - Edge Applications > Origins
+        - Edge Applications > Origins
     patch:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: origin_key
-        required: true
-        schema:
-          type: string
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: origin_key
+          required: true
+          schema:
+            type: string
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -1402,46 +1402,46 @@ paths:
           description: Internal Server Error
       summary: '/edge_applications/:edge_application_id:/origins/:origin_id:'
       tags:
-      - Edge Applications > Origins
+        - Edge Applications > Origins
     put:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: origin_key
-        required: true
-        schema:
-          type: string
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: origin_key
+          required: true
+          schema:
+            type: string
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -1466,70 +1466,70 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/origins/{origin_id}"
       tags:
-      - Edge Applications > Origins
+        - Edge Applications > Origins
   /edge_applications/{edge_application_id}/rules_engine/{phase}/rules:
     get:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: page_size
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: order_by
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: sort
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: false
-        in: path
-        name: phase
-        required: true
-        schema:
-          type: string
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: true
+          in: query
+          name: page
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: page_size
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: order_by
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: false
+          in: path
+          name: phase
+          required: true
+          schema:
+            type: string
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -1549,7 +1549,7 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/rules_engine/{phase}/rules"
       tags:
-      - Edge Applications > Rules Engine
+        - Edge Applications > Rules Engine
     post:
       description: |-
         Check below the list of behaviors that can be applied:
@@ -1580,43 +1580,43 @@ paths:
         | Set Cache Policy                    | set_cache_policy       |
         | Set Origin                          | set_origin             |
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: phase
-        required: true
-        schema:
-          type: string
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: phase
+          required: true
+          schema:
+            type: string
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -1641,43 +1641,43 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/rules_engine/{phase}/rules"
       tags:
-      - Edge Applications > Rules Engine
+        - Edge Applications > Rules Engine
   /edge_applications/{edge_application_id}/rules_engine/{phase}/rules/{rule_id}:
     delete:
       parameters:
-      - description: "The id of the edge application you plan to delete.\t"
-        explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: phase
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: "The id of the rule you plan to delete.\t"
-        explode: false
-        in: path
-        name: rule_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - description: "The id of the edge application you plan to delete.\t"
+          explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: phase
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: "The id of the rule you plan to delete.\t"
+          explode: false
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "204":
           description: No response
@@ -1693,42 +1693,42 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/rules_engine/{phase}/rules"
       tags:
-      - Edge Applications > Rules Engine
+        - Edge Applications > Rules Engine
     get:
       parameters:
-      - description: "The id of the edge application you want to get.\t"
-        explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: phase
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: "The id of the rule you plan to delete.\t"
-        explode: false
-        in: path
-        name: rule_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - description: "The id of the edge application you want to get.\t"
+          explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: phase
+          required: true
+          schema:
+            type: string
+          style: simple
+        - description: "The id of the rule you plan to delete.\t"
+          explode: false
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -1748,54 +1748,54 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/rules_engine/{phase}/rules"
       tags:
-      - Edge Applications > Rules Engine
+        - Edge Applications > Rules Engine
     patch:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: phase
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: phase
+          required: true
+          schema:
+            type: string
+          style: simple
+        - explode: false
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -1820,54 +1820,54 @@ paths:
           description: Internal Server Error
       summary: '/edge_applications/:edge_application_id:/rules_engine/:phase:/rules/:rule_id:'
       tags:
-      - Edge Applications > Rules Engine
+        - Edge Applications > Rules Engine
     put:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: phase
-        required: true
-        schema:
-          type: string
-        style: simple
-      - explode: false
-        in: path
-        name: rule_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: phase
+          required: true
+          schema:
+            type: string
+          style: simple
+        - explode: false
+          in: path
+          name: rule_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -1892,63 +1892,63 @@ paths:
           description: Internal Server Error
       summary: '/edge_applications/:edge_application_id:/rules_engine/:phase:/rules/:rule_id:'
       tags:
-      - Edge Applications > Rules Engine
+        - Edge Applications > Rules Engine
   /edge_applications/{edge_application_id}/device_groups:
     get:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: true
-        in: query
-        name: page
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: page_size
-        required: false
-        schema:
-          format: int64
-          type: integer
-        style: form
-      - explode: true
-        in: query
-        name: filter
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: order_by
-        required: false
-        schema:
-          type: string
-        style: form
-      - explode: true
-        in: query
-        name: sort
-        required: false
-        schema:
-          type: string
-        style: form
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: true
+          in: query
+          name: page
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: page_size
+          required: false
+          schema:
+            format: int64
+            type: integer
+          style: form
+        - explode: true
+          in: query
+          name: filter
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: order_by
+          required: false
+          schema:
+            type: string
+          style: form
+        - explode: true
+          in: query
+          name: sort
+          required: false
+          schema:
+            type: string
+          style: form
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -1968,39 +1968,39 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/device_groups"
       tags:
-      - Edge Applications > Device Groups
+        - Edge Applications > Device Groups
     post:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -2025,35 +2025,35 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/device_groups"
       tags:
-      - Edge Applications > Device Groups
+        - Edge Applications > Device Groups
   /edge_applications/{edge_application_id}/device_groups/{device_group_id}:
     delete:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: device_group_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - description: The id of the Device Groups that you plan to delete.
-        example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: device_group_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - description: The id of the Device Groups that you plan to delete.
+          example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "204":
           description: No response
@@ -2069,34 +2069,34 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/device_groups/{device_group_id}"
       tags:
-      - Edge Applications > Device Groups
+        - Edge Applications > Device Groups
     get:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: device_group_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - description: The id of the Device Groups that you plan to query.
-        example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: device_group_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - description: The id of the Device Groups that you plan to query.
+          example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
       responses:
         "200":
           content:
@@ -2116,47 +2116,47 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/device_groups/{device_group_id}"
       tags:
-      - Edge Applications > Device Groups
+        - Edge Applications > Device Groups
     patch:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: device_group_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: device_group_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -2181,47 +2181,47 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/device_groups/{device_group_id}"
       tags:
-      - Edge Applications > Device Groups
+        - Edge Applications > Device Groups
     put:
       parameters:
-      - explode: false
-        in: path
-        name: edge_application_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: device_group_id
-        required: true
-        schema:
-          format: int64
-          type: integer
-        style: simple
-      - example: application/json; version=3
-        explode: false
-        in: header
-        name: Accept
-        required: false
-        schema:
-          type: string
-        style: simple
-      - description: |-
-          The type of coding used in the Body (application/json).
-          <br>
-
-          Example:
-          Content-Type: application/json
-        example: application/json
-        explode: false
-        in: header
-        name: Content-Type
-        required: false
-        schema:
-          type: string
-        style: simple
+        - explode: false
+          in: path
+          name: edge_application_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - explode: false
+          in: path
+          name: device_group_id
+          required: true
+          schema:
+            format: int64
+            type: integer
+          style: simple
+        - example: application/json; version=3
+          explode: false
+          in: header
+          name: Accept
+          required: false
+          schema:
+            type: string
+          style: simple
+        - description: |-
+            The type of coding used in the Body (application/json).
+            <br>
+            
+            Example:
+            Content-Type: application/json
+          example: application/json
+          explode: false
+          in: header
+          name: Content-Type
+          required: false
+          schema:
+            type: string
+          style: simple
       requestBody:
         content:
           application/json; version=3:
@@ -2246,7 +2246,7 @@ paths:
           description: Internal Server Error
       summary: "/edge_applications/{edge_application_id}/device_groups/{device_group_id}"
       tags:
-      - Edge Applications > Device Groups
+        - Edge Applications > Device Groups
 components:
   schemas:
     GetApplicationsResponse:
@@ -2259,46 +2259,34 @@ components:
           previous: previous
         total_pages: 6
         results:
-        - next: next
-          load_balancer: true
-          application_acceleration: true
-          web_application_firewall: true
-          device_detection: true
-          raw_logs: true
-          active: true
-          delivery_protocol: delivery_protocol
-          edge_firewall: true
-          caching: true
-          http_port:
-          - 5
-          https_port:
-          - 2
-          minimum_tls_version: minimum_tls_version
-          name: name
-          edge_functions: true
-          l2_caching: true
-          id: 5
-          image_optimization: true
-        - next: next
-          load_balancer: true
-          application_acceleration: true
-          web_application_firewall: true
-          device_detection: true
-          raw_logs: true
-          active: true
-          delivery_protocol: delivery_protocol
-          edge_firewall: true
-          caching: true
-          http_port:
-          - 5
-          https_port:
-          - 2
-          minimum_tls_version: minimum_tls_version
-          name: name
-          edge_functions: true
-          l2_caching: true
-          id: 5
-          image_optimization: true
+          - next: next
+            id: 5
+            name: name
+            active: true
+            debug_rules: true
+            last_editor: last_editor
+            last_modified: last_editor
+            "origins": [
+              {
+                "name": "Default Origin",
+                "origin_type": "single_origin",
+                "origin_id": "a7210940-b3fa-4d98-a5aa-ecadb4f48f57"
+              }
+            ]
+          - next: next
+            id: 5
+            name: name
+            active: true
+            debug_rules: true
+            last_editor: last_editor
+            last_modified: last_editor
+            "origins": [
+              {
+                "name": "Default Origin",
+                "origin_type": "single_origin",
+                "origin_id": "a7210940-b3fa-4d98-a5aa-ecadb4f48f57"
+              }
+            ]
       properties:
         count:
           format: int64
@@ -2313,14 +2301,14 @@ components:
           $ref: '#/components/schemas/ApplicationLinks'
         results:
           items:
-            $ref: '#/components/schemas/ApplicationResults'
+            $ref: '#/components/schemas/ApplicationsResults'
           type: array
       required:
-      - count
-      - links
-      - results
-      - schema_version
-      - total_pages
+        - count
+        - links
+        - results
+        - schema_version
+        - total_pages
       type: object
     ApplicationLinks:
       additionalProperties: false
@@ -2335,8 +2323,8 @@ components:
           nullable: true
           type: string
       required:
-      - next
-      - previous
+        - next
+        - previous
       type: object
     ApplicationsResults:
       additionalProperties: false
@@ -2344,15 +2332,23 @@ components:
         id:
           format: int64
           type: integer
-        next:
+        name:
+          type: string
+        debug_rules:
+          type: string
+        last_editor:
+          type: string
+        last_modified:
           type: string
         active:
           type: boolean
-        links:
-          $ref: '#/components/schemas/ApplicationOrigins'
+        origins:
+          items:
+            $ref: '#/components/schemas/ApplicationOrigins'
+          type: array
       required:
-      - next
-      - previous
+        - next
+        - previous
       type: object
     ApplicationOrigins:
       additionalProperties: false
@@ -2364,8 +2360,8 @@ components:
         origin_id:
           type: string
       required:
-      - next
-      - previous
+        - next
+        - previous
       type: object
     GetApplicationResponse:
       additionalProperties: false
@@ -2383,9 +2379,9 @@ components:
           edge_firewall: true
           caching: true
           http_port:
-          - 5
+            - 5
           https_port:
-          - 2
+            - 2
           minimum_tls_version: minimum_tls_version
           name: name
           edge_functions: true
@@ -2399,8 +2395,8 @@ components:
           format: int64
           type: integer
       required:
-      - results
-      - schema_version
+        - results
+        - schema_version
       type: object
     ApplicationResults:
       additionalProperties: false
@@ -2416,9 +2412,9 @@ components:
         edge_firewall: true
         caching: true
         http_port:
-        - 5
+          - 5
         https_port:
-        - 2
+          - 2
         minimum_tls_version: minimum_tls_version
         name: name
         edge_functions: true
@@ -2437,10 +2433,8 @@ components:
           type: boolean
         delivery_protocol:
           type: string
-        http_port:
-          type: "interface{}"
-        https_port:
-          type: "interface{}"
+        http_port: {}
+        https_port: {}
         minimum_tls_version:
           type: string
         application_acceleration:
@@ -2464,23 +2458,23 @@ components:
         web_application_firewall:
           type: boolean
       required:
-      - active
-      - application_acceleration
-      - caching
-      - delivery_protocol
-      - device_detection
-      - edge_firewall
-      - edge_functions
-      - http_port
-      - https_port
-      - id
-      - image_optimization
-      - l2_caching
-      - load_balancer
-      - minimum_tls_version
-      - name
-      - raw_logs
-      - web_application_firewall
+        - active
+        - application_acceleration
+        - caching
+        - delivery_protocol
+        - device_detection
+        - edge_firewall
+        - edge_functions
+        - http_port
+        - https_port
+        - id
+        - image_optimization
+        - l2_caching
+        - load_balancer
+        - minimum_tls_version
+        - name
+        - raw_logs
+        - web_application_firewall
       type: object
     CreateApplicationRequest:
       additionalProperties: false
@@ -2521,7 +2515,7 @@ components:
           format: int64
           type: integer
       required:
-      - name
+        - name
       type: object
     CreateApplicationResult:
       additionalProperties: false
@@ -2538,9 +2532,9 @@ components:
           edge_firewall: true
           caching: true
           http_port:
-          - 6
+            - 6
           https_port:
-          - 1
+            - 1
           minimum_tls_version: minimum_tls_version
           name: name
           edge_functions: true
@@ -2553,8 +2547,8 @@ components:
           format: int64
           type: integer
       required:
-      - results
-      - schema_version
+        - results
+        - schema_version
       type: object
     ApplicationResultsCreate:
       additionalProperties: false
@@ -2569,9 +2563,9 @@ components:
         edge_firewall: true
         caching: true
         http_port:
-        - 6
+          - 6
         https_port:
-        - 1
+          - 1
         minimum_tls_version: minimum_tls_version
         name: name
         edge_functions: true
@@ -2587,10 +2581,8 @@ components:
           type: boolean
         delivery_protocol:
           type: string
-        http_port:
-          type: "interface{}"
-        https_port:
-          type: "interface{}"
+        http_port: {}
+        https_port: {}
         minimum_tls_version:
           type: string
         application_acceleration:
@@ -2612,22 +2604,22 @@ components:
         web_application_firewall:
           type: boolean
       required:
-      - active
-      - application_acceleration
-      - caching
-      - delivery_protocol
-      - device_detection
-      - edge_firewall
-      - edge_functions
-      - http_port
-      - https_port
-      - id
-      - image_optimization
-      - load_balancer
-      - minimum_tls_version
-      - name
-      - raw_logs
-      - web_application_firewall
+        - active
+        - application_acceleration
+        - caching
+        - delivery_protocol
+        - device_detection
+        - edge_firewall
+        - edge_functions
+        - http_port
+        - https_port
+        - id
+        - image_optimization
+        - load_balancer
+        - minimum_tls_version
+        - name
+        - raw_logs
+        - web_application_firewall
       type: object
     ApplicationUpdateRequest:
       additionalProperties: false
@@ -2642,9 +2634,9 @@ components:
         edge_firewall: true
         caching: true
         http_port:
-        - 0
+          - 0
         https_port:
-        - 6
+          - 6
         minimum_tls_version: minimum_tls_version
         name: name
         edge_functions: true
@@ -2655,10 +2647,8 @@ components:
           type: string
         delivery_protocol:
           type: string
-        http_port:
-          type: "interface{}"
-        https_port:
-          type: "interface{}"
+        http_port: {}
+        https_port: {}
         minimum_tls_version:
           type: string
         active:
@@ -2699,9 +2689,9 @@ components:
           edge_firewall: true
           caching: true
           http_port:
-          - 6
+            - 6
           https_port:
-          - 1
+            - 1
           minimum_tls_version: minimum_tls_version
           name: name
           edge_functions: true
@@ -2715,8 +2705,8 @@ components:
           format: int64
           type: integer
       required:
-      - results
-      - schema_version
+        - results
+        - schema_version
       type: object
     ApplicationUpdateResults:
       additionalProperties: false
@@ -2731,9 +2721,9 @@ components:
         edge_firewall: true
         caching: true
         http_port:
-        - 6
+          - 6
         https_port:
-        - 1
+          - 1
         minimum_tls_version: minimum_tls_version
         name: name
         edge_functions: true
@@ -2748,10 +2738,8 @@ components:
           type: string
         delivery_protocol:
           type: string
-        http_port:
-          type: "interface{}"
-        https_port:
-          type: "interface{}"
+        http_port: {}
+        https_port: {}
         minimum_tls_version:
           type: string
         active:
@@ -2777,23 +2765,23 @@ components:
         web_application_firewall:
           type: boolean
       required:
-      - active
-      - application_acceleration
-      - caching
-      - delivery_protocol
-      - device_detection
-      - edge_firewall
-      - edge_functions
-      - http_port
-      - https_port
-      - id
-      - image_optimization
-      - l2_caching
-      - load_balancer
-      - minimum_tls_version
-      - name
-      - raw_logs
-      - web_application_firewall
+        - active
+        - application_acceleration
+        - caching
+        - delivery_protocol
+        - device_detection
+        - edge_firewall
+        - edge_functions
+        - http_port
+        - https_port
+        - id
+        - image_optimization
+        - l2_caching
+        - load_balancer
+        - minimum_tls_version
+        - name
+        - raw_logs
+        - web_application_firewall
       type: object
     ApplicationPutRequest:
       additionalProperties: false
@@ -2808,9 +2796,9 @@ components:
         edge_firewall: true
         caching: true
         http_port:
-        - 0
+          - 0
         https_port:
-        - 6
+          - 6
         minimum_tls_version: minimum_tls_version
         name: name
         edge_functions: true
@@ -2821,10 +2809,8 @@ components:
           type: string
         delivery_protocol:
           type: string
-        http_port:
-          type: "interface{}"
-        https_port:
-          type: "interface{}"
+        http_port: {}
+        https_port: {}
         minimum_tls_version:
           type: string
         active:
@@ -2850,7 +2836,7 @@ components:
         web_application_firewall:
           type: boolean
       required:
-      - name
+        - name
       type: object
     ApplicationPutResult:
       additionalProperties: false
@@ -2867,9 +2853,9 @@ components:
           edge_firewall: true
           caching: true
           http_port:
-          - 6
+            - 6
           https_port:
-          - 1
+            - 1
           minimum_tls_version: minimum_tls_version
           name: name
           edge_functions: true
@@ -2883,8 +2869,8 @@ components:
           format: int64
           type: integer
       required:
-      - results
-      - schema_version
+        - results
+        - schema_version
       type: object
     ApplicationCacheGetResponse:
       additionalProperties: false
@@ -2896,48 +2882,48 @@ components:
           previous: previous
         total_pages: 6
         results:
-        - cache_by_cookies: cache_by_cookies
-          device_group:
-          - device_group
-          - device_group
-          enable_query_string_sort: true
-          l2_caching_enabled: true
-          browser_cache_settings: browser_cache_settings
-          cdn_cache_settings: cdn_cache_settings
-          query_string_fields:
-          - query_string_fields
-          - query_string_fields
-          adaptive_delivery_action: adaptive_delivery_action
-          name: name
-          enable_caching_for_post: true
-          cookie_names:
-          - cookie_names
-          - cookie_names
-          id: 5
-          cache_by_query_string: cache_by_query_string
-          browser_cache_settings_maximum_ttl: 5
-          cdn_cache_settings_maximum_ttl: 2
-        - cache_by_cookies: cache_by_cookies
-          device_group:
-          - device_group
-          - device_group
-          enable_query_string_sort: true
-          l2_caching_enabled: true
-          browser_cache_settings: browser_cache_settings
-          cdn_cache_settings: cdn_cache_settings
-          query_string_fields:
-          - query_string_fields
-          - query_string_fields
-          adaptive_delivery_action: adaptive_delivery_action
-          name: name
-          enable_caching_for_post: true
-          cookie_names:
-          - cookie_names
-          - cookie_names
-          id: 5
-          cache_by_query_string: cache_by_query_string
-          browser_cache_settings_maximum_ttl: 5
-          cdn_cache_settings_maximum_ttl: 2
+          - cache_by_cookies: cache_by_cookies
+            device_group:
+              - device_group
+              - device_group
+            enable_query_string_sort: true
+            l2_caching_enabled: true
+            browser_cache_settings: browser_cache_settings
+            cdn_cache_settings: cdn_cache_settings
+            query_string_fields:
+              - query_string_fields
+              - query_string_fields
+            adaptive_delivery_action: adaptive_delivery_action
+            name: name
+            enable_caching_for_post: true
+            cookie_names:
+              - cookie_names
+              - cookie_names
+            id: 5
+            cache_by_query_string: cache_by_query_string
+            browser_cache_settings_maximum_ttl: 5
+            cdn_cache_settings_maximum_ttl: 2
+          - cache_by_cookies: cache_by_cookies
+            device_group:
+              - device_group
+              - device_group
+            enable_query_string_sort: true
+            l2_caching_enabled: true
+            browser_cache_settings: browser_cache_settings
+            cdn_cache_settings: cdn_cache_settings
+            query_string_fields:
+              - query_string_fields
+              - query_string_fields
+            adaptive_delivery_action: adaptive_delivery_action
+            name: name
+            enable_caching_for_post: true
+            cookie_names:
+              - cookie_names
+              - cookie_names
+            id: 5
+            cache_by_query_string: cache_by_query_string
+            browser_cache_settings_maximum_ttl: 5
+            cdn_cache_settings_maximum_ttl: 2
       properties:
         count:
           format: int64
@@ -2955,11 +2941,11 @@ components:
             $ref: '#/components/schemas/ApplicationCacheResults'
           type: array
       required:
-      - count
-      - links
-      - results
-      - schema_version
-      - total_pages
+        - count
+        - links
+        - results
+        - schema_version
+        - total_pages
       type: object
     ApplicationCacheGetOneResponse:
       additionalProperties: false
@@ -2968,21 +2954,21 @@ components:
         results:
           cache_by_cookies: cache_by_cookies
           device_group:
-          - device_group
-          - device_group
+            - device_group
+            - device_group
           enable_query_string_sort: true
           l2_caching_enabled: true
           browser_cache_settings: browser_cache_settings
           cdn_cache_settings: cdn_cache_settings
           query_string_fields:
-          - query_string_fields
-          - query_string_fields
+            - query_string_fields
+            - query_string_fields
           adaptive_delivery_action: adaptive_delivery_action
           name: name
           enable_caching_for_post: true
           cookie_names:
-          - cookie_names
-          - cookie_names
+            - cookie_names
+            - cookie_names
           id: 5
           cache_by_query_string: cache_by_query_string
           browser_cache_settings_maximum_ttl: 5
@@ -2994,29 +2980,29 @@ components:
           format: int64
           type: integer
       required:
-      - results
-      - schema_version
+        - results
+        - schema_version
       type: object
     ApplicationCacheResults:
       additionalProperties: false
       example:
         cache_by_cookies: cache_by_cookies
         device_group:
-        - device_group
-        - device_group
+          - device_group
+          - device_group
         enable_query_string_sort: true
         l2_caching_enabled: true
         browser_cache_settings: browser_cache_settings
         cdn_cache_settings: cdn_cache_settings
         query_string_fields:
-        - query_string_fields
-        - query_string_fields
+          - query_string_fields
+          - query_string_fields
         adaptive_delivery_action: adaptive_delivery_action
         name: name
         enable_caching_for_post: true
         cookie_names:
-        - cookie_names
-        - cookie_names
+          - cookie_names
+          - cookie_names
         id: 5
         cache_by_query_string: cache_by_query_string
         browser_cache_settings_maximum_ttl: 5
@@ -3062,21 +3048,21 @@ components:
         l2_caching_enabled:
           type: boolean
       required:
-      - adaptive_delivery_action
-      - browser_cache_settings
-      - browser_cache_settings_maximum_ttl
-      - cache_by_cookies
-      - cache_by_query_string
-      - cdn_cache_settings
-      - cdn_cache_settings_maximum_ttl
-      - cookie_names
-      - device_group
-      - enable_caching_for_post
-      - enable_query_string_sort
-      - id
-      - l2_caching_enabled
-      - name
-      - query_string_fields
+        - adaptive_delivery_action
+        - browser_cache_settings
+        - browser_cache_settings_maximum_ttl
+        - cache_by_cookies
+        - cache_by_query_string
+        - cdn_cache_settings
+        - cdn_cache_settings_maximum_ttl
+        - cookie_names
+        - device_group
+        - enable_caching_for_post
+        - enable_query_string_sort
+        - id
+        - l2_caching_enabled
+        - name
+        - query_string_fields
       type: object
     ApplicationCacheCreateRequest:
       additionalProperties: false
@@ -3090,14 +3076,14 @@ components:
         is_slice_l2_caching_enabled: true
         cdn_cache_settings: cdn_cache_settings
         query_string_fields:
-        - query_string_fields
-        - query_string_fields
+          - query_string_fields
+          - query_string_fields
         is_slice_edge_caching_enabled: true
         name: name
         enable_caching_for_post: true
         cookie_names:
-        - cookie_names
-        - cookie_names
+          - cookie_names
+          - cookie_names
         cache_by_query_string: cache_by_query_string
         browser_cache_settings_maximum_ttl: 0
         cdn_cache_settings_maximum_ttl: 6
@@ -3146,7 +3132,7 @@ components:
           format: int64
           type: integer
       required:
-      - name
+        - name
       type: object
     ApplicationCacheCreateResponse:
       additionalProperties: false
@@ -3155,21 +3141,21 @@ components:
         results:
           cache_by_cookies: cache_by_cookies
           device_group:
-          - device_group
-          - device_group
+            - device_group
+            - device_group
           enable_query_string_sort: true
           l2_caching_enabled: true
           browser_cache_settings: browser_cache_settings
           cdn_cache_settings: cdn_cache_settings
           query_string_fields:
-          - query_string_fields
-          - query_string_fields
+            - query_string_fields
+            - query_string_fields
           adaptive_delivery_action: adaptive_delivery_action
           name: name
           enable_caching_for_post: true
           cookie_names:
-          - cookie_names
-          - cookie_names
+            - cookie_names
+            - cookie_names
           id: 0
           cache_by_query_string: cache_by_query_string
           browser_cache_settings_maximum_ttl: 6
@@ -3186,21 +3172,21 @@ components:
       example:
         cache_by_cookies: cache_by_cookies
         device_group:
-        - device_group
-        - device_group
+          - device_group
+          - device_group
         enable_query_string_sort: true
         l2_caching_enabled: true
         browser_cache_settings: browser_cache_settings
         cdn_cache_settings: cdn_cache_settings
         query_string_fields:
-        - query_string_fields
-        - query_string_fields
+          - query_string_fields
+          - query_string_fields
         adaptive_delivery_action: adaptive_delivery_action
         name: name
         enable_caching_for_post: true
         cookie_names:
-        - cookie_names
-        - cookie_names
+          - cookie_names
+          - cookie_names
         id: 0
         cache_by_query_string: cache_by_query_string
         browser_cache_settings_maximum_ttl: 6
@@ -3246,21 +3232,21 @@ components:
         l2_caching_enabled:
           type: boolean
       required:
-      - adaptive_delivery_action
-      - browser_cache_settings
-      - browser_cache_settings_maximum_ttl
-      - cache_by_cookies
-      - cache_by_query_string
-      - cdn_cache_settings
-      - cdn_cache_settings_maximum_ttl
-      - cookie_names
-      - device_group
-      - enable_caching_for_post
-      - enable_query_string_sort
-      - id
-      - l2_caching_enabled
-      - name
-      - query_string_fields
+        - adaptive_delivery_action
+        - browser_cache_settings
+        - browser_cache_settings_maximum_ttl
+        - cache_by_cookies
+        - cache_by_query_string
+        - cdn_cache_settings
+        - cdn_cache_settings_maximum_ttl
+        - cookie_names
+        - device_group
+        - enable_caching_for_post
+        - enable_query_string_sort
+        - id
+        - l2_caching_enabled
+        - name
+        - query_string_fields
       type: object
     ApplicationCachePutRequest:
       additionalProperties: false
@@ -3274,14 +3260,14 @@ components:
         is_slice_l2_caching_enabled: true
         cdn_cache_settings: cdn_cache_settings
         query_string_fields:
-        - query_string_fields
-        - query_string_fields
+          - query_string_fields
+          - query_string_fields
         is_slice_edge_caching_enabled: true
         name: name
         enable_caching_for_post: true
         cookie_names:
-        - cookie_names
-        - cookie_names
+          - cookie_names
+          - cookie_names
         cache_by_query_string: cache_by_query_string
         browser_cache_settings_maximum_ttl: 0
         cdn_cache_settings_maximum_ttl: 6
@@ -3326,7 +3312,7 @@ components:
           format: int64
           type: integer
       required:
-      - name
+        - name
       type: object
     ApplicationCachePutResponse:
       additionalProperties: false
@@ -3335,21 +3321,21 @@ components:
         results:
           cache_by_cookies: cache_by_cookies
           device_group:
-          - device_group
-          - device_group
+            - device_group
+            - device_group
           enable_query_string_sort: true
           l2_caching_enabled: true
           browser_cache_settings: browser_cache_settings
           cdn_cache_settings: cdn_cache_settings
           query_string_fields:
-          - query_string_fields
-          - query_string_fields
+            - query_string_fields
+            - query_string_fields
           adaptive_delivery_action: adaptive_delivery_action
           name: name
           enable_caching_for_post: true
           cookie_names:
-          - cookie_names
-          - cookie_names
+            - cookie_names
+            - cookie_names
           id: 0
           cache_by_query_string: cache_by_query_string
           browser_cache_settings_maximum_ttl: 6
@@ -3361,8 +3347,8 @@ components:
           format: int64
           type: integer
       required:
-      - results
-      - schema_version
+        - results
+        - schema_version
       type: object
     ApplicationCachePatchRequest:
       additionalProperties: false
@@ -3376,14 +3362,14 @@ components:
         is_slice_l2_caching_enabled: true
         cdn_cache_settings: cdn_cache_settings
         query_string_fields:
-        - query_string_fields
-        - query_string_fields
+          - query_string_fields
+          - query_string_fields
         is_slice_edge_caching_enabled: true
         name: name
         enable_caching_for_post: true
         cookie_names:
-        - cookie_names
-        - cookie_names
+          - cookie_names
+          - cookie_names
         cache_by_query_string: cache_by_query_string
         browser_cache_settings_maximum_ttl: 0
         cdn_cache_settings_maximum_ttl: 6
@@ -3439,21 +3425,21 @@ components:
         results:
           cache_by_cookies: cache_by_cookies
           device_group:
-          - device_group
-          - device_group
+            - device_group
+            - device_group
           enable_query_string_sort: true
           l2_caching_enabled: true
           browser_cache_settings: browser_cache_settings
           cdn_cache_settings: cdn_cache_settings
           query_string_fields:
-          - query_string_fields
-          - query_string_fields
+            - query_string_fields
+            - query_string_fields
           adaptive_delivery_action: adaptive_delivery_action
           name: name
           enable_caching_for_post: true
           cookie_names:
-          - cookie_names
-          - cookie_names
+            - cookie_names
+            - cookie_names
           id: 0
           cache_by_query_string: cache_by_query_string
           browser_cache_settings_maximum_ttl: 6
@@ -3470,21 +3456,21 @@ components:
       example:
         cache_by_cookies: cache_by_cookies
         device_group:
-        - device_group
-        - device_group
+          - device_group
+          - device_group
         enable_query_string_sort: true
         l2_caching_enabled: true
         browser_cache_settings: browser_cache_settings
         cdn_cache_settings: cdn_cache_settings
         query_string_fields:
-        - query_string_fields
-        - query_string_fields
+          - query_string_fields
+          - query_string_fields
         adaptive_delivery_action: adaptive_delivery_action
         name: name
         enable_caching_for_post: true
         cookie_names:
-        - cookie_names
-        - cookie_names
+          - cookie_names
+          - cookie_names
         id: 0
         cache_by_query_string: cache_by_query_string
         browser_cache_settings_maximum_ttl: 6
@@ -3534,19 +3520,19 @@ components:
         l2_caching_enabled:
           type: boolean
       required:
-      - browser_cache_settings
-      - browser_cache_settings_maximum_ttl
-      - cache_by_cookies
-      - cache_by_query_string
-      - cdn_cache_settings
-      - cdn_cache_settings_maximum_ttl
-      - cookie_names
-      - enable_caching_for_post
-      - enable_query_string_sort
-      - id
-      - l2_caching_enabled
-      - name
-      - query_string_fields
+        - browser_cache_settings
+        - browser_cache_settings_maximum_ttl
+        - cache_by_cookies
+        - cache_by_query_string
+        - cdn_cache_settings
+        - cdn_cache_settings_maximum_ttl
+        - cookie_names
+        - enable_caching_for_post
+        - enable_query_string_sort
+        - id
+        - l2_caching_enabled
+        - name
+        - query_string_fields
       type: object
     ApplicationInstancesGetResponse:
       additionalProperties: false
@@ -3558,14 +3544,14 @@ components:
           previous: previous
         total_pages: 6
         results:
-        - args: ""
-          edge_function_id: 5
-          name: name
-          id: 5
-        - args: ""
-          edge_function_id: 5
-          name: name
-          id: 5
+          - args: ""
+            edge_function_id: 5
+            name: name
+            id: 5
+          - args: ""
+            edge_function_id: 5
+            name: name
+            id: 5
       properties:
         count:
           format: int64
@@ -3583,11 +3569,11 @@ components:
             $ref: '#/components/schemas/ApplicationInstancesResults'
           type: array
       required:
-      - count
-      - links
-      - results
-      - schema_version
-      - total_pages
+        - count
+        - links
+        - results
+        - schema_version
+        - total_pages
       type: object
     ApplicationInstancesGetOneResponse:
       additionalProperties: false
@@ -3605,8 +3591,8 @@ components:
           format: int64
           type: integer
       required:
-      - results
-      - schema_version
+        - results
+        - schema_version
       type: object
     ApplicationInstancesResults:
       example:
@@ -3625,10 +3611,10 @@ components:
           type: string
         args: {}
       required:
-      - args
-      - edge_function_id
-      - id
-      - name
+        - args
+        - edge_function_id
+        - id
+        - name
     ApplicationCreateInstanceRequest:
       example:
         args: ""
@@ -3642,9 +3628,9 @@ components:
           type: integer
         args: {}
       required:
-      - args
-      - edge_function_id
-      - name
+        - args
+        - edge_function_id
+        - name
     ApplicationPutInstanceRequest:
       example:
         args: ""
@@ -3658,9 +3644,9 @@ components:
           type: integer
         args: {}
       required:
-      - args
-      - edge_function_id
-      - name
+        - args
+        - edge_function_id
+        - name
     ApplicationUpdateInstanceRequest:
       example:
         args: ""
@@ -3676,9 +3662,9 @@ components:
           type: integer
         args: {}
       required:
-      - args
-      - edge_function_id
-      - name
+        - args
+        - edge_function_id
+        - name
     ApplicationInstanceResults:
       additionalProperties: false
       example:
@@ -3699,8 +3685,8 @@ components:
       additionalProperties: false
       example:
         addresses:
-        - address: address
-        - address: address
+          - address: address
+          - address: address
         hmac_secret_key: hmac_secret_key
         origin_path: origin_path
         origin_protocol_policy: origin_protocol_policy
@@ -3734,16 +3720,16 @@ components:
         hmac_secret_key:
           type: string
       required:
-      - addresses
-      - host_header
-      - name
+        - addresses
+        - host_header
+        - name
       type: object
     UpdateOriginsRequest:
       additionalProperties: false
       example:
         addresses:
-        - address: address
-        - address: address
+          - address: address
+          - address: address
         hmac_secret_key: hmac_secret_key
         origin_path: origin_path
         origin_protocol_policy: origin_protocol_policy
@@ -3777,16 +3763,16 @@ components:
         hmac_secret_key:
           type: string
       required:
-      - addresses
-      - host_header
-      - name
+        - addresses
+        - host_header
+        - name
       type: object
     PatchOriginsRequest:
       additionalProperties: false
       example:
         addresses:
-        - address: address
-        - address: address
+          - address: address
+          - address: address
         hmac_secret_key: hmac_secret_key
         origin_path: origin_path
         origin_protocol_policy: origin_protocol_policy
@@ -3825,14 +3811,14 @@ components:
       example:
         timeout_between_bytes: 2
         addresses:
-        - address: address
-          is_active: true
-          weight: weight
-          server_role: server_role
-        - address: address
-          is_active: true
-          weight: weight
-          server_role: server_role
+          - address: address
+            is_active: true
+            weight: weight
+            server_role: server_role
+          - address: address
+            is_active: true
+            weight: weight
+            server_role: server_role
         hmac_secret_key: hmac_secret_key
         method: method
         origin_path: origin_path
@@ -3886,22 +3872,22 @@ components:
         hmac_secret_key:
           type: string
       required:
-      - addresses
-      - connection_timeout
-      - hmac_access_key
-      - hmac_authentication
-      - hmac_region_name
-      - hmac_secret_key
-      - host_header
-      - is_origin_redirection_enabled
-      - method
-      - name
-      - origin_id
-      - origin_key
-      - origin_path
-      - origin_protocol_policy
-      - origin_type
-      - timeout_between_bytes
+        - addresses
+        - connection_timeout
+        - hmac_access_key
+        - hmac_authentication
+        - hmac_region_name
+        - hmac_secret_key
+        - host_header
+        - is_origin_redirection_enabled
+        - method
+        - name
+        - origin_id
+        - origin_key
+        - origin_path
+        - origin_protocol_policy
+        - origin_type
+        - timeout_between_bytes
       type: object
     OriginsResponse:
       additionalProperties: false
@@ -3913,54 +3899,54 @@ components:
           previous: previous
         total_pages: 6
         results:
-        - timeout_between_bytes: 2
-          addresses:
-          - address: address
-            is_active: true
-            weight: weight
-            server_role: server_role
-          - address: address
-            is_active: true
-            weight: weight
-            server_role: server_role
-          hmac_secret_key: hmac_secret_key
-          method: method
-          origin_path: origin_path
-          origin_protocol_policy: origin_protocol_policy
-          hmac_region_name: hmac_region_name
-          hmac_access_key: hmac_access_key
-          origin_id: 5
-          is_origin_redirection_enabled: true
-          origin_type: origin_type
-          host_header: host_header
-          origin_key: origin_key
-          name: name
-          connection_timeout: 5
-          hmac_authentication: true
-        - timeout_between_bytes: 2
-          addresses:
-          - address: address
-            is_active: true
-            weight: weight
-            server_role: server_role
-          - address: address
-            is_active: true
-            weight: weight
-            server_role: server_role
-          hmac_secret_key: hmac_secret_key
-          method: method
-          origin_path: origin_path
-          origin_protocol_policy: origin_protocol_policy
-          hmac_region_name: hmac_region_name
-          hmac_access_key: hmac_access_key
-          origin_id: 5
-          is_origin_redirection_enabled: true
-          origin_type: origin_type
-          host_header: host_header
-          origin_key: origin_key
-          name: name
-          connection_timeout: 5
-          hmac_authentication: true
+          - timeout_between_bytes: 2
+            addresses:
+              - address: address
+                is_active: true
+                weight: weight
+                server_role: server_role
+              - address: address
+                is_active: true
+                weight: weight
+                server_role: server_role
+            hmac_secret_key: hmac_secret_key
+            method: method
+            origin_path: origin_path
+            origin_protocol_policy: origin_protocol_policy
+            hmac_region_name: hmac_region_name
+            hmac_access_key: hmac_access_key
+            origin_id: 5
+            is_origin_redirection_enabled: true
+            origin_type: origin_type
+            host_header: host_header
+            origin_key: origin_key
+            name: name
+            connection_timeout: 5
+            hmac_authentication: true
+          - timeout_between_bytes: 2
+            addresses:
+              - address: address
+                is_active: true
+                weight: weight
+                server_role: server_role
+              - address: address
+                is_active: true
+                weight: weight
+                server_role: server_role
+            hmac_secret_key: hmac_secret_key
+            method: method
+            origin_path: origin_path
+            origin_protocol_policy: origin_protocol_policy
+            hmac_region_name: hmac_region_name
+            hmac_access_key: hmac_access_key
+            origin_id: 5
+            is_origin_redirection_enabled: true
+            origin_type: origin_type
+            host_header: host_header
+            origin_key: origin_key
+            name: name
+            connection_timeout: 5
+            hmac_authentication: true
       properties:
         count:
           format: int64
@@ -3978,11 +3964,11 @@ components:
             $ref: '#/components/schemas/OriginsResultResponse'
           type: array
       required:
-      - count
-      - links
-      - results
-      - schema_version
-      - total_pages
+        - count
+        - links
+        - results
+        - schema_version
+        - total_pages
       type: object
     OriginsIdResponse:
       additionalProperties: false
@@ -3991,14 +3977,14 @@ components:
         results:
           timeout_between_bytes: 2
           addresses:
-          - address: address
-            is_active: true
-            weight: weight
-            server_role: server_role
-          - address: address
-            is_active: true
-            weight: weight
-            server_role: server_role
+            - address: address
+              is_active: true
+              weight: weight
+              server_role: server_role
+            - address: address
+              is_active: true
+              weight: weight
+              server_role: server_role
           hmac_secret_key: hmac_secret_key
           method: method
           origin_path: origin_path
@@ -4020,8 +4006,8 @@ components:
           format: int64
           type: integer
       required:
-      - results
-      - schema_version
+        - results
+        - schema_version
       type: object
     CreateDeviceGroupsRequest:
       additionalProperties: false
@@ -4034,8 +4020,8 @@ components:
         user_agent:
           type: string
       required:
-      - addresses
-      - user_agent
+        - addresses
+        - user_agent
       type: object
     UpdateDeviceGroupsRequest:
       additionalProperties: false
@@ -4074,8 +4060,8 @@ components:
         user_agent:
           type: string
       required:
-      - name
-      - user_agent
+        - name
+        - user_agent
       type: object
     DeviceGroupsResponse:
       additionalProperties: false
@@ -4087,9 +4073,9 @@ components:
           previous: previous
         total_pages: 6
         results:
-        - id: 5
-          name: name
-          user_agent: user_agent
+          - id: 5
+            name: name
+            user_agent: user_agent
       properties:
         count:
           format: int64
@@ -4107,11 +4093,11 @@ components:
             $ref: '#/components/schemas/DeviceGroupsResultResponse'
           type: array
       required:
-      - count
-      - links
-      - results
-      - schema_version
-      - total_pages
+        - count
+        - links
+        - results
+        - schema_version
+        - total_pages
       type: object
     DeviceGroupsIdResponse:
       additionalProperties: false
@@ -4128,33 +4114,33 @@ components:
           format: int64
           type: integer
       required:
-      - results
-      - schema_version
+        - results
+        - schema_version
       type: object
     CreateRulesEngineRequest:
       example:
         criteria:
-        - - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-          - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-        - - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-          - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
+          - - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+            - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+          - - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+            - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
         behaviors:
-        - name: name
-          target: ""
-        - name: name
-          target: ""
+          - name: name
+            target: ""
+          - name: name
+            target: ""
         name: name
       properties:
         name:
@@ -4170,35 +4156,35 @@ components:
             $ref: '#/components/schemas/RulesEngineBehavior'
           type: array
       required:
-      - behaviors
-      - criteria
-      - name
+        - behaviors
+        - criteria
+        - name
       type: object
     UpdateRulesEngineRequest:
       additionalProperties: false
       example:
         criteria:
-        - - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-          - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-        - - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-          - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
+          - - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+            - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+          - - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+            - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
         behaviors:
-        - name: name
-          target: ""
-        - name: name
-          target: ""
+          - name: name
+            target: ""
+          - name: name
+            target: ""
         name: name
       properties:
         name:
@@ -4214,35 +4200,35 @@ components:
             $ref: '#/components/schemas/RulesEngineBehavior'
           type: array
       required:
-      - behaviors
-      - criteria
-      - name
+        - behaviors
+        - criteria
+        - name
       type: object
     PatchRulesEngineRequest:
       additionalProperties: false
       example:
         criteria:
-        - - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-          - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-        - - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-          - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
+          - - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+            - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+          - - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+            - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
         behaviors:
-        - name: name
-          target: ""
-        - name: name
-          target: ""
+          - name: name
+            target: ""
+          - name: name
+            target: ""
         name: name
       properties:
         name:
@@ -4263,27 +4249,27 @@ components:
         phase: phase
         is_active: true
         behaviors:
-        - name: name
-          target: ""
-        - name: name
-          target: ""
+          - name: name
+            target: ""
+          - name: name
+            target: ""
         criteria:
-        - - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-          - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-        - - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
-          - conditional: conditional
-            variable: variable
-            input_value: input_value
-            operator: operator
+          - - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+            - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+          - - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
+            - conditional: conditional
+              variable: variable
+              input_value: input_value
+              operator: operator
         name: name
         id: 5
         order: 5
@@ -4311,13 +4297,13 @@ components:
           format: int64
           type: integer
       required:
-      - behavior
-      - criteria
-      - id
-      - is_active
-      - name
-      - order
-      - phase
+        - behavior
+        - criteria
+        - id
+        - is_active
+        - name
+        - order
+        - phase
       type: object
     RulesEngineCriteria:
       additionalProperties: false
@@ -4336,9 +4322,9 @@ components:
         input_value:
           type: string
       required:
-      - conditional
-      - operator
-      - variable
+        - conditional
+        - operator
+        - variable
       type: object
     RulesEngineBehavior:
       additionalProperties: false
@@ -4350,7 +4336,7 @@ components:
           type: string
         target: {}
       required:
-      - name
+        - name
       type: object
     RulesEngineResponse:
       additionalProperties: false
@@ -4362,60 +4348,60 @@ components:
           previous: previous
         total_pages: 6
         results:
-        - phase: phase
-          is_active: true
-          behaviors:
-          - name: name
-            target: ""
-          - name: name
-            target: ""
-          criteria:
-          - - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
-            - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
-          - - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
-            - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
-          name: name
-          id: 5
-          order: 5
-        - phase: phase
-          is_active: true
-          behaviors:
-          - name: name
-            target: ""
-          - name: name
-            target: ""
-          criteria:
-          - - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
-            - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
-          - - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
-            - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
-          name: name
-          id: 5
-          order: 5
+          - phase: phase
+            is_active: true
+            behaviors:
+              - name: name
+                target: ""
+              - name: name
+                target: ""
+            criteria:
+              - - conditional: conditional
+                  variable: variable
+                  input_value: input_value
+                  operator: operator
+                - conditional: conditional
+                  variable: variable
+                  input_value: input_value
+                  operator: operator
+              - - conditional: conditional
+                  variable: variable
+                  input_value: input_value
+                  operator: operator
+                - conditional: conditional
+                  variable: variable
+                  input_value: input_value
+                  operator: operator
+            name: name
+            id: 5
+            order: 5
+          - phase: phase
+            is_active: true
+            behaviors:
+              - name: name
+                target: ""
+              - name: name
+                target: ""
+            criteria:
+              - - conditional: conditional
+                  variable: variable
+                  input_value: input_value
+                  operator: operator
+                - conditional: conditional
+                  variable: variable
+                  input_value: input_value
+                  operator: operator
+              - - conditional: conditional
+                  variable: variable
+                  input_value: input_value
+                  operator: operator
+                - conditional: conditional
+                  variable: variable
+                  input_value: input_value
+                  operator: operator
+            name: name
+            id: 5
+            order: 5
       properties:
         count:
           format: int64
@@ -4433,11 +4419,11 @@ components:
             $ref: '#/components/schemas/RulesEngineResultResponse'
           type: array
       required:
-      - count
-      - links
-      - results
-      - schema_version
-      - total_pages
+        - count
+        - links
+        - results
+        - schema_version
+        - total_pages
       type: object
     RulesEngineIdResponse:
       additionalProperties: false
@@ -4447,27 +4433,27 @@ components:
           phase: phase
           is_active: true
           behaviors:
-          - name: name
-            target: ""
-          - name: name
-            target: ""
+            - name: name
+              target: ""
+            - name: name
+              target: ""
           criteria:
-          - - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
-            - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
-          - - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
-            - conditional: conditional
-              variable: variable
-              input_value: input_value
-              operator: operator
+            - - conditional: conditional
+                variable: variable
+                input_value: input_value
+                operator: operator
+              - conditional: conditional
+                variable: variable
+                input_value: input_value
+                operator: operator
+            - - conditional: conditional
+                variable: variable
+                input_value: input_value
+                operator: operator
+              - conditional: conditional
+                variable: variable
+                input_value: input_value
+                operator: operator
           name: name
           id: 5
           order: 5
@@ -4478,8 +4464,8 @@ components:
           format: int64
           type: integer
       required:
-      - results
-      - schema_version
+        - results
+        - schema_version
       type: object
     CreateOriginsRequest_addresses:
       example:
@@ -4488,7 +4474,7 @@ components:
         address:
           type: string
       required:
-      - address
+        - address
       type: object
     OriginsResultResponse_addresses:
       example:
@@ -4507,10 +4493,10 @@ components:
         is_active:
           type: boolean
       required:
-      - address
-      - is_active
-      - server_role
-      - weight
+        - address
+        - is_active
+        - server_role
+        - weight
       type: object
     OriginsResponse_links:
       example:
@@ -4545,7 +4531,7 @@ components:
           type: string
         target: {}
       required:
-      - name
+        - name
       type: object
   securitySchemes:
     tokenAuth:
