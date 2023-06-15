@@ -2377,6 +2377,7 @@ components:
           active: true
           debug_rules: true
           http3: true
+          supported_ciphers: supported_ciphers
           delivery_protocol: delivery_protocol
           edge_firewall: true
           caching: true
@@ -2410,6 +2411,7 @@ components:
         raw_logs: true
         active: true
         http3: true
+        supported_ciphers: supported_ciphers
         debug_rules: true
         delivery_protocol: delivery_protocol
         edge_firewall: true
@@ -2436,6 +2438,8 @@ components:
           type: boolean
         http3:
           type: boolean
+        supported_ciphers:
+          type: string
         delivery_protocol:
           type: string
         http_port: {}
@@ -2466,6 +2470,7 @@ components:
       - active
       - debug_rules
       - http3
+      - supported_ciphers
       - application_acceleration
       - caching
       - delivery_protocol
@@ -2535,6 +2540,9 @@ components:
           device_detection: true
           raw_logs: true
           active: true
+          http3: true
+          supported_ciphers: supported_ciphers
+          debug_rules: true
           delivery_protocol: delivery_protocol
           edge_firewall: true
           caching: true
@@ -2566,6 +2574,9 @@ components:
         device_detection: true
         raw_logs: true
         active: true
+        http3: true
+        supported_ciphers: supported_ciphers
+        debug_rules: true
         delivery_protocol: delivery_protocol
         edge_firewall: true
         caching: true
@@ -2586,6 +2597,12 @@ components:
           type: string
         active:
           type: boolean
+        debug_rules:
+          type: boolean
+        http3:
+          type: boolean
+        supported_ciphers:
+          type: string
         delivery_protocol:
           type: string
         http_port: {}
@@ -2612,6 +2629,9 @@ components:
           type: boolean
       required:
       - active
+      - debug_rules
+      - supported_ciphers
+      - http3
       - application_acceleration
       - caching
       - delivery_protocol
@@ -2637,6 +2657,7 @@ components:
         device_detection: true
         raw_logs: true
         active: true
+        debug_rules: false
         delivery_protocol: delivery_protocol
         edge_firewall: true
         caching: true
@@ -2659,6 +2680,8 @@ components:
         minimum_tls_version:
           type: string
         active:
+          type: boolean
+        debug_rules:
           type: boolean
         application_acceleration:
           type: boolean
@@ -2692,6 +2715,9 @@ components:
           device_detection: true
           raw_logs: true
           active: true
+          debug_rules: true
+          http3: true
+          supported_ciphers: "all"
           delivery_protocol: delivery_protocol
           edge_firewall: true
           caching: true
@@ -2724,6 +2750,9 @@ components:
         device_detection: true
         raw_logs: true
         active: true
+        http3: true
+        supported_ciphers: supported_ciphers
+        debug_rules: true
         delivery_protocol: delivery_protocol
         edge_firewall: true
         caching: true
@@ -2751,6 +2780,12 @@ components:
           type: string
         active:
           type: boolean
+        debug_rules:
+          type: boolean
+        http3:
+          type: boolean
+        supported_ciphers:
+          type: string
         application_acceleration:
           type: boolean
         caching:
@@ -2773,6 +2808,9 @@ components:
           type: boolean
       required:
       - active
+      - supported_ciphers
+      - http3
+      - debug_rules
       - application_acceleration
       - caching
       - delivery_protocol
