@@ -24,7 +24,7 @@ paths:
       responses:
         "200":
           content:
-            application/json; version=3:
+            application/json:
               schema:
                 $ref: '#/components/schemas/GetZonesResponse'
           description: Zones collection retrieved
