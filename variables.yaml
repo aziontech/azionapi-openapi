@@ -2,10 +2,6 @@ openapi: 3.0.3
 info:
   title: 'Variables'
   version: 0.1.0
-tags:
-  - name: Variables
-    description: >-
-      TDB
 paths:
   /api/variables:
     get:
@@ -49,12 +45,6 @@ paths:
                   value: My secret value
                   secret: true
                 summary: Secret Variable creation
-          # application/x-www-form-urlencoded:
-          #   schema:
-          #     $ref: '#/components/schemas/VariableCreate'
-          # multipart/form-data:
-          #   schema:
-          #     $ref: '#/components/schemas/VariableCreate'
         required: true
       security:
       - tokenAuth: []

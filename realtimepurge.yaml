@@ -4,10 +4,6 @@ info:
   title: Purge API
   version: 1.0.0
 servers:
-- description: Local Dev
-  url: http://localhost:3002
-- description: Staging
-  url: https://stage-api.azion.net
 - description: Production
   url: https://api.azionapi.net
 tags:

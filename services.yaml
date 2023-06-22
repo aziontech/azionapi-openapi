@@ -4,10 +4,6 @@ info:
   title: Services API
   version: 2.0.0
 servers:
-- description: Local Dev
-  url: http://localhost:3002
-- description: Staging
-  url: http://stage-bff-gke.azion.net:3002
 - description: Production
   url: http://bff.azion.net:3002
 security:
