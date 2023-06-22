@@ -2,9 +2,14 @@ openapi: 3.0.0
 info:
   title: Web Application Firewall API
   version: 2.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
 - description: Production
   url: https://api.azionapi.net
+security:
+- tokenAuth: []
 paths:
   /waf/{wafId}/domains:
     get:
@@ -26,8 +31,6 @@ paths:
         required: false
         schema:
             type: string
-      security:
-      - JWT: []
       responses:
         "200":
           description: successful operation
@@ -70,8 +73,6 @@ paths:
         required: true
         schema:
             type: string
-      security:
-      - JWT: []
       responses:
         "200":
           description: successful operation
@@ -172,10 +173,10 @@ components:
           example:
             "Authentication credentials were not provided."
   securitySchemes:
-    JWT:
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-      in: header
-      name: Authorization
-      type: apiKey

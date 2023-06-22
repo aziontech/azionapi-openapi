@@ -2,9 +2,14 @@ openapi: 3.0.0
 info:
   title: Network Lists API
   version: 1.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
 - description: Production
-  url: https://api.azionapi.net/
+  url: https://api.azionapi.net
+security:
+- tokenAuth: []
 paths:
   /network_lists:
     post:
@@ -196,10 +201,10 @@ components:
           example: ip_cidr
       type: object
   securitySchemes:
-    JWT:
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-      in: header
-      name: Authorization
-      type: apiKey

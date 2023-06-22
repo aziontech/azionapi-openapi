@@ -2,9 +2,14 @@ openapi: 3.0.0
 info:
   title: Purge API
   version: 1.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
 - description: Production
   url: https://api.azionapi.net
+security:
+- tokenAuth: []
 paths:
   /purge/url:
     post:
@@ -88,8 +93,6 @@ paths:
           content:
             application/json; version=3: {}
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /purge/url
       tags:
       - Real-Time Purge
@@ -176,8 +179,6 @@ paths:
           content:
             application/json; version=3: {}
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /purge/cachekey
       tags:
       - Real-Time Purge
@@ -263,8 +264,6 @@ paths:
           content:
             application/json; version=3: {}
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /purge/wildcard
       tags:
       - Real-Time Purge
@@ -330,10 +329,10 @@ components:
       - urls
       type: object
   securitySchemes:
-    JWT:
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-      in: header
-      name: Authorization
-      type: apiKey

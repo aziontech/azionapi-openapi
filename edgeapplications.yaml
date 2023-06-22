@@ -2,9 +2,14 @@ openapi: 3.0.0
 info:
   title: Edge Application API
   version: 2.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
 - description: Production
   url: https://api.azionapi.net
+security:
+- tokenAuth: []
 paths:
   /edge_applications:
     get:
@@ -553,7 +558,6 @@ paths:
       summary: /edge_applications/:edge_application_id:/cache_settings/ca
       tags:
       - Edge Applications > Cache Settings
-  /edge_applications/{edge_application_id}/cache_settings/{cache_settings}:
     delete:
       parameters:
       - explode: false
@@ -566,7 +570,7 @@ paths:
         style: simple
       - explode: false
         in: path
-        name: cache_settings
+        name: cache_settings_id
         required: true
         schema:
           format: int64
@@ -607,7 +611,7 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-      summary: '/edge_applications/:edge_application_id:/cache_settings/:cache_settings:'
+      summary: '/edge_applications/:edge_application_id:/cache_settings/:cache_settings_id:'
       tags:
       - Edge Applications > Cache Settings
     patch:
@@ -622,7 +626,7 @@ paths:
         style: simple
       - explode: false
         in: path
-        name: cache_settings
+        name: cache_settings_id
         required: true
         schema:
           format: int64

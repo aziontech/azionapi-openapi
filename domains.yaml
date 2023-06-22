@@ -2,9 +2,14 @@ openapi: 3.0.0
 info:
   title: Domain API
   version: 2.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
 - description: Production
   url: https://api.azionapi.net
+security:
+- tokenAuth: []
 paths:
   /domains:
     get:
@@ -75,13 +80,6 @@ paths:
           application/json; version=3:
             schema:
               $ref: '#/components/schemas/CreateDomainRequest'
-              example:
-                name: My Domain
-                cnames: []
-                cname_access_only: false
-                digital_certificate_id: null
-                edge_application_id: 1580476573
-                is_active: true
       operationId: createDomain
       parameters:
         - name: Accept
@@ -194,13 +192,6 @@ paths:
           application/json; version=3:
             schema:
               $ref: '#/components/schemas/PutDomainRequest'
-              example:
-                name: My Domain
-                cnames: []
-                cname_access_only: false
-                digital_certificate_id: null
-                edge_application_id: 1580476573
-                is_active: true
       operationId: putDomain
       parameters:
         - name: Accept
@@ -247,13 +238,6 @@ paths:
           application/json; version=3:
             schema:
               $ref: '#/components/schemas/UpdateDomainRequest'
-              example:
-                name: Validation Fafinha
-                cnames: []
-                cname_access_only: false
-                digital_certificate_id: null
-                edge_application_id: 1580476573
-                is_active: true
       operationId: updateDomain
       parameters:
         - name: Accept

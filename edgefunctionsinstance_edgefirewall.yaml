@@ -2,9 +2,14 @@ openapi: 3.0.0
 info:
   title: Edge Functions Instances API
   version: 2.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
 - description: Production
-  url: https://api.azionapi.net/
+  url: https://api.azionapi.net
+security:
+- tokenAuth: []
 paths:
   /edge_firewall/:edge_firewall_id:/functions_instances:
     get:
@@ -240,10 +245,10 @@ components:
     UpdateEdgeFunctionsInstanceRequest:
       $ref: '#/components/schemas/CreateEdgeFunctionsInstancesRequest'
   securitySchemes:
-    JWT:
+    tokenAuth:
       type: apiKey
+      name: Authorization
+      in: header
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-      name: Authorization
-      in: header

@@ -2,12 +2,18 @@ openapi: 3.0.0
 info:
   title: Variables API
   version: 1.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
 - description: Stage
   url: https://stage-variables.azion.com
+security:
+- tokenAuth: []
 paths:
   /api/variables:
     get:
+      summary: /api/variables
       operationId: api_variables_list
       description: List all user's Variables.
       tags:
@@ -25,6 +31,7 @@ paths:
           description: ''
     post:
       operationId: api_variables_create
+      summary: /api/variables
       description: Create a new Variable. <br><ul><li>If the attribute "secret" is
         informed with value "true" in request payload the Variable value will be secret
         and no longer viewable after creation.</li><li>If the attribute "secret" is
@@ -69,6 +76,7 @@ paths:
   /api/variables/{uuid}:
     get:
       operationId: api_variables_retrieve
+      summary: /api/variables/:uuid
       description: Retrieve all data for a Variable by it's UUID
       parameters:
       - in: path
@@ -98,6 +106,7 @@ paths:
           description: Internal Server Error
     put:
       operationId: api_variables_update
+      summary: /api/variables/:uuid
       description: Update variable attributes by it's UUID. Keep the Variable UUID
         but overwrite all editable attributes.
       parameters:
@@ -152,6 +161,7 @@ paths:
           description: Internal Server Error
     delete:
       operationId: api_variables_destroy
+      summary: /api/variables/:uuid
       description: Delete a Variable by it's UUID
       parameters:
       - in: path

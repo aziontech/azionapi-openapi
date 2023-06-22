@@ -2,9 +2,14 @@ openapi: 3.0.0
 info:
   title: Edge Node API
   version: 1.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
 - description: Production
   url: https://api.azionapi.net
+security:
+- tokenAuth: []
 paths:
   /edge_nodes:
     get:

@@ -2,11 +2,16 @@ openapi: 3.0.0
 info:
   title: Services API
   version: 1.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
 - description: Production
   url: http://bff.azion.net:3002
+security:
+- tokenAuth: []
 paths:
-  /edge_services/:
+  /edge_services:
     get:
       operationId: getServices
       parameters:
