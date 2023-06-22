@@ -53,8 +53,8 @@ paths:
                 total_pages: 1
                 schema_version: 3
                 links:
-                  previous: null
-                  next: null
+                  previous: previous
+                  next: next
                 results:
                 - id: 4184
                   name: Teste

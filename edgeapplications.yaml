@@ -2186,43 +2186,29 @@ components:
                 "origin_id": "a7210940-b3fa-4d98-a5aa-ecadb4f48f57"
               }
             ]
-          - next: next
-            id: 5
-            name: name
-            active: true
-            debug_rules: true
-            last_editor: last_editor
-            last_modified: last_editor
-            "origins": [
-              {
-                "name": "Default Origin",
-                "origin_type": "single_origin",
-                "origin_id": "a7210940-b3fa-4d98-a5aa-ecadb4f48f57"
-              }
-            ]
-      properties:
-        count:
-          format: int64
-          type: integer
-        total_pages:
-          format: int64
-          type: integer
-        schema_version:
-          format: int64
-          type: integer
-        links:
-          $ref: '#/components/schemas/ApplicationLinks'
-        results:
-          items:
-            $ref: '#/components/schemas/ApplicationsResults'
-          type: array
-      required:
-      - count
-      - links
-      - results
-      - schema_version
-      - total_pages
-      type: object
+        properties:
+          count:
+            format: int64
+            type: integer
+          total_pages:
+            format: int64
+            type: integer
+          schema_version:
+            format: int64
+            type: integer
+          links:
+            $ref: '#/components/schemas/ApplicationLinks'
+          results:
+            items:
+              $ref: '#/components/schemas/ApplicationsResults'
+            type: array
+        required:
+        - count
+        - links
+        - results
+        - schema_version
+        - total_pages
+        type: object
     ApplicationLinks:
       additionalProperties: false
       example:
@@ -2281,7 +2267,6 @@ components:
       example:
         schema_version: 0
         results:
-          next: next
           load_balancer: true
           application_acceleration: true
           web_application_firewall: true
@@ -2802,10 +2787,13 @@ components:
         schema_version: 5
         results:
           load_balancer: true
+          supported_ciphers: supported_ciphers
           application_acceleration: true
           web_application_firewall: true
+          debug_rules: true
           device_detection: true
           raw_logs: true
+          http3: true
           active: true
           delivery_protocol: delivery_protocol
           edge_firewall: true
@@ -3972,10 +3960,13 @@ components:
       example:
         name: name
         user_agent: user_agent
+        addresses: addresses
       properties:
         name:
           type: string
         user_agent:
+          type: string
+        addresses:
           type: string
       required:
       - addresses
@@ -4206,9 +4197,7 @@ components:
       example:
         phase: phase
         is_active: true
-        behaviors:
-        - name: name
-          target: ""
+        behavior:
         - name: name
           target: ""
         criteria:
@@ -4308,9 +4297,7 @@ components:
         results:
         - phase: phase
           is_active: true
-          behaviors:
-          - name: name
-            target: ""
+          behavior:
           - name: name
             target: ""
           criteria:
@@ -4335,9 +4322,7 @@ components:
           order: 5
         - phase: phase
           is_active: true
-          behaviors:
-          - name: name
-            target: ""
+          behavior:
           - name: name
             target: ""
           criteria:
@@ -4390,9 +4375,7 @@ components:
         results:
           phase: phase
           is_active: true
-          behaviors:
-          - name: name
-            target: ""
+          behavior:
           - name: name
             target: ""
           criteria:

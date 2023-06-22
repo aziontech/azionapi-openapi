@@ -429,8 +429,8 @@ components:
         content_type: content_type
         name: name
         id: 0
-        type: type
         content: content
+        trigger: trigger
       properties:
         content:
           type: string
@@ -492,24 +492,18 @@ components:
           name: name
           id: 0
           type: type
-        - content_type: content_type
-          updated_at: updated_at
-          last_editor: last_editor
-          name: name
-          id: 0
-          type: type
-      properties:
-        resources:
-          items:
-            $ref: '#/components/schemas/ResourceResponse'
-          type: array
-        total:
-          format: int64
-          type: integer
-      required:
-      - resources
-      - total
-      type: object
+        properties:
+          resources:
+            items:
+              $ref: '#/components/schemas/ResourceResponse'
+            type: array
+          total:
+            format: int64
+            type: integer
+        required:
+        - resources
+        - total
+        type: object
     ServiceResponse:
       additionalProperties: false
       example:
