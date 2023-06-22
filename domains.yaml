@@ -376,11 +376,9 @@ components:
           type: integer
         links:
           $ref: '#/components/schemas/DomainLinks'
-          type: object
         results:
           items:
             $ref: '#/components/schemas/DomainResults'
-          type: array
       required:
       - count
       - total_pages
@@ -396,7 +394,6 @@ components:
           type: integer
         results:
           $ref: '#/components/schemas/DomainResults'
-          type: object
       required:
       - schema_version
       - results
