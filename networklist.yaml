@@ -99,11 +99,6 @@ components:
         code:
           type: string
       type: object
-    ErrorResponse:
-      properties:
-        detail:
-          type: string
-      type: object
     Links:
       properties:
         previous:
