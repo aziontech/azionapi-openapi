@@ -340,11 +340,6 @@ components:
             $ref: '#/components/schemas/CreateEdgeFunctionRequest'
       required: true
   schemas:
-    ErrorModel:
-      properties:
-        code:
-          type: string
-      type: object
     ErrorResponse:
       properties:
         detail:
