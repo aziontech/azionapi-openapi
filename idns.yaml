@@ -1,22 +1,15 @@
 openapi: 3.0.0
 info:
-  description: Azion Intelligent DNS API
+  title: Intelligent DNS API
+  version: 1.0.0
   license:
     name: MIT
     url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
-  title: Intelligent DNS
-  version: 3.0.0
 servers:
-- url: https://api.azionapi.net
+- description: Production
+  url: https://api.azionapi.net
 security:
 - tokenAuth: []
-tags:
-- description: Intelligent DNS hosted zones
-  name: Zones
-- description: Intelligent DNS zone records
-  name: Records
-- description: Options for the Domain Name System Security Extensions
-  name: DNSSEC
 paths:
   /intelligent_dns:
     get:

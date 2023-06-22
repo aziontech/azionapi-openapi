@@ -1,19 +1,17 @@
 openapi: 3.0.0
 info:
-  description: Azion Services
   title: Services API
-  version: 2.0.0
+  version: 1.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
-- description: Local Dev
-  url: http://localhost:3002
-- description: Staging
-  url: http://stage-bff-gke.azion.net:3002
 - description: Production
   url: http://bff.azion.net:3002
 security:
 - tokenAuth: []
 paths:
-  /edge_services/:
+  /edge_services:
     get:
       operationId: getServices
       parameters:
@@ -431,8 +429,8 @@ components:
         content_type: content_type
         name: name
         id: 0
-        type: type
         content: content
+        trigger: trigger
       properties:
         content:
           type: string
@@ -494,24 +492,18 @@ components:
           name: name
           id: 0
           type: type
-        - content_type: content_type
-          updated_at: updated_at
-          last_editor: last_editor
-          name: name
-          id: 0
-          type: type
-      properties:
-        resources:
-          items:
-            $ref: '#/components/schemas/ResourceResponse'
-          type: array
-        total:
-          format: int64
-          type: integer
-      required:
-      - resources
-      - total
-      type: object
+        properties:
+          resources:
+            items:
+              $ref: '#/components/schemas/ResourceResponse'
+            type: array
+          total:
+            format: int64
+            type: integer
+        required:
+        - resources
+        - total
+        type: object
     ServiceResponse:
       additionalProperties: false
       example:

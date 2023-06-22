@@ -1,28 +1,21 @@
 openapi: 3.0.0
 info:
-  description: Azion Real-Time Purge
   title: Purge API
   version: 1.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
-- description: Local Dev
-  url: http://localhost:3002
-- description: Staging
-  url: https://stage-api.azion.net
 - description: Production
   url: https://api.azionapi.net
-tags:
-- description: "If you need to delete an object from the Edge Caching or L2 Caching\
-    \ layers before time-out, you can use the Real-Time Purge API. \nIf desired, integrate\
-    \ the Azion API with your CMS to automate any content update process."
-  name: Real-Time Purge
+security:
+- tokenAuth: []
 paths:
   /purge/url:
     post:
       description: |-
         List of URLs you want to remove from the Azion Edge Servers cache.
-
         urls (array): list of up to 50 URLs to be expired from the cache, per request.
-
         method (choice): purge method, use the “delete” value for removal.
       operationId: purgeUrl
       parameters:
@@ -100,8 +93,6 @@ paths:
           content:
             application/json; version=3: {}
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /purge/url
       tags:
       - Real-Time Purge
@@ -109,11 +100,8 @@ paths:
     post:
       description: |-
         List of Cache Keys you want to remove from the Azion Edge Servers cache.
-
         urls (array): list of up to 50 Cache Keys to be expired from the cache, per request.
-
         method (choice): purge method, use the “delete” value for removal.
-
         Layer (choice): layer where the purge will be done. Use the value “edge_caching” (default value if not informed) to purge on the Edge Caching layer and the value “l2_caching” to purge on L2 Caching.
       operationId: purgeCacheKey
       parameters:
@@ -191,8 +179,6 @@ paths:
           content:
             application/json; version=3: {}
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /purge/cachekey
       tags:
       - Real-Time Purge
@@ -200,9 +186,7 @@ paths:
     post:
       description: |-
         The Wildcard expression that represents the list of objects that you want to remove from the Azion Edge Servers cache.
-
         urls (array):the Wildcard URL or Wildcard Cache Key that represents the list of objects you want to expire. You can only use one Wildcard expression per request.
-
         method (choice): purge method, use the “delete” value for removal.
       operationId: purgeWildcard
       parameters:
@@ -280,8 +264,6 @@ paths:
           content:
             application/json; version=3: {}
           description: Internal Server Error
-      security:
-      - JWT: []
       summary: /purge/wildcard
       tags:
       - Real-Time Purge
@@ -347,10 +329,10 @@ components:
       - urls
       type: object
   securitySchemes:
-    JWT:
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-      in: header
-      name: Authorization
-      type: apiKey

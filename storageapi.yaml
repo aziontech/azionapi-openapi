@@ -1,17 +1,19 @@
-openapi: 3.0.3
+openapi: 3.0.0
 info:
   title: Storage API
-  version: v1
+  version: 1.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
-- description: prod
+- description: Production
   url: https://storage-api.azion.com
-- description: stage
-  url: https://stage-storage-api.azion.com
 security:
 - tokenAuth: []
 paths:
   /storage/{version_id}:
     post:
+      summary: /domains/:version_id
       description: Upload file and transfer to remote storage
       parameters:
       - description: "Required in order to get the path and file name. i.e.: assets/css/main.css"
@@ -44,6 +46,7 @@ paths:
           description: ""
   /storage/{version_id}/delete:
     delete:
+      summary: /domains/:version_id
       description: Delete a version. A version is just um path prefix/sub-namespace
         for a set of files.
       operationId: deleteVersion
@@ -72,9 +75,10 @@ components:
       description: Token/Personal Token has been expired or invalid
   schemas: {}
   securitySchemes:
-    authToken:
-      description: "Prefix the value with \"Token \". The final header is: Authorization:\
-        \ Token my-token-value"
-      in: header
-      name: Authorization
+    tokenAuth:
       type: apiKey
+      name: Authorization
+      in: header
+      description: |
+        You must inform a token to auth.
+        Usage format: `Token <TOKEN>`

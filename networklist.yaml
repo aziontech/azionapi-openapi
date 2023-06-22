@@ -1,9 +1,15 @@
 openapi: 3.0.0
 info:
-  title: Azion API
-  version: '3.0'
+  title: Network Lists API
+  version: 1.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
-  - url: https://api.azionapi.net/
+- description: Production
+  url: https://api.azionapi.net
+security:
+- tokenAuth: []
 paths:
   /network_lists:
     post:
@@ -97,11 +103,6 @@ components:
     ErrorModel:
       properties:
         code:
-          type: string
-      type: object
-    ErrorResponse:
-      properties:
-        detail:
           type: string
       type: object
     Links:
@@ -200,10 +201,10 @@ components:
           example: ip_cidr
       type: object
   securitySchemes:
-    JWT:
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-      in: header
-      name: Authorization
-      type: apiKey
