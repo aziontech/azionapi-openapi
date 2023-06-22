@@ -1,14 +1,10 @@
 openapi: 3.0.0
 info:
-  description: Azion Edge Function API
-  title: Edge Function
-  version: "3.0"
+  title: Edge Function API
+  version: 2.0.0
 servers:
-- url: https://api.azionapi.net
-security:
-- tokenAuth: []
-tags:
-- name: edge_functions
+- description: Production
+  url: https://api.azionapi.net
 paths:
   /edge_functions:
     get:

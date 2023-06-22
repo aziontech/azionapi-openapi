@@ -1,9 +1,10 @@
 openapi: 3.0.0
 info:
-  title: Azion API
-  version: '3.0'
+  title: Network Lists API
+  version: 1.0.0
 servers:
-  - url: https://api.azionapi.net/
+- description: Production
+  url: https://api.azionapi.net/
 paths:
   /network_lists:
     post:

@@ -1,13 +1,10 @@
 openapi: 3.0.0
 info:
-  description: Azion Services
   title: Services API
-  version: 2.0.0
+  version: 1.0.0
 servers:
 - description: Production
   url: http://bff.azion.net:3002
-security:
-- tokenAuth: []
 paths:
   /edge_services/:
     get:

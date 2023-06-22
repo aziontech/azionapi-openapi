@@ -1,13 +1,10 @@
 openapi: 3.0.0
 info:
-  description: "Azion Web Application Firewall API"
-  version: 3.0.0
-  title: WAF
+  title: Web Application Firewall API
+  version: 2.0.0
 servers:
-- url: https://api.azionapi.net
-tags:
-- name: WAF
-  description: WAF Product
+- description: Production
+  url: https://api.azionapi.net
 paths:
   /waf/{wafId}/domains:
     get:

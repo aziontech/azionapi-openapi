@@ -1,187 +1,10 @@
 openapi: 3.0.0
 info:
-  title: Domain
+  title: Domain API
+  version: 2.0.0
 servers:
-  - url: https://api.azionapi.net
-security:
-- tokenAuth: []
-components:
-  schemas:
-    CreateDomainRequest:
-      additionalProperties: false
-      properties:
-        cnames:
-          type: array
-          items:
-            type: string
-        cname_access_only:
-          type: boolean
-        name:
-          type: string
-        is_active:
-          type: boolean
-        edge_application_id:
-          format: int64
-          type: integer
-        digital_certificate_id:
-          format: int64
-          type: integer
-          nullable: true
-      required:
-      - name
-      - edge_application_id
-      - cname_access_only
-      - cnames
-      - is_active
-      - digital_certificate_id
-      type: object
-    UpdateDomainRequest:
-      additionalProperties: false
-      properties:
-        cnames:
-          type: array
-          items:
-            type: string
-        cname_access_only:
-          type: boolean
-        name:
-          type: string
-        is_active:
-          type: boolean
-        edge_application_id:
-          format: int64
-          type: integer
-        digital_certificate_id:
-          format: int64
-          type: integer
-          nullable: true
-      type: object
-    PutDomainRequest:
-      additionalProperties: false
-      properties:
-        cnames:
-          type: array
-          items:
-            type: string
-        cname_access_only:
-          type: boolean
-        name:
-          type: string
-        is_active:
-          type: boolean
-        edge_application_id:
-          format: int64
-          type: integer
-        digital_certificate_id:
-          format: int64
-          type: integer
-          nullable: true
-      required:
-      - name
-      - edge_application_id
-      - cname_access_only
-      - cnames
-      - is_active
-      - digital_certificate_id
-      type: object
-    DomainLinks:
-      additionalProperties: false
-      properties:
-        previous:
-          type: string
-        next:
-          type: string
-      required:
-      - previous
-      - next
-      type: object
-    DomainResponseWithResults:
-      additionalProperties: false
-      properties:
-        count:
-          format: int64
-          type: integer
-        total_pages:
-          format: int64
-          type: integer
-        schema_version:
-          format: int64
-          type: integer
-        links:
-          $ref: '#/components/schemas/DomainLinks'
-          type: object
-        results:
-          items:
-            $ref: '#/components/schemas/DomainResults'
-          type: array
-      required:
-      - count
-      - total_pages
-      - schema_version
-      - links
-      - results
-      type: object
-    DomainResponseWithResult:
-      additionalProperties: false
-      properties:
-        schema_version:
-          format: int64
-          type: integer
-        results:
-          $ref: '#/components/schemas/DomainResults'
-          type: object
-      required:
-      - schema_version
-      - results
-      type: object
-    DomainResults:
-      additionalProperties: false
-      properties:
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-        cnames:
-          type: array
-          items:
-            type: string
-        cname_access_only:
-          type: boolean
-        is_active:
-          type: boolean
-        edge_application_id:
-          format: int64
-          type: integer
-        digital_certificate_id:
-          format: int64
-          type: integer
-          nullable: true
-        domain_name:
-          type: string
-        environment:
-          type: string
-      required:
-      - id
-      - name
-      - type
-      - content_type
-      - last_editor
-      - updated_at
-      type: object
-  securitySchemes:
-    tokenAuth:
-      type: apiKey
-      name: Authorization
-      in: header
-      description: |
-        You must inform a token to auth.
-        Usage format: `Token <TOKEN>`
-tags:
-  - name: Domains
-    description: >-
-      Through My Domains API you can retrieve, create, remove or update Domains
-      used by Edge Applications
+- description: Production
+  url: https://api.azionapi.net
 paths:
   /domains:
     get:
@@ -465,3 +288,175 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
+components:
+  schemas:
+    CreateDomainRequest:
+      additionalProperties: false
+      properties:
+        cnames:
+          type: array
+          items:
+            type: string
+        cname_access_only:
+          type: boolean
+        name:
+          type: string
+        is_active:
+          type: boolean
+        edge_application_id:
+          format: int64
+          type: integer
+        digital_certificate_id:
+          format: int64
+          type: integer
+          nullable: true
+      required:
+      - name
+      - edge_application_id
+      - cname_access_only
+      - cnames
+      - is_active
+      - digital_certificate_id
+      type: object
+    UpdateDomainRequest:
+      additionalProperties: false
+      properties:
+        cnames:
+          type: array
+          items:
+            type: string
+        cname_access_only:
+          type: boolean
+        name:
+          type: string
+        is_active:
+          type: boolean
+        edge_application_id:
+          format: int64
+          type: integer
+        digital_certificate_id:
+          format: int64
+          type: integer
+          nullable: true
+      type: object
+    PutDomainRequest:
+      additionalProperties: false
+      properties:
+        cnames:
+          type: array
+          items:
+            type: string
+        cname_access_only:
+          type: boolean
+        name:
+          type: string
+        is_active:
+          type: boolean
+        edge_application_id:
+          format: int64
+          type: integer
+        digital_certificate_id:
+          format: int64
+          type: integer
+          nullable: true
+      required:
+      - name
+      - edge_application_id
+      - cname_access_only
+      - cnames
+      - is_active
+      - digital_certificate_id
+      type: object
+    DomainLinks:
+      additionalProperties: false
+      properties:
+        previous:
+          type: string
+        next:
+          type: string
+      required:
+      - previous
+      - next
+      type: object
+    DomainResponseWithResults:
+      additionalProperties: false
+      properties:
+        count:
+          format: int64
+          type: integer
+        total_pages:
+          format: int64
+          type: integer
+        schema_version:
+          format: int64
+          type: integer
+        links:
+          $ref: '#/components/schemas/DomainLinks'
+          type: object
+        results:
+          items:
+            $ref: '#/components/schemas/DomainResults'
+          type: array
+      required:
+      - count
+      - total_pages
+      - schema_version
+      - links
+      - results
+      type: object
+    DomainResponseWithResult:
+      additionalProperties: false
+      properties:
+        schema_version:
+          format: int64
+          type: integer
+        results:
+          $ref: '#/components/schemas/DomainResults'
+          type: object
+      required:
+      - schema_version
+      - results
+      type: object
+    DomainResults:
+      additionalProperties: false
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        cnames:
+          type: array
+          items:
+            type: string
+        cname_access_only:
+          type: boolean
+        is_active:
+          type: boolean
+        edge_application_id:
+          format: int64
+          type: integer
+        digital_certificate_id:
+          format: int64
+          type: integer
+          nullable: true
+        domain_name:
+          type: string
+        environment:
+          type: string
+      required:
+      - id
+      - name
+      - type
+      - content_type
+      - last_editor
+      - updated_at
+      type: object
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: |
+        You must inform a token to auth.
+        Usage format: `Token <TOKEN>`
