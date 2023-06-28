@@ -2166,11 +2166,11 @@ components:
       additionalProperties: false
       example:
         schema_version: 1
-        count: 0
+        count: 1
         links:
           next: next
           previous: previous
-        total_pages: 6
+        total_pages: 1
         results:
           - next: next
             id: 5
@@ -2245,9 +2245,6 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationOrigins'
           type: array
-      required:
-      - next
-      - previous
       type: object
     ApplicationOrigins:
       additionalProperties: false
