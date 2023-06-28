@@ -13,54 +13,53 @@ security:
 paths:
   /storage/{version_id}:
     post:
-      summary: /domains/:version_id
-      description: Upload file and transfer to remote storage
+      description: 'Upload file and transfer to remote storage'
       parameters:
-      - description: "Required in order to get the path and file name. i.e.: assets/css/main.css"
-        explode: false
-        in: header
-        name: X-Azion-Static-Path
-        required: true
-        schema:
-          type: string
-        style: simple
-      - description: ""
-        explode: false
-        in: path
-        name: version_id
-        required: true
-        schema:
-          type: string
-        style: simple
+        - name: Content-Type
+          in: header
+          required: false
+          description: "The content type of the file (Example: text/plain)."
+          schema:
+            type: string
+            default: b2/x-auto
+        - name: X-Azion-Static-Path
+          description: "Required in order to get the path and file name. i.e.: assets/css/main.css"
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: version_id
+          in: path
+          required: true
+          description: ''
+          schema:
+            type: string
       requestBody:
         content:
-          b2/x-auto:
+          'application/octet-stream':
             schema:
-              format: binary
               type: string
+              format: binary
       responses:
-        "201":
+        '201':
           content:
             application/json:
-              schema: {}
-          description: ""
+              schema: { }
+          description: ''
+
   /storage/{version_id}/delete:
     delete:
-      summary: /domains/:version_id
-      description: Delete a version. A version is just um path prefix/sub-namespace
-        for a set of files.
       operationId: deleteVersion
+      description: 'Delete a version. A version is just um path prefix/sub-namespace for a set of files.'
       parameters:
-      - description: The version identifier
-        explode: false
-        in: path
-        name: version_id
-        required: true
-        schema:
-          type: string
-        style: simple
+        - name: version_id
+          in: path
+          required: true
+          description: 'The version identifier'
+          schema:
+            type: string
       responses:
-        "204":
+        '204':
           description: The resource was deleted successfully.
 components:
   responses:
