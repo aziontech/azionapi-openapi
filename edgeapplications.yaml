@@ -2178,13 +2178,6 @@ components:
             debug_rules: true
             last_editor: last_editor
             last_modified: last_editor
-            "origins": [
-              {
-                "name": "Default Origin",
-                "origin_type": "single_origin",
-                "origin_id": "a7210940-b3fa-4d98-a5aa-ecadb4f48f57"
-              }
-            ]
       properties:
         count:
           format: int64
