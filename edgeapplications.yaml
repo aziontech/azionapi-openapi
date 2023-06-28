@@ -2186,29 +2186,29 @@ components:
                 "origin_id": "a7210940-b3fa-4d98-a5aa-ecadb4f48f57"
               }
             ]
-        properties:
-          count:
-            format: int64
-            type: integer
-          total_pages:
-            format: int64
-            type: integer
-          schema_version:
-            format: int64
-            type: integer
-          links:
-            $ref: '#/components/schemas/ApplicationLinks'
-          results:
-            items:
-              $ref: '#/components/schemas/ApplicationsResults'
-            type: array
-        required:
-        - count
-        - links
-        - results
-        - schema_version
-        - total_pages
-        type: object
+      properties:
+        count:
+          format: int64
+          type: integer
+        total_pages:
+          format: int64
+          type: integer
+        schema_version:
+          format: int64
+          type: integer
+        links:
+          $ref: '#/components/schemas/ApplicationLinks'
+        results:
+          items:
+            $ref: '#/components/schemas/ApplicationsResults'
+          type: array
+      required:
+      - count
+      - links
+      - results
+      - schema_version
+      - total_pages
+      type: object
     ApplicationLinks:
       additionalProperties: false
       example:
