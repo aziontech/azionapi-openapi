@@ -2166,49 +2166,41 @@ components:
       additionalProperties: false
       example:
         schema_version: 1
-        count: 0
+        count: 1
         links:
           next: next
           previous: previous
-        total_pages: 6
+        total_pages: 1
         results:
-          - next: next
-            id: 5
+          - id: 5
             name: name
             active: true
             debug_rules: true
             last_editor: last_editor
             last_modified: last_editor
-            "origins": [
-              {
-                "name": "Default Origin",
-                "origin_type": "single_origin",
-                "origin_id": "a7210940-b3fa-4d98-a5aa-ecadb4f48f57"
-              }
-            ]
-        properties:
-          count:
-            format: int64
-            type: integer
-          total_pages:
-            format: int64
-            type: integer
-          schema_version:
-            format: int64
-            type: integer
-          links:
-            $ref: '#/components/schemas/ApplicationLinks'
-          results:
-            items:
-              $ref: '#/components/schemas/ApplicationsResults'
-            type: array
-        required:
-        - count
-        - links
-        - results
-        - schema_version
-        - total_pages
-        type: object
+      properties:
+        count:
+          format: int64
+          type: integer
+        total_pages:
+          format: int64
+          type: integer
+        schema_version:
+          format: int64
+          type: integer
+        links:
+          $ref: '#/components/schemas/ApplicationLinks'
+        results:
+          items:
+            $ref: '#/components/schemas/ApplicationsResults'
+          type: array
+      required:
+      - count
+      - links
+      - results
+      - schema_version
+      - total_pages
+      type: object
     ApplicationLinks:
       additionalProperties: false
       example:
@@ -2245,9 +2237,6 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationOrigins'
           type: array
-      required:
-      - next
-      - previous
       type: object
     ApplicationOrigins:
       additionalProperties: false
