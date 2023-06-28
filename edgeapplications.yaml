@@ -2172,8 +2172,7 @@ components:
           previous: previous
         total_pages: 1
         results:
-          - next: next
-            id: 5
+          - id: 5
             name: name
             active: true
             debug_rules: true
