@@ -52,8 +52,12 @@ jobs:
             oal lint $file -f yaml
           done          
 
-      - name: OpenAPI Lint Checks
-        uses: trybeapp/redocly-openapi-cli-github-action@v0.0.1
-        with:
-          args: 'lint *.yaml'
+      - name: install redocly-cli
+        run: npm i -g @redocly/cli
+
+      - name: Run linter for changed files
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+            redocly lint $file
+          done 
 
