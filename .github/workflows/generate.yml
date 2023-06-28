@@ -75,9 +75,7 @@ jobs:
         run: |
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             removed=$(echo ${file} | cut -d. -f1);
-            npx @openapitools/openapi-generator-cli generate -i $file -g ${{ matrix.types }} -o ./${{ matrix.types }}/${removed} --package-name ${removed};\
-            echo 'go.mod' >> ./${{ matrix.types }}/${removed}/.gitignore
-            echo 'go.sum' >> ./${{ matrix.types }}/${removed}/.gitignore
+            npx @openapitools/openapi-generator-cli generate -i $file -g ${{ matrix.types }} -o ./${{ matrix.types }}/${removed} --package-name ${removed};
           done
 
       - name: push changes
