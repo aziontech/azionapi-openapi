@@ -13,6 +13,7 @@ security:
 paths:
   /storage/{version_id}:
     post:
+      summary: /domains/:version_id
       description: 'Upload file and transfer to remote storage'
       parameters:
         - name: Content-Type
@@ -50,6 +51,7 @@ paths:
   /storage/{version_id}/delete:
     delete:
       operationId: deleteVersion
+      summary: /domains/:version_id
       description: 'Delete a version. A version is just um path prefix/sub-namespace for a set of files.'
       parameters:
         - name: version_id
