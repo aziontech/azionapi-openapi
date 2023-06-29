@@ -2178,6 +2178,7 @@ components:
             debug_rules: true
             last_editor: last_editor
             last_modified: last_editor
+            origins: {}
       properties:
         count:
           format: int64
@@ -2238,6 +2239,14 @@ components:
             $ref: '#/components/schemas/ApplicationOrigins'
           type: array
       type: object
+      required:
+      - id
+      - name
+      - debug_rules
+      - last_editor
+      - last_modified
+      - active
+      - origins
     ApplicationOrigins:
       additionalProperties: false
       properties:
