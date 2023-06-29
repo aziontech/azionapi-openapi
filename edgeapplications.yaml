@@ -2178,7 +2178,7 @@ components:
             debug_rules: true
             last_editor: last_editor
             last_modified: last_editor
-            origins: {}
+            origins: []
       properties:
         count:
           format: int64
