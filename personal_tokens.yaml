@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info:
+  title: Personal Tokens - OpenAPI 1.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
+  version: 1.0.0
+servers:
+  - url: https://api.azionapi.net
+security:
+  - tokenAuth: []
+paths:
+  /iam/personal_tokens:
+    get:
+      summary: Return all credentials
+      operationId: findAll personal tokens
+      parameters:
+      - in: query
+        name: count
+        schema:
+          type: string
+      - in: query
+        name: total_pages
+        schema:
+          format: int64
+          type: integer
+      
+      responses:
+        "200":
+          content:
+            'application/json; version=3':
+              schema:
+                $ref: '#/iam/personal_tokens'
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
