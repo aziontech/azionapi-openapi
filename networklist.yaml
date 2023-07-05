@@ -29,6 +29,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestResponse'
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Not Found
         '500':
           description: Internal Server Error
           content:
@@ -49,6 +54,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListNetworkListsResponse'
+        '404':
+          description: Not Found
   /network_lists/{uuid}:
     get:
       summary: Retrieve a Network Lists set by uuid
@@ -65,6 +72,17 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/NetworkListsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Not Found               
     put:
       summary: Overwrite some Network Lists attributes
       parameters:
@@ -92,6 +110,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BadRequestResponse'
+            text/html:
+              schema:
+                type: string
+        '404':
+          description: Not Found
         '500':
           description: Internal Server Error
           content:
@@ -109,8 +132,10 @@ components:
       properties:
         previous:
           type: string
+          nullable: true
         next:
           type: string
+          nullable: true
       type: object
     NetworkLists:
       properties:
