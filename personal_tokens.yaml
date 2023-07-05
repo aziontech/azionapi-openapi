@@ -36,3 +36,12 @@ paths:
           description: Bad Request
         "500":
           description: Internal Server Error
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: |
+        You must inform a token to auth.
+        Usage format: `Token <TOKEN>`
+        
