@@ -25,7 +25,7 @@ paths:
       tags:
         - Personal Token
       summary: List an existing personal token 
-      description: List an existing personal token by Id
+      description: List an existing personal token
       operationId: ListPersonalToken
       
       responses:
