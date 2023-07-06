@@ -4,9 +4,6 @@ info:
   description: |-
     The Personal Tokens API allows you to manage your existing personal tokens.
 
-#  termsOfService: http://swagger.io/terms/
-#  contact:
-#    email: apiteam@swagger.io
   license:
     name: MIT
     url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
