@@ -1,47 +1,126 @@
 openapi: 3.0.3
 info:
-  title: Personal Tokens - OpenAPI 1.0
+  title: Personal Tokens - OpenAPI
+  description: |-
+    The Personal Tokens API allows you to manage your existing personal tokens.
+
+#  termsOfService: http://swagger.io/terms/
+#  contact:
+#    email: apiteam@swagger.io
   license:
     name: MIT
     url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
   version: 1.0.0
+externalDocs:
+  description: See the documentation on Personal Tokens for more information.
+  url: https://www.azion.com/en/documentation/products/accounts/personal-tokens/
 servers:
-  - url: https://api.azionapi.net
+  - description: Production
+    url: https://api.azionapi.net
 security:
-  - tokenAuth: []
+  - authToken: []
+tags:
+  - name: Personal Token
+    description: List all personal tokens
+    #externalDocs:
+    #  description: Find out more
+    #  url: http://swagger.io
 paths:
   /iam/personal_tokens:
     get:
-      summary: Return all credentials
-      operationId: findAll personal tokens
-      parameters:
-      - in: query
-        name: count
-        schema:
-          type: string
-      - in: query
-        name: total_pages
-        schema:
-          format: int64
-          type: integer
+      tags:
+        #- pet
+        - Personal Token
+      summary: Update an existing pet
+      description: Update an existing pet by Id
+      operationId: updatePet
       
       responses:
-        "200":
+        '200':
+          description: Successful operation
           content:
-            'application/json; version=3':
+            application/json:
               schema:
-                $ref: '#/iam/personal_tokens'
-          description: OK
-        "400":
-          description: Bad Request
-        "500":
-          description: Internal Server Error
+                $ref: '#/components/schemas/PersonalToken'          
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/PersonalToken'
+  
+components:
+  schemas:
+    PersonalToken:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+          example: 2
+        total_pages:
+          type: integer
+          format: int64
+          example: 1
+        schema_version: 
+          type: integer
+          format: int64
+          example: 3
+        links:
+          type: object
+          properties:
+            next:
+              type: integer
+              format: int64
+              example: null
+            previous:
+              type: integer
+              format: int64
+              example: null
+        results:
+            type: array
+            items:
+              type: object
+              properties:
+                uuid: 
+                  type: string
+                  example: "s6006r20-5lf8-4750-a5c4-2820552643c0"
+                name:
+                  type: string
+                  example: "Personal Token 1"
+                created:
+                  type: string
+                  format: date-time
+                  example: "2023-04-14T21:23:25.233511Z"
+                expires_at:
+                  type: string
+                  format: date-time
+                  example: '2023-04-29T23:59:59Z'
+                description: 
+                  type: string
+                  example: "my personal token"
+      #      uauid:
+      #        type: string
+      #        example: "4if9f6rd-5q7f-74dd-s856-451e5ef4048b"
+      #      name: 
+      #        type: string
+      #        example: Personal Token 2
+      #      created: 
+      #        type: string
+      #        format: date-time
+      #        example: '2023-04-05T17:17:58.979073Z'
+      #      expires_at:
+      #        type: string
+      #        format: date-time
+      #        example: '2023-04-12T23:59:59Z'
+      #      description: 
+      #        type: string
+      #        example: API personal token
+      xml:
+        name: personal_token
+    
   securitySchemes:
-    tokenAuth:
+    authToken:
       type: apiKey
       name: Authorization
       in: header
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-        
