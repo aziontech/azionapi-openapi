@@ -29,7 +29,6 @@ paths:
   /iam/personal_tokens:
     get:
       tags:
-        #- pet
         - Personal Token
       summary: Update an existing pet
       description: Update an existing pet by Id
@@ -124,3 +123,4 @@ components:
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
+        
