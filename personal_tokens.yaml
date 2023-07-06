@@ -1,7 +1,7 @@
 openapi: 3.0.3
 info:
   title: Personal Tokens - OpenAPI
-  description: |-
+  description:
     The Personal Tokens API allows you to manage your existing personal tokens.
 
   license:
@@ -15,7 +15,7 @@ servers:
   - description: Production
     url: https://api.azionapi.net
 security:
-  - authToken: []
+  - tokenAuth: []
 tags:
   - name: Personal Token
     description: List all personal tokens
@@ -56,12 +56,12 @@ components:
           type: object
           properties:
             next:
-              type: integer
-              format: int64
+              type: string
+              nullable: true
               example: null
             previous:
-              type: integer
-              format: int64
+              type: string
+              nullable: true
               example: null
         results:
             type: array
