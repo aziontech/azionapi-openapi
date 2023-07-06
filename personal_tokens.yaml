@@ -1,0 +1,158 @@
+openapi: 3.0.3
+info:
+  title: Personal Tokens API
+  version: 2.0.0
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
+servers:
+- description: Production
+  url: https://api.azionapi.net
+security:
+- tokenAuth: []
+paths:
+  /personal_tokens:
+    get:
+#       operationId: findAll
+#       parameters:
+#       - in: query
+#         name: filter
+#         schema:
+#           type: string
+#       - in: query
+#         name: page
+#         schema:
+#           format: int64
+#           type: integer
+#       - in: query
+#         name: page_size
+#         schema:
+#           format: int64
+#           type: integer
+#       - in: query
+#         name: sort
+#         schema:
+#           type: string
+#       - in: query
+#         name: order_by
+#         schema:
+#           type: string
+      responses:
+        "200":
+          # content:
+            # 'application/json; version=3':
+              # schema:
+              #   $ref: '#/iam/personal_tokens'
+          description: OK
+        "400":
+          description: Bad Request
+        "500":
+          description: Internal Server Error
+      summary: Return all personal_tokens
+
+
+
+
+      
+#     post:
+#       operationId: createPersonaltokens
+#       requestBody:
+#         content:
+#           'application/json; version=3':
+#             schema:
+#               $ref: '#/iam/personal_tokens'
+#         required: true
+#       responses:
+#         "201":
+#           content:
+#             'application/json; version=3':
+#               schema:
+#                 $ref: '#/iam/personal_tokens'
+#           description: Created
+#         "400":
+#           description: Bad Request
+#         "403":
+#           description: Forbidden
+#         "422":
+#           description: Unprocessable Entity
+#         "500":
+#           description: Internal Server Error
+#       summary: Create Personal Tokens
+#   /iam/personal_tokens/{uuid}:    
+#     delete:
+#       operationId: deletePersonalTokens
+#       parameters:
+#       - in: path
+#         name: name-field-personal-token-name
+#         required: true
+#         schema:
+#           format: int64
+#           type: integer
+#       responses:
+#         "204":
+#           description: No Content
+#         "400":
+#           description: Bad Request
+#         "403":
+#           description: Forbidden
+#         "404":
+#           description: Not Found
+#         "500":
+#           description: Internal Server Error
+#       summary: Delete the Personal Tokens
+# components:
+#   schemas:
+#     AuthToken:
+#       additionalProperties: false
+#       properties:
+#         client_id:
+#           type: string
+#         created_at:
+#           format: date-time
+#           type: string
+#         deleted_at:
+#           format: date-time
+#           type: string
+#         description:
+#           type: string
+#         id:
+#           format: int64
+#           type: integer
+#         is_active:
+#           type: boolean
+#         last_editor:
+#           type: string
+#         name:
+#           type: string
+#         token:
+#           type: string
+#         updated_at:
+#           format: date-time
+#           type: string
+#       required:
+#       - name
+#       - expires_at
+#       - description
+#       type: object
+#     ResponseWithTotal:
+#       additionalProperties: false
+#       properties:
+#         credentials:
+#           items:
+#             $ref: '#/components/schemas/Response'
+#           type: array
+#         total:
+#           format: int64
+#           type: integer
+#       required:
+#       - credentials
+#       - total
+#       type: object
+#   securitySchemes:
+#     tokenAuth:
+#       type: apiKey
+#       name: Authorization
+#       in: header
+#       description: |
+#         You must inform a token to auth.
+#         Usage format: `Token <TOKEN>`
