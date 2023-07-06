@@ -39,10 +39,10 @@ paths:
 #           type: string
       responses:
         "200":
-          # content:
-            # 'application/json; version=3':
-              # schema:
-              #   $ref: '#/iam/personal_tokens'
+          content:
+            'application/json; version=3':
+              schema:
+                $ref: '#/components/schemas/ResponseWithTotal'
           description: OK
         "400":
           description: Bad Request
