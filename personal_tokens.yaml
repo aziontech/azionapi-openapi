@@ -30,9 +30,9 @@ paths:
     get:
       tags:
         - Personal Token
-      summary: Update an existing pet
-      description: Update an existing pet by Id
-      operationId: updatePet
+      summary: Update an existing personal token 
+      description: Update an existing personal token by Id
+      operationId: updatePersonalToken
       
       responses:
         '200':
@@ -123,4 +123,3 @@ components:
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-        
