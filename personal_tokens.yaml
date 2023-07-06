@@ -24,9 +24,9 @@ paths:
     get:
       tags:
         - Personal Token
-      summary: Update an existing personal token 
-      description: Update an existing personal token by Id
-      operationId: updatePersonalToken
+      summary: List an existing personal token 
+      description: List an existing personal token by Id
+      operationId: ListPersonalToken
       
       responses:
         '200':
