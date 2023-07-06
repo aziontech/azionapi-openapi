@@ -34,14 +34,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PersonalToken'          
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/PersonalToken'
-  
+                $ref: '#/components/schemas/PersonalTokenResponseWithResults'          
 components:
   schemas:
-    PersonalToken:
+    PersonalTokenResponseWithResults:
       type: object
       properties:
         count:
@@ -70,25 +66,7 @@ components:
         results:
             type: array
             items:
-              type: object
-              properties:
-                uuid: 
-                  type: string
-                  example: "s6006r20-5lf8-4750-a5c4-2820552643c0"
-                name:
-                  type: string
-                  example: "Personal Token 1"
-                created:
-                  type: string
-                  format: date-time
-                  example: "2023-04-14T21:23:25.233511Z"
-                expires_at:
-                  type: string
-                  format: date-time
-                  example: '2023-04-29T23:59:59Z'
-                description: 
-                  type: string
-                  example: "my personal token"
+              $ref: '#/components/schemas/ResponseGet'
               
             example:
               - uuid: "s6006r20-5lf8-4750-a5c4-2820552643c0"
@@ -101,7 +79,27 @@ components:
                 description: "API personal token"
       xml:
         name: personal_token
-    
+    ResponseGet:
+      type: object
+      properties:
+        uuid: 
+          type: string
+          example: "s6006r20-5lf8-4750-a5c4-2820552643c0"
+        name:
+          type: string
+          example: "Personal Token 1"
+        created:
+          type: string
+          format: date-time
+          example: "2023-04-14T21:23:25.233511Z"
+        expires_at:
+          type: string
+          format: date-time
+          example: '2023-04-29T23:59:59Z'
+        description: 
+          type: string
+          example: "my personal token"
+  
   securitySchemes:
     authToken:
       type: apiKey
