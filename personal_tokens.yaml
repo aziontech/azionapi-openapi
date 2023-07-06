@@ -1,9 +1,8 @@
 openapi: 3.0.3
 info:
   title: Personal Tokens - OpenAPI
-  description:
+  description: |
     The Personal Tokens API allows you to manage your existing personal tokens.
-
   license:
     name: MIT
     url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
@@ -99,7 +98,6 @@ components:
         description: 
           type: string
           example: "my personal token"
-  
   securitySchemes:
     authToken:
       type: apiKey
