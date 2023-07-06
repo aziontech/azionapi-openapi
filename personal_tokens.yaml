@@ -22,9 +22,6 @@ security:
 tags:
   - name: Personal Token
     description: List all personal tokens
-    #externalDocs:
-    #  description: Find out more
-    #  url: http://swagger.io
 paths:
   /iam/personal_tokens:
     get:
@@ -95,23 +92,16 @@ components:
                 description: 
                   type: string
                   example: "my personal token"
-      #      uauid:
-      #        type: string
-      #        example: "4if9f6rd-5q7f-74dd-s856-451e5ef4048b"
-      #      name: 
-      #        type: string
-      #        example: Personal Token 2
-      #      created: 
-      #        type: string
-      #        format: date-time
-      #        example: '2023-04-05T17:17:58.979073Z'
-      #      expires_at:
-      #        type: string
-      #        format: date-time
-      #        example: '2023-04-12T23:59:59Z'
-      #      description: 
-      #        type: string
-      #        example: API personal token
+              
+            example:
+              - uuid: "s6006r20-5lf8-4750-a5c4-2820552643c0"
+                name: "Personal Token 1"
+                expires_at: "2023-04-12T23:59:59Z"
+                description: "my personal token"
+              - uuid: "4if9f6rd-5q7f-74dd-s856-451e5ef4048b"
+                name: "Personal Token 2" 
+                expires_at: "2023-04-12T23:59:59Z"
+                description: "API personal token"
       xml:
         name: personal_token
     
