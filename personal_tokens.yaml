@@ -65,7 +65,7 @@ components:
         results:
             type: array
             items:
-              $ref: '#/components/schemas/ResponseGet'
+              $ref: '#/components/schemas/PersonalTokenResponseGet'
               
             example:
               - uuid: "s6006r20-5lf8-4750-a5c4-2820552643c0"
