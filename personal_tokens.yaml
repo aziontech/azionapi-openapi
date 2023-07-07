@@ -1,0 +1,87 @@
+openapi: 3.0.3
+info:
+  title: Personal Tokens - OpenAPI
+  description: |
+    The Personal Tokens API allows you to manage your existing personal tokens.
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
+  version: 1.0.0
+externalDocs:
+  description: See the documentation on Personal Tokens for more information.
+  url: https://www.azion.com/en/documentation/products/accounts/personal-tokens/
+servers:
+  - description: Production
+    url: https://api.azionapi.net
+security:
+  - tokenAuth: []
+tags:
+  - name: Personal Token
+    description: List all personal tokens
+paths:
+  /iam/personal_tokens:
+    get:
+      tags:
+        - Personal Token
+      summary: List all existing personal token 
+      description: List all existing personal token
+      operationId: ListPersonalToken
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalTokenResponseWithResults'          
+components:
+  schemas:
+    PersonalTokenResponseWithResults:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+        total_pages:
+          type: integer
+          format: int6
+        schema_version: 
+          type: integer
+          format: int64
+        links:
+          type: object
+          properties:
+            next:
+              type: string
+              nullable: true
+            previous:
+              type: string
+              nullable: true
+        results:
+            type: array
+            items:
+              $ref: '#/components/schemas/PersonalTokenResponseGet'
+  
+    PersonalTokenResponseGet:
+      type: object
+      properties:
+        uuid: 
+          type: string
+        name:
+          type: string
+        created:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        description: 
+          type: string
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: |
+        You must inform a token to auth.
+        Usage format: `Token <TOKEN>`
