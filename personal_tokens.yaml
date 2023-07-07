@@ -78,7 +78,7 @@ components:
                 description: "API personal token"
       xml:
         name: personal_token
-    ResponseGet:
+    PersonalTokenResponseGet:
       type: object
       properties:
         uuid: 
