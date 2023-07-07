@@ -99,7 +99,7 @@ components:
           type: string
           example: "my personal token"
   securitySchemes:
-    authToken:
+    tokenAuth:
       type: apiKey
       name: Authorization
       in: header
