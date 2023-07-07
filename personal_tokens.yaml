@@ -62,8 +62,6 @@ components:
             items:
               $ref: '#/components/schemas/PersonalTokenResponseGet'
   
-      xml:
-        name: personal_token
     PersonalTokenResponseGet:
       type: object
       properties:
@@ -87,4 +85,3 @@ components:
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-        
