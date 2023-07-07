@@ -23,8 +23,8 @@ paths:
     get:
       tags:
         - Personal Token
-      summary: List an existing personal token 
-      description: List an existing personal token
+      summary: List all existing personal token 
+      description: List all existing personal token
       operationId: ListPersonalToken
       
       responses:
