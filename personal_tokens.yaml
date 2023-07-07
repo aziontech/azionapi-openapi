@@ -42,40 +42,26 @@ components:
         count:
           type: integer
           format: int64
-          example: 2
         total_pages:
           type: integer
-          format: int64
-          example: 1
+          format: int6
         schema_version: 
           type: integer
           format: int64
-          example: 3
         links:
           type: object
           properties:
             next:
               type: string
               nullable: true
-              example: null
             previous:
               type: string
               nullable: true
-              example: null
         results:
             type: array
             items:
               $ref: '#/components/schemas/PersonalTokenResponseGet'
-              
-            example:
-              - uuid: "s6006r20-5lf8-4750-a5c4-2820552643c0"
-                name: "Personal Token 1"
-                expires_at: "2023-04-12T23:59:59Z"
-                description: "my personal token"
-              - uuid: "4if9f6rd-5q7f-74dd-s856-451e5ef4048b"
-                name: "Personal Token 2" 
-                expires_at: "2023-04-12T23:59:59Z"
-                description: "API personal token"
+  
       xml:
         name: personal_token
     PersonalTokenResponseGet:
@@ -83,21 +69,16 @@ components:
       properties:
         uuid: 
           type: string
-          example: "s6006r20-5lf8-4750-a5c4-2820552643c0"
         name:
           type: string
-          example: "Personal Token 1"
         created:
           type: string
           format: date-time
-          example: "2023-04-14T21:23:25.233511Z"
         expires_at:
           type: string
           format: date-time
-          example: '2023-04-29T23:59:59Z'
         description: 
           type: string
-          example: "my personal token"
   securitySchemes:
     tokenAuth:
       type: apiKey
@@ -106,3 +87,4 @@ components:
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
+        
