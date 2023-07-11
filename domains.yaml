@@ -65,6 +65,8 @@ paths:
           description: Bad Request
         "403":
           description: Forbidden
+        "404":
+          description: Not Found
         "422":
           description: Unprocessable Entity
         "500":
@@ -356,8 +358,10 @@ components:
       properties:
         previous:
           type: string
+          nullable: true
         next:
           type: string
+          nullable: true
       required:
       - previous
       - next
