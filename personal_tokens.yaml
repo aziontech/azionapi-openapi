@@ -33,7 +33,31 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PersonalTokenResponseWithResults'          
+                $ref: '#/components/schemas/PersonalTokenResponseWithResults'
+
+  /iam/personal_tokens/{personalTokenId}:
+    get:
+      tags:
+        - Personal Token
+      summary: Get a personal token info
+      description: Get a personal token info
+      operationId: GetPersonalToken
+      parameters: 
+      - in: path
+        name: personalTokenId
+        required: true
+        schema:
+          format: uuid
+          type: string
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalTokenResponseGet'
+
 components:
   schemas:
     PersonalTokenResponseWithResults:
