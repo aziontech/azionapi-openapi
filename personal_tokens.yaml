@@ -34,6 +34,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PersonalTokenResponseWithResults'
+        '400':
+          description: Bad Request
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '500':
+          description: Internal Server Error
 
   /iam/personal_tokens/{personalTokenId}:
     get:
