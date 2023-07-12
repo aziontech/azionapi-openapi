@@ -6,10 +6,10 @@ info:
     name: MIT
     url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
-- description: Production
-  url: https://api.azionapi.net
+  - description: Production
+    url: https://api.azionapi.net
 security:
-- tokenAuth: []
+  - tokenAuth: []
 paths:
   /domains:
     get:
@@ -55,7 +55,7 @@ paths:
             type: string
           example: application/json; version=3
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json; version=3:
@@ -71,7 +71,7 @@ paths:
           description: Unprocessable Entity
         "500":
           description: Internal Server Error
-            
+
     post:
       tags:
         - Domains
@@ -81,7 +81,7 @@ paths:
         content:
           application/json; version=3:
             schema:
-              $ref: '#/components/schemas/CreateDomainRequest'
+              $ref: "#/components/schemas/CreateDomainRequest"
       operationId: createDomain
       parameters:
         - name: Accept
@@ -95,7 +95,7 @@ paths:
             type: string
           example: application/json
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json; version=3:
@@ -133,7 +133,7 @@ paths:
           required: true
           description: "The id of the domain to be consulted.\t"
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json; version=3:
@@ -195,7 +195,7 @@ paths:
         content:
           application/json; version=3:
             schema:
-              $ref: '#/components/schemas/PutDomainRequest'
+              $ref: "#/components/schemas/PutDomainRequest"
       operationId: putDomain
       parameters:
         - name: Accept
@@ -214,7 +214,7 @@ paths:
             type: string
           required: true
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json; version=3:
@@ -243,7 +243,7 @@ paths:
         content:
           application/json; version=3:
             schema:
-              $ref: '#/components/schemas/UpdateDomainRequest'
+              $ref: "#/components/schemas/UpdateDomainRequest"
       operationId: updateDomain
       parameters:
         - name: Accept
@@ -262,7 +262,7 @@ paths:
             type: string
           required: true
       responses:
-        '200':
+        "200":
           description: Successful response
           content:
             application/json; version=3:
@@ -274,6 +274,8 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
+        "405":
+          description: Method Not Allowed
         "422":
           description: Unprocessable Entity
         "500":
@@ -301,12 +303,12 @@ components:
           type: integer
           nullable: true
       required:
-      - name
-      - edge_application_id
-      - cname_access_only
-      - cnames
-      - is_active
-      - digital_certificate_id
+        - name
+        - edge_application_id
+        - cname_access_only
+        - cnames
+        - is_active
+        - digital_certificate_id
       type: object
     UpdateDomainRequest:
       additionalProperties: false
@@ -350,12 +352,12 @@ components:
           type: integer
           nullable: true
       required:
-      - name
-      - edge_application_id
-      - cname_access_only
-      - cnames
-      - is_active
-      - digital_certificate_id
+        - name
+        - edge_application_id
+        - cname_access_only
+        - cnames
+        - is_active
+        - digital_certificate_id
       type: object
     DomainLinks:
       additionalProperties: false
@@ -367,8 +369,8 @@ components:
           type: string
           nullable: true
       required:
-      - previous
-      - next
+        - previous
+        - next
       type: object
     DomainResponseWithResults:
       additionalProperties: false
@@ -383,28 +385,36 @@ components:
           format: int64
           type: integer
         links:
-          $ref: '#/components/schemas/DomainLinks'
+          $ref: "#/components/schemas/DomainLinks"
         results:
           items:
-            $ref: '#/components/schemas/DomainResults'
+            $ref: "#/components/schemas/DomainResults"
       required:
-      - count
-      - total_pages
-      - schema_version
-      - links
-      - results
+        - count
+        - total_pages
+        - schema_version
+        - links
+        - results
       type: object
     DomainResponseWithResult:
       additionalProperties: false
       properties:
+        count:
+          format: int64
+          type: integer
+        links:
+          $ref: "#/components/schemas/DomainLinks"
+        results:
+          $ref: "#/components/schemas/DomainResults"
+        total_pages:
+          format: int64
+          type: integer
         schema_version:
           format: int64
           type: integer
-        results:
-          $ref: '#/components/schemas/DomainResults'
       required:
-      - schema_version
-      - results
+        - schema_version
+        - results
       type: object
     DomainResults:
       additionalProperties: false
@@ -442,17 +452,17 @@ components:
           type: string
           nullable: true
       required:
-      - id
-      - name
-      - cnames
-      - cname_access_only
-      - digital_certificate_id
-      - edge_application_id
-      - is_active
-      - domain_name
-      - is_mtls_enabled
-      - mtls_verification
-      - mtls_trusted_ca_certificate_id
+        - id
+        - name
+        - cnames
+        - cname_access_only
+        - digital_certificate_id
+        - edge_application_id
+        - is_active
+        - domain_name
+        - is_mtls_enabled
+        - mtls_verification
+        - mtls_trusted_ca_certificate_id
       type: object
   securitySchemes:
     tokenAuth:
