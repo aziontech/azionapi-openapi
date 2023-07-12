@@ -452,17 +452,17 @@ components:
           type: string
           nullable: true
       required:
-        - id
-        - name
-        - cnames
-        - cname_access_only
-        - digital_certificate_id
-        - edge_application_id
-        - is_active
-        - domain_name
-        - is_mtls_enabled
-        - mtls_verification
-        - mtls_trusted_ca_certificate_id
+      - id
+      - name
+      - cnames
+      - cname_access_only
+      - digital_certificate_id
+      - edge_application_id
+      - is_active
+      - domain_name
+      - is_mtls_enabled
+      - mtls_verification
+      - mtls_trusted_ca_certificate_id
       type: object
   securitySchemes:
     tokenAuth:
