@@ -112,7 +112,7 @@ paths:
           description: Rate Limit
         '500':
           description: Internal Server Error
-          
+
     delete:
       tags:
         - Personal Token
