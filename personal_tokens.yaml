@@ -60,7 +60,7 @@ paths:
               $ref: '#/components/schemas/CreatePersonalTokenRequest'
               
       responses:
-        '200':
+        '201':
           description: Successful operation
           content:
             application/json:
