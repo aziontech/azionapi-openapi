@@ -93,7 +93,6 @@ paths:
         schema:
           format: uuid
           type: string
-      
       responses:
         '200':
           description: Successful operation
@@ -114,6 +113,27 @@ paths:
         '500':
           description: Internal Server Error
           
+    delete:
+      tags:
+        - Personal Token
+      summary: Delete a personal token by id
+      description: Delete a personal token
+      operationId: DeletePersonalToken
+      parameters: 
+      - in: path
+        name: personalTokenId
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalTokenResponseGet'
+
 components:
   schemas:
     PersonalTokenResponseWithResults:
