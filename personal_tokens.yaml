@@ -167,6 +167,7 @@ components:
       properties:
         uuid: 
           type: string
+          format: uuid
         name:
           type: string
         created:
@@ -195,6 +196,7 @@ components:
       properties:
         uuid: 
           type: string
+          format: uuid
         name:
           type: string
         key:
