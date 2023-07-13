@@ -33,7 +33,55 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PersonalTokenResponseWithResults'          
+                $ref: '#/components/schemas/PersonalTokenResponseWithResults'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit
+        '500':
+          description: Internal Server Error
+
+  /iam/personal_tokens/{personalTokenId}:
+    get:
+      tags:
+        - Personal Token
+      summary: Get a personal token info
+      description: Get a personal token info
+      operationId: GetPersonalToken
+      parameters: 
+      - in: path
+        name: personalTokenId
+        required: true
+        schema:
+          format: uuid
+          type: string
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PersonalTokenResponseGet'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit
+        '500':
+          description: Internal Server Error
+
 components:
   schemas:
     PersonalTokenResponseWithResults:
