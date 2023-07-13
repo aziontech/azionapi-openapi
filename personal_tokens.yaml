@@ -113,7 +113,7 @@ paths:
           description: Rate Limit
         '500':
           description: Internal Server Error
-          
+
 components:
   schemas:
     PersonalTokenResponseWithResults:

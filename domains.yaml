@@ -65,6 +65,8 @@ paths:
           description: Bad Request
         "403":
           description: Forbidden
+        "404":
+          description: Not Found
         "422":
           description: Unprocessable Entity
         "500":
@@ -105,6 +107,8 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
+        "409":
+          description: Conflict
         "422":
           description: Unprocessable Entity
         "500":
@@ -222,6 +226,8 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
+        "405":
+          description: Method Not Allowed
         "422":
           description: Unprocessable Entity
         "500":
@@ -356,8 +362,10 @@ components:
       properties:
         previous:
           type: string
+          nullable: true
         next:
           type: string
+          nullable: true
       required:
       - previous
       - next
@@ -425,13 +433,26 @@ components:
           type: string
         environment:
           type: string
+        is_mtls_enabled:
+          type: boolean
+        mtls_trusted_ca_certificate_id:
+          type: string
+          nullable: true
+        mtls_verification:
+          type: string
+          nullable: true
       required:
       - id
       - name
-      - type
-      - content_type
-      - last_editor
-      - updated_at
+      - cnames
+      - cname_access_only
+      - digital_certificate_id
+      - edge_application_id
+      - is_active
+      - domain_name
+      - is_mtls_enabled
+      - mtls_verification
+      - mtls_trusted_ca_certificate_id
       type: object
   securitySchemes:
     tokenAuth:
