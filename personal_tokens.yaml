@@ -127,12 +127,8 @@ paths:
           format: uuid
           type: string
       responses:
-        '200':
+        '204':
           description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PersonalTokenResponseGet'
         '400':
           description: Bad Request
         '401':
