@@ -46,6 +46,38 @@ paths:
           description: Rate Limit
         '500':
           description: Internal Server Error
+    post:
+      tags:
+        - Personal Token
+      summary: Create a new personal token 
+      description: Create a new personal token
+      operationId: CreatePersonalToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePersonalTokenRequest'
+              
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreatePersonalTokenResponse'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit
+        '500':
+          description: Internal Server Error
 
   /iam/personal_tokens/{personalTokenId}:
     get:
@@ -113,6 +145,40 @@ components:
           format: date-time
         description: 
           type: string
+          
+    CreatePersonalTokenRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        expires_at:
+          type: string
+          format: date-time
+        description:
+          type: string
+          nullable: true
+          
+    CreatePersonalTokenResponse:
+      type: object
+      properties:
+        uuid: 
+          type: string
+        name:
+          type: string
+        key:
+          type: string
+        user_id:
+          type: number
+        created:
+          type: string
+          format: date-time
+        expires_at:
+          type: string
+          format: date-time
+        description: 
+          type: string
+          nullable: true
+          
   securitySchemes:
     tokenAuth:
       type: apiKey
