@@ -60,7 +60,7 @@ paths:
               $ref: '#/components/schemas/CreatePersonalTokenRequest'
               
       responses:
-        '200':
+        '201':
           description: Successful operation
           content:
             application/json:
@@ -93,7 +93,6 @@ paths:
         schema:
           format: uuid
           type: string
-      
       responses:
         '200':
           description: Successful operation
@@ -101,6 +100,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PersonalTokenResponseGet'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit
+        '500':
+          description: Internal Server Error
+
+    delete:
+      tags:
+        - Personal Token
+      summary: Delete a personal token by id
+      description: Delete a personal token
+      operationId: DeletePersonalToken
+      parameters: 
+      - in: path
+        name: personalTokenId
+        required: true
+        schema:
+          format: uuid
+          type: string
+      responses:
+        '204':
+          description: Successful operation
         '400':
           description: Bad Request
         '401':
@@ -147,6 +175,7 @@ components:
       properties:
         uuid: 
           type: string
+          format: uuid
         name:
           type: string
         created:
@@ -175,6 +204,7 @@ components:
       properties:
         uuid: 
           type: string
+          format: uuid
         name:
           type: string
         key:
