@@ -186,6 +186,7 @@ components:
           format: date-time
         description: 
           type: string
+          nullable: true
           
     CreatePersonalTokenRequest:
       type: object
