@@ -45,8 +45,7 @@ paths:
           description: Searches for string in certificate name
           required: false
           schema:
-           type: 
-            string 
+            type: string
 
       responses:
         "200":
@@ -54,41 +53,41 @@ paths:
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC200List'
+                $ref: "#/components/schemas/DC200List"
         "400":
           description: Bad Request
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC400'
+                $ref: "#/components/schemas/DC400"
         "401":
           description: Unauthorized
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC401'
+                $ref: "#/components/schemas/DC401"
         "403":
           description: Forbidden
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC403'
+                $ref: "#/components/schemas/DC403"
         "404":
           description: Not Found
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC404'
+                $ref: "#/components/schemas/DC404"
         "406":
           description: Not acceptable
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC406'
+                $ref: "#/components/schemas/DC406"
 
     post:
       tags:
-          - Create digital certificate
+        - Create digital certificate
       summary: Create a new digital certificate
       operationId: createCertificate
       requestBody:
@@ -104,6 +103,11 @@ paths:
                   type: string
                 private_key:
                   type: string
+                certificate_type:
+                  type: string
+                managed:
+                  type: boolean
+
               example:
                 name: "New SSL certificate for www.mydomain.com"
                 certificate: "-----BEGIN CERTIFICATE-----\nMIIDCTCCAfGgAwIBAgIJAPpMWHKMIGuAMA0GCSqGSIb3DQEBBQUAMBsxGTAXBgNV\nBAMMEHd3dy5teWRvbWFpbi5jb20wHhcNMTgwMzI3MjAwOTA0WhcNMjgwMzI0MjAw\nOTA0WjAbMRkwFwYDVQQDDBB3d3cubXlkb21haW4uY29tMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEAt25cziDBsHbZzZhy9BPLApPf9OmE67k9pr7VezsR\nkIw4trY2xtJXFB7itT1p7HxbLBoL5u8FGmMKssB+XTmztmgty43ogor1KSjUgfZg\nrpAqyXtrbSM5g+14c0VO9S0LkkePlHvul0UiblJj7K+gkvc6sZqXZY+TI1BPqeuO\ns9A4LLCUGziyNv0qJfIL5RZm07Yy35BEBTTxUWVL2msfaUH2uPM5XN5eFC7oKN0/\n3NuYIboRmyk+P7CDC99M8Mp/wOjiB+yVGZVTjeqGPI8nFWJl2waXkc54VvW84xQP\njwtid1v1KENK/ixMAAXi2cQ9gNRX+/USoneuWj5n4QUj6QIDAQABo1AwTjAdBgNV\nHQ4EFgQU2sDgtyYMDXvw79OhdvAFqcLmcwkwHwYDVR0jBBgwFoAU2sDgtyYMDXvw\n79OhdvAFqcLmcwkwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEAKzCM\niG67IPwJK6MIJ31N734AofnjLf+fffxNtfYmH0XGORHPYUxCxsLxXiSFgPvubWh+\n7vLsKAm67bflMWbnxohuiOR0O/LJhLvhj6F+wgv0aDXpu581Hm8Ob/88ldbF6ND1\nTqzVATS0WDfl+z1QBKtNdDm3Nv45IZ83ob7OhIzD9MwL6tflBPDpWOYtmBDn0xSP\n6ra9d8oa6jK1fe2/5A7LY41acjbbNrLbFDYP7hcx02TmCfSMut+ysaZ/blay4Sbb\nwNlt92KhJw07UEKgXXbgyXGoFQkU8V+r2AZcgt0XM9jvwTc01Sbq/gegd2GMAj3x\nrTwkn5UNzFs56FCgNg==\n-----END CERTIFICATE-----"
@@ -117,15 +121,13 @@ paths:
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC400'
+                $ref: "#/components/schemas/DC400"
         "403":
           description: Forbidden
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC403'
-          
-      
+                $ref: "#/components/schemas/DC403"
 
   /digital_certificates/{digital_certificate_id}:
     get:
@@ -147,37 +149,37 @@ paths:
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC200'
+                $ref: "#/components/schemas/DC200"
         "400":
           description: Bad request
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC400'
+                $ref: "#/components/schemas/DC400"
         "401":
           description: Unauthorized operation
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC401'
+                $ref: "#/components/schemas/DC401"
         "403":
           description: Forbidden operation
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC403'
+                $ref: "#/components/schemas/DC403"
         "404":
           description: Data not found
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC404'
+                $ref: "#/components/schemas/DC404"
         "406":
           description: Not Acceptable
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC406'
+                $ref: "#/components/schemas/DC406"
     put:
       tags:
         - Overwrite digital certificate
@@ -203,6 +205,11 @@ paths:
                   type: string
                 private_key:
                   type: string
+                certificate_type:
+                  type: string
+                managed:
+                  type: boolean
+
               example:
                 name: "New SSL certificate for www.mydomain.com"
                 certificate: "-----BEGIN CERTIFICATE-----\nMIIDCTCCAfGgAwIBAgIJAPpMWHKMIGuAMA0GCSqGSIb3DQEBBQUAMBsxGTAXBgNV\nBAMMEHd3dy5teWRvbWFpbi5jb20wHhcNMTgwMzI3MjAwOTA0WhcNMjgwMzI0MjAw\nOTA0WjAbMRkwFwYDVQQDDBB3d3cubXlkb21haW4uY29tMIIBIjANBgkqhkiG9w0B\nAQEFAAOCAQ8AMIIBCgKCAQEAt25cziDBsHbZzZhy9BPLApPf9OmE67k9pr7VezsR\nkIw4trY2xtJXFB7itT1p7HxbLBoL5u8FGmMKssB+XTmztmgty43ogor1KSjUgfZg\nrpAqyXtrbSM5g+14c0VO9S0LkkePlHvul0UiblJj7K+gkvc6sZqXZY+TI1BPqeuO\ns9A4LLCUGziyNv0qJfIL5RZm07Yy35BEBTTxUWVL2msfaUH2uPM5XN5eFC7oKN0/\n3NuYIboRmyk+P7CDC99M8Mp/wOjiB+yVGZVTjeqGPI8nFWJl2waXkc54VvW84xQP\njwtid1v1KENK/ixMAAXi2cQ9gNRX+/USoneuWj5n4QUj6QIDAQABo1AwTjAdBgNV\nHQ4EFgQU2sDgtyYMDXvw79OhdvAFqcLmcwkwHwYDVR0jBBgwFoAU2sDgtyYMDXvw\n79OhdvAFqcLmcwkwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEAKzCM\niG67IPwJK6MIJ31N734AofnjLf+fffxNtfYmH0XGORHPYUxCxsLxXiSFgPvubWh+\n7vLsKAm67bflMWbnxohuiOR0O/LJhLvhj6F+wgv0aDXpu581Hm8Ob/88ldbF6ND1\nTqzVATS0WDfl+z1QBKtNdDm3Nv45IZ83ob7OhIzD9MwL6tflBPDpWOYtmBDn0xSP\n6ra9d8oa6jK1fe2/5A7LY41acjbbNrLbFDYP7hcx02TmCfSMut+ysaZ/blay4Sbb\nwNlt92KhJw07UEKgXXbgyXGoFQkU8V+r2AZcgt0XM9jvwTc01Sbq/gegd2GMAj3x\nrTwkn5UNzFs56FCgNg==\n-----END CERTIFICATE-----"
@@ -215,26 +222,26 @@ paths:
           content:
             application/json; version=3:
               schema:
-                count: 
-                $ref: '#/components/schemas/DC200'
+                count:
+                $ref: "#/components/schemas/DC200"
         "400":
           description: Bad request
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC400'
+                $ref: "#/components/schemas/DC400"
         "403":
           description: Forbidden
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC403'
+                $ref: "#/components/schemas/DC403"
         "404":
           description: Not Found
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC404'
+                $ref: "#/components/schemas/DC404"
     patch:
       tags:
         - Update digital certificate
@@ -260,6 +267,11 @@ paths:
                   type: string
                 private_key:
                   type: string
+                certificate_type:
+                  type: string
+                managed:
+                  type: boolean
+
               example:
                 name: "New SSL certificate for www.mydomain.com"
                 private_key: "-----BEGIN RSA PRIVATE KEY-----\nMIIEogIBAAKCAQB29Xrr3II5eeHr/8ttgB6uRg9bO0bS9qyhGS3QrHTYsME8/yZG\nULyN9FdDGPiExEHqpUVVeU1J5v3fGMXaskhXMCJIsuP5oFPQ10U7m9Kdcia4MXJZ\n7Bea6dVxsJuL4+CbuAaEjX52f3Q30uX3XyvrUtLA9vBJbHHmVUmZ22Qza5QHXWDD\ntAUTScEAGYfIb19BAZi8Zsz1aOniIhv91UyMKJeH/abP/\nq4ZskXf8yYjgG1mmhi\n4YlK1x0kYuHvcuDU4Sduf78bUKJ7uNK8wzg2NROJ8QYw+LQrPofg1+pYswZRfEcd\nqcXtnOqTdAQjAIOKG2lCCsVF221pz9to1DwHAgMBAAECggEAYpMqx/YTB1PDbY+q\n39MyGVG++eeV2c1E4b3+pBO0Q7e8eTIpYk0W4j7ebKBtl38V7D4FxT1eWWYLa2qY\n0Y+4uF8PmdR7a2h66+zm1u1ZytRD15BJ5M/qA5nPIIWrb3Fmt0L4S7EAYWteP8AI\nhkMcHsWkFPjLxtwRSj/UXKVbU+uh6NAkyQY2JnwRjPssIvEcDTLolDQ0IB5kHVMJ\nGXFboptKAlM41yaLXcTPVHmF3Jqt9p4T1AkaVTA1CVGuMG/KGDgt5whkND67a29W\nJFHu/RxPeBCTVgwYp6IuuXz2XylqkH4cOv1VsaXRWBjruHlp8tV2hUWW5khyYpoc\n9xsCeQKBgQDaMTt1agDsgMhw/y5RkmEW3eFXse+NwmSx+lAnrJCaBSvtZ2VojFqq\nGR+kJUoXxc1CgX2OtYL107yOdITPIlyjW8akPHU1hiiunmnwcXJBDPH2OeWF1OPS\nyeQbZUI4L7h5r5+GXQJNmDJjrXmDetnG5LCIoF7MC9+m6S1zqny9OwKBgQCLkl1Y\nXTwtM7FOE0pTC7kzbECbXTrAVg/sCALMWH9UOZ4OvSEj1z281fCfykO5WRkCD1uf\nrlrftQhvmJdj5P3Khz1ILQnNCnVEfHm7ILAQJRWOZfqLIMwIVTX7uhHLulfwQwiT\nNfBn2CjaNBn22jLXHlU15NJDmoma9aaivMp/pQKBgCQHmS/sTza+lVrDaJyjtVCX\nVwyqH0qjXQlesjm67y3fyL8tIbu/4YDRIT5zweZnDVv8EgWsx3Fcg3hqmTuzCuUW\n1JhuO1SZUMJ0+j1wHlPLlXD5YoNVAkHegMJdWC/7AVVmwMrpNOYnSbrX/\nIbPlIKZ\nZOVKxhyfoVDolE7TSkHdAoGBAIouWmRFynImH4Bg8NDPZohWwJAQ+T269wCD3eFa\nLJXChY2qCclmLCVs2lIY+nvijjPP6LJq+GVK4hM6S4gHCo0c37s5e96YYAlyA0MU\n1brmPDVDGY3s5pPJaSzTxxKgZrfkZfT5Dg6Bn9CIjLwswvDfgxVceh+cPGhClLvB\nlepRAoGAKT+xIeMoMkQeZruOL72AvO6raQGjY+yPbXCIFeZxwv5kb+m3UaXNaVbq\nH5KzJESG2ALhOvyHgj8YopNsMWQuleoAYVXdODp0w3omN4a3ajjMUuV8GXDQis+a\nQl7R6ytpLpoc1TYx6cLwK7qGSAzB8vz9ZQkd2iYFco43E7IdABc=\n-----END RSA PRIVATE KEY-----"
@@ -270,26 +282,26 @@ paths:
           content:
             application/json; version=3:
               schema:
-                count: 
-                $ref: '#/components/schemas/DC200'
+                count:
+                $ref: "#/components/schemas/DC200"
         "400":
           description: Bad request
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC400'
+                $ref: "#/components/schemas/DC400"
         "403":
           description: Forbidden
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC403'
+                $ref: "#/components/schemas/DC403"
         "404":
           description: Not Found
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC404'
+                $ref: "#/components/schemas/DC404"
 
     delete:
       tags:
@@ -312,31 +324,29 @@ paths:
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC400'
+                $ref: "#/components/schemas/DC400"
         "403":
           description: Forbidden
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC403'
+                $ref: "#/components/schemas/DC403"
 
         "404":
           description: Not Found
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC404'
+                $ref: "#/components/schemas/DC404"
         "409":
           description: Forbidden
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC403'
-          
+                $ref: "#/components/schemas/DC403"
 
   /digital_certificates/csr:
     post:
-
       tags:
         - Create CSR
       summary: Create an encrypted Certificate Request with Azion, which can then be sent for signing to a CA
@@ -392,15 +402,14 @@ paths:
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC400'
+                $ref: "#/components/schemas/DC400"
         "403":
           description: Forbidden
           content:
             application/json; version=3:
               schema:
-                $ref: '#/components/schemas/DC403'
+                $ref: "#/components/schemas/DC403"
 components:
-        
   schemas:
     singleResult:
       type: object
@@ -412,66 +421,63 @@ components:
         status: Active
         certificate_type: edge_certificate
         managed: false
-      properties: 
-        id: 
+      properties:
+        id:
           type: integer
         name:
           type: string
-        subject_name: 
+        subject_name:
           type: array
-        validity: 
+        validity:
           type: string
-        status: 
+        status:
           type: string
-        certificate_type: 
+        certificate_type:
           type: string
-        managed: 
+        managed:
           type: boolean
-        
 
     results:
       type: array
-      items: 
+      items:
         type: object
         example:
-          - 
-            id: 12345
+          - id: 12345
             name: New SSL certificate for www.mydomain.com
             subject_name: []
             validity: 2028-03-24 20:09:00-03:00
             status: Active
             certificate_type: edge_certificate
             managed: false
-          - 
-            id: 1
+          - id: 1
             name: New SSL certificate for www.mydomain.com
             subject_name: []
             validity: 2028-03-24 20:09:00-03:00
             status: Active
             certificate_type: edge_certificate
             managed: false
-        properties: 
-          id: 
+        properties:
+          id:
             type: integer
           name:
             type: string
-          subject_name: 
+          subject_name:
             type: array
-          validity: 
+          validity:
             type: string
-          status: 
+          status:
             type: string
-          certificate_type: 
+          certificate_type:
             type: string
-          managed: 
+          managed:
             type: boolean
-        
+
     DC200:
       type: object
       properties:
         schema_version:
           type: integer
-          example: 3 
+          example: 3
         result:
           $ref: "#/components/schemas/singleResult"
 
@@ -487,7 +493,7 @@ components:
         schema_version:
           type: integer
           example: 3
-        links: 
+        links:
           type: object
           properties:
             previous:
@@ -498,7 +504,7 @@ components:
               type: string
               example: null
               nullable: true
-      
+
         results:
           type: array
           $ref: "#/components/schemas/results"
@@ -516,7 +522,7 @@ components:
             properties: {}
         schema_version:
           type: integer
-          example: 3 
+          example: 3
     DC400:
       type: object
       properties:
@@ -530,13 +536,13 @@ components:
             properties: {}
         schema_version:
           type: integer
-          example: 3 
+          example: 3
     DC401:
       type: object
       properties:
         detail:
           type: string
-          example: "Authentication credentials were not provided."   
+          example: "Authentication credentials were not provided."
     DC403:
       type: object
       properties:
