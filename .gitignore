@@ -5,6 +5,11 @@ package.json
 
 #Python
 python/
+#Go
+go/
+#JS
+javascript/
+
 # Environments
 *env*
 *ENV*
