@@ -2858,8 +2858,8 @@ components:
           cdn_cache_settings_maximum_ttl: 2
           cache_by_query_string: cache_by_query_string
           query_string_fields:
-           - query_string_fields
-           - query_string_fields
+          - query_string_fields
+          - query_string_fields
           enable_query_string_sort: true
           cache_by_cookies: cache_by_cookies
           cookie_names:
