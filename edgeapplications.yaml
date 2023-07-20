@@ -2826,48 +2826,54 @@ components:
           previous: previous
         total_pages: 6
         results:
-        - cache_by_cookies: cache_by_cookies
-          device_group:
-          - device_group
-          - device_group
-          enable_query_string_sort: true
-          l2_caching_enabled: true
+        - id: 5
+          name: name
           browser_cache_settings: browser_cache_settings
+          browser_cache_settings_maximum_ttl: 5
           cdn_cache_settings: cdn_cache_settings
+          cdn_cache_settings_maximum_ttl: 2
+          cache_by_query_string: cache_by_query_string
           query_string_fields:
           - query_string_fields
           - query_string_fields
-          adaptive_delivery_action: adaptive_delivery_action
-          name: name
-          enable_caching_for_post: true
+          enable_query_string_sort: true
+          cache_by_cookies: cache_by_cookies
           cookie_names:
           - cookie_names
           - cookie_names
-          id: 5
-          cache_by_query_string: cache_by_query_string
-          browser_cache_settings_maximum_ttl: 5
-          cdn_cache_settings_maximum_ttl: 2
-        - cache_by_cookies: cache_by_cookies
+          adaptive_delivery_action: adaptive_delivery_action
           device_group:
           - device_group
           - device_group
-          enable_query_string_sort: true
+          enable_caching_for_post: true
           l2_caching_enabled: true
+          enable_caching_for_options: true
+          enable_stale_cache: true
+          l2_region: l2_region
+        - id: 5
+          name: name
           browser_cache_settings: browser_cache_settings
+          browser_cache_settings_maximum_ttl: 5
           cdn_cache_settings: cdn_cache_settings
+          cdn_cache_settings_maximum_ttl: 2
+          cache_by_query_string: cache_by_query_string
           query_string_fields:
           - query_string_fields
           - query_string_fields
-          adaptive_delivery_action: adaptive_delivery_action
-          name: name
-          enable_caching_for_post: true
+          enable_query_string_sort: true
+          cache_by_cookies: cache_by_cookies
           cookie_names:
           - cookie_names
           - cookie_names
-          id: 5
-          cache_by_query_string: cache_by_query_string
-          browser_cache_settings_maximum_ttl: 5
-          cdn_cache_settings_maximum_ttl: 2
+          adaptive_delivery_action: adaptive_delivery_action
+          device_group:
+          - device_group
+          - device_group
+          enable_caching_for_post: true
+          l2_caching_enabled: true
+          enable_caching_for_options: true
+          enable_stale_cache: true
+          l2_region: l2_region
       properties:
         count:
           format: int64
@@ -2896,27 +2902,30 @@ components:
       example:
         schema_version: 0
         results:
-          cache_by_cookies: cache_by_cookies
-          device_group:
-          - device_group
-          - device_group
-          enable_query_string_sort: true
-          l2_caching_enabled: true
+          id: 5
+          name: name
           browser_cache_settings: browser_cache_settings
+          browser_cache_settings_maximum_ttl: 5
           cdn_cache_settings: cdn_cache_settings
+          cdn_cache_settings_maximum_ttl: 2
+          cache_by_query_string: cache_by_query_string
           query_string_fields:
           - query_string_fields
           - query_string_fields
-          adaptive_delivery_action: adaptive_delivery_action
-          name: name
-          enable_caching_for_post: true
+          enable_query_string_sort: true
+          cache_by_cookies: cache_by_cookies
           cookie_names:
           - cookie_names
           - cookie_names
-          id: 5
-          cache_by_query_string: cache_by_query_string
-          browser_cache_settings_maximum_ttl: 5
-          cdn_cache_settings_maximum_ttl: 2
+          adaptive_delivery_action: adaptive_delivery_action
+          device_group:
+          - device_group
+          - device_group
+          enable_caching_for_post: true
+          l2_caching_enabled: true
+          enable_caching_for_options: true
+          enable_stale_cache: true
+          l2_region: l2_region
       properties:
         results:
           $ref: '#/components/schemas/ApplicationCacheResults'
@@ -2930,27 +2939,30 @@ components:
     ApplicationCacheResults:
       additionalProperties: false
       example:
-        cache_by_cookies: cache_by_cookies
-        device_group:
-        - device_group
-        - device_group
-        enable_query_string_sort: true
-        l2_caching_enabled: true
+        id: 5
+        name: name
         browser_cache_settings: browser_cache_settings
+        browser_cache_settings_maximum_ttl: 5
         cdn_cache_settings: cdn_cache_settings
+        cdn_cache_settings_maximum_ttl: 2
+        cache_by_query_string: cache_by_query_string
         query_string_fields:
         - query_string_fields
         - query_string_fields
-        adaptive_delivery_action: adaptive_delivery_action
-        name: name
-        enable_caching_for_post: true
+        enable_query_string_sort: true
+        cache_by_cookies: cache_by_cookies
         cookie_names:
         - cookie_names
         - cookie_names
-        id: 5
-        cache_by_query_string: cache_by_query_string
-        browser_cache_settings_maximum_ttl: 5
-        cdn_cache_settings_maximum_ttl: 2
+        adaptive_delivery_action: adaptive_delivery_action
+        device_group:
+        - device_group
+        - device_group
+        enable_caching_for_post: true
+        l2_caching_enabled: true
+        enable_caching_for_options: true
+        enable_stale_cache: true
+        l2_region: l2_region
       properties:
         id:
           format: int64
@@ -2991,46 +3003,50 @@ components:
           type: boolean
         l2_caching_enabled:
           type: boolean
+        enable_caching_for_options:
+          type: boolean
+        enable_stale_cache:
+          type: boolean
+        l2_region:
+          type: string
       required:
-      - adaptive_delivery_action
+      - id
+      - name
       - browser_cache_settings
       - browser_cache_settings_maximum_ttl
-      - cache_by_cookies
-      - cache_by_query_string
       - cdn_cache_settings
       - cdn_cache_settings_maximum_ttl
+      - cache_by_query_string
+      - query_string_fields
+      - enable_query_string_sort
+      - cache_by_cookies
       - cookie_names
+      - adaptive_delivery_action
       - device_group
       - enable_caching_for_post
-      - enable_query_string_sort
-      - id
       - l2_caching_enabled
-      - name
-      - query_string_fields
+      - enable_caching_for_options
+      - enable_stale_cache
+      - l2_region
       type: object
     ApplicationCacheCreateRequest:
       additionalProperties: false
       example:
-        cache_by_cookies: cache_by_cookies
-        is_slice_configuration_enabled: true
-        slice_configuration_range: 1
-        enable_query_string_sort: true
-        l2_caching_enabled: true
+        name: name
         browser_cache_settings: browser_cache_settings
-        is_slice_l2_caching_enabled: true
+        browser_cache_settings_maximum_ttl: 0
         cdn_cache_settings: cdn_cache_settings
+        cdn_cache_settings_maximum_ttl: 6
+        cache_by_query_string: cache_by_query_string
         query_string_fields:
         - query_string_fields
         - query_string_fields
-        is_slice_edge_caching_enabled: true
-        name: name
-        enable_caching_for_post: true
+        enable_query_string_sort: true
+        cache_by_cookies: cache_by_cookies
         cookie_names:
-        - cookie_names
-        - cookie_names
-        cache_by_query_string: cache_by_query_string
-        browser_cache_settings_maximum_ttl: 0
-        cdn_cache_settings_maximum_ttl: 6
+        - cache_names
+        - cache_names
+        l2_caching_enabled: true
       properties:
         name:
           type: string
@@ -3041,12 +3057,116 @@ components:
           type: integer
         cdn_cache_settings:
           type: string
-        adaptive_delivery_action:
+        cdn_cache_settings_maximum_ttl:
+          format: int64
+          type: integer
+        cache_by_query_string:
           type: string
-        enable_caching_for_options:
-          type: boolean
+        query_string_fields:
+          items:
+            type: string
+          nullable: true
+          type: array
         enable_query_string_sort:
           type: boolean
+        cache_by_cookies:
+          type: string
+        cookie_names:
+          items:
+            type: string
+          nullable: true
+          type: array
+        user_email:
+          type: string
+        l2_caching_enabled:
+          type: boolean
+      required:
+      - name
+      type: object
+    ApplicationCacheCreateResponse:
+      additionalProperties: false
+      example:
+        schema_version: 5
+        results:
+          id: 0
+          name: name
+          browser_cache_settings: browser_cache_settings
+          browser_cache_settings_maximum_ttl: 6
+          cdn_cache_settings: cdn_cache_settings
+          cdn_cache_settings_maximum_ttl: 1
+          cache_by_query_string: cache_by_query_string
+          query_string_fields:
+          - query_string_fields
+          - query_string_fields
+          enable_query_string_sort: true
+          cache_by_cookies: cache_by_cookies
+          cookie_names:
+          - cookie_names
+          - cookie_names
+          adaptive_delivery_action: adaptive_delivery_action
+          device_group:
+          - device_group
+          - device_group
+          enable_caching_for_post: true
+          l2_caching_enabled: true
+          is_slice_configuration_enabled: true
+          is_slice_edge_caching_enabled: true
+          is_slice_l2_caching_enabled: true
+          slice_configuration_range: 1024
+          enable_caching_for_options: true
+          enable_stale_cache: true
+          l2_region: l2_region
+      properties:
+        results:
+          $ref: '#/components/schemas/ApplicationCacheCreateResults'
+        schema_version:
+          format: int64
+          type: integer
+      type: object
+    ApplicationCacheCreateResults:
+      additionalProperties: false
+      example:
+        id: 0
+        name: name
+        browser_cache_settings: browser_cache_settings
+        browser_cache_settings_maximum_ttl: 6
+        cdn_cache_settings: cdn_cache_settings
+        cdn_cache_settings_maximum_ttl: 1
+        cache_by_query_string: cache_by_query_string
+        query_string_fields:
+        - query_string_fields
+        - query_string_fields
+        enable_query_string_sort: true
+        cache_by_cookies: cache_by_cookies
+        cookie_names:
+        - cookie_names
+        - cookie_names
+        adaptive_delivery_action: adaptive_delivery_action
+        device_group:
+        - device_group
+        - device_group
+        enable_caching_for_post: true
+        l2_caching_enabled: true
+        is_slice_configuration_enabled: true
+        is_slice_edge_caching_enabled: true
+        is_slice_l2_caching_enabled: true
+        slice_configuration_range: 1024
+        enable_caching_for_options: true
+        enable_stale_cache: true
+        l2_region: l2_region
+      properties:
+        id:
+          format: int64
+          type: integer
+        name:
+          type: string
+        browser_cache_settings:
+          type: string
+        browser_cache_settings_maximum_ttl:
+          format: int64
+          type: integer
+        cdn_cache_settings:
+          type: string
         cdn_cache_settings_maximum_ttl:
           format: int64
           type: integer
@@ -3056,9 +3176,17 @@ components:
           items:
             type: string
           type: array
+        enable_query_string_sort:
+          type: boolean
         cache_by_cookies:
           type: string
         cookie_names:
+          items:
+            type: string
+          type: array
+        adaptive_delivery_action:
+          type: string
+        device_group:
           items:
             type: string
           type: array
@@ -3075,106 +3203,12 @@ components:
         slice_configuration_range:
           format: int64
           type: integer
-      required:
-      - name
-      type: object
-    ApplicationCacheCreateResponse:
-      additionalProperties: false
-      example:
-        schema_version: 5
-        results:
-          cache_by_cookies: cache_by_cookies
-          device_group:
-          - device_group
-          - device_group
-          enable_query_string_sort: true
-          l2_caching_enabled: true
-          browser_cache_settings: browser_cache_settings
-          cdn_cache_settings: cdn_cache_settings
-          query_string_fields:
-          - query_string_fields
-          - query_string_fields
-          adaptive_delivery_action: adaptive_delivery_action
-          name: name
-          enable_caching_for_post: true
-          cookie_names:
-          - cookie_names
-          - cookie_names
-          id: 0
-          cache_by_query_string: cache_by_query_string
-          browser_cache_settings_maximum_ttl: 6
-          cdn_cache_settings_maximum_ttl: 1
-      properties:
-        results:
-          $ref: '#/components/schemas/ApplicationCacheCreateResults'
-        schema_version:
-          format: int64
-          type: integer
-      type: object
-    ApplicationCacheCreateResults:
-      additionalProperties: false
-      example:
-        cache_by_cookies: cache_by_cookies
-        device_group:
-        - device_group
-        - device_group
-        enable_query_string_sort: true
-        l2_caching_enabled: true
-        browser_cache_settings: browser_cache_settings
-        cdn_cache_settings: cdn_cache_settings
-        query_string_fields:
-        - query_string_fields
-        - query_string_fields
-        adaptive_delivery_action: adaptive_delivery_action
-        name: name
-        enable_caching_for_post: true
-        cookie_names:
-        - cookie_names
-        - cookie_names
-        id: 0
-        cache_by_query_string: cache_by_query_string
-        browser_cache_settings_maximum_ttl: 6
-        cdn_cache_settings_maximum_ttl: 1
-      properties:
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-        browser_cache_settings:
-          type: string
-        browser_cache_settings_maximum_ttl:
-          format: int64
-          type: integer
-        cdn_cache_settings:
-          type: string
-        cdn_cache_settings_maximum_ttl:
-          format: int64
-          type: integer
-        cache_by_query_string:
-          type: string
-        query_string_fields:
-          items:
-            type: string
-          type: array
-        enable_query_string_sort:
+        enable_caching_for_options:
           type: boolean
-        cache_by_cookies:
-          type: string
-        cookie_names:
-          items:
-            type: string
-          type: array
-        adaptive_delivery_action:
-          type: string
-        device_group:
-          items:
-            type: string
-          type: array
-        enable_caching_for_post:
+        enable_stale_cache:
           type: boolean
-        l2_caching_enabled:
-          type: boolean
+        l2_region:
+          type: string
       required:
       - adaptive_delivery_action
       - browser_cache_settings
