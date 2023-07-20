@@ -8,7 +8,7 @@ info:
     url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
   version: 1.0.0
 externalDocs:
-  description: See the documentation on Personal Tokens for more information.
+  description: See the documentation of Personal Tokens for more information.
   url: https://www.azion.com/en/documentation/products/accounts/personal-tokens/
 servers:
   - description: Production
