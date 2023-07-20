@@ -1,0 +1,108 @@
+openapi: 3.0.3
+info:
+  title: Data Streaming - OpenAPI
+  description: |
+    The Data Streaming API allows you to manage your existing data streamings and templates.|
+    Data Streaming allows you to feed your stream processing, SIEM, and big data platforms with the event logs from your applications on Azion in real time.
+
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
+  version: 1.0.0
+externalDocs:
+  description: See the documentation of Data Streaming for more information.
+  url: https://www.azion.com/en/documentation/products/data-streaming/
+servers:
+  - description: Production
+    url: https://api.azionapi.net
+security:
+  - tokenAuth: []
+tags:
+  - name: Data Streaming
+    description: List all data streamings
+paths:
+  /data_streaming/streamings:
+    get:
+      tags:
+        - Data Streaming
+      summary: List all exist data streamings
+      description: List all exist data streamings
+      operationId: ListDataStreamings
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStreamingResponseWithResults'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit
+        '500':
+          description: Internal Server Error
+
+components:
+  schemas:
+    DataStreamingResponseWithResults:
+      type: object
+      properties:
+        results:
+            type: array
+            items:
+              $ref: '#/components/schemas/DataStreamingResponseGet'
+        schema_version: 
+          type: number
+   
+    DataStreamingResponseGet:
+      type: object
+      properties:
+        id: 
+          type: number
+          format: integer
+        name:
+          type: string
+        template_id: 
+          type: number
+          format: integer
+        data_source:
+           type: string
+        active:
+          type: boolean
+        endpoint:
+            $ref: '#/components/schemas/DataStreamingEndpoint'
+        all_domains:
+          type: boolean
+
+    DataStreamingEndpoint:
+      type: object
+      properties:
+        endpoint_type:
+          type: string
+        url:
+          type: string
+        log_line_separator:
+          type: string
+        payload_format:
+          type: string
+        max_size:
+          type: number
+          format: integer
+          nullable: true
+
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      name: Authorization
+      in: header
+      description: |
+        You must inform a token to auth.
+        Usage format: `Token <TOKEN>`
+        
