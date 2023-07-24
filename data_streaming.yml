@@ -49,7 +49,7 @@ paths:
         '500':
           description: Internal Server Error
   
-  /data_streaming/domains?ds_name=&ds_id=number&selected=:
+  /data_streaming/domains:
     get:
       tags:
         - Data streaming
@@ -62,7 +62,6 @@ paths:
         description: Domain's name in data streaming 
         required: true
         schema:
-          format: uuid
           type: string
       - in: query
         name: ds_id
