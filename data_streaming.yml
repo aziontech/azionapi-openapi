@@ -48,6 +48,49 @@ paths:
           description: Rate Limit
         '500':
           description: Internal Server Error
+  
+  /data_streaming/domains?ds_name=&ds_id=number&selected=:
+    get:
+      tags:
+        - Data streaming
+      summary: List a data streaming by name
+      description: List a data streaming info
+      operationId: ListDataStreaming
+      parameters: 
+      - in: query
+        name: ds_name
+        required: true
+        schema:
+          format: uuid
+          type: string
+      - in: query
+        name: ds_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+      
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStreamingEndpoint'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit
+        '500':
+          description: Internal Server Error
+
 
 components:
   schemas:
