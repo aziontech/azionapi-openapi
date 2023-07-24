@@ -457,6 +457,8 @@ components:
         certificate_content:
           type: string
           nullable: true
+        azion_information:
+          type: string
 
     results:
       type: array
@@ -499,6 +501,8 @@ components:
           issuer:
             type: string
             nullable: true
+          azion_information:
+            type: string
 
     DC200:
       type: object
