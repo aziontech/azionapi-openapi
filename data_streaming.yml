@@ -53,7 +53,7 @@ paths:
     get:
       tags:
         - Data streaming
-      summary: List a data streaming by domain's name
+      summary: List all domains used on data streaming
       description: List a data streaming info
       operationId: ListDataStreaming
       parameters: 
@@ -78,7 +78,10 @@ paths:
       responses:
         '200':
           description: Successful operation
-            
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStreamingsDomainResponse' 
         '400':
           description: Bad Request
         '401':
@@ -241,8 +244,34 @@ components:
         template_model:
           type: string
           
-  
-    DataStreamingsDomain:
+    
+    DataStreamingsDomainResponse:
+      type: object
+      properties:
+        count:
+          type: number
+        total_pages:
+          type: number
+        schema_version:
+          type: number
+        links:
+          $ref: '#/components/schemas/DataStreamingsDomainResponseLinks'
+        results:
+            type: array
+            items:
+              $ref: '#/components/schemas/DataStreamingsDomainResult'
+    
+    DataStreamingsDomainResponseLinks:
+      type: object
+      properties:
+        previous:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+    
+    DataStreamingsDomainResult:
       type: object
       properties:
         domain_id:
@@ -251,8 +280,7 @@ components:
         name:
           type: string
         selected:
-          type: number
-          format: integer
+          type: boolean
           nullable: true
 
   securitySchemes:
@@ -263,4 +291,3 @@ components:
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-        
