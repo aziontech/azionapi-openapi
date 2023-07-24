@@ -438,8 +438,12 @@ components:
           type: array
           items:
             type: string
+        issuer:
+          type: string
+          nullable: true
         validity:
           type: string
+          nullable: true
         status:
           type: string
         certificate_type:
@@ -447,6 +451,12 @@ components:
           enum: [edge_certificate, trusted_ca_certificate]
         managed:
           type: boolean
+        csr:
+          type: string
+          nullable: true
+        certificate_content:
+          type: string
+          nullable: true
 
     results:
       type: array
@@ -473,11 +483,12 @@ components:
           name:
             type: string
           subject_name:
-            type: array  
+            type: array
             items:
               type: string
           validity:
             type: string
+            nullable: true
           status:
             type: string
           certificate_type:
@@ -485,6 +496,9 @@ components:
             enum: [edge_certificate, trusted_ca_certificate]
           managed:
             type: boolean
+          issuer:
+            type: string
+            nullable: true
 
     DC200:
       type: object
