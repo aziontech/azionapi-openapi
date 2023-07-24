@@ -59,6 +59,7 @@ paths:
       parameters: 
       - in: query
         name: ds_name
+        description: Domain's name in data streaming 
         required: true
         schema:
           format: uuid
@@ -70,14 +71,13 @@ paths:
           format: int64
           type: integer
       
-      
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DataStreamingEndpoint'
+                $ref: '#/components/schemas/DataStreamingResponseGet'
         '400':
           description: Bad Request
         '401':
