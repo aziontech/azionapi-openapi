@@ -520,10 +520,7 @@ components:
               nullable: true
 
         results:
-          type: array
-          items:
-            $ref: "#/components/schemas/results"
-          properties: {}
+          $ref: "#/components/schemas/results"
     DC201:
       type: object
       properties:
