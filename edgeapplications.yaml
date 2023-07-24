@@ -4123,6 +4123,7 @@ components:
         - name: name
           target: target
         name: name
+        description: description
       properties:
         name:
           type: string
@@ -4170,6 +4171,7 @@ components:
         - name: name
           target: target
         name: name
+        description: description
       properties:
         name:
           type: string
@@ -4217,9 +4219,13 @@ components:
         - name: name
           target: target
         name: name
+        description: description
       properties:
         name:
           type: string
+        description:
+          type: string
+          maxLength: 1000
         criteria:
           items:
             items:
