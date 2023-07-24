@@ -4143,6 +4143,7 @@ components:
         - name: name
           target: target
         name: name
+        description: description
       properties:
         name:
           type: string
@@ -4190,6 +4191,7 @@ components:
         - name: name
           target: target
         name: name
+        description: description
       properties:
         name:
           type: string
@@ -4237,9 +4239,13 @@ components:
         - name: name
           target: target
         name: name
+        description: description
       properties:
         name:
           type: string
+        description:
+          type: string
+          maxLength: 1000
         criteria:
           items:
             items:
@@ -4379,6 +4385,7 @@ components:
               input_value: input_value
               operator: operator
           name: name
+          description: description
           id: 5
           order: 5
         - phase: phase
@@ -4404,6 +4411,7 @@ components:
               input_value: input_value
               operator: operator
           name: name
+          description: description
           id: 5
           order: 5
       properties:
@@ -4457,6 +4465,7 @@ components:
               input_value: input_value
               operator: operator
           name: name
+          description: description
           id: 5
           order: 5
       properties:
@@ -4544,4 +4553,3 @@ components:
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-
