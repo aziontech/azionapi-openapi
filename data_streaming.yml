@@ -35,7 +35,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DataStreamingResponseWithResults'
+                $ref: '#/components/schemas/DataStreamingResponseWithResults' 
         '400':
           description: Bad Request
         '401':
@@ -53,30 +53,32 @@ paths:
     get:
       tags:
         - Data streaming
-      summary: List a data streaming by name
+      summary: List a data streaming by domain's name
       description: List a data streaming info
       operationId: ListDataStreaming
       parameters: 
       - in: query
-        name: ds_name
+        name: name
         description: Domain's name in data streaming 
-        required: true
+        required: false
         schema:
           type: string
       - in: query
-        name: ds_id
-        required: true
+        name: streaming_id
+        required: false
         schema:
           format: int64
           type: integer
-      
+      - in: query
+        name: selected
+        required: false
+        schema:
+          type: boolean
+    
       responses:
         '200':
           description: Successful operation
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/DataStreamingResponseGet'
+            
         '400':
           description: Bad Request
         '401':
@@ -90,7 +92,6 @@ paths:
         '500':
           description: Internal Server Error
 
-
 components:
   schemas:
     DataStreamingResponseWithResults:
@@ -99,11 +100,15 @@ components:
         results:
             type: array
             items:
-              $ref: '#/components/schemas/DataStreamingResponseGet'
+              anyOf:
+                - $ref: '#/components/schemas/DataStreamingResponseGetResultTypeDatadogDTS'
+                - $ref: '#/components/schemas/DataStreamingResponseGetResultTypeKafka'
+                - $ref: '#/components/schemas/DataStreamingResponseGetResultTypeStandard'
+                - $ref: '#/components/schemas/DataStreamingResponseGetResultTypeCustom'
         schema_version: 
           type: number
    
-    DataStreamingResponseGet:
+    DataStreamingResponseGetResultTypeDatadogDTS:
       type: object
       properties:
         id: 
@@ -119,11 +124,75 @@ components:
         active:
           type: boolean
         endpoint:
-            $ref: '#/components/schemas/DataStreamingEndpoint'
+            $ref: '#/components/schemas/DataStreamingEndpointTypeDatadogDTS'
         all_domains:
           type: boolean
 
-    DataStreamingEndpoint:
+    DataStreamingEndpointTypeDatadogDTS:
+      type: object
+      properties:
+        endpoint_type:
+          type: string
+        url:
+          type: string
+        api_key:
+          type: string
+  
+  
+    DataStreamingResponseGetResultTypeKafka:
+      type: object
+      properties:
+        id: 
+          type: number
+          format: integer
+        name:
+          type: string
+        template_id: 
+          type: number
+          format: integer
+        data_source:
+           type: string
+        active:
+          type: boolean
+        endpoint:
+            $ref: '#/components/schemas/DataStreamingEndpointTypeKafka'
+        all_domains:
+          type: boolean
+          
+    DataStreamingEndpointTypeKafka:
+      type: object
+      properties:
+        endpoint_type:
+          type: string
+        use_tls:
+          type: boolean
+        kafka_topic:
+          type: string
+        bootstrap_servers:
+          type: string
+          
+          
+    DataStreamingResponseGetResultTypeStandard:
+      type: object
+      properties:
+        id: 
+          type: number
+          format: integer
+        name:
+          type: string
+        template_id: 
+          type: number
+          format: integer
+        data_source:
+           type: string
+        active:
+          type: boolean
+        endpoint:
+            $ref: '#/components/schemas/DataStreamingEndpointTypeStandard'
+        all_domains:
+          type: boolean
+          
+    DataStreamingEndpointTypeStandard:
       type: object
       properties:
         endpoint_type:
@@ -135,6 +204,53 @@ components:
         payload_format:
           type: string
         max_size:
+          type: number
+        headers:
+          $ref: '#/components/schemas/DataStreamingEndpointTypeStandardHeadersExample'
+          
+    DataStreamingEndpointTypeStandardHeadersExample:
+      type: object
+      properties:
+        header-name-1:
+          type: string
+          nullable: true
+        header-name-2:
+          type: string
+          nullable: true
+        header-name-3:
+          type: string
+          nullable: true
+          
+          
+    DataStreamingResponseGetResultTypeCustom:
+      type: object
+      properties:
+        id: 
+          type: number
+          format: integer
+        name:
+          type: string
+        data_source:
+           type: string
+        active:
+          type: boolean
+        endpoint:
+            $ref: '#/components/schemas/DataStreamingEndpointTypeKafka'
+        all_domains:
+          type: boolean
+        template_model:
+          type: string
+          
+  
+    DataStreamingsDomain:
+      type: object
+      properties:
+        domain_id:
+          type: number
+          format: integer
+        name:
+          type: string
+        selected:
           type: number
           format: integer
           nullable: true
