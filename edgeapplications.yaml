@@ -2847,6 +2847,10 @@ components:
           - device_group
           enable_caching_for_post: true
           l2_caching_enabled: true
+          is_slice_configuration_enabled: true
+          is_slice_edge_caching_enabled: true
+          is_slice_l2_caching_enabled: true
+          slice_configuration_range: true
           enable_caching_for_options: true
           enable_stale_cache: true
           l2_region: l2_region
@@ -2871,6 +2875,10 @@ components:
           - device_group
           enable_caching_for_post: true
           l2_caching_enabled: true
+          is_slice_configuration_enabled: true
+          is_slice_edge_caching_enabled: true
+          is_slice_l2_caching_enabled: true
+          slice_configuration_range: true
           enable_caching_for_options: true
           enable_stale_cache: true
           l2_region: l2_region
@@ -2960,6 +2968,10 @@ components:
         - device_group
         enable_caching_for_post: true
         l2_caching_enabled: true
+        is_slice_configuration_enabled: true
+        is_slice_edge_caching_enabled: true
+        is_slice_l2_caching_enabled: true
+        slice_configuration_range: true
         enable_caching_for_options: true
         enable_stale_cache: true
         l2_region: l2_region
@@ -3002,6 +3014,14 @@ components:
         enable_caching_for_post:
           type: boolean
         l2_caching_enabled:
+          type: boolean
+        is_slice_configuration_enabled:
+          type: boolean
+        is_slice_edge_caching_enabled:
+          type: boolean
+        is_slice_l2_caching_enabled:
+          type: boolean
+        slice_configuration_range:
           type: boolean
         enable_caching_for_options:
           type: boolean
