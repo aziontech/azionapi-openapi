@@ -43,7 +43,7 @@ paths:
         '404':
           description: Not Found
         '429':
-          description: Rate Limit
+          description: Too Many Requests
         '500':
           description: Internal Server Error
   
@@ -89,7 +89,7 @@ paths:
         '404':
           description: Not Found
         '429':
-          description: Rate Limit
+          description: Too Many Requests
         '500':
           description: Internal Server Error
   
@@ -122,7 +122,7 @@ paths:
         '404':
           description: Not Found
         '429':
-          description: Rate Limit
+          description: Too Many Requests
         '500':
           description: Internal Server Error
               
@@ -149,7 +149,7 @@ paths:
         '404':
           description: Not Found
         '429':
-          description: Rate Limit
+          description: Too Many Requests
         '500':
           description: Internal Server Error
           
@@ -182,7 +182,7 @@ paths:
         '404':
           description: Not Found
         '429':
-          description: Rate Limit
+          description: Too Many Requests
         '500':
           description: Internal Server Error
 
