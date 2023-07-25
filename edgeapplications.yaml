@@ -2843,8 +2843,8 @@ components:
           - cookie_names
           adaptive_delivery_action: adaptive_delivery_action
           device_group:
-          - device_group
-          - device_group
+          - 1
+          - 2
           enable_caching_for_post: true
           l2_caching_enabled: true
           is_slice_configuration_enabled: true
@@ -2871,8 +2871,8 @@ components:
           - cookie_names
           adaptive_delivery_action: adaptive_delivery_action
           device_group:
-          - device_group
-          - device_group
+          - 1
+          - 2
           enable_caching_for_post: true
           l2_caching_enabled: true
           is_slice_configuration_enabled: true
@@ -2927,8 +2927,8 @@ components:
           - cookie_names
           adaptive_delivery_action: adaptive_delivery_action
           device_group:
-          - device_group
-          - device_group
+          - 1
+          - 2
           enable_caching_for_post: true
           l2_caching_enabled: true
           enable_caching_for_options: true
@@ -2964,8 +2964,8 @@ components:
         - cookie_names
         adaptive_delivery_action: adaptive_delivery_action
         device_group:
-        - device_group
-        - device_group
+        - 1
+        - 2
         enable_caching_for_post: true
         l2_caching_enabled: true
         is_slice_configuration_enabled: true
@@ -3008,9 +3008,9 @@ components:
         adaptive_delivery_action:
           type: string
         device_group:
-          items:
-            type: string
           type: array
+          items:
+            type: integer
         enable_caching_for_post:
           type: boolean
         l2_caching_enabled:
@@ -3126,8 +3126,8 @@ components:
           - cookie_names
           adaptive_delivery_action: adaptive_delivery_action
           device_group:
-          - device_group
-          - device_group
+          - 1
+          - 2
           enable_caching_for_post: true
           l2_caching_enabled: true
           is_slice_configuration_enabled: true
@@ -3164,8 +3164,8 @@ components:
         - cookie_names
         adaptive_delivery_action: adaptive_delivery_action
         device_group:
-        - device_group
-        - device_group
+        - 1
+        - 2
         enable_caching_for_post: true
         l2_caching_enabled: true
         is_slice_configuration_enabled: true
@@ -3208,9 +3208,9 @@ components:
         adaptive_delivery_action:
           type: string
         device_group:
-          items:
-            type: string
           type: array
+          items:
+            type: integer
         enable_caching_for_post:
           type: boolean
         l2_caching_enabled:
@@ -3320,8 +3320,8 @@ components:
         results:
           cache_by_cookies: cache_by_cookies
           device_group:
-          - device_group
-          - device_group
+          - 1
+          - 2
           enable_query_string_sort: true
           l2_caching_enabled: true
           browser_cache_settings: browser_cache_settings
@@ -3424,8 +3424,8 @@ components:
         results:
           cache_by_cookies: cache_by_cookies
           device_group:
-          - device_group
-          - device_group
+          - 1
+          - 2
           enable_query_string_sort: true
           l2_caching_enabled: true
           browser_cache_settings: browser_cache_settings
@@ -3455,8 +3455,8 @@ components:
       example:
         cache_by_cookies: cache_by_cookies
         device_group:
-        - device_group
-        - device_group
+        - 1
+        - 2
         enable_query_string_sort: true
         l2_caching_enabled: true
         browser_cache_settings: browser_cache_settings
@@ -3509,9 +3509,9 @@ components:
         adaptive_delivery_action:
           type: string
         device_group:
-          items:
-            type: string
           type: array
+          items:
+            type: integer
         enable_caching_for_post:
           type: boolean
         enable_caching_for_options:
