@@ -27,7 +27,6 @@ paths:
       summary: List all exist data streamings
       description: List all exist data streamings
       operationId: ListDataStreamings
-      
       responses:
         '200':
           description: Successful operation
@@ -127,7 +126,6 @@ paths:
         '500':
           description: Internal Server Error
               
-          
   /data_streaming/templates:
     get:
       tags:
@@ -135,7 +133,6 @@ paths:
       summary: List all global Templates that can be used on Data Streaming operations
       description: Return all global Data Streaming Templates
       operationId: List Data Streaming Templates
-      
       responses:
         '200':
           description: Successful operation
@@ -143,6 +140,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TemplateResults' 
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit
+        '500':
+          description: Internal Server Error
+          
+  /data_streaming/templates/{template_id}:
+    get:
+      tags:
+        - Data Streaming Templates
+      summary: Get an global Template info by template ID
+      description: Return an Data Streaming Templates info
+      operationId: Get Data Straming Template by ID
+      parameters: 
+      - in: path
+        required: true
+        name: template_id
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResultById'
         '400':
           description: Bad Request
         '401':
@@ -366,6 +396,14 @@ components:
         schema_version:
           type: number
           
+    TemplateResultById:
+      type: object
+      properties:
+        results:
+          $ref: '#/components/schemas/Template'
+        schema_version:
+          type: number
+          
     Template:
       type: object
       properties:
@@ -386,4 +424,3 @@ components:
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-        
