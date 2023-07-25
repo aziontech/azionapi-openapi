@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Data Streaming - OpenAPI
   description: |
-    The Data Streaming API allows you to manage your existing data streamings and templates.|
+    The Data Streaming API allows you to manage your existing data streamings and templates.
     Data Streaming allows you to feed your stream processing, SIEM, and big data platforms with the event logs from your applications on Azion in real time.
 
   license:
@@ -19,7 +19,6 @@ security:
   - tokenAuth: []
 tags:
   - name: Data Streaming
-    description: List all data streamings
 paths:
   /data_streaming/streamings:
     get:
@@ -52,7 +51,7 @@ paths:
   /data_streaming/domains:
     get:
       tags:
-        - Data streaming
+        - Data Streaming Domain
       summary: List all domains used on data streaming
       description: List a data streaming info
       operationId: ListDataStreaming
@@ -94,6 +93,41 @@ paths:
           description: Rate Limit
         '500':
           description: Internal Server Error
+  
+  /data_streaming/streamings/{data_streaming_id}:
+    get:
+      tags:
+        - Data Streaming
+      summary: Get expecific data streaming by Streaming ID
+      description: Return a data streaming info by ID
+      operationId: List Data Streaming by ID
+      parameters: 
+      - in: path
+        required: true
+        name: data_streaming_id
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStreamingsById' 
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit
+        '500':
+          description: Internal Server Error
+              
+          
 
 components:
   schemas:
@@ -282,6 +316,16 @@ components:
         selected:
           type: boolean
           nullable: true
+          
+          
+    DataStreamingsById:
+      type: object
+      properties:
+        results:
+          $ref: '#/components/schemas/DataStreamingResponseGetResultTypeKafka'
+        schema_version: 
+          type: number
+    
 
   securitySchemes:
     tokenAuth:
@@ -291,3 +335,4 @@ components:
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
+        
