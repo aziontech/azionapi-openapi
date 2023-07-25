@@ -97,7 +97,7 @@ paths:
     get:
       tags:
         - Data Streaming
-      summary: Get expecific data streaming by Streaming ID
+      summary: Get expecific data streaming by Data Streaming ID
       description: Return a data streaming info by ID
       operationId: List Data Streaming by ID
       parameters: 
