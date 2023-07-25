@@ -2,7 +2,7 @@ openapi: 3.0.3
 info:
   title: Data Streaming - OpenAPI
   description: |
-    The Data Streaming API allows you to manage your existing data streamings and templates.|
+    The Data Streaming API allows you to manage your existing data streamings and templates.
     Data Streaming allows you to feed your stream processing, SIEM, and big data platforms with the event logs from your applications on Azion in real time.
 
   license:
@@ -19,7 +19,6 @@ security:
   - tokenAuth: []
 tags:
   - name: Data Streaming
-    description: List all data streamings
 paths:
   /data_streaming/streamings:
     get:
@@ -28,14 +27,13 @@ paths:
       summary: List all exist data streamings
       description: List all exist data streamings
       operationId: ListDataStreamings
-      
       responses:
         '200':
           description: Successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DataStreamingResponseWithResults'
+                $ref: '#/components/schemas/DataStreamingResponseWithResults' 
         '400':
           description: Bad Request
         '401':
@@ -45,7 +43,146 @@ paths:
         '404':
           description: Not Found
         '429':
-          description: Rate Limit
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+  
+  /data_streaming/domains:
+    get:
+      tags:
+        - Data Streaming Domain
+      summary: List all domains used on data streaming
+      description: List a data streaming info
+      operationId: ListDataStreaming
+      parameters: 
+      - in: query
+        name: name
+        description: Domain's name in data streaming 
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: streaming_id
+        required: false
+        schema:
+          format: int64
+          type: integer
+      - in: query
+        name: selected
+        required: false
+        schema:
+          type: boolean
+    
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStreamingsDomainResponse' 
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+  
+  /data_streaming/streamings/{data_streaming_id}:
+    get:
+      tags:
+        - Data Streaming
+      summary: Get expecific data streaming by Data Streaming ID
+      description: Return a Data streaming info by ID
+      operationId: List Data Streaming by ID
+      parameters: 
+      - in: path
+        required: true
+        name: data_streaming_id
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStreamingsById' 
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+              
+  /data_streaming/templates:
+    get:
+      tags:
+        - Data Streaming Templates
+      summary: List all global Templates that can be used on Data Streaming operations
+      description: Return all global Data Streaming Templates
+      operationId: List Data Streaming Templates
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResults' 
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+          
+  /data_streaming/templates/{template_id}:
+    get:
+      tags:
+        - Data Streaming Templates
+      summary: Get an global Template info by template ID
+      description: Return an Data Streaming Templates info
+      operationId: Get Data Straming Template by ID
+      parameters: 
+      - in: path
+        required: true
+        name: template_id
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResultById'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Too Many Requests
         '500':
           description: Internal Server Error
 
@@ -57,11 +194,15 @@ components:
         results:
             type: array
             items:
-              $ref: '#/components/schemas/DataStreamingResponseGet'
+              anyOf:
+                - $ref: '#/components/schemas/DataStreamingResponseGetResultTypeDatadogDTS'
+                - $ref: '#/components/schemas/DataStreamingResponseGetResultTypeKafka'
+                - $ref: '#/components/schemas/DataStreamingResponseGetResultTypeStandard'
+                - $ref: '#/components/schemas/DataStreamingResponseGetResultTypeCustom'
         schema_version: 
           type: number
    
-    DataStreamingResponseGet:
+    DataStreamingResponseGetResultTypeDatadogDTS:
       type: object
       properties:
         id: 
@@ -77,26 +218,204 @@ components:
         active:
           type: boolean
         endpoint:
-            $ref: '#/components/schemas/DataStreamingEndpoint'
+            $ref: '#/components/schemas/DataStreamingEndpointTypeDatadogDTS'
         all_domains:
           type: boolean
 
-    DataStreamingEndpoint:
+    DataStreamingEndpointTypeDatadogDTS:
       type: object
       properties:
         endpoint_type:
           type: string
         url:
           type: string
+          format: uri
+        api_key:
+          type: string
+  
+  
+    DataStreamingResponseGetResultTypeKafka:
+      type: object
+      properties:
+        id: 
+          type: number
+          format: integer
+        name:
+          type: string
+        template_id: 
+          type: number
+          format: integer
+        data_source:
+           type: string
+        active:
+          type: boolean
+        endpoint:
+            $ref: '#/components/schemas/DataStreamingEndpointTypeKafka'
+        all_domains:
+          type: boolean
+          
+    DataStreamingEndpointTypeKafka:
+      type: object
+      properties:
+        endpoint_type:
+          type: string
+        use_tls:
+          type: boolean
+        kafka_topic:
+          type: string
+        bootstrap_servers:
+          type: string
+          
+          
+    DataStreamingResponseGetResultTypeStandard:
+      type: object
+      properties:
+        id: 
+          type: number
+          format: integer
+        name:
+          type: string
+        template_id: 
+          type: number
+          format: integer
+        data_source:
+           type: string
+        active:
+          type: boolean
+        endpoint:
+            $ref: '#/components/schemas/DataStreamingEndpointTypeStandard'
+        all_domains:
+          type: boolean
+          
+    DataStreamingEndpointTypeStandard:
+      type: object
+      properties:
+        endpoint_type:
+          type: string
+        url:
+          type: string
+          format: uri
         log_line_separator:
           type: string
         payload_format:
           type: string
         max_size:
           type: number
-          format: integer
+        headers:
+          $ref: '#/components/schemas/DataStreamingEndpointTypeStandardHeadersExample'
+          
+    DataStreamingEndpointTypeStandardHeadersExample:
+      type: object
+      properties:
+        header-name-1:
+          type: string
           nullable: true
-
+        header-name-2:
+          type: string
+          nullable: true
+        header-name-3:
+          type: string
+          nullable: true
+          
+          
+    DataStreamingResponseGetResultTypeCustom:
+      type: object
+      properties:
+        id: 
+          type: number
+          format: integer
+        name:
+          type: string
+        data_source:
+           type: string
+        active:
+          type: boolean
+        endpoint:
+            $ref: '#/components/schemas/DataStreamingEndpointTypeKafka'
+        all_domains:
+          type: boolean
+        template_model:
+          type: string
+          
+    
+    DataStreamingsDomainResponse:
+      type: object
+      properties:
+        count:
+          type: number
+        total_pages:
+          type: number
+        schema_version:
+          type: number
+        links:
+          $ref: '#/components/schemas/DataStreamingsDomainResponseLinks'
+        results:
+            type: array
+            items:
+              $ref: '#/components/schemas/DataStreamingsDomainResult'
+    
+    DataStreamingsDomainResponseLinks:
+      type: object
+      properties:
+        previous:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+    
+    DataStreamingsDomainResult:
+      type: object
+      properties:
+        domain_id:
+          type: number
+          format: integer
+        name:
+          type: string
+        selected:
+          type: boolean
+          nullable: true
+          
+          
+    DataStreamingsById:
+      type: object
+      properties:
+        results:
+          $ref: '#/components/schemas/DataStreamingResponseGetResultTypeKafka'
+        schema_version: 
+          type: number
+          
+          
+    TemplateResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        schema_version:
+          type: number
+          
+    TemplateResultById:
+      type: object
+      properties:
+        results:
+          $ref: '#/components/schemas/Template'
+        schema_version:
+          type: number
+          
+    Template:
+      type: object
+      properties:
+        id:
+          type: number
+          format: integer
+        name:
+          type: string
+        template_model:
+          type: string
+    
+      
   securitySchemes:
     tokenAuth:
       type: apiKey
@@ -105,4 +424,3 @@ components:
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-        
