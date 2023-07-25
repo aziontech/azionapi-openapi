@@ -438,8 +438,12 @@ components:
           type: array
           items:
             type: string
+        issuer:
+          type: string
+          nullable: true
         validity:
           type: string
+          nullable: true
         status:
           type: string
         certificate_type:
@@ -447,6 +451,14 @@ components:
           enum: [edge_certificate, trusted_ca_certificate]
         managed:
           type: boolean
+        csr:
+          type: string
+          nullable: true
+        certificate_content:
+          type: string
+          nullable: true
+        azion_information:
+          type: string
 
     results:
       type: array
@@ -473,11 +485,12 @@ components:
           name:
             type: string
           subject_name:
-            type: array  
+            type: array
             items:
               type: string
           validity:
             type: string
+            nullable: true
           status:
             type: string
           certificate_type:
@@ -485,6 +498,11 @@ components:
             enum: [edge_certificate, trusted_ca_certificate]
           managed:
             type: boolean
+          issuer:
+            type: string
+            nullable: true
+          azion_information:
+            type: string
 
     DC200:
       type: object
@@ -520,10 +538,7 @@ components:
               nullable: true
 
         results:
-          type: array
-          items:
-            $ref: "#/components/schemas/results"
-          properties: {}
+          $ref: "#/components/schemas/results"
     DC201:
       type: object
       properties:
