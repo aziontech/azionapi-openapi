@@ -128,6 +128,33 @@ paths:
           description: Internal Server Error
               
           
+  /data_streaming/templates:
+    get:
+      tags:
+        - Data Streaming Templates
+      summary: List all global Templates that can be used on Data Streaming operations
+      description: Return all global Data Streaming Templates
+      operationId: List Data Streaming Templates
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TemplateResults' 
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Rate Limit
+        '500':
+          description: Internal Server Error
 
 components:
   schemas:
@@ -172,6 +199,7 @@ components:
           type: string
         url:
           type: string
+          format: uri
         api_key:
           type: string
   
@@ -236,6 +264,7 @@ components:
           type: string
         url:
           type: string
+          format: uri
         log_line_separator:
           type: string
         payload_format:
@@ -325,8 +354,30 @@ components:
           $ref: '#/components/schemas/DataStreamingResponseGetResultTypeKafka'
         schema_version: 
           type: number
+          
+          
+    TemplateResults:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Template'
+        schema_version:
+          type: number
+          
+    Template:
+      type: object
+      properties:
+        id:
+          type: number
+          format: integer
+        name:
+          type: string
+        template_model:
+          type: string
     
-
+      
   securitySchemes:
     tokenAuth:
       type: apiKey
