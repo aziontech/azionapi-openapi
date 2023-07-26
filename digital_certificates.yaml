@@ -492,7 +492,7 @@ components:
         schema_version:
           type: integer
           example: 3
-        result:
+        results:
           $ref: "#/components/schemas/singleResult"
 
     DC200List:
