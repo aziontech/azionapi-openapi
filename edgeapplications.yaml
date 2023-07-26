@@ -3250,26 +3250,33 @@ components:
     ApplicationCachePutRequest:
       additionalProperties: false
       example:
-        cache_by_cookies: cache_by_cookies
-        is_slice_configuration_enabled: true
-        slice_configuration_range: 1
-        enable_query_string_sort: true
-        l2_caching_enabled: true
+        name: name
         browser_cache_settings: browser_cache_settings
-        is_slice_l2_caching_enabled: true
+        browser_cache_settings_maximum_ttl: 0
         cdn_cache_settings: cdn_cache_settings
+        cdn_cache_settings_maximum_ttl: 6
+        cache_by_query_string: cache_by_query_string
         query_string_fields:
         - query_string_fields
         - query_string_fields
-        is_slice_edge_caching_enabled: true
-        name: name
-        enable_caching_for_post: true
+        enable_query_string_sort: true
+        cache_by_cookies: cache_by_cookies
         cookie_names:
         - cookie_names
         - cookie_names
-        cache_by_query_string: cache_by_query_string
-        browser_cache_settings_maximum_ttl: 0
-        cdn_cache_settings_maximum_ttl: 6
+        adaptive_delivery_action: adaptive_delivery_action
+        device_group:
+        - 1
+        - 2
+        enable_caching_for_post: true
+        l2_caching_enabled: true
+        is_slice_configuration_enabled: true
+        is_slice_edge_caching_enabled: true
+        is_slice_l2_caching_enabled: true
+        slice_configuration_range: 1
+        enable_caching_for_options: true
+        enable_stale_cache: true
+        l2_region: l2_region
       properties:
         name:
           type: string
@@ -3297,6 +3304,12 @@ components:
           items:
             type: string
           type: array
+        adaptive_delivery_action: 
+          type: string
+        device_group:
+          type: array
+          items:
+            type: integer
         enable_caching_for_post:
           type: boolean
         l2_caching_enabled:
@@ -3310,6 +3323,12 @@ components:
         slice_configuration_range:
           format: int64
           type: integer
+        enable_caching_for_options:
+          type: boolean
+        enable_stale_cache:
+          type: boolean
+        l2_region:
+          type: string
       required:
       - name
       type: object
@@ -3318,27 +3337,34 @@ components:
       example:
         schema_version: 5
         results:
-          cache_by_cookies: cache_by_cookies
-          device_group:
-          - 1
-          - 2
-          enable_query_string_sort: true
-          l2_caching_enabled: true
+          id: 0
+          name: name
           browser_cache_settings: browser_cache_settings
+          browser_cache_settings_maximum_ttl: 6
           cdn_cache_settings: cdn_cache_settings
+          cdn_cache_settings_maximum_ttl: 1
+          cache_by_query_string: cache_by_query_string
           query_string_fields:
           - query_string_fields
           - query_string_fields
-          adaptive_delivery_action: adaptive_delivery_action
-          name: name
-          enable_caching_for_post: true
+          enable_query_string_sort: true
+          cache_by_cookies: cache_by_cookies
           cookie_names:
           - cookie_names
           - cookie_names
-          id: 0
-          cache_by_query_string: cache_by_query_string
-          browser_cache_settings_maximum_ttl: 6
-          cdn_cache_settings_maximum_ttl: 1
+          adaptive_delivery_action: adaptive_delivery_action
+          device_group:
+          - 1
+          - 2
+          enable_caching_for_post: true
+          l2_caching_enabled: true
+          is_slice_configuration_enabled: true
+          is_slice_edge_caching_enabled: true
+          is_slice_l2_caching_enabled: true
+          slice_configuration_range: 1024
+          enable_caching_for_options: true
+          enable_stale_cache: true
+          l2_region: l2_region
       properties:
         results:
           $ref: '#/components/schemas/ApplicationCacheResponseDetails'
@@ -3453,27 +3479,34 @@ components:
     ApplicationCacheResponseDetails:
       additionalProperties: false
       example:
-        cache_by_cookies: cache_by_cookies
-        device_group:
-        - 1
-        - 2
-        enable_query_string_sort: true
-        l2_caching_enabled: true
+        id: 0
+        name: name
         browser_cache_settings: browser_cache_settings
+        browser_cache_settings_maximum_ttl: 6
         cdn_cache_settings: cdn_cache_settings
+        cdn_cache_settings_maximum_ttl: 1
+        cache_by_query_string: cache_by_query_string
         query_string_fields:
         - query_string_fields
         - query_string_fields
-        adaptive_delivery_action: adaptive_delivery_action
-        name: name
-        enable_caching_for_post: true
+        enable_query_string_sort: true
+        cache_by_cookies: cache_by_cookies
         cookie_names:
         - cookie_names
         - cookie_names
-        id: 0
-        cache_by_query_string: cache_by_query_string
-        browser_cache_settings_maximum_ttl: 6
-        cdn_cache_settings_maximum_ttl: 1
+        adaptive_delivery_action: adaptive_delivery_action
+        device_group:
+        - 1
+        - 2
+        enable_caching_for_post: true
+        l2_caching_enabled: true
+        is_slice_configuration_enabled: true
+        is_slice_edge_caching_enabled: true
+        is_slice_l2_caching_enabled: true
+        slice_configuration_range: 1024
+        enable_caching_for_options: true
+        enable_stale_cache: true
+        l2_region: l2_region
       properties:
         id:
           format: int64
@@ -3518,6 +3551,19 @@ components:
           type: boolean
         l2_caching_enabled:
           type: boolean
+        is_slice_configuration_enabled:
+          type: boolean
+        is_slice_edge_caching_enabled:
+          type: boolean
+        is_slice_l2_caching_enabled:
+          type: boolean
+        slice_configuration_range:
+          format: int64
+          type: integer
+        enable_stale_cache:
+          type: boolean
+        l2_region:
+          type: string  
       required:
       - browser_cache_settings
       - browser_cache_settings_maximum_ttl
