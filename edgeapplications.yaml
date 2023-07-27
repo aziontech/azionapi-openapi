@@ -3107,7 +3107,7 @@ components:
           items:
             type: string
           type: array
-        adaptive_delivery_action: 
+        adaptive_delivery_action:
           type: string
         device_group:
           type: array
@@ -3335,7 +3335,7 @@ components:
           items:
             type: string
           type: array
-        adaptive_delivery_action: 
+        adaptive_delivery_action:
           type: string
         device_group:
           type: array
@@ -3594,7 +3594,7 @@ components:
         enable_stale_cache:
           type: boolean
         l2_region:
-          type: string  
+          type: string
       required:
       - browser_cache_settings
       - browser_cache_settings_maximum_ttl
@@ -4426,7 +4426,17 @@ components:
         name:
           type: string
         target:
-          type: string
+          oneOf:
+            - type: string
+            - type: number
+            - type: object
+              properties:
+                captured_array:
+                  type: string
+                subject:
+                  type: string
+                regex:
+                  type: string
       required:
       - name
       type: object
