@@ -4427,7 +4427,7 @@ components:
           type: string
         target:
           oneOf:
-            - type: number
+            - type: string
             - type: number
             - type: object
               properties:
