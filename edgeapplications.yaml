@@ -3081,7 +3081,7 @@ components:
         enable_stale_cache: true
         l2_region: l2_region
       properties:
-       name:
+        name:
           type: string
         browser_cache_settings:
           type: string
