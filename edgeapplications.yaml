@@ -3065,9 +3065,21 @@ components:
         enable_query_string_sort: true
         cache_by_cookies: cache_by_cookies
         cookie_names:
-        - cache_names
-        - cache_names
+        - cookie_names
+        - cookie_names
+        adaptive_delivery_action: adaptive_delivery_action
+        device_group:
+        - 1
+        - 2
+        enable_caching_for_post: true
         l2_caching_enabled: true
+        is_slice_configuration_enabled: true
+        is_slice_edge_caching_enabled: true
+        is_slice_l2_caching_enabled: true
+        slice_configuration_range: 1
+        enable_caching_for_options: true
+        enable_stale_cache: true
+        l2_region: l2_region
       properties:
         name:
           type: string
@@ -3086,7 +3098,6 @@ components:
         query_string_fields:
           items:
             type: string
-          nullable: true
           type: array
         enable_query_string_sort:
           type: boolean
@@ -3095,12 +3106,32 @@ components:
         cookie_names:
           items:
             type: string
-          nullable: true
           type: array
-        user_email:
+        adaptive_delivery_action: 
           type: string
+        device_group:
+          type: array
+          items:
+            type: integer
+        enable_caching_for_post:
+          type: boolean
         l2_caching_enabled:
           type: boolean
+        is_slice_configuration_enabled:
+          type: boolean
+        is_slice_edge_caching_enabled:
+          type: boolean
+        is_slice_l2_caching_enabled:
+          type: boolean
+        slice_configuration_range:
+          format: int64
+          type: integer
+        enable_caching_for_options:
+          type: boolean
+        enable_stale_cache:
+          type: boolean
+        l2_region:
+          type: string
       required:
       - name
       type: object
