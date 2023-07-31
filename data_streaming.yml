@@ -265,6 +265,46 @@ paths:
           description: Too Many Requests
         '500':
           description: Internal Server Error
+           
+    put:
+      tags:
+        - Data Streaming
+      summary: Overwrite data streaming
+      description: |
+        Use the PUT method to overwrite the data streaming. Although  you can change a single property using the PUT method, you must pass all fields for the request to be completed.
+        
+        **Note:** To check the Data Streaming Properties, check it in POST method description. 
+      
+      operationId: Overwrite data streaming by ID
+      parameters: 
+      - in: path
+        required: true
+        name: data_streaming_id
+        schema:
+          type: integer
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CreateDataStreamingResponse'
+                  - $ref: '#/components/schemas/CreateCustomDataStreamingResponse'
+          
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
               
   /data_streaming/templates:
     get:
