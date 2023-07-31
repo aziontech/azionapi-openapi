@@ -74,6 +74,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/ListEdgeFunctionResponse'
           description: Success
+        "404":
+          content:
+            application/json:
+              example:
+                detail: Sorry unable to perform operation.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
         default:
           content:
             application/json:
@@ -182,6 +190,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/EdgeFunctionResponse'
           description: Success
+        "404":
+          content:
+            application/json:
+              example:
+                detail: Sorry unable to perform operation.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Not found
         default:
           content:
             application/json:
@@ -352,8 +368,10 @@ components:
       properties:
         previous:
           type: string
+          nullable: true
         next:
           type: string
+          nullable: true
       type: object
     Results:
       example:
