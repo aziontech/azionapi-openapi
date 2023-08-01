@@ -282,6 +282,16 @@ paths:
         name: data_streaming_id
         schema:
           type: integer
+          
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/DataStreamingPostBody' 
+                - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
+                - $ref: '#/components/schemas/CustomDataStreamingPostBody'
       
       responses:
         '200':
@@ -305,7 +315,57 @@ paths:
           description: Too Many Requests
         '500':
           description: Internal Server Error
-              
+    
+    patch:
+      tags:
+        - Data Streaming
+      summary: Edit data streaming
+      description: |
+        Use the PATCH method to change only select settings of your data streaming.
+        
+        **Note:** To check the Data Streaming Properties, check it in POST method description. 
+      
+      operationId: Edit data streaming by ID
+      parameters: 
+      - in: path
+        required: true
+        name: data_streaming_id
+        schema:
+          type: integer
+      
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/DataStreamingPostBody' 
+                - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
+                - $ref: '#/components/schemas/CustomDataStreamingPostBody'
+      
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - $ref: '#/components/schemas/CreateDataStreamingResponse'
+                  - $ref: '#/components/schemas/CreateCustomDataStreamingResponse'
+          
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+          
   /data_streaming/templates:
     get:
       tags:
@@ -915,7 +975,7 @@ components:
           type: string
         bootstrap_servers:
           type: string
-    
+          
     DataStreamingResponseGetResultTypeStandard:
       type: object
       properties:
