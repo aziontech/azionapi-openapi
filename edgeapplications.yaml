@@ -2422,6 +2422,16 @@ components:
         cdn_cache_settings_maximum_ttl:
           format: int64
           type: integer
+        debug_rules:
+          type: boolean
+        supported_ciphers:
+          type: string
+        http_port: {}
+        https_port: {}
+        l2_caching:
+          type: boolean
+        http3:
+          type: boolean
       required:
       - name
       type: object
@@ -2522,6 +2532,8 @@ components:
         raw_logs:
           type: boolean
         web_application_firewall:
+          type: boolean
+        l2_caching:
           type: boolean
       required:
       - active
@@ -2776,6 +2788,12 @@ components:
           type: boolean
         web_application_firewall:
           type: boolean
+        debug_rules:
+          type: boolean
+        http3:
+          type: boolean
+        supported_ciphers:
+          type: string
       required:
       - name
       type: object
