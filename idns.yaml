@@ -368,6 +368,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
           description: Zone not found
+        "500":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Error
       summary: Retrieve the DNSSEC zone status
       tags:
       - DNSSEC
@@ -391,6 +397,12 @@ paths:
             schema:
               $ref: '#/components/schemas/DnsSec'
       responses:
+        "200":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/GetOrPatchDnsSecResponse'
+          description: DNSSEC status updated
         "201":
           content:
             application/json; version=3:
@@ -403,6 +415,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorsResponse'
           description: Zone update error
+        "404":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Zone not found
       summary: Update the DNSSEC zone
       tags:
       - DNSSEC
