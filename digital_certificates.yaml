@@ -510,7 +510,7 @@ components:
         schema_version:
           type: integer
           example: 3
-        result:
+        results:
           $ref: "#/components/schemas/singleResult"
 
     DC200List:
@@ -540,19 +540,7 @@ components:
         results:
           $ref: "#/components/schemas/results"
     DC201:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            type: object
-            example:
-              message: Bad Request
-              error: bad_request
-            properties: {}
-        schema_version:
-          type: integer
-          example: 3
+      $ref: "#/components/schemas/DC200"
     DC400:
       type: object
       properties:

@@ -61,7 +61,7 @@ paths:
               
       responses:
         '201':
-          description: Successful operation
+          description: Created successfully
           content:
             application/json:
               schema:
