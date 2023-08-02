@@ -2432,6 +2432,8 @@ components:
           type: boolean
         http3:
           type: boolean
+        minimum_tls_version:
+          type: string
       required:
       - name
       type: object
