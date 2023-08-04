@@ -115,12 +115,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/CreateApplicationResult'
           description: Successful response
+        "201":
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/CreateApplicationResult'
+          description: Successful response
         "400":
           description: Bad Request
         "403":
           description: Forbidden
         "404":
           description: Not Found
+        "415":
+          description: Unsupported Media Type
         "422":
           description: Unprocessable Entity
         "500":
@@ -249,6 +257,8 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
+        "405":
+          description: Method Not Allowed
         "422":
           description: Unprocessable Entity
         "500":
@@ -306,6 +316,8 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
+        "405":
+          description: Method Not Allowed
         "422":
           description: Unprocessable Entity
         "500":
@@ -958,6 +970,8 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
+        "405":
+          description: Method Not Allowed
         "422":
           description: Unprocessable Entity
         "500":
@@ -1023,6 +1037,8 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
+        "405":
+          description: Method Not Allowed
         "422":
           description: Unprocessable Entity
         "500":
@@ -1932,6 +1948,8 @@ paths:
           description: Forbidden
         "404":
           description: Not Found
+        "415":
+          description: Unsupported Media Type
         "422":
           description: Unprocessable Entity
         "500":
@@ -2195,6 +2213,12 @@ components:
           items:
             $ref: '#/components/schemas/ApplicationsResults'
           type: array
+        next:
+          nullable: true
+          type: string
+        previous:
+          nullable: true
+          type: string
       required:
       - count
       - links
@@ -2256,9 +2280,6 @@ components:
           type: string
         origin_id:
           type: string
-      required:
-      - next
-      - previous
       type: object
     GetApplicationResponse:
       additionalProperties: false
@@ -2422,6 +2443,16 @@ components:
         cdn_cache_settings_maximum_ttl:
           format: int64
           type: integer
+        debug_rules:
+          type: boolean
+        supported_ciphers:
+          type: string
+        http_port: {}
+        https_port: {}
+        l2_caching:
+          type: boolean
+        http3:
+          type: boolean
       required:
       - name
       type: object
@@ -2522,6 +2553,8 @@ components:
         raw_logs:
           type: boolean
         web_application_firewall:
+          type: boolean
+        l2_caching:
           type: boolean
       required:
       - active
@@ -2776,6 +2809,12 @@ components:
           type: boolean
         web_application_firewall:
           type: boolean
+        debug_rules:
+          type: boolean
+        http3:
+          type: boolean
+        supported_ciphers:
+          type: string
       required:
       - name
       type: object
@@ -2843,14 +2882,14 @@ components:
           - cookie_names
           adaptive_delivery_action: adaptive_delivery_action
           device_group:
-          - device_group
-          - device_group
+          - 1
+          - 2
           enable_caching_for_post: true
           l2_caching_enabled: true
           is_slice_configuration_enabled: true
           is_slice_edge_caching_enabled: true
           is_slice_l2_caching_enabled: true
-          slice_configuration_range: true
+          slice_configuration_range: 1024
           enable_caching_for_options: true
           enable_stale_cache: true
           l2_region: l2_region
@@ -2871,14 +2910,14 @@ components:
           - cookie_names
           adaptive_delivery_action: adaptive_delivery_action
           device_group:
-          - device_group
-          - device_group
+          - 1
+          - 2
           enable_caching_for_post: true
           l2_caching_enabled: true
           is_slice_configuration_enabled: true
           is_slice_edge_caching_enabled: true
           is_slice_l2_caching_enabled: true
-          slice_configuration_range: true
+          slice_configuration_range: 1024
           enable_caching_for_options: true
           enable_stale_cache: true
           l2_region: l2_region
@@ -2927,8 +2966,8 @@ components:
           - cookie_names
           adaptive_delivery_action: adaptive_delivery_action
           device_group:
-          - device_group
-          - device_group
+          - 1
+          - 2
           enable_caching_for_post: true
           l2_caching_enabled: true
           enable_caching_for_options: true
@@ -2964,14 +3003,14 @@ components:
         - cookie_names
         adaptive_delivery_action: adaptive_delivery_action
         device_group:
-        - device_group
-        - device_group
+        - 1
+        - 2
         enable_caching_for_post: true
         l2_caching_enabled: true
         is_slice_configuration_enabled: true
         is_slice_edge_caching_enabled: true
         is_slice_l2_caching_enabled: true
-        slice_configuration_range: true
+        slice_configuration_range: 1024
         enable_caching_for_options: true
         enable_stale_cache: true
         l2_region: l2_region
@@ -2997,6 +3036,7 @@ components:
           items:
             type: string
           type: array
+          nullable: true
         enable_query_string_sort:
           type: boolean
         cache_by_cookies:
@@ -3004,13 +3044,15 @@ components:
         cookie_names:
           items:
             type: string
+            nullable: true
           type: array
+          nullable: true
         adaptive_delivery_action:
           type: string
         device_group:
-          items:
-            type: string
           type: array
+          items:
+            type: integer
         enable_caching_for_post:
           type: boolean
         l2_caching_enabled:
@@ -3022,13 +3064,15 @@ components:
         is_slice_l2_caching_enabled:
           type: boolean
         slice_configuration_range:
-          type: boolean
+          format: int64
+          type: integer
         enable_caching_for_options:
           type: boolean
         enable_stale_cache:
           type: boolean
         l2_region:
           type: string
+          nullable: true
       required:
       - id
       - name
@@ -3064,9 +3108,21 @@ components:
         enable_query_string_sort: true
         cache_by_cookies: cache_by_cookies
         cookie_names:
-        - cache_names
-        - cache_names
+        - cookie_names
+        - cookie_names
+        adaptive_delivery_action: adaptive_delivery_action
+        device_group:
+        - 1
+        - 2
+        enable_caching_for_post: true
         l2_caching_enabled: true
+        is_slice_configuration_enabled: true
+        is_slice_edge_caching_enabled: true
+        is_slice_l2_caching_enabled: true
+        slice_configuration_range: 1
+        enable_caching_for_options: true
+        enable_stale_cache: true
+        l2_region: l2_region
       properties:
         name:
           type: string
@@ -3085,7 +3141,6 @@ components:
         query_string_fields:
           items:
             type: string
-          nullable: true
           type: array
         enable_query_string_sort:
           type: boolean
@@ -3094,12 +3149,32 @@ components:
         cookie_names:
           items:
             type: string
-          nullable: true
           type: array
-        user_email:
+        adaptive_delivery_action:
           type: string
+        device_group:
+          type: array
+          items:
+            type: integer
+        enable_caching_for_post:
+          type: boolean
         l2_caching_enabled:
           type: boolean
+        is_slice_configuration_enabled:
+          type: boolean
+        is_slice_edge_caching_enabled:
+          type: boolean
+        is_slice_l2_caching_enabled:
+          type: boolean
+        slice_configuration_range:
+          format: int64
+          type: integer
+        enable_caching_for_options:
+          type: boolean
+        enable_stale_cache:
+          type: boolean
+        l2_region:
+          type: string
       required:
       - name
       type: object
@@ -3125,8 +3200,8 @@ components:
           - cookie_names
           adaptive_delivery_action: adaptive_delivery_action
           device_group:
-          - device_group
-          - device_group
+          - 1
+          - 2
           enable_caching_for_post: true
           l2_caching_enabled: true
           is_slice_configuration_enabled: true
@@ -3163,8 +3238,8 @@ components:
         - cookie_names
         adaptive_delivery_action: adaptive_delivery_action
         device_group:
-        - device_group
-        - device_group
+        - 1
+        - 2
         enable_caching_for_post: true
         l2_caching_enabled: true
         is_slice_configuration_enabled: true
@@ -3207,9 +3282,9 @@ components:
         adaptive_delivery_action:
           type: string
         device_group:
-          items:
-            type: string
           type: array
+          items:
+            type: integer
         enable_caching_for_post:
           type: boolean
         l2_caching_enabled:
@@ -3249,26 +3324,33 @@ components:
     ApplicationCachePutRequest:
       additionalProperties: false
       example:
-        cache_by_cookies: cache_by_cookies
-        is_slice_configuration_enabled: true
-        slice_configuration_range: 1
-        enable_query_string_sort: true
-        l2_caching_enabled: true
+        name: name
         browser_cache_settings: browser_cache_settings
-        is_slice_l2_caching_enabled: true
+        browser_cache_settings_maximum_ttl: 0
         cdn_cache_settings: cdn_cache_settings
+        cdn_cache_settings_maximum_ttl: 6
+        cache_by_query_string: cache_by_query_string
         query_string_fields:
         - query_string_fields
         - query_string_fields
-        is_slice_edge_caching_enabled: true
-        name: name
-        enable_caching_for_post: true
+        enable_query_string_sort: true
+        cache_by_cookies: cache_by_cookies
         cookie_names:
         - cookie_names
         - cookie_names
-        cache_by_query_string: cache_by_query_string
-        browser_cache_settings_maximum_ttl: 0
-        cdn_cache_settings_maximum_ttl: 6
+        adaptive_delivery_action: adaptive_delivery_action
+        device_group:
+        - 1
+        - 2
+        enable_caching_for_post: true
+        l2_caching_enabled: true
+        is_slice_configuration_enabled: true
+        is_slice_edge_caching_enabled: true
+        is_slice_l2_caching_enabled: true
+        slice_configuration_range: 1
+        enable_caching_for_options: true
+        enable_stale_cache: true
+        l2_region: l2_region
       properties:
         name:
           type: string
@@ -3296,6 +3378,12 @@ components:
           items:
             type: string
           type: array
+        adaptive_delivery_action:
+          type: string
+        device_group:
+          type: array
+          items:
+            type: integer
         enable_caching_for_post:
           type: boolean
         l2_caching_enabled:
@@ -3309,6 +3397,12 @@ components:
         slice_configuration_range:
           format: int64
           type: integer
+        enable_caching_for_options:
+          type: boolean
+        enable_stale_cache:
+          type: boolean
+        l2_region:
+          type: string
       required:
       - name
       type: object
@@ -3317,27 +3411,34 @@ components:
       example:
         schema_version: 5
         results:
-          cache_by_cookies: cache_by_cookies
-          device_group:
-          - device_group
-          - device_group
-          enable_query_string_sort: true
-          l2_caching_enabled: true
+          id: 0
+          name: name
           browser_cache_settings: browser_cache_settings
+          browser_cache_settings_maximum_ttl: 6
           cdn_cache_settings: cdn_cache_settings
+          cdn_cache_settings_maximum_ttl: 1
+          cache_by_query_string: cache_by_query_string
           query_string_fields:
           - query_string_fields
           - query_string_fields
-          adaptive_delivery_action: adaptive_delivery_action
-          name: name
-          enable_caching_for_post: true
+          enable_query_string_sort: true
+          cache_by_cookies: cache_by_cookies
           cookie_names:
           - cookie_names
           - cookie_names
-          id: 0
-          cache_by_query_string: cache_by_query_string
-          browser_cache_settings_maximum_ttl: 6
-          cdn_cache_settings_maximum_ttl: 1
+          adaptive_delivery_action: adaptive_delivery_action
+          device_group:
+          - 1
+          - 2
+          enable_caching_for_post: true
+          l2_caching_enabled: true
+          is_slice_configuration_enabled: true
+          is_slice_edge_caching_enabled: true
+          is_slice_l2_caching_enabled: true
+          slice_configuration_range: 1024
+          enable_caching_for_options: true
+          enable_stale_cache: true
+          l2_region: l2_region
       properties:
         results:
           $ref: '#/components/schemas/ApplicationCacheResponseDetails'
@@ -3423,8 +3524,8 @@ components:
         results:
           cache_by_cookies: cache_by_cookies
           device_group:
-          - device_group
-          - device_group
+          - 1
+          - 2
           enable_query_string_sort: true
           l2_caching_enabled: true
           browser_cache_settings: browser_cache_settings
@@ -3452,27 +3553,34 @@ components:
     ApplicationCacheResponseDetails:
       additionalProperties: false
       example:
-        cache_by_cookies: cache_by_cookies
-        device_group:
-        - device_group
-        - device_group
-        enable_query_string_sort: true
-        l2_caching_enabled: true
+        id: 0
+        name: name
         browser_cache_settings: browser_cache_settings
+        browser_cache_settings_maximum_ttl: 6
         cdn_cache_settings: cdn_cache_settings
+        cdn_cache_settings_maximum_ttl: 1
+        cache_by_query_string: cache_by_query_string
         query_string_fields:
         - query_string_fields
         - query_string_fields
-        adaptive_delivery_action: adaptive_delivery_action
-        name: name
-        enable_caching_for_post: true
+        enable_query_string_sort: true
+        cache_by_cookies: cache_by_cookies
         cookie_names:
         - cookie_names
         - cookie_names
-        id: 0
-        cache_by_query_string: cache_by_query_string
-        browser_cache_settings_maximum_ttl: 6
-        cdn_cache_settings_maximum_ttl: 1
+        adaptive_delivery_action: adaptive_delivery_action
+        device_group:
+        - 1
+        - 2
+        enable_caching_for_post: true
+        l2_caching_enabled: true
+        is_slice_configuration_enabled: true
+        is_slice_edge_caching_enabled: true
+        is_slice_l2_caching_enabled: true
+        slice_configuration_range: 1024
+        enable_caching_for_options: true
+        enable_stale_cache: true
+        l2_region: l2_region
       properties:
         id:
           format: int64
@@ -3508,15 +3616,29 @@ components:
         adaptive_delivery_action:
           type: string
         device_group:
-          items:
-            type: string
           type: array
+          items:
+            type: integer
         enable_caching_for_post:
           type: boolean
         enable_caching_for_options:
           type: boolean
         l2_caching_enabled:
           type: boolean
+        is_slice_configuration_enabled:
+          type: boolean
+        is_slice_edge_caching_enabled:
+          type: boolean
+        is_slice_l2_caching_enabled:
+          type: boolean
+        slice_configuration_range:
+          format: int64
+          type: integer
+        enable_stale_cache:
+          type: boolean
+        l2_region:
+          type: string
+          nullable: true
       required:
       - browser_cache_settings
       - browser_cache_settings_maximum_ttl
@@ -4348,7 +4470,17 @@ components:
         name:
           type: string
         target:
-          type: string
+          oneOf:
+            - type: string
+            - type: number
+            - type: object
+              properties:
+                captured_array:
+                  type: string
+                subject:
+                  type: string
+                regex:
+                  type: string
       required:
       - name
       type: object
