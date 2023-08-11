@@ -42,6 +42,8 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+        '406':
+          description: Not Acceptable
         '429':
           description: Too Many Requests
         '500':
@@ -52,105 +54,7 @@ paths:
         -  Data Streaming
       summary: Create a new data streaming
       description: |        
-        This method can be used in three slightly different ways:
-      
-          - To **create data streaming**
-          - To **create standard endpoint data streaming**
-          - To **create custom template data streaming**
         
-        
-        # Create data streaming
-        Use the POST method to create a new data streaming.
-        
-        See the table below for more information on all available properties.
-        
-        ### Data Streaming Properties
-        
-        | Property            | Type       | Description                                                  | Accepted values                                              | Required |
-        | ------------------- | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- |
-        | name                | string     | Name of the data streaming you want to create.               | -                                                            | Yes      |
-        | template_id         | int        | Identifier template of one of the default templates that you want to use with the new data streaming. <br/><br/>You can also use `template_model` to insert a custom template with a set of specific variables, instead of a default model. Find out more on the **POST Create new custom template** endpoint. | `2` (Edge Applications Event Collector)<br/>`4` (WAF Event Collector)<br/>`86` (Edge Functions Event Collector)<br/>`184` (Edge Applications + WAF Event Collector)<br/>`251` (Activity History Collector) | Yes      |
-        | data_source         | string     | Data source from which you want to stream your data.         | `http` (Edge Applications, default)   <br/>`waf` (WAF Events)   <br/>`cells_console` (Edge Functions)   <br/>`rtm_activity` (Activity History) | No       |
-        | active              | bool       | Status of your data streaming.                               | `true` (default)   `false`                                   | No       |
-        | endpoint            | json       | Endpoint to which you want to stream your data.This field must be filled out with different properties, according to the chosen endpoint type.<br/><br/>See the **Data Streaming Endpoints** table below for all endpoint options. | `"endpoint": { }`    <br/><br/>Add `endpoint_type` + specific variables for the chosen endpoint. | Yes      |
-        | domain_ids          | int, array | Domain identifiers that you want to associate to the new data streaming. | -                                                            | Yes``*``     |
-        | all_domains         | bool       | Used to associate all domains in your account to the new data streaming.      If you pass this field as true, the mandatory parameter `domain_ids` can be passed as an empty list. | `true` <br/>`false` (default)                                | No``*``      |
-        | sampling_percentage | int        | **To use this feature,** [**contact the sales team**](https://www.azion.com/en/contact-sales/) **to activate it in your account.**      If you pass `all_domains` as `true`, you can define a sampling percentage to receive data collected from your account randomly. | from `0` to `100`                                            | No       |
-        
-        ``*`` - Not used with the rtm_activity data source. 
-        
-        **Note**: If you use the `rtm_activity` **data_source**, you can't associate domains. Thus, you don't need to send the **domain_ids** and **all_domains** fields.
-        
-        <br/>
-        
-        ### Data Streaming Endpoints
-
-        During the process of creating or updating a data  streaming, different endpoints are available for use. The following  table describes the endpoints that may be used and the properties that  must be informed.
-        
-        For information on each of the properties, see the [reference documentation](https://www.azion.com/en/documentation/products/data-streaming/#setting-endpoint).
-        
-        
-        | Endpoint                    | endpoint_type          | Properties                                                   | Example                                                      |
-        | --------------------------- | ---------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-        | Standard HTTP/HTTPS POST    | `standard`             | url <br/>log_line_separator <br/>payload_format <br/>max_size | `"endpoint": { "endpoint_type": "standard", "url": "http://example.com", "log_line_separator": "\n", "payload_format": "$dataset", "max_size": 1000024 }` |
-        | Apache Kafka                | `kafka`                | kafka_topic <br/>bootstrap_servers <br/>use_tls              | `"endpoint": { "endpoint_type": "kafka", "kafka_topic": "example_topic", "bootstrap_servers": "kafka-server.com:9092,kafka-server-2.com:9092", "use_tls":true }` |
-        | Simple Storage Service (S3) | `s3`                   | access_key <br/>region <br/>object_key_prefix<br/>bucket_name <br/>content_type <br/>host_url<br/>secret_key | `"endpoint": { "endpoint_type": "s3", "access_key": "MYACCESSKEY", "region": "us-east-1", "object_key_prefix": "my_prefix_", "bucket_name": "bucket_example", "content_type": "plain/text", "host_url": "http://aws-host.com", "secret_key": "MYSECRETKEY" }` |
-        | Google BigQuery             | `big_query`            | dataset_id<br/>project_id<br/>table_id<br/>service_account_key | `"endpoint": { "endpoint_type": "big_query", "dataset_id": "my_dataset", "project_id": "my_project", "table_id": "my_table", "service_account_key": "{ "service_account_key": "key_content" }" }` |
-        | Elasticsearch               | `elasticsearch`        | url<br/>api_key                                              | `"endpoint": { “endpoint_type”: "elasticsearch", “url”: “http://elasticsearch.com”, “api_key”: “XYZ_API_KEY” }` |
-        | AWS Kinesis Data Firehose   | `aws_kinesis_firehose` | access_key<br/>stream_name<br/>region<br/>secret_key         | `"endpoint": { "endpoint_type": "aws_kinesis_firehose", "access_key": "MYACCESSKEY", "stream_name": "my_stream_name", "region": "us-east-1", "secret_key": "MYSECRETKEY" }` |
-        | Datadog                     | `datadog`              | url<br/>api_key                                              | `"endpoint": { "endpoint_type": "datadog", "url": "https://http-intake.logs.datadoghq.com/v1/input", "api_key": "MYAPIKEY" }` |
-        | IBM QRadar                  | `qradar`               | url                                                          | `endpoint": { "endpoint_type": "qradar", "url": "http://137.15.824.10:14440”` `}` |
-        | Azure Monitor               | `azure_monitor`        | log_type <br/>shared_key <br/>time_generated_field <br/>workspace_id | `"endpoint": { "endpoint_type": "azure_monitor", "log_type": "myLogType", "shared_key": "mysharedkey", "time_generated_field": "timeGeneratedField", "workspace_id": "anfhw-123sd-466gcs"}` |
-        | Azure Blob Storage          | `azure_blob_storage`   | storage_account   <br/>container_name   <br/>blob_sas_token  | `"endpoint": { "endpoint_type": "azure_blob_storage", "storage_account": "mystorageaccount", "container_name": "log_container", "blob_sas_token": "fd56e23e1f12efe" }` |
-        | Splunk                      | `splunk`               | url <br/>api_key                                             | `"endpoint": { "endpoint_type": "splunk", "url": "https://inputs.splunk-client.splunkcloud.com:1337/services/collector", "api_key": "MYAPIKEY" }` |
-                
-        <br/>
-        
-        # Create standard endpoint data streaming
-        Use the POST method to create a new data streaming with the  specific HTTP/HTTPS Standard endpoint. It also allows you to include a  payload, with customized `format`, `log line separator`, and `max size`, and up to 5 headers.
-        
-        See the table below for more information on all available properties.
-        
-        ### Data Streaming HTTP/HTTPS Standard endpoint Properties
-        
-        | Property           | Type       | Description                                                  | Accepted values                                              | Required |
-        | ------------------ | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- |
-        | name               | string     | Name of the data streaming you want to create.               | -                                                            | Yes      |
-        | template_id        | int        | Identifier template of one of the default templates that you want to use with the new data streaming.<br/><br/>You can also use `template_model` to insert a custom template with a set of specific variables, instead of a default model. <br/><br/>Find out more on the **POST Create new custom template** endpoint. | `2` (Edge Applications Event Collector) <br/>`4` (WAF Event Collector) <br/>`86` (Edge Functions Event Collector) <br/>`184` (Edge Applications + WAF Event Collector) <br/>`251` (Activity History Collector) | Yes      |
-        | data_source        | string     | Data source from which you want to stream your data.         | `http` (Edge Applications, default) <br/>`waf` (WAF Events)<br/>`cells_console` (Edge Functions) <br/>`rtm_activity` (Activity History) | No       |
-        | active             | bool       | Status of your data streaming.                               | `true` (default) <br/>`false`                                | No       |
-        | endpoint           | json       | Endpoint to which you want to stream your data.              | `"endpoint": { }` <br/><br/>Add `endpoint_type` + specific variables for the chosen endpoint. | Yes      |
-        | endpoint_type      | string     | Name of the specific endpoint you want to stream your data. <br/>Must be passed inside the `"endpoint": { }` property. | `standard`                                                   | Yes      |
-        | url                | string     | URL to which you want to stream your data. <br/>Must be passed inside the `"endpoint": { }` property. | -                                                            | Yes      |
-        | payload_format     | string     | Defines which information will be sent in your data for each data streaming request. <br/>Must be passed inside the `"endpoint": { }` property. | -                                                            | No       |
-        | log_line_separator | string     | Defines what information will be used at the end of each log line. Used to break information into different lines. <br/>Must be passed inside the `"endpoint": { }` property. | -                                                            | No       |
-        | max_size           | int        | Defines the size of data packets that will be sent in bytes. Accepts values over 1000000. <br/>Must be passed inside the `"endpoint": { }` property. | `≥ 1000000`                                                  | No       |
-        | headers            | string     | Names and values for each header to send to the endpoint.      You can enter one or more custom headers for your HTTP/HTTPS request. Example: `header-name:value`. <br/>Must be passed inside the `"endpoint": { }` property. | -                                                            | No       |
-        | domain_ids         | int, array | Domain identifiers that you want to associate to the new data streaming. | -                                                            | Yes`*`   |
-        | all_domains        | bool       | Used to associate all domains in your account to the new data streaming. <br/><br/>If you pass this field as `true`, the mandatory parameter `domain_ids` can be passed as an empty list. | `true` <br/>`false` (default)                                | No`*`    |
-        
-        ``*`` - Not used with the rtm_activity data source. 
-        
-        <br/>
-        
-        # Create custom template data streaming
-        Use the POST method to create a new data streaming with a  custom template, with the variables of your choice. All data streaming [variables can be found on the reference documentation](https://www.azion.com/en/documentation/products/data-streaming/#selecting-data-sources).
-
-        See the table below for more information on all available properties.
-        
-        ### Data Streaming with Custom Template Properties
-        
-        | Property       | Type       | Description                                                  | Accepted values                                              | Required |
-        | -------------- | ---------- | ------------------------------------------------------------ | ------------------------------------------------------------ | -------- |
-        | name           | string     | Name of the data streaming you want to create.               | -                                                            | Yes      |
-        | template_model | string     | Add all variables and values that will be used to stream according to the data source you choose to use. <br/>All data streaming [variables can be found on the reference documentation](https://www.azion.com/en/documentation/products/data-streaming/#selecting-data-sources). | -                                                            | Yes      |
-        | data_source    | string     | Data source from which you want to stream your data.         | `http` (Edge Applications, default)<br/>`waf` (WAF Events) <br/>`cells_console` (Edge Functions) <br/>`rtm_activity` (Activity History) | No       |
-        | active         | bool       | Status of your data streaming.                               | `true` (default)   `false`                                   | No       |
-        | endpoint       | json       | Endpoint to which you want to stream your data. <br/>This field must be filled out with different properties, according to the chosen endpoint type. <br/>See the **Data Streaming Endpoints** table above for all endpoint options. | `"endpoint": { }`   <br/><br/>Add `endpoint_type` + specific variables for the chosen endpoint. | Yes      |
-        | domain_ids     | int, array | Domain identifiers that you want to associate to the new data streaming. | -                                                            | Yes`*`   |
-        | all_domains    | bool       | Used to associate all domains in your account to the new data streaming.      If you pass this field as `true`, the mandatory parameter `domain_ids` can be passed as an empty list. | `true`  <br/>`false` (default)                               | No`*`    |
-        
-        ``*`` - Not used with the rtm_activity data source. 
 
         
       operationId: CreateNewDataStreaming
@@ -181,6 +85,8 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+        '406':
+          description: Not Acceptable
         '429':
           description: Too Many Requests
         '500':
@@ -228,6 +134,8 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+        '406':
+          description: Not Acceptable
         '429':
           description: Too Many Requests
         '500':
@@ -261,6 +169,8 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+        '406':
+          description: Not Acceptable
         '429':
           description: Too Many Requests
         '500':
@@ -273,8 +183,6 @@ paths:
       description: |
         Use the PUT method to overwrite the data streaming. Although  you can change a single property using the PUT method, you must pass all fields for the request to be completed.
         
-        **Note:** To check the Data Streaming Properties, check it in POST method description. 
-      
       operationId: Overwrite data streaming by ID
       parameters: 
       - in: path
@@ -311,6 +219,10 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+        '406':
+          description: Not Acceptable
+        '409':
+          description: Conflict
         '429':
           description: Too Many Requests
         '500':
@@ -323,8 +235,6 @@ paths:
       description: |
         Use the PATCH method to change only select settings of your data streaming.
         
-        **Note:** To check the Data Streaming Properties, check it in POST method description. 
-      
       operationId: Edit data streaming by ID
       parameters: 
       - in: path
@@ -361,6 +271,41 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '500':
+          description: Internal Server Error
+          
+    delete:
+      tags:
+        - Data Streaming
+      summary: Delete data streaming
+      description: |
+        Use the DELETE method to remove a data streaming from your account.
+      
+      operationId: Delete data streaming by ID
+      parameters: 
+      - in: path
+        required: true
+        name: data_streaming_id
+        schema:
+          type: integer
+      
+      responses:
+        '204':
+          description: Successful operation
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
         '429':
           description: Too Many Requests
         '500':
@@ -391,6 +336,8 @@ paths:
           description: Forbidden
         '404':
           description: Not Found
+        '406':
+          description: Not Acceptable
         '429':
           description: Too Many Requests
         '500':
@@ -741,7 +688,7 @@ components:
         url:
           type: string
           format: uri
-        log_line_separator: 
+        log_line_separator:
           type: string
         payload_format:
           type: string
