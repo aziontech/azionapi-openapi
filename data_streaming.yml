@@ -190,6 +190,16 @@ paths:
         name: data_streaming_id
         schema:
           type: integer
+          
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/DataStreamingPostBody' 
+                - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
+                - $ref: '#/components/schemas/CustomDataStreamingPostBody'
       
       responses:
         '200':
@@ -217,9 +227,6 @@ paths:
           description: Too Many Requests
         '500':
           description: Internal Server Error
-<<<<<<< Updated upstream
-              
-=======
     
     patch:
       tags:
@@ -304,7 +311,6 @@ paths:
         '500':
           description: Internal Server Error
           
->>>>>>> Stashed changes
   /data_streaming/templates:
     get:
       tags:
@@ -916,7 +922,7 @@ components:
           type: string
         bootstrap_servers:
           type: string
-    
+          
     DataStreamingResponseGetResultTypeStandard:
       type: object
       properties:
