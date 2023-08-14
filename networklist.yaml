@@ -6,10 +6,10 @@ info:
     name: MIT
     url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
-- description: Production
-  url: https://api.azionapi.net
+  - description: Production
+    url: https://api.azionapi.net
 security:
-- tokenAuth: []
+  - tokenAuth: []
 paths:
   /network_lists:
     post:
@@ -22,7 +22,11 @@ paths:
               $ref: '#/components/schemas/CreateNetworkListsRequest'
       responses:
         '201':
-          description: Network Lists created
+          description: A Network Lists object
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NetworkListsResponse'
         '400':
           description: Bad Request
           content:
@@ -45,8 +49,32 @@ paths:
       parameters:
         - name: page
           in: query
+          required: false
+          style: form
+          explode: true
           schema:
             type: integer
+        - name: page_size
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+        - name: sort
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: order_by
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
       responses:
         '200':
           description: A list of Network Lists
@@ -71,7 +99,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NetworkListsResponse'
+                $ref: '#/components/schemas/NetworkListUuidResponse'
         '400':
           description: Bad Request
           content:
@@ -82,7 +110,7 @@ paths:
               schema:
                 type: string
         '404':
-          description: Not Found               
+          description: Not Found
     put:
       summary: Overwrite some Network Lists attributes
       parameters:
@@ -96,14 +124,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateNetworkListsRequest'
+              $ref: '#/components/schemas/CreateNetworkListsRequest'
       responses:
         '200':
           description: Successfully updated
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListNetworkListsResponse'
+                $ref: '#/components/schemas/NetworkListsResponse'
         '400':
           description: Bad Request
           content:
@@ -140,20 +168,31 @@ components:
     NetworkLists:
       properties:
         id:
+          format: int64
           type: integer
           example: 1614
+        last_editor:
+          type: string
+          example: Azion
+        last_modified:
+          type: string
+          example: 2023-08-10T05:00:07.893747Z
+        list_type:
+          type: string
+          example: ip_cidr
         name:
           type: string
           example: Network List created using the API
-        items_values:
+        country_list:
+          type: array
+          items:
+            type: string
+        ip_list:
           type: array
           items:
             type: string
           example:
             - 192.168.0.1
-        list_type:
-          type: string
-          example: ip_cidr
       type: object
     ListNetworkListsResponse:
       properties:
@@ -173,6 +212,52 @@ components:
             $ref: '#/components/schemas/NetworkLists'
           type: array
       type: object
+    NetworkListResponseEntry:
+      properties:
+        id:
+          format: int64
+          type: integer
+          example: 1614
+        last_editor:
+          type: string
+          example: Azion
+        last_modified:
+          type: string
+          example: 2023-08-10T05:00:07.893747Z
+        list_type:
+          type: string
+          example: ip_cidr
+        name:
+          type: string
+          example: Network List created using the API
+        items_values:
+          type: array
+          items:
+            type: string
+          example:
+            - 192.168.0.1
+      type: object
+    NetworkListUuidResponseEntry:
+      properties:
+        last_editor:
+          type: string
+          example: Azion
+        last_modified:
+          type: string
+          example: 2023-08-10T05:00:07.893747Z
+        list_type:
+          type: string
+          example: ip_cidr
+        name:
+          type: string
+          example: Network List created using the API
+        items_values:
+          type: array
+          items:
+            type: string
+          example:
+            - 192.168.0.1
+      type: object
     CreateNetworkListsRequest:
       properties:
         name:
@@ -186,6 +271,7 @@ components:
             - 192.168.0.1
         list_type:
           type: string
+          enum: [ip_cidr, asn, countries]
           example: ip_cidr
       type: object
     BadRequestResponse:
@@ -206,24 +292,19 @@ components:
     NetworkListsResponse:
       properties:
         results:
-          $ref: '#/components/schemas/NetworkLists'
+          $ref: '#/components/schemas/NetworkListResponseEntry'
         schema_version:
           type: number
+          example: 3
       type: object
-    UpdateNetworkListsRequest:
+    NetworkListUuidResponse:
       properties:
-        name:
-          type: string
-          example: Network List created using the API
-        items_values:
-          type: array
-          items:
-            type: string
-          example:
-            - 192.168.0.1
-        list_type:
-          type: string
-          example: ip_cidr
+        results:
+          $ref: '#/components/schemas/NetworkListUuidResponseEntry'
+        schema_version:
+          format: int64
+          type: integer
+          example: 3
       type: object
   securitySchemes:
     tokenAuth:
