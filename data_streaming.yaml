@@ -764,20 +764,19 @@ components:
           type: boolean
           
         endpoint:
-          type: array
-          items:
-            oneOf:
-              - $ref: '#/components/schemas/Endpoint_Default'
-              - $ref: '#/components/schemas/Endpoint_Kafka'
-              - $ref: '#/components/schemas/Endpoinrt_S3'
-              - $ref: '#/components/schemas/Endpoint_Google_BigQuery'
-              - $ref: '#/components/schemas/Endpoint_Elasticsearch'
-              - $ref: '#/components/schemas/Endpoint_AWS_Kinesis_Firehose'
-              - $ref: '#/components/schemas/Endpoint_Datadog'
-              - $ref: '#/components/schemas/Endpoint_IBM_QRadar'
-              - $ref: '#/components/schemas/Endpoint_Azure_Monitor'
-              - $ref: '#/components/schemas/Endpoint_Azure_Blob_Storage'
-              - $ref: '#/components/schemas/Endpoint_Splunk'
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/Endpoint_Default'
+            - $ref: '#/components/schemas/Endpoint_Kafka'
+            - $ref: '#/components/schemas/Endpoinrt_S3'
+            - $ref: '#/components/schemas/Endpoint_Google_BigQuery'
+            - $ref: '#/components/schemas/Endpoint_Elasticsearch'
+            - $ref: '#/components/schemas/Endpoint_AWS_Kinesis_Firehose'
+            - $ref: '#/components/schemas/Endpoint_Datadog'
+            - $ref: '#/components/schemas/Endpoint_IBM_QRadar'
+            - $ref: '#/components/schemas/Endpoint_Azure_Monitor'
+            - $ref: '#/components/schemas/Endpoint_Azure_Blob_Storage'
+            - $ref: '#/components/schemas/Endpoint_Splunk'
 
         all_domains:
           type: boolean
