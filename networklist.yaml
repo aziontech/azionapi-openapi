@@ -82,6 +82,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListNetworkListsResponse'
+        '400': 
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+            text/html:
+              schema:
+                type: string
         '404':
           description: Not Found
   /network_lists/{uuid}:
