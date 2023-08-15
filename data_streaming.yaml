@@ -555,10 +555,21 @@ components:
           type: boolean
           nullable: true
           default: true
-          
+ 
         endpoint:
-          type: string
-          format: json
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/Endpoint_Default'
+            - $ref: '#/components/schemas/Endpoint_Kafka'
+            - $ref: '#/components/schemas/Endpoinrt_S3'
+            - $ref: '#/components/schemas/Endpoint_Google_BigQuery'
+            - $ref: '#/components/schemas/Endpoint_Elasticsearch'
+            - $ref: '#/components/schemas/Endpoint_AWS_Kinesis_Firehose'
+            - $ref: '#/components/schemas/Endpoint_Datadog'
+            - $ref: '#/components/schemas/Endpoint_IBM_QRadar'
+            - $ref: '#/components/schemas/Endpoint_Azure_Monitor'
+            - $ref: '#/components/schemas/Endpoint_Azure_Blob_Storage'
+            - $ref: '#/components/schemas/Endpoint_Splunk'
           description: > 
             Options' examples:
              - `Standard HTTP/HTTPS POST` - { "endpoint_type": "standard", "url": "http://example.com", "log_line_separator": "\n", "payload_format": "$dataset", "max_size": 1000024 }
@@ -808,8 +819,19 @@ components:
           type: boolean
           
         endpoint:
-          type: string
-          format: json
+          type: object
+          oneOf:
+            - $ref: '#/components/schemas/Endpoint_Default'
+            - $ref: '#/components/schemas/Endpoint_Kafka'
+            - $ref: '#/components/schemas/Endpoinrt_S3'
+            - $ref: '#/components/schemas/Endpoint_Google_BigQuery'
+            - $ref: '#/components/schemas/Endpoint_Elasticsearch'
+            - $ref: '#/components/schemas/Endpoint_AWS_Kinesis_Firehose'
+            - $ref: '#/components/schemas/Endpoint_Datadog'
+            - $ref: '#/components/schemas/Endpoint_IBM_QRadar'
+            - $ref: '#/components/schemas/Endpoint_Azure_Monitor'
+            - $ref: '#/components/schemas/Endpoint_Azure_Blob_Storage'
+            - $ref: '#/components/schemas/Endpoint_Splunk'
 
         all_domains:
           type: boolean
