@@ -50,6 +50,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListEdgeFunctionsInstancesResponse'
+        "404":
+          description: Not Found
     post:
       summary: Create an Edge Functions Instance
       requestBody:
@@ -63,6 +65,8 @@ paths:
           description: Edge Functions Instance created
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "500":
           description: Internal Server Error
   /edge_firewall/:edge_firewall_id:/functions_instances/{uuid}:
@@ -83,6 +87,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EdgeFunctionsInstanceResponse'
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
     put:
       summary: Overwrite some Edge Functions Instance attributes
       parameters:
@@ -108,6 +116,8 @@ paths:
                 $ref: '#/components/schemas/ListEdgeFunctionsInstancesResponse'
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "500":
           description: Internal Server Error
     delete:
@@ -123,6 +133,10 @@ paths:
       responses:
         "204":
           description: Successfully deleted
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
     patch:
       summary: Update some Edge Functions Instance attributes
       parameters:
@@ -148,6 +162,8 @@ paths:
                 $ref: '#/components/schemas/ListEdgeFunctionsInstancesResponse'
         "400":
           description: Bad Request
+        "404":
+          description: Not Found
         "500":
           description: Internal Server Error
 components:
