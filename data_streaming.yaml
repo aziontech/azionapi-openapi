@@ -34,6 +34,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DataStreamingResponseWithResults' 
+                
         '400':
           description: Bad Request
         '401':
@@ -53,9 +54,6 @@ paths:
       tags:
         -  Data Streaming
       summary: Create a new data streaming
-      description: |        
-        
-
         
       operationId: CreateNewDataStreaming
       requestBody:
@@ -63,10 +61,26 @@ paths:
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: '#/components/schemas/DataStreamingPostBody' 
-                - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
-                - $ref: '#/components/schemas/CustomDataStreamingPostBody' 
+              $ref: '#/components/schemas/DataStreamingPostBody' 
+              # oneOf:
+              #   - $ref: '#/components/schemas/DataStreamingPostBody' 
+              #   - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
+              #   - $ref: '#/components/schemas/CustomDataStreamingPostBody' 
+            example:  
+              name: Overwritten DS
+              template_id: 2
+              data_source: http
+              active: false
+              endpoint:
+                endpoint_type: standard
+                url: http://example.com
+                log_line_separator: "\n"
+                payload_format: $dataset
+                max_size: 1000024
+              all_domains: false
+              domains_ids: [1656613172]
+              
+            
       responses:
         '201':
           description: Created successfully
@@ -76,7 +90,37 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/CreateDataStreamingResponse'
                   - $ref: '#/components/schemas/CreateCustomDataStreamingResponse'
-          
+              examples:
+                KafkaExample:
+                  value:
+                    results:
+                      - id: 1594
+                        name: "Kafka Connector"
+                        template_id: 2
+                        data_source: waf
+                        active: true
+                        endpoint:
+                          endpoint_type: kafka
+                          use_tls: false
+                          kafka_topic: "mykafka.dts.topic"
+                          bootstrap_servers: "infra.my.net:9094,infra.my.net:9094"
+                        all_domains: false
+                    schema_version: 3
+                CustomExample:
+                  value:
+                    results:
+                      - id: 1596
+                        name: "DTS - Custom template"
+                        data_source: http
+                        active: true
+                        endpoint:
+                          endpoint_type: datadog
+                          url: "http://mydatadoghost.com"
+                          api_key: "BNIAudh9s8dASJKLhksaidua9i9"
+                        all_domains: false
+                        template_model: "{\"custom_template_field\":\"$custom_value\", \"status\":\"$status\"}"
+                    schema_version: 3
+        
         '400':
           description: Bad Request
         '401':
@@ -113,6 +157,8 @@ paths:
         schema:
           format: int64
           type: integer
+          minimum: 1
+          exclusiveMinimum: true
       - in: query
         name: selected
         required: false
@@ -154,6 +200,8 @@ paths:
         name: data_streaming_id
         schema:
           type: integer
+          minimum: 1
+          exclusiveMinimum: true
       responses:
         '200':
           description: Successful operation
@@ -190,17 +238,33 @@ paths:
         name: data_streaming_id
         schema:
           type: integer
+          minimum: 1
+          exclusiveMinimum: true
           
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: '#/components/schemas/DataStreamingPostBody' 
-                - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
-                - $ref: '#/components/schemas/CustomDataStreamingPostBody'
-      
+              $ref: '#/components/schemas/StandardDataStreamingPostBody' 
+              # oneOf:
+              #   - $ref: '#/components/schemas/DataStreamingPostBody' 
+              #   - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
+              #   - $ref: '#/components/schemas/CustomDataStreamingPostBody' 
+            example:  
+              name: Overwritten DS
+              template_id: 2
+              data_source: http
+              active: false
+              endpoint:
+                endpoint_type: standard
+                url: http://example.com
+                log_line_separator: "\n"
+                payload_format: $dataset
+                max_size: 1000024
+              all_domains: false
+              domains_ids: [1656613172]
+              
       responses:
         '200':
           description: Successful operation
@@ -210,6 +274,36 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/CreateDataStreamingResponse'
                   - $ref: '#/components/schemas/CreateCustomDataStreamingResponse'
+              examples:
+                KafkaExample:
+                  value:
+                    results:
+                      - id: 1594
+                        name: "Kafka Connector"
+                        template_id: 2
+                        data_source: waf
+                        active: true
+                        endpoint:
+                          endpoint_type: kafka
+                          use_tls: false
+                          kafka_topic: "mykafka.dts.topic"
+                          bootstrap_servers: "infra.my.net:9094,infra.my.net:9094"
+                        all_domains: false
+                    schema_version: 3
+                CustomExample:
+                  value:
+                    results:
+                      - id: 1596
+                        name: "DTS - Custom template"
+                        data_source: http
+                        active: true
+                        endpoint:
+                          endpoint_type: datadog
+                          url: "http://mydatadoghost.com"
+                          api_key: "BNIAudh9s8dASJKLhksaidua9i9"
+                        all_domains: false
+                        template_model: "{\"custom_template_field\":\"$custom_value\", \"status\":\"$status\"}"
+                    schema_version: 3
           
         '400':
           description: Bad Request
@@ -242,16 +336,27 @@ paths:
         name: data_streaming_id
         schema:
           type: integer
+          minimum: 1
+          exclusiveMinimum: true
       
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              oneOf:
-                - $ref: '#/components/schemas/DataStreamingPostBody' 
-                - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
-                - $ref: '#/components/schemas/CustomDataStreamingPostBody'
+              $ref: '#/components/schemas/CustomDataStreamingPostBody' 
+              # oneOf:
+              #   - $ref: '#/components/schemas/DataStreamingPostBody' 
+              #   - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
+              #   - $ref: '#/components/schemas/CustomDataStreamingPostBody' 
+            example:  
+              name: "DTS - Custom template"
+              template_model: "{\"custom_template_field\":\"$custom_value\", \"status\":\"$status\"}"
+              domain_ids: [1656613172]
+              endpoint:
+                endpoint_type: "datadog"
+                url: "http://mydatadoghost.com"
+                api_key: "BNIAudh9s8dASJKLhksaidua9i9"
       
       responses:
         '200':
@@ -262,6 +367,36 @@ paths:
                 oneOf:
                   - $ref: '#/components/schemas/CreateDataStreamingResponse'
                   - $ref: '#/components/schemas/CreateCustomDataStreamingResponse'
+              examples:
+                KafkaExample:
+                  value:
+                    results:
+                      - id: 1594
+                        name: "Kafka Connector"
+                        template_id: 2
+                        data_source: waf
+                        active: true
+                        endpoint:
+                          endpoint_type: kafka
+                          use_tls: false
+                          kafka_topic: "mykafka.dts.topic"
+                          bootstrap_servers: "infra.my.net:9094,infra.my.net:9094"
+                        all_domains: false
+                    schema_version: 3
+                CustomExample:
+                  value:
+                    results:
+                      - id: 1596
+                        name: "DTS - Custom template"
+                        data_source: http
+                        active: true
+                        endpoint:
+                          endpoint_type: datadog
+                          url: "http://mydatadoghost.com"
+                          api_key: "BNIAudh9s8dASJKLhksaidua9i9"
+                        all_domains: false
+                        template_model: "{\"custom_template_field\":\"$custom_value\", \"status\":\"$status\"}"
+                    schema_version: 3
           
         '400':
           description: Bad Request
@@ -292,6 +427,8 @@ paths:
         name: data_streaming_id
         schema:
           type: integer
+          minimum: 1
+          exclusiveMinimum: true
       
       responses:
         '204':
@@ -356,6 +493,8 @@ paths:
         name: template_id
         schema:
           type: integer
+          minimum: 1
+          exclusiveMinimum: true
       responses:
         '200':
           description: Successful operation
@@ -694,6 +833,8 @@ components:
           type: string
         max_size:
           type: integer
+          minimum: 1
+          exclusiveMinimum: true
         headers:
           type: array
           items:
@@ -863,6 +1004,8 @@ components:
                 - $ref: '#/components/schemas/DataStreamingResponseGetResultTypeCustom'
         schema_version: 
           type: number
+      
+        
    
     DataStreamingResponseGetResultTypeDatadogDTS:
       type: object
@@ -955,6 +1098,8 @@ components:
           type: string
         max_size:
           type: integer
+          minimum: 1
+          exclusiveMinimum: true
         headers:
           $ref: '#/components/schemas/DataStreamingEndpointTypeStandardHeadersExample'
 
