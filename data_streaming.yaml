@@ -67,16 +67,15 @@ paths:
               #   - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
               #   - $ref: '#/components/schemas/CustomDataStreamingPostBody' 
             example:  
-              name: Overwritten DS
+              name: "Kafka Connector"
               template_id: 2
-              data_source: http
-              active: false
+              data_source: waf
+              active: true
               endpoint:
-                endpoint_type: standard
-                url: http://example.com
-                log_line_separator: "\n"
-                payload_format: $dataset
-                max_size: 1000024
+                endpoint_type: kafka
+                use_tls: false
+                kafka_topic: "mykafka.dts.topic"
+                bootstrap_servers: "infra.my.net:9094,infra.my.net:9094"
               all_domains: false
               domains_ids: [1656613172]
               
@@ -105,6 +104,7 @@ paths:
                           kafka_topic: "mykafka.dts.topic"
                           bootstrap_servers: "infra.my.net:9094,infra.my.net:9094"
                         all_domains: false
+                        domains_ids: [1656613172]
                     schema_version: 3
                 CustomExample:
                   value:
@@ -382,6 +382,7 @@ paths:
                           kafka_topic: "mykafka.dts.topic"
                           bootstrap_servers: "infra.my.net:9094,infra.my.net:9094"
                         all_domains: false
+
                     schema_version: 3
                 CustomExample:
                   value:
