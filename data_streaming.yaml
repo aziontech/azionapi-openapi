@@ -100,11 +100,11 @@ paths:
                         active: true
                         endpoint:
                           endpoint_type: kafka
-                          use_tls: false
                           kafka_topic: "mykafka.dts.topic"
                           bootstrap_servers: "infra.my.net:9094,infra.my.net:9094"
+                          use_tls: false
+                        # domains_ids: [1656613172]
                         all_domains: false
-                        domains_ids: [1656613172]
                     schema_version: 3
                 CustomExample:
                   value:
@@ -382,7 +382,6 @@ paths:
                           kafka_topic: "mykafka.dts.topic"
                           bootstrap_servers: "infra.my.net:9094,infra.my.net:9094"
                         all_domains: false
-
                     schema_version: 3
                 CustomExample:
                   value:
@@ -495,7 +494,6 @@ paths:
         schema:
           type: integer
           minimum: 1
-          exclusiveMinimum: true
       responses:
         '200':
           description: Successful operation
@@ -713,6 +711,8 @@ components:
             $ref: '#/components/schemas/PostDataStreamingResponse'
         schema_version: 
           type: number
+          minimum: 0
+
           
     CreateCustomDataStreamingResponse:
       type: object
@@ -723,6 +723,7 @@ components:
             $ref: '#/components/schemas/PostCustomDataStreamingResponse'
         schema_version: 
           type: number
+          minimum: 0
     
 
     PostDataStreamingResponse:
@@ -730,7 +731,8 @@ components:
       properties:
         id: 
           type: integer
-        
+          minimum: 0
+
         name:
           type: string
         
@@ -793,7 +795,8 @@ components:
       properties:
         id: 
           type: integer
-        
+          minimum: 0
+
         name:
           type: string
           
@@ -1026,6 +1029,7 @@ components:
                 - $ref: '#/components/schemas/DataStreamingResponseGetResultTypeCustom'
         schema_version: 
           type: number
+          minimum: 0
       
         
    
@@ -1034,10 +1038,17 @@ components:
       properties:
         id: 
           type: integer
+          minimum: 0
         name:
           type: string
         template_id: 
           type: integer
+          enum:
+            - 2 
+            - 4 
+            - 86
+            - 184
+            - 251
         data_source:
            type: string
         active:
@@ -1063,10 +1074,17 @@ components:
       properties:
         id: 
           type: integer
+          minimum: 0
         name:
           type: string
         template_id: 
           type: integer
+          enum:
+            - 2 
+            - 4 
+            - 86
+            - 184
+            - 251
         data_source:
            type: string
         active:
@@ -1093,10 +1111,17 @@ components:
       properties:
         id: 
           type: integer
+          minimum: 0
         name:
           type: string
         template_id: 
           type: integer
+          enum:
+            - 2 
+            - 4 
+            - 86
+            - 184
+            - 251
         data_source:
            type: string
         active:
@@ -1143,6 +1168,7 @@ components:
       properties:
         id: 
           type: integer
+          minimum: 0
         name:
           type: string
         data_source:
@@ -1165,6 +1191,7 @@ components:
           type: integer
         schema_version:
           type: number
+          minimum: 0
         links:
           $ref: '#/components/schemas/DataStreamingsDomainResponseLinks'
         results:
@@ -1187,6 +1214,7 @@ components:
       properties:
         domain_id:
           type: integer
+          minimum: 0
         name:
           type: string
         selected:
@@ -1200,6 +1228,7 @@ components:
           $ref: '#/components/schemas/DataStreamingResponseGetResultTypeKafka'
         schema_version: 
           type: number
+          minimum: 0
           
           
     TemplateResults:
@@ -1211,6 +1240,7 @@ components:
             $ref: '#/components/schemas/Template'
         schema_version:
           type: number
+          minimum: 0
           
     TemplateResultById:
       type: object
@@ -1219,12 +1249,14 @@ components:
           $ref: '#/components/schemas/Template'
         schema_version:
           type: number
+          minimum: 0
           
     Template:
       type: object
       properties:
         id:
           type: integer
+          minimum: 0
         name:
           type: string
         template_model:
