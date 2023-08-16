@@ -19,6 +19,11 @@ security:
   - tokenAuth: []
 tags:
   - name: Data Streaming
+    description: Data Streaming
+  - name: Data Streaming Domain
+    description: Data Streaming Domain
+  - name: Data Streaming Templates
+    description: Data Streaming Templates
 paths:
   /data_streaming/streamings:
     get:
@@ -355,7 +360,7 @@ paths:
         - Data Streaming Templates
       summary: Get an global Template info by template ID
       description: Use the GET method and add the data streaming's ID to the URI of the request to get more data on a specific data streaming global template.
-      operationId: Get Data Straming Template by ID
+      operationId: GetDataStramingTemplateById
       parameters: 
       - in: path
         required: true
