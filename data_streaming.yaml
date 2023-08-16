@@ -64,21 +64,7 @@ paths:
               $ref: '#/components/schemas/DataStreamingPostBody' 
               # oneOf:
               #   - $ref: '#/components/schemas/DataStreamingPostBody' 
-              #   - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
               #   - $ref: '#/components/schemas/CustomDataStreamingPostBody' 
-            example:  
-              name: "Kafka Connector"
-              template_id: 2
-              data_source: waf
-              active: true
-              endpoint:
-                endpoint_type: kafka
-                use_tls: false
-                kafka_topic: "mykafka.dts.topic"
-                bootstrap_servers: "infra.my.net:9094,infra.my.net:9094"
-              all_domains: false
-              domains_ids: [1656613172]
-              
             
       responses:
         '201':
@@ -214,10 +200,9 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/StandardDataStreamingPostBody' 
+              $ref: '#/components/schemas/DataStreamingPostBody' 
               # oneOf:
               #   - $ref: '#/components/schemas/DataStreamingPostBody' 
-              #   - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
               #   - $ref: '#/components/schemas/CustomDataStreamingPostBody' 
             example:  
               name: Overwritten DS
@@ -284,7 +269,6 @@ paths:
               $ref: '#/components/schemas/CustomDataStreamingPostBody' 
               # oneOf:
               #   - $ref: '#/components/schemas/DataStreamingPostBody' 
-              #   - $ref: '#/components/schemas/StandardDataStreamingPostBody' 
               #   - $ref: '#/components/schemas/CustomDataStreamingPostBody' 
             example:  
               name: "DTS - Custom template"
@@ -429,6 +413,7 @@ components:
       properties:
         name:
           type: string
+          example: "Data Stream Name"
           
         template_id:
           type: integer
@@ -445,6 +430,7 @@ components:
              * `86` - Edge Functions Event Collector
              * `184` - Edge Applications + WAF Event Collector
              * `251` - Activity History Collector
+          example: 2
         
         data_source:
           type: string
@@ -456,16 +442,18 @@ components:
              * `waf` - WAF Events
              * `cells_console` - Edge Functions
              * `rtm_activity` - Activity History
+          example: "http"
           
         active:
           type: boolean
           nullable: true
           default: true
+          example: true
  
         endpoint:
           type: object
           oneOf:
-            - $ref: '#/components/schemas/Endpoint_Default'
+            - $ref: '#/components/schemas/Endpoint_Standard'
             - $ref: '#/components/schemas/Endpoint_Kafka'
             - $ref: '#/components/schemas/Endpoint_S3'
             - $ref: '#/components/schemas/Endpoint_Google_BigQuery'
@@ -495,6 +483,7 @@ components:
           items:       
             type: integer
           minItems: 1
+          example: [1234, 5678]
           description: > 
             Note:
              * Field not used with the rtm_activity data source.
@@ -505,6 +494,7 @@ components:
           type: boolean
           nullable: true
           default: false
+          example: false
           description: > 
             Note:
              * Field not used with the rtm_activity data source.
@@ -516,68 +506,12 @@ components:
           nullable: true
           minimum: 0
           maximum: 100
+          example: null
           description: > 
             Note:
              * `Range` - From 0 to 100.
              * `To use:` [Contact the sales team](https://www.azion.com/en/contact-sales/) to activate this feature in your account.
           
-    StandardDataStreamingPostBody:
-      type: object
-      properties:
-        name:
-          type: string
-        
-        template_id:
-          type: integer
-          enum:
-            - 2 
-            - 4 
-            - 86
-            - 184
-            - 251
-          description: > 
-            Options:
-             * `2` - Edge Applications Event Collector
-             * `4` - WAF Event Collector
-             * `86` - Edge Functions Event Collector
-             * `184` - Edge Applications + WAF Event Collector
-             * `251` - Activity History Collector
-        
-        data_source:
-          type: string
-          nullable: true
-          enum: ["http", "waf", "cells_console", "rtm_activity"]
-          description: > 
-            Options:
-             * `http` - Edge Applications (default)
-             * `waf` - WAF Events
-             * `cells_console` - Edge Functions
-             * `rtm_activity` - Activity History
-        active:
-          type: boolean
-          nullable: true
-          default: true
-          
-        endpoint:
-            $ref: '#/components/schemas/DataStreamingEndpointTypeStandard'
-        
-        domains_ids:
-          type: array
-          items:       
-            type: integer
-          minItems: 1
-          description: > 
-            Note:
-             * Field not used with the rtm_activity data source.
-          
-        all_domains:
-          type: boolean
-          nullable: true
-          default: false
-          description: > 
-            Note:
-             * Field not used with the rtm_activity data source.
-        
     CustomDataStreamingPostBody:
       type: object
       properties:
@@ -675,7 +609,7 @@ components:
         endpoint:
           type: object
           oneOf:
-            - $ref: '#/components/schemas/Endpoint_Default'
+            - $ref: '#/components/schemas/Endpoint_Standard'
             - $ref: '#/components/schemas/Endpoint_Kafka'
             - $ref: '#/components/schemas/Endpoint_S3'
             - $ref: '#/components/schemas/Endpoint_Google_BigQuery'
@@ -731,7 +665,7 @@ components:
         endpoint:
           type: object
           oneOf:
-            - $ref: '#/components/schemas/Endpoint_Default'
+            - $ref: '#/components/schemas/Endpoint_Standard'
             - $ref: '#/components/schemas/Endpoint_Kafka'
             - $ref: '#/components/schemas/Endpoint_S3'
             - $ref: '#/components/schemas/Endpoint_Google_BigQuery'
@@ -751,7 +685,7 @@ components:
              * Field not used with the rtm_activity data source.
 
 
-    Endpoint_Default:
+    Endpoint_Standard:
       type: object
       properties:
         endpoint_type:
@@ -1072,41 +1006,9 @@ components:
         active:
           type: boolean
         endpoint:
-            $ref: '#/components/schemas/DataStreamingEndpointTypeStandard'
+            $ref: '#/components/schemas/Endpoint_Standard'
         all_domains:
           type: boolean
-    
-    DataStreamingEndpointTypeStandard:
-      type: object
-      properties:
-        endpoint_type:
-          type: string
-        url:
-          type: string
-          format: uri
-        log_line_separator:
-          type: string
-        payload_format:
-          type: string
-        max_size:
-          type: integer
-          minimum: 1
-          exclusiveMinimum: true
-        headers:
-          $ref: '#/components/schemas/DataStreamingEndpointTypeStandardHeadersExample'
-
-    DataStreamingEndpointTypeStandardHeadersExample:
-      type: object
-      properties:
-        header-name-1:
-          type: string
-          nullable: true
-        header-name-2:
-          type: string
-          nullable: true
-        header-name-3:
-          type: string
-          nullable: true
 
     DataStreamingResponseGetResultTypeCustom:
       type: object
