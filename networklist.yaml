@@ -82,6 +82,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListNetworkListsResponse'
+        '400': 
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestResponse'
+            text/html:
+              schema:
+                type: string
         '404':
           description: Not Found
   /network_lists/{uuid}:
@@ -238,6 +247,10 @@ components:
             - 192.168.0.1
       type: object
     NetworkListUuidResponseEntry:
+        oneOf:
+        - $ref: '#/components/schemas/NetworkListUuidResponseEntryString'
+        - $ref: '#/components/schemas/NetworkListUuidResponseEntryInt'
+    NetworkListUuidResponseEntryString:
       properties:
         last_editor:
           type: string
@@ -257,6 +270,27 @@ components:
             type: string
           example:
             - 192.168.0.1
+      type: object
+    NetworkListUuidResponseEntryInt:
+      properties:
+        last_editor:
+          type: string
+          example: Azion
+        last_modified:
+          type: string
+          example: 2023-08-10T05:00:07.893747Z
+        list_type:
+          type: string
+          example: asn
+        name:
+          type: string
+          example: Network List created using the API
+        items_values:
+          type: array
+          items:
+            type: integer
+          example:
+            - 1234
       type: object
     CreateNetworkListsRequest:
       properties:
