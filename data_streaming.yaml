@@ -147,7 +147,7 @@ paths:
         - Data Streaming
       summary: Get expecific data streaming by Data Streaming ID
       description: Use the GET method and add the data streaming's ID to the URI of the request to get more data on a specific data streaming.
-      operationId: List Data Streaming by ID
+      operationId: ListDataStreamingById
       parameters: 
       - in: path
         required: true
@@ -185,7 +185,7 @@ paths:
       description: |
         Use the PUT method to overwrite the data streaming. Although  you can change a single property using the PUT method, you must pass all fields for the request to be completed.
         
-      operationId: Overwrite data streaming by ID
+      operationId: OverwriteDataStreamingById
       parameters: 
       - in: path
         required: true
@@ -237,7 +237,7 @@ paths:
       description: |
         Use the PATCH method to change only select settings of your data streaming.
         
-      operationId: Edit data streaming by ID
+      operationId: EditDataStreamingById
       parameters: 
       - in: path
         required: true
@@ -289,7 +289,7 @@ paths:
       description: |
         Use the DELETE method to remove a data streaming from your account.
       
-      operationId: Delete data streaming by ID
+      operationId: DeleteDataStreamingById
       parameters: 
       - in: path
         required: true
@@ -326,7 +326,7 @@ paths:
         Use the GET method to list all global templates that can be used on Data Streaming operations.
         
         **Note:** Customized templates won't be listed.
-      operationId: List Data Streaming Templates 
+      operationId: ListDataStreamingTemplates 
       responses:
         '200':
           description: Successful operation
