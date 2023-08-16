@@ -271,9 +271,9 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                  - $ref: '#/components/schemas/CreateDataStreamingResponse'
-                  - $ref: '#/components/schemas/CreateCustomDataStreamingResponse'
+                # oneOf:
+                $ref: '#/components/schemas/CreateDataStreamingResponse'
+                #  - $ref: '#/components/schemas/CreateCustomDataStreamingResponse'
               examples:
                 KafkaExample:
                   value:
@@ -285,25 +285,26 @@ paths:
                         active: true
                         endpoint:
                           endpoint_type: kafka
-                          use_tls: false
                           kafka_topic: "mykafka.dts.topic"
                           bootstrap_servers: "infra.my.net:9094,infra.my.net:9094"
+                          use_tls: false
+                        # domains_ids: [1656613172]
                         all_domains: false
                     schema_version: 3
-                CustomExample:
-                  value:
-                    results:
-                      - id: 1596
-                        name: "DTS - Custom template"
-                        data_source: http
-                        active: true
-                        endpoint:
-                          endpoint_type: datadog
-                          url: "http://mydatadoghost.com"
-                          api_key: "BNIAudh9s8dASJKLhksaidua9i9"
-                        all_domains: false
-                        template_model: "{\"custom_template_field\":\"$custom_value\", \"status\":\"$status\"}"
-                    schema_version: 3
+                # CustomExample:
+                #   value:
+                #     results:
+                #       - id: 1596
+                #         name: "DTS - Custom template"
+                #         data_source: http
+                #         active: true
+                #         endpoint:
+                #           endpoint_type: datadog
+                #           url: "http://mydatadoghost.com"
+                #           api_key: "BNIAudh9s8dASJKLhksaidua9i9"
+                #         all_domains: false
+                #         template_model: "{\"custom_template_field\":\"$custom_value\", \"status\":\"$status\"}"
+                #     schema_version: 3
           
         '400':
           description: Bad Request
@@ -364,9 +365,9 @@ paths:
           content:
             application/json:
               schema:
-                oneOf:
-                  - $ref: '#/components/schemas/CreateDataStreamingResponse'
-                  - $ref: '#/components/schemas/CreateCustomDataStreamingResponse'
+                # oneOf:
+                $ref: '#/components/schemas/CreateDataStreamingResponse'
+                #  - $ref: '#/components/schemas/CreateCustomDataStreamingResponse'
               examples:
                 KafkaExample:
                   value:
@@ -378,25 +379,26 @@ paths:
                         active: true
                         endpoint:
                           endpoint_type: kafka
-                          use_tls: false
                           kafka_topic: "mykafka.dts.topic"
                           bootstrap_servers: "infra.my.net:9094,infra.my.net:9094"
+                          use_tls: false
+                        # domains_ids: [1656613172]
                         all_domains: false
                     schema_version: 3
-                CustomExample:
-                  value:
-                    results:
-                      - id: 1596
-                        name: "DTS - Custom template"
-                        data_source: http
-                        active: true
-                        endpoint:
-                          endpoint_type: datadog
-                          url: "http://mydatadoghost.com"
-                          api_key: "BNIAudh9s8dASJKLhksaidua9i9"
-                        all_domains: false
-                        template_model: "{\"custom_template_field\":\"$custom_value\", \"status\":\"$status\"}"
-                    schema_version: 3
+                # CustomExample:
+                #   value:
+                #     results:
+                #       - id: 1596
+                #         name: "DTS - Custom template"
+                #         data_source: http
+                #         active: true
+                #         endpoint:
+                #           endpoint_type: datadog
+                #           url: "http://mydatadoghost.com"
+                #           api_key: "BNIAudh9s8dASJKLhksaidua9i9"
+                #         all_domains: false
+                #         template_model: "{\"custom_template_field\":\"$custom_value\", \"status\":\"$status\"}"
+                #     schema_version: 3
           
         '400':
           description: Bad Request
