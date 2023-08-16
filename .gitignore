@@ -13,3 +13,6 @@ javascript/
 # Environments
 *env*
 *ENV*
+
+#hypothesis
+.hypothesis
