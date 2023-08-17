@@ -418,8 +418,19 @@ components:
           default: true
           
         endpoint:
-          type: string
-          format: json
+          oneOf:
+            - $ref: '#/components/schemas/Endpoint_Standard'
+            - $ref: '#/components/schemas/Endpoint_Kafka'
+            - $ref: '#/components/schemas/Endpoint_S3'
+            - $ref: '#/components/schemas/Endpoint_Google_BigQuery'
+            - $ref: '#/components/schemas/Endpoint_Elasticsearch'
+            - $ref: '#/components/schemas/Endpoint_AWS_Kinesis_Firehose'
+            - $ref: '#/components/schemas/Endpoint_Datadog'
+            - $ref: '#/components/schemas/Endpoint_IBM_QRadar'
+            - $ref: '#/components/schemas/Endpoint_Azure_Monitor'
+            - $ref: '#/components/schemas/Endpoint_Azure_Blob_Storage'
+            - $ref: '#/components/schemas/Endpoint_Splunk'
+
           description: > 
             Options' examples:
              - `Standard HTTP/HTTPS POST` - { "endpoint_type": "standard", "url": "http://example.com", "log_line_separator": "\n", "payload_format": "$dataset", "max_size": 1000024 }
@@ -510,8 +521,18 @@ components:
           default: true
           
         endpoint:
-          type: string
-          format: json
+          oneOf:
+            - $ref: '#/components/schemas/Endpoint_Standard'
+            - $ref: '#/components/schemas/Endpoint_Kafka'
+            - $ref: '#/components/schemas/Endpoint_S3'
+            - $ref: '#/components/schemas/Endpoint_Google_BigQuery'
+            - $ref: '#/components/schemas/Endpoint_Elasticsearch'
+            - $ref: '#/components/schemas/Endpoint_AWS_Kinesis_Firehose'
+            - $ref: '#/components/schemas/Endpoint_Datadog'
+            - $ref: '#/components/schemas/Endpoint_IBM_QRadar'
+            - $ref: '#/components/schemas/Endpoint_Azure_Monitor'
+            - $ref: '#/components/schemas/Endpoint_Azure_Blob_Storage'
+            - $ref: '#/components/schemas/Endpoint_Splunk'
           description: > 
             Options' examples:
              - `Standard HTTP/HTTPS POST` - { "endpoint_type": "standard", "url": "http://example.com", "log_line_separator": "\n", "payload_format": "$dataset", "max_size": 1000024 }
@@ -593,8 +614,18 @@ components:
           default: true
         
         endpoint:
-          type: string
-          format: json
+          oneOf:
+            - $ref: '#/components/schemas/Endpoint_Standard'
+            - $ref: '#/components/schemas/Endpoint_Kafka'
+            - $ref: '#/components/schemas/Endpoint_S3'
+            - $ref: '#/components/schemas/Endpoint_Google_BigQuery'
+            - $ref: '#/components/schemas/Endpoint_Elasticsearch'
+            - $ref: '#/components/schemas/Endpoint_AWS_Kinesis_Firehose'
+            - $ref: '#/components/schemas/Endpoint_Datadog'
+            - $ref: '#/components/schemas/Endpoint_IBM_QRadar'
+            - $ref: '#/components/schemas/Endpoint_Azure_Monitor'
+            - $ref: '#/components/schemas/Endpoint_Azure_Blob_Storage'
+            - $ref: '#/components/schemas/Endpoint_Splunk'
           description: > 
             Options' examples:
              - `Standard HTTP/HTTPS POST` - { "endpoint_type": "standard", "url": "http://example.com", "log_line_separator": "\n", "payload_format": "$dataset", "max_size": 1000024 }
@@ -710,9 +741,9 @@ components:
           type: array
           items:
             oneOf:
-              - $ref: '#/components/schemas/Endpoint_Default'
+              - $ref: '#/components/schemas/Endpoint_Standard'
               - $ref: '#/components/schemas/Endpoint_Kafka'
-              - $ref: '#/components/schemas/Endpoinrt_S3'
+              - $ref: '#/components/schemas/Endpoint_S3'
               - $ref: '#/components/schemas/Endpoint_Google_BigQuery'
               - $ref: '#/components/schemas/Endpoint_Elasticsearch'
               - $ref: '#/components/schemas/Endpoint_AWS_Kinesis_Firehose'
@@ -773,7 +804,7 @@ components:
             Note:
              * Field not used with the rtm_activity data source.
 
-    Endpoint_Default:
+    Endpoint_Standard:
       type: object
       properties:
         endpoint_type:
@@ -797,7 +828,11 @@ components:
             example:
               additional_header: additional_header_value
           maximum: 5
-          
+      required:
+        - endpoint_type
+        - url
+        - payload_format
+        - log_line_separator
           
     Endpoint_Kafka:
       type: object
@@ -811,8 +846,12 @@ components:
           type: string
         use_tls:
           type: boolean
-          
-    Endpoinrt_S3:
+      required:
+        - endpoint_type
+        - kafka_topic
+        - bootstrap_servers
+
+    Endpoint_S3:
       type: object
       properties:
         endpoint_type:
@@ -833,6 +872,14 @@ components:
           format: uri
         secret_key:
           type: string
+      required:
+        - endpoint_type
+        - access_key
+        - secret_key
+        - content_type
+        - bucket_name
+        - host_url
+        - region
           
     Endpoint_Google_BigQuery:
       type: object
@@ -851,6 +898,12 @@ components:
           properties:
             service_account_key:
               type: string
+      required:
+        - endpoint_type
+        - project_id
+        - table_id
+        - service_account_key
+        - dataset_id
       
     Endpoint_Elasticsearch:
       type: object
@@ -863,6 +916,10 @@ components:
           format: uri
         api_key:
           format: string
+      required:
+        - endpoint_type
+        - url
+        - api_key
           
     Endpoint_AWS_Kinesis_Firehose:
       type: object
@@ -878,18 +935,28 @@ components:
           type: string
         secret_key:
           type: string
-          
+      required:
+        - endpoint_type
+        - access_key
+        - secret_key
+        - stream_name
+        - region
+
     Endpoint_Datadog:
       type: object
       properties:
         endpoint_type:
           type: string
           example: "datadog"
-        url:
+        datadog_url:
           type: string
           format: uri
         api_key:
           format: string
+      required:
+        - endpoint_type
+        - api_key
+        - datadog_url
         
     Endpoint_IBM_QRadar:
       type: object
@@ -900,6 +967,9 @@ components:
         url:
           type: string
           format: uri
+      required:
+        - endpoint_type
+        - url
           
     Endpoint_Azure_Monitor:
       type: object
@@ -916,6 +986,11 @@ components:
         workspace_id:
           type: string
           pattern: '[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{6}'
+      required:
+        - endpoint_type
+        - log_type
+        - shared_key
+        - workspace_id
           
     Endpoint_Azure_Blob_Storage:
       type: object
@@ -930,6 +1005,11 @@ components:
         blob_sas_token:
           type: string
           pattern: '[a-zA-Z0-9]{15}'
+      required:
+        - endpoint_type
+        - storage_account
+        - container_name
+        - blob_sas_token
           
     Endpoint_Splunk:
       type: object
@@ -942,6 +1022,10 @@ components:
           format: uri
         api_key:
           type: string
+      required:
+        - endpoint_type
+        - api_key
+        - url
   
   
     DataStreamingResponseWithResults:
@@ -1004,6 +1088,7 @@ components:
             $ref: '#/components/schemas/DataStreamingEndpointTypeKafka'
         all_domains:
           type: boolean
+
     
     DataStreamingEndpointTypeKafka:
       type: object
@@ -1016,7 +1101,10 @@ components:
           type: string
         bootstrap_servers:
           type: string
-          
+      required:
+        - kafka_topic
+        - bootstrap_servers
+
     DataStreamingResponseGetResultTypeStandard:
       type: object
       properties:
@@ -1051,6 +1139,10 @@ components:
           type: integer
         headers:
           $ref: '#/components/schemas/DataStreamingEndpointTypeStandardHeadersExample'
+      required:
+        - url
+        - payload_format
+        - log_line_separator
 
     DataStreamingEndpointTypeStandardHeadersExample:
       type: object
