@@ -120,6 +120,33 @@ paths:
                 type: string
         '404':
           description: Not Found
+    delete:
+      summary: Delete a Network Lists set by uuid
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json; version=3
+        - name: uuid
+          in: path
+          schema:
+            type: string
+          required: true
+          description: "The id of the networkList to be deleted.\t"
+      responses:
+        "204":
+          description: No Content
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "422":
+          description: Unprocessable Entity
+        "500":
+          description: Internal Server Error
     put:
       summary: Overwrite some Network Lists attributes
       parameters:
@@ -328,7 +355,8 @@ components:
         results:
           $ref: '#/components/schemas/NetworkListResponseEntry'
         schema_version:
-          type: number
+          format: int64
+          type: integer
           example: 3
       type: object
     NetworkListUuidResponse:
