@@ -50,6 +50,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListEdgeFirewallResponse'
+        "404":
+          description: Not found
     post:
       summary: Create a edge firewall
       requestBody:
@@ -62,7 +64,7 @@ paths:
         "201":
           description: Edge firewall created
         "400":
-          description: Internal Server Error
+          description: Bad Request
         "500":
           description: Internal Server Error
   /edge_firewall/{uuid}:
@@ -83,6 +85,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EdgeFirewallResponse'
+        "404":
+          description: Not found
+        "400":
+          description: Bad Request
     put:
       summary: "Overwrite some edge firewall attributes, like \"active\""
       parameters:
@@ -110,6 +116,8 @@ paths:
           description: Bad Request
         "500":
           description: Internal Server Error
+        "404":
+          description: Not found
     delete:
       summary: Delete an edge firewall by uuid
       parameters:
@@ -123,6 +131,10 @@ paths:
       responses:
         "204":
           description: Successfully deleted
+        "404":
+          description: Not found
+        "400":
+          description: Bad Request
     patch:
       summary: "Update some edge firewall attributes, like \"active\""
       parameters:
@@ -157,8 +169,10 @@ components:
       properties:
         previous:
           type: string
+          nullable: true
         next:
           type: string
+          nullable: true
       example:
         next: next
         previous: previous
