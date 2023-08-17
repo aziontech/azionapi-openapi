@@ -85,10 +85,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/EdgeFirewallResponse'
-        "404":
-          description: Not found
         "400":
           description: Bad Request
+        "404":
+          description: Not found
     put:
       summary: "Overwrite some edge firewall attributes, like \"active\""
       parameters:
@@ -114,10 +114,10 @@ paths:
                 $ref: '#/components/schemas/ListEdgeFirewallResponse'
         "400":
           description: Bad Request
-        "500":
-          description: Internal Server Error
         "404":
           description: Not found
+        "500":
+          description: Internal Server Error
     delete:
       summary: Delete an edge firewall by uuid
       parameters:
@@ -131,10 +131,10 @@ paths:
       responses:
         "204":
           description: Successfully deleted
-        "404":
-          description: Not found
         "400":
           description: Bad Request
+        "404":
+          description: Not found
     patch:
       summary: "Update some edge firewall attributes, like \"active\""
       parameters:
