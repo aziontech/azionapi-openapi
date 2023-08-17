@@ -160,6 +160,8 @@ paths:
                 $ref: '#/components/schemas/ListEdgeFirewallResponse'
         "400":
           description: Bad Request
+        "404":
+          description: Not found
         "500":
           description: Internal Server Error
 components:
