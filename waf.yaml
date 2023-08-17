@@ -38,7 +38,18 @@ paths:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/WAFDomains200'
-        
+        "400":
+          description: Bad request
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/WAFEvents400'
+        "404":
+          description: data not found
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/WAFEvents404'   
   /waf/{wafId}/waf_events:
     get:
       tags:
@@ -86,18 +97,20 @@ paths:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/WAFEvents400'
-        "404":
-          description: data not found
-          content:
-            application/json; version=3:
-              schema:
-                $ref: '#/components/schemas/WAFEvents404'
         "401":
           description: unauthorized operation
           content:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/WAFEvents401'
+        "404":
+          description: data not found
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/WAFEvents404'
+        "500":
+          description: Internal server error
 components:
   schemas:
     WAFDomains200:
