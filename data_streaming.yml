@@ -464,7 +464,14 @@ components:
             Note:
              * `Range` - From 0 to 100.
              * `To use:` [Contact the sales team](https://www.azion.com/en/contact-sales/) to activate this feature in your account.
-          
+
+      required:
+        - name
+        - template_id
+        - endpoint
+        - domains_ids
+
+
     StandardDataStreamingPostBody:
       type: object
       properties:
@@ -503,7 +510,21 @@ components:
           default: true
           
         endpoint:
-            $ref: '#/components/schemas/DataStreamingEndpointTypeStandard'
+          type: string
+          format: json
+          description: > 
+            Options' examples:
+             - `Standard HTTP/HTTPS POST` - { "endpoint_type": "standard", "url": "http://example.com", "log_line_separator": "\n", "payload_format": "$dataset", "max_size": 1000024 }
+             - `Apache Kafka` - { "endpoint_type": "kafka", "kafka_topic": "example_topic", "bootstrap_servers": "kafka-server.com:9092,kafka-server-2.com:9092", "use_tls":true }
+             - `Simple Storage Service (S3)` - { "endpoint_type": "s3", "access_key": "MYACCESSKEY", "region": "us-east-1", "object_key_prefix": "my_prefix_", "bucket_name": "bucket_example", "content_type": "plain/text", "host_url": "http://aws-host.com", "secret_key": "MYSECRETKEY" }
+             - `Google BigQuery` - { "endpoint_type": "big_query", "dataset_id": "my_dataset", "project_id": "my_project", "table_id": "my_table", "service_account_key": "{ "service_account_key": "key_content" }" }
+             - `Elasticsearch` - { “endpoint_type”: "elasticsearch", “url”: “http://elasticsearch.com”, “api_key”: “XYZ_API_KEY” }
+             - `AWS Kinesis Data Firehose` -  { "endpoint_type": "aws_kinesis_firehose", "access_key": "MYACCESSKEY", "stream_name": "my_stream_name", "region": "us-east-1", "secret_key": "MYSECRETKEY" }
+             - `Datadog` - { "endpoint_type": "datadog", "url": "https://http-intake.logs.datadoghq.com/v1/input", "api_key": "MYAPIKEY" }
+             - `IBM QRadar` - { "endpoint_type": "qradar", "url": "http://137.15.824.10:14440” }
+             - `Azure Monitor` - { "endpoint_type": "azure_monitor", "log_type": "myLogType", "shared_key": "mysharedkey", "time_generated_field": "timeGeneratedField", "workspace_id": "anfhw-123sd-466gcs"}
+             - `Azure Blob Storage` - { "endpoint_type": "azure_blob_storage", "storage_account": "mystorageaccount", "container_name": "log_container", "blob_sas_token": "fd56e23e1f12efe" }
+             - `Splunk` - { "endpoint_type": "splunk", "url": "https://inputs.splunk-client.splunkcloud.com:1337/services/collector", "api_key": "MYAPIKEY" }
         
         domains_ids:
           type: array
@@ -513,6 +534,8 @@ components:
           description: > 
             Note:
              * Field not used with the rtm_activity data source.
+          # OpenAPI 3.0 does not support parameter dependencies and mutually exclusive parameters.
+          #   Link: https://stackoverflow.com/questions/63209596/how-to-indicate-that-a-parameter-is-conditionally-required-when-another-paramete/63213464#63213464
           
         all_domains:
           type: boolean
@@ -521,6 +544,24 @@ components:
           description: > 
             Note:
              * Field not used with the rtm_activity data source.
+          # OpenAPI 3.0 does not support parameter dependencies and mutually exclusive parameters.
+          #   Link: https://stackoverflow.com/questions/63209596/how-to-indicate-that-a-parameter-is-conditionally-required-when-another-paramete/63213464#63213464
+          
+        sampling_percentage:
+          type: integer
+          nullable: true
+          minimum: 0
+          maximum: 100
+          description: > 
+            Note:
+             * `Range` - From 0 to 100.
+             * `To use:` [Contact the sales team](https://www.azion.com/en/contact-sales/) to activate this feature in your account.
+
+      required:
+        - name
+        - template_id
+        - endpoint
+        - domains_ids
         
     CustomDataStreamingPostBody:
       type: object
@@ -551,6 +592,59 @@ components:
           nullable: true
           default: true
         
+        endpoint:
+          type: string
+          format: json
+          description: > 
+            Options' examples:
+             - `Standard HTTP/HTTPS POST` - { "endpoint_type": "standard", "url": "http://example.com", "log_line_separator": "\n", "payload_format": "$dataset", "max_size": 1000024 }
+             - `Apache Kafka` - { "endpoint_type": "kafka", "kafka_topic": "example_topic", "bootstrap_servers": "kafka-server.com:9092,kafka-server-2.com:9092", "use_tls":true }
+             - `Simple Storage Service (S3)` - { "endpoint_type": "s3", "access_key": "MYACCESSKEY", "region": "us-east-1", "object_key_prefix": "my_prefix_", "bucket_name": "bucket_example", "content_type": "plain/text", "host_url": "http://aws-host.com", "secret_key": "MYSECRETKEY" }
+             - `Google BigQuery` - { "endpoint_type": "big_query", "dataset_id": "my_dataset", "project_id": "my_project", "table_id": "my_table", "service_account_key": "{ "service_account_key": "key_content" }" }
+             - `Elasticsearch` - { “endpoint_type”: "elasticsearch", “url”: “http://elasticsearch.com”, “api_key”: “XYZ_API_KEY” }
+             - `AWS Kinesis Data Firehose` -  { "endpoint_type": "aws_kinesis_firehose", "access_key": "MYACCESSKEY", "stream_name": "my_stream_name", "region": "us-east-1", "secret_key": "MYSECRETKEY" }
+             - `Datadog` - { "endpoint_type": "datadog", "url": "https://http-intake.logs.datadoghq.com/v1/input", "api_key": "MYAPIKEY" }
+             - `IBM QRadar` - { "endpoint_type": "qradar", "url": "http://137.15.824.10:14440” }
+             - `Azure Monitor` - { "endpoint_type": "azure_monitor", "log_type": "myLogType", "shared_key": "mysharedkey", "time_generated_field": "timeGeneratedField", "workspace_id": "anfhw-123sd-466gcs"}
+             - `Azure Blob Storage` - { "endpoint_type": "azure_blob_storage", "storage_account": "mystorageaccount", "container_name": "log_container", "blob_sas_token": "fd56e23e1f12efe" }
+             - `Splunk` - { "endpoint_type": "splunk", "url": "https://inputs.splunk-client.splunkcloud.com:1337/services/collector", "api_key": "MYAPIKEY" }
+        
+        domains_ids:
+          type: array
+          items:       
+            type: integer
+          minItems: 1
+          description: > 
+            Note:
+             * Field not used with the rtm_activity data source.
+          # OpenAPI 3.0 does not support parameter dependencies and mutually exclusive parameters.
+          #   Link: https://stackoverflow.com/questions/63209596/how-to-indicate-that-a-parameter-is-conditionally-required-when-another-paramete/63213464#63213464
+          
+        all_domains:
+          type: boolean
+          nullable: true
+          default: false
+          description: > 
+            Note:
+             * Field not used with the rtm_activity data source.
+          # OpenAPI 3.0 does not support parameter dependencies and mutually exclusive parameters.
+          #   Link: https://stackoverflow.com/questions/63209596/how-to-indicate-that-a-parameter-is-conditionally-required-when-another-paramete/63213464#63213464
+          
+        sampling_percentage:
+          type: integer
+          nullable: true
+          minimum: 0
+          maximum: 100
+          description: > 
+            Note:
+             * `Range` - From 0 to 100.
+             * `To use:` [Contact the sales team](https://www.azion.com/en/contact-sales/) to activate this feature in your account.
+
+      required:
+        - name
+        - template_id
+        - endpoint
+        - domains_ids
       
         
     CreateDataStreamingResponse:
