@@ -2453,6 +2453,8 @@ components:
           type: boolean
         http3:
           type: boolean
+        websocket:
+          type: boolean
       required:
       - name
       type: object
@@ -2631,6 +2633,8 @@ components:
         raw_logs:
           type: boolean
         web_application_firewall:
+          type: boolean
+        websocket:
           type: boolean
       type: object
     ApplicationUpdateResponse:
@@ -2812,6 +2816,8 @@ components:
         debug_rules:
           type: boolean
         http3:
+          type: boolean
+        websocket:
           type: boolean
         supported_ciphers:
           type: string
