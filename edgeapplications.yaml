@@ -2471,6 +2471,7 @@ components:
           raw_logs: true
           active: true
           http3: true
+          websocket: true
           supported_ciphers: supported_ciphers
           debug_rules: true
           delivery_protocol: delivery_protocol
@@ -2685,6 +2686,7 @@ components:
         raw_logs: true
         active: true
         http3: true
+        websocket: true
         supported_ciphers: supported_ciphers
         debug_rules: true
         delivery_protocol: delivery_protocol
@@ -2838,6 +2840,7 @@ components:
           device_detection: true
           raw_logs: true
           http3: true
+          websocket: true
           active: true
           delivery_protocol: delivery_protocol
           edge_firewall: true
