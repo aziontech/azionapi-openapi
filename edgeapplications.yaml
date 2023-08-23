@@ -2294,6 +2294,7 @@ components:
           active: true
           debug_rules: true
           http3: true
+          websocket: true
           supported_ciphers: supported_ciphers
           delivery_protocol: delivery_protocol
           edge_firewall: true
@@ -2452,6 +2453,8 @@ components:
         l2_caching:
           type: boolean
         http3:
+          type: boolean
+        websocket:
           type: boolean
       required:
       - name
@@ -2631,6 +2634,8 @@ components:
         raw_logs:
           type: boolean
         web_application_firewall:
+          type: boolean
+        websocket:
           type: boolean
       type: object
     ApplicationUpdateResponse:
@@ -2812,6 +2817,8 @@ components:
         debug_rules:
           type: boolean
         http3:
+          type: boolean
+        websocket:
           type: boolean
         supported_ciphers:
           type: string
