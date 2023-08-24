@@ -31,6 +31,8 @@ paths:
         '200':
           description: Successful operation
           content:
+            application/json; version=3:
+              {}
             application/json:
               schema:
                 $ref: '#/components/schemas/DataStreamingResponseWithResults' 
@@ -71,6 +73,8 @@ paths:
         '201':
           description: Created successfully
           content:
+            application/json; version=3:
+              {}
             application/json:
               schema:
                 oneOf:
@@ -123,6 +127,8 @@ paths:
         '200':
           description: Successful operation
           content:
+            application/json; version=3:
+              {}
             application/json:
               schema:
                 $ref: '#/components/schemas/DataStreamingsDomainResponse' 
@@ -158,6 +164,8 @@ paths:
         '200':
           description: Successful operation
           content:
+            application/json; version=3:
+              {}
             application/json:
               schema:
                 $ref: '#/components/schemas/DataStreamingsById' 
@@ -205,6 +213,8 @@ paths:
         '200':
           description: Successful operation
           content:
+            application/json; version=3:
+              {}
             application/json:
               schema:
                 oneOf:
@@ -257,6 +267,8 @@ paths:
         '200':
           description: Successful operation
           content:
+            application/json; version=3:
+              {}
             application/json:
               schema:
                 oneOf:
@@ -325,6 +337,8 @@ paths:
         '200':
           description: Successful operation
           content:
+            application/json; version=3:
+              {}
             application/json:
               schema:
                 $ref: '#/components/schemas/TemplateResults' 
@@ -360,6 +374,8 @@ paths:
         '200':
           description: Successful operation
           content:
+            application/json; version=3:
+              {}
             application/json:
               schema:
                 $ref: '#/components/schemas/TemplateResultById'
