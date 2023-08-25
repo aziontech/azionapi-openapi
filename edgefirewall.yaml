@@ -22,6 +22,7 @@ paths:
         explode: true
         schema:
           type: integer
+          format: int64
       - name: page_size
         in: query
         required: false
@@ -29,6 +30,7 @@ paths:
         explode: true
         schema:
           type: integer
+          format: int64
       - name: sort
         in: query
         required: false
@@ -63,6 +65,10 @@ paths:
       responses:
         "201":
           description: Edge firewall created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EdgeFirewallResponse'
         "400":
           description: Bad Request
         "500":
@@ -111,7 +117,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListEdgeFirewallResponse'
+                $ref: '#/components/schemas/EdgeFirewallResponse'
         "400":
           description: Bad Request
         "404":
@@ -157,7 +163,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ListEdgeFirewallResponse'
+                $ref: '#/components/schemas/EdgeFirewallResponse'
         "400":
           description: Bad Request
         "404":
@@ -204,6 +210,7 @@ components:
           type: array
           items:
             type: integer
+            format: int64
       example:
         is_active: true
         last_editor: last_editor
@@ -276,6 +283,7 @@ components:
           type: array
           items:
             type: integer
+            format: int64
         is_active:
           type: boolean
         edge_functions_enabled:
@@ -307,7 +315,23 @@ components:
           last_modified: last_modified
           debug_rules: true
     UpdateEdgeFirewallRequest:
-      $ref: '#/components/schemas/ListEdgeFirewallResponse'
+      type: object
+      properties:
+        name:
+          type: string
+        domains:
+          type: array
+          items:
+            type: integer
+            format: int64
+        is_active:
+          type: boolean
+        edge_functions_enabled:
+          type: boolean
+        network_protection_enabled:
+          type: boolean
+        waf_enabled:
+          type: boolean
   securitySchemes:
     tokenAuth:
       type: apiKey
