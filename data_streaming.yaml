@@ -53,7 +53,7 @@ paths:
       tags:
         -  Data Streaming
       summary: Create a new data streaming
-      description:
+      description: Create a new data streaming.
       operationId: CreateNewDataStreaming
       requestBody:
         required: true
