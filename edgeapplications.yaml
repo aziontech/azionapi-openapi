@@ -2413,6 +2413,7 @@ components:
         cdn_cache_settings: cdn_cache_settings
         origin_protocol_policy: origin_protocol_policy
         name: name
+        minimum_tls_version: minimum_tls_version
         delivery_protocol: delivery_protocol
         browser_cache_settings_maximum_ttl: 0
         origin_type: origin_type
@@ -2428,6 +2429,8 @@ components:
         origin_type:
           type: string
         address:
+          type: string
+        minimum_tls_version:
           type: string
         origin_protocol_policy:
           type: string
