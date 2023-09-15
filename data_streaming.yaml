@@ -55,10 +55,7 @@ paths:
       tags:
         -  Data Streaming
       summary: Create a new data streaming
-      description: |        
-        
-
-        
+      description: Create a new data streaming.
       operationId: CreateNewDataStreaming
       requestBody:
         required: true
@@ -480,7 +477,8 @@ components:
             Note:
              * `Range` - From 0 to 100.
              * `To use:` [Contact the sales team](https://www.azion.com/en/contact-sales/) to activate this feature in your account.
-          
+      additionalProperties: false
+
     StandardDataStreamingPostBody:
       type: object
       properties:
@@ -537,7 +535,8 @@ components:
           description: > 
             Note:
              * Field not used with the rtm_activity data source.
-        
+      additionalProperties: false
+
     CustomDataStreamingPostBody:
       type: object
       properties:
@@ -566,9 +565,8 @@ components:
           type: boolean
           nullable: true
           default: true
-        
-      
-        
+      additionalProperties: false
+
     CreateDataStreamingResponse:
       type: object
       properties:
@@ -1088,4 +1086,3 @@ components:
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
-        
