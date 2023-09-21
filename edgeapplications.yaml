@@ -4486,11 +4486,17 @@ components:
           type: string
       required:
       - name
+      - target
       type: object
     RulesEngineBehaviorObject:
       example:
         name: name
-        target: target
+        target:
+          type: object
+          properties:
+          - captured_array: string
+          - subject: string
+          - regex: string
       properties:
         name:
           type: string
@@ -4505,6 +4511,7 @@ components:
                   type: string
       required:
         - name
+        - target
       type: object
     RulesEngineResponse:
       additionalProperties: false
