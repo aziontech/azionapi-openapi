@@ -4289,7 +4289,7 @@ components:
           type: array
         behaviors:
           items:
-            $ref: '#/components/schemas/RulesEngineBehavior'
+            $ref: '#/components/schemas/RulesEngineBehaviorEntry'
           type: array
       required:
       - behaviors
@@ -4337,7 +4337,7 @@ components:
           type: array
         behaviors:
           items:
-            $ref: '#/components/schemas/RulesEngineBehavior'
+            $ref: '#/components/schemas/RulesEngineBehaviorEntry'
           type: array
       required:
       - behaviors
@@ -4385,7 +4385,7 @@ components:
           type: array
         behaviors:
           items:
-            $ref: '#/components/schemas/RulesEngineBehavior'
+            $ref: '#/components/schemas/RulesEngineBehaviorEntry'
           type: array
       type: object
     RulesEngineResultResponse:
@@ -4427,7 +4427,7 @@ components:
           type: string
         behaviors:
           items:
-            $ref: '#/components/schemas/RulesEngineResultResponse_behaviors'
+            $ref: '#/components/schemas/RulesEngineBehaviorEntry'
           type: array
         criteria:
           items:
@@ -4470,8 +4470,12 @@ components:
       - operator
       - variable
       type: object
-    RulesEngineBehavior:
-      additionalProperties: false
+    RulesEngineBehaviorEntry:
+      anyOf:
+        - $ref: '#/components/schemas/RulesEngineBehaviorString'
+        - $ref: '#/components/schemas/RulesEngineBehaviorObject'
+    RulesEngineBehaviorString:
+      nullable: true
       example:
         name: name
         target: target
@@ -4479,11 +4483,26 @@ components:
         name:
           type: string
         target:
-          oneOf:
-            - type: string
-            - type: number
-            - type: object
-              properties:
+          type: string
+      required:
+      - name
+      - target
+      type: object
+    RulesEngineBehaviorObject:
+      example:
+        name: name
+        target:
+          type: object
+          properties:
+          - captured_array: string
+          - subject: string
+          - regex: string
+      properties:
+        name:
+          type: string
+        target:
+            type: object
+            properties:
                 captured_array:
                   type: string
                 subject:
@@ -4491,7 +4510,8 @@ components:
                 regex:
                   type: string
       required:
-      - name
+        - name
+        - target
       type: object
     RulesEngineResponse:
       additionalProperties: false
@@ -4673,18 +4693,6 @@ components:
         next:
           nullable: true
           type: string
-      type: object
-    RulesEngineResultResponse_behaviors:
-      example:
-        name: name
-        target: target
-      properties:
-        name:
-          type: string
-        target:
-          type: string
-      required:
-      - name
       type: object
   securitySchemes:
     tokenAuth:
