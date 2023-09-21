@@ -365,6 +365,16 @@ components:
         name:
           type: string
           enum: [deny, drop, set_rate_limit, set_waf_ruleset, run_function, tag_event]
+        target:
+          type: string
+
+    Variables:
+      type: string
+      enum: [header_accept, header_accept_encoding, header_accept_language, header_cookie, header_origin, header_referer, header_user_agent, host, network, request_args, request_method, request_uri, scheme, client_certificate_validation]
+          
+    Conditionals:
+      type: string
+      enum: [if, and, or]
       
     SSLVerificationStatusOperators:
       type: string
@@ -377,9 +387,13 @@ components:
     SSLVerificationStatusCriteria:
       type: object
       properties:
+        variable:
+          $ref: '#/components/schemas/Variables'
         operator:
           $ref: '#/components/schemas/SSLVerificationStatusOperators'
-        argument:
+        conditional:
+          $ref: '#/components/schemas/Conditionals'
+        input_value:
           $ref: '#/components/schemas/SSLVerificationStatusArguments'
       
     RuleSet:
