@@ -170,7 +170,34 @@ paths:
           description: Not found
         "500":
           description: Internal Server Error
+  /edge_firewall/{edge_firewall_id}/rules_engine:
+    parameters:
+      - $ref: '#/components/parameters/edge_firewall_id'
+    post:
+      summary: Create a new rule set for an edge firewall.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateRuleSetRequest'
+      responses:
+        "201":
+          description: Rule Set created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetResponse'
 components:
+  parameters:
+    edge_firewall_id:
+      in: path
+      name: edge_firewall_id
+      required: true
+      schema:
+        type: integer
+        format: int64
+        minimum: 1
+
   schemas:
     Links:
       type: object
@@ -332,6 +359,62 @@ components:
           type: boolean
         waf_enabled:
           type: boolean
+
+    Behaviors:
+      type: string
+      enum: [deny, drop, set_rate_limit, set_waf_ruleset, run_function, tag_event]
+      
+    SSLVerificationStatusOperators:
+      type: string
+      enum: [is_equal, is_not_equal]
+      
+    SSLVerificationStatusArguments:
+      type: string
+      enum: [SUCCESS, CERTIFICATE_VERIFICATION_ERROR, MISSING_CLIENT_CERTIFICATE]
+      
+    SSLVerificationStatusCriteria:
+      type: object
+      properties:
+        operator:
+          $ref: '#/components/schemas/SSLVerificationStatusOperators'
+        argument:
+          $ref: '#/components/schemas/SSLVerificationStatusArguments'
+      
+    RuleSet:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        criteria:
+          type: object
+          
+    CreateRuleSetRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        is_active:
+          type: boolean
+        behaviors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Behaviors'
+        criteria:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/SSLVerificationStatusCriteria'
+
+    RuleSetResponse:
+      type: object
+      properties:
+        results:
+            $ref: '#/components/schemas/RuleSet'
+
   securitySchemes:
     tokenAuth:
       type: apiKey
