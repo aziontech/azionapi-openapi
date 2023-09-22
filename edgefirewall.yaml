@@ -428,8 +428,34 @@ components:
     RuleSetResponse:
       type: object
       properties:
-        results:
-            $ref: '#/components/schemas/RuleSet'
+        name:
+          type: string
+        is_active:
+          type: boolean
+        behaviors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Behaviors'
+        criteria:
+          type: array
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/SSLVerificationStatusCriteria'
+        last_modified:
+          type: string
+          format: date-time
+        last_editor:
+          type: string
+          format: email
+        id:
+          type: integer
+          format: int64
+          minimum: 1
+        order:
+          type: integer
+          format: int64
+          minimum: 1
 
   securitySchemes:
     tokenAuth:
