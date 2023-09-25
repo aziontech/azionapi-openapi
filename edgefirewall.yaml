@@ -174,7 +174,7 @@ paths:
     parameters:
       - $ref: '#/components/parameters/edge_firewall_id'
     post:
-      summary: Create a new rule set for an edge firewall.
+      summary: Create rule set.
       requestBody:
         content:
           application/json:
@@ -182,11 +182,23 @@ paths:
               $ref: '#/components/schemas/CreateRuleSetRequest'
       responses:
         "201":
-          description: Rule Set created
+          description: Create rule set.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/RuleSetResponse'
+                
+    get:
+      summary: List all rule sets.
+      responses:
+        "200":
+          description: List all rule sets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetResponseAll'
+          
+    
 components:
   parameters:
     edge_firewall_id:
@@ -197,6 +209,41 @@ components:
         type: integer
         format: int64
         minimum: 1
+        
+    order_by:
+      in: query
+      name: order_by
+      required: false
+      schema:
+        type: string
+        
+    sort:
+      in: query
+      name: sort
+      required: false
+      schema:
+        type: string
+        enum: [ASC, DESC]
+        
+    page:
+      in: query
+      name: page
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 1
+        default: 1
+        
+    page_size:
+      in: query
+      name: page_size
+      required: false
+      schema:
+        type: integer
+        format: int64
+        minimum: 1
+        default: 10
 
   schemas:
     Links:
@@ -402,6 +449,7 @@ components:
         id:
           type: integer
           format: int64
+          minimum: 1
         name:
           type: string
         criteria:
@@ -456,6 +504,29 @@ components:
           type: integer
           format: int64
           minimum: 1
+          
+    RuleSetResponseAll:
+      type: object
+      properties:
+        count:
+          type: integer
+          format: int64
+          minimum: 0
+        total_pages:
+          type: integer
+          format: int64
+          minimum: 0
+        schema_version:
+          type: integer
+          format: int32
+          default: 3
+        links:
+          $ref: '#/components/schemas/Links'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleSet'
+          
 
   securitySchemes:
     tokenAuth:
