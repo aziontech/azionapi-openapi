@@ -443,17 +443,38 @@ components:
         input_value:
           $ref: '#/components/schemas/SSLVerificationStatusArguments'
       
-    RuleSet:
+    RuleSetResultAll:
       type: object
       properties:
         id:
           type: integer
           format: int64
           minimum: 1
+        last_editor:
+          type: string
+          format: email
+        last_modified:
+          type: string
+          format: date-time
         name:
           type: string
+        is_active: 
+          type: boolean
+        description:
+          type: string
+        behaviors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Behaviors'
         criteria:
-          type: object
+            type: array
+            items:
+              type: array
+              items:
+                $ref: '#/components/schemas/SSLVerificationStatusCriteria'
+        order:
+          type: integer
+          minimum: 0
           
     CreateRuleSetRequest:
       type: object
@@ -525,7 +546,7 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/RuleSet'
+            $ref: '#/components/schemas/RuleSetResultAll'
           
 
   securitySchemes:
