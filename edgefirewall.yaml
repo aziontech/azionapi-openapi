@@ -170,6 +170,7 @@ paths:
           description: Not found
         "500":
           description: Internal Server Error
+          
   /edge_firewall/{edge_firewall_id}/rules_engine:
     parameters:
       - $ref: '#/components/parameters/edge_firewall_id'
@@ -197,6 +198,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RuleSetResponseAll'
+                
+  /edge_firewall/{edge_firewall_id}/rules_engine/{rule_set_id}:
+    parameters:
+      - $ref: '#/components/parameters/edge_firewall_id'
+      - $ref: '#/components/parameters/rule_set_id'
+      - $ref: '#/components/parameters/order_by'
+      - $ref: '#/components/parameters/sort'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/page_size'
+    get:
+      summary: Retrieve rule set by ID.
+      responses:
+        "200":
+          description: Retrieve rule set by ID.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleSetResultAll'
+          
           
     
 components:
@@ -204,6 +224,15 @@ components:
     edge_firewall_id:
       in: path
       name: edge_firewall_id
+      required: true
+      schema:
+        type: integer
+        format: int64
+        minimum: 1
+        
+    rule_set_id:
+      in: path
+      name: rule_set_id
       required: true
       schema:
         type: integer
