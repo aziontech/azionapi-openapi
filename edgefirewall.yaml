@@ -178,16 +178,22 @@ paths:
       summary: Create rule set.
       requestBody:
         content:
-          application/json:
+          application/json; version=3:
             schema:
               $ref: '#/components/schemas/CreateRuleSetRequest'
       responses:
         "201":
           description: Create rule set.
           content:
-            application/json:
+            application/json; version=3:
               schema:
                 $ref: '#/components/schemas/RuleSetResponse'
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
                 
     get:
       summary: List all rule sets.
@@ -195,30 +201,99 @@ paths:
         "200":
           description: List all rule sets.
           content:
-            application/json:
+            application/json; version=3:
               schema:
                 $ref: '#/components/schemas/RuleSetResponseAll'
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
                 
   /edge_firewall/{edge_firewall_id}/rules_engine/{rule_set_id}:
     parameters:
       - $ref: '#/components/parameters/edge_firewall_id'
       - $ref: '#/components/parameters/rule_set_id'
+    get:
+      parameters:
       - $ref: '#/components/parameters/order_by'
       - $ref: '#/components/parameters/sort'
       - $ref: '#/components/parameters/page'
       - $ref: '#/components/parameters/page_size'
-    get:
       summary: Retrieve rule set by ID.
       responses:
         "200":
           description: Retrieve rule set by ID.
           content:
-            application/json:
+            application/json; version=3:
               schema:
                 $ref: '#/components/schemas/RuleSetResult'
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "500":
+          description: Internal Server Error
           
+    put:
+      summary: Overwrite rule set
+      requestBody:
+        content:
+          application/json; version=3:
+            schema:
+              $ref: '#/components/schemas/CreateRuleSetRequest'
+      responses:
+        "200":
+          description: Overwrite rule set.
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/RuleSetResult'
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
           
-    
+    patch:
+      summary: Edit rule set.
+      requestBody:
+        content:
+          application/json; version=3:
+            schema:
+              $ref: '#/components/schemas/CreateRuleSetRequest'
+      responses:
+        "200":
+          description: Edit rule set.
+          content:
+            application/json; version=3:
+              schema:
+                $ref: '#/components/schemas/RuleSetResult'
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
+          
+    delete:
+      summary: Delete rule set.
+      responses:
+        "204":
+          description: Delete rule set.
+        "400":
+          description: Bad Request
+        "403":
+          description: Forbidden
+        "500":
+          description: Internal Server Error
+
 components:
   parameters:
     edge_firewall_id:
