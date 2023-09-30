@@ -56,12 +56,16 @@ jobs:
           fetch-depth: 0
       
       - name: Setup SSH for SDK repo
+        env:
+          MATRIX_TYPE: ${{ matrix.types }}
         run: |
           mkdir -p ~/.ssh/
-          echo "${{ secrets['REPO_ACCESS_TOKEN_'+matrix.types] }}" > ~/.ssh/id_rsa
+          SSH_KEY=$(echo "REPO_ACCESS_TOKEN_${MATRIX_TYPE}" | awk '{print toupper($0)}')
+          echo "${{ secrets[SSH_KEY] }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan github.com >> ~/.ssh/known_hosts
         shell: bash
+        
       
       - name: Checkout SDK repo
         run: git clone git@github.com:aziontech/azionapi-${{ matrix.types }}-sdk.git ${{ matrix.types }}
