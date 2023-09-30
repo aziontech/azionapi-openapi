@@ -55,23 +55,15 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Setup SSH for SDK repo
-        env:
-          MATRIX_TYPE: ${{ matrix.types }}
-        run: |
-          mkdir -p ~/.ssh/
-          SSH_KEY=$(echo "REPO_ACCESS_TOKEN_${MATRIX_TYPE}" | awk '{print toupper($0)}')
-          echo "${{ secrets[SSH_KEY] }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-        shell: bash
-        
-      
       - name: Checkout SDK repo
-        run: git clone git@github.com:aziontech/azionapi-${{ matrix.types }}-sdk.git ${{ matrix.types }}
-        shell: bash
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          repository: aziontech/azionapi-${{ matrix.types }}-sdk
+          path: ${{ matrix.types }}
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
 
-      # get all .yaml files which were added/modified
+      #get all .yaml files which were added/modified
       - name: Get changed files
         id: changed-files
         uses: tj-actions/changed-files@v35
@@ -87,15 +79,17 @@ jobs:
             echo 'go.mod' >> ./${{ matrix.types }}/${removed}/.gitignore
             echo 'go.sum' >> ./${{ matrix.types }}/${removed}/.gitignore
           done
-        shell: bash
 
       - name: push changes
         run: |
           cd ${{ matrix.types }}
-          git config user.name 'GitHubActionBot'
-          git config user.email 'github-action@users.noreply.github.com'
+          git config user.email "patrick.menoti@gmail.com"
+          git config user.name "PatrickMenoti"
+          git checkout -b generated-sdk
           git add .
           git commit -m "Auto-Generated SDK"
-          git push origin main
-        shell: bash
-      
+          git push origin generated-sdk
+          gh pr create --body "Auto-generated SDK" --title "Auto-generated SDK"
+        env:
+          GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+        
