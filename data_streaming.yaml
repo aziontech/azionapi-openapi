@@ -33,7 +33,13 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DataStreamingResponseWithResults' 
+                $ref: '#/components/schemas/DataStreamingResponseWithResults'
+        '201':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DataStreamingResponseWithResults'
         '400':
           description: Bad Request
         '401':
