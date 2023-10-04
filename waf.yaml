@@ -346,6 +346,15 @@ components:
     WAFSensitivityChoices:
       type: string
       enum: ["lowest", "low", "medium", "high", "highest"]
+    Links:
+      properties:
+        previous:
+          type: string
+          nullable: true
+        next:
+          type: string
+          nullable: true
+      type: object
     SingleWAF:
       type: object
       example:
@@ -438,8 +447,12 @@ components:
         total_pages: 
           type: integer
           format: int64
-        links: 
-          $ref: '#/components/schemas/SingleWAF'
+        links:
+          $ref: '#/components/schemas/Links'
+        results:
+          items:
+            $ref: '#/components/schemas/SingleWAF'
+          type: array
         schema_version:
           type: integer
           format: int64
