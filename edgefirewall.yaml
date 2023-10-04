@@ -258,6 +258,8 @@ paths:
           description: Bad Request
         "403":
           description: Forbidden
+        "404":
+          description: Not found
         "500":
           description: Internal Server Error
           
@@ -279,6 +281,8 @@ paths:
           description: Bad Request
         "403":
           description: Forbidden
+        "404":
+          description: Not found
         "500":
           description: Internal Server Error
           
@@ -291,6 +295,8 @@ paths:
           description: Bad Request
         "403":
           description: Forbidden
+        "404":
+          description: Not found
         "500":
           description: Internal Server Error
 
