@@ -14,6 +14,35 @@ paths:
   /intelligent_dns:
     get:
       operationId: getZones
+      parameters:
+        - in: query
+          name: order_by
+          description: Identifies which property the return should be sorted by.
+          schema:
+            type: string
+            enum: [ id,name,domain,is_active]
+            default: "name"
+        - in: query
+          name: sort
+          description: Defines whether objects are shown in ascending or descending order depending on the value set in order_by.
+          schema:
+            type: string
+            enum: [ "asc", "desc" ]
+            default: "asc"
+        - in: query
+          name: page
+          description: Identifies which page should be returned, if the return is paginated.
+          schema:
+            type: integer
+            format: int64
+            default: 1
+        - in: query
+          name: page_size
+          description: Identifies how many items should be returned per page.
+          schema:
+            type: integer
+            format: int64
+            default: 10
       responses:
         "200":
           content:
