@@ -51,7 +51,7 @@ paths:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/WAFEvents404' 
-  /waf/{wafId}/domains:
+  /waf/{waf_id}/domains:
     get:
       tags:
       - WAF
@@ -59,7 +59,7 @@ paths:
       operationId: getWAFDomains
       parameters:
       - in: path
-        name: wafId
+        name: waf_id
         description: ID of WAF to return
         required: true
         schema:
@@ -90,22 +90,22 @@ paths:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/WAFEvents404'   
-  /waf/{wafId}/waf_events:
+  /waf/{waf_id}/waf_events:
     get:
       tags:
       - WAF
       summary: Find WAF log events
       operationId: getWAFEvents
       parameters:
-      - in: path
-        name: wafId
+      - name: waf_id
+        in: path
         description: ID of WAF to return
         required: true
         schema:
             type: integer
             format: int64
-      - in: query
-        name: hour_range
+      - name: hour_range
+        in: query
         description: Last log hours since now (it must be a integer number ranging between 1 and 72)
         required: true
         schema:
@@ -124,6 +124,27 @@ paths:
         required: true
         schema:
             type: string
+      - name: sort
+        in: query
+        required: false
+        schema:
+          type: string
+          enum: [asc, desc]
+          default: asc
+      - name: page
+        in: query
+        required: false
+        schema:
+            type: integer
+            format: int64
+            default: 1
+      - name: page_size
+        in: query
+        required: false
+        schema:
+            type: integer
+            format: int64
+            default: 10
       responses:
         "200":
           description: successful operation
@@ -457,21 +478,42 @@ components:
           type: integer
           format: int64
           example: 3
+    WAFDomainList200:
+      type: object
+      example:
+        id: 28852
+        name: Domain Name
+        domain: 28852f.ha.azioncdn.net
+        cnames:
+        - www.example2.io
+        - www.example.com
+      properties: 
+        id: 
+          type: integer
+          format: int64
+        name:
+          type: string
+        domain:
+          type: string
+        cnames:
+          type: array
+          items:
+            type: string
     WAFDomains200:
       type: object
       properties:
+        count: 
+          type: integer
+          format: int64
+        total_pages: 
+          type: integer
+          format: int64
+        links: 
+          $ref: '#/components/schemas/Links'
         results:
           type: array
           items:
-            type: object
-            example:
-              id: 28852
-              name: Domain Name
-              domain: 28852f.ha.azioncdn.net
-              cnames:
-              - www.example2.io
-              - www.example.com
-            properties: {}
+            $ref: '#/components/schemas/WAFDomainList200'
         schema_version:
           type: integer
           format: int64
@@ -513,15 +555,38 @@ components:
           type: array
           items:
             type: object
-            example:
-              hit_count: 9290
-              rule_id: 1005
-              ip_count: 217
-              match_zone: cookies
-              path_count: 798
-              matches_on: value
-              rule_description: 'Possible SQL Injection attack: MySQL keyword (|) found in Cookies'
-            properties: {}
+            properties:
+              country_count: 
+                type: integer
+                format: int64
+              top_10_countries:
+                type: array
+                items:
+                  type: string
+              top_10_ips:
+                type: array
+                items:
+                  type: string
+              hit_count: 
+                type: integer
+                format: int64
+              rule_id:  
+                type: integer
+                format: int64
+              ip_count:  
+                type: integer
+                format: int64
+              match_zone: 
+                type: string
+                enum: [path, query_string, request_header, request_body, raw_body, file_name, cookie]
+              path_count:  
+                type: integer
+                format: int64
+              matches_on: 
+                type: string
+                enum: [name, value]
+              rule_description: 
+                type: string
         schema_version:
           type: integer
           format: int64
