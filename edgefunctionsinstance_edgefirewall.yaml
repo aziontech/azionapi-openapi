@@ -11,10 +11,18 @@ servers:
 security:
 - tokenAuth: []
 paths:
-  /edge_firewall/:edge_firewall_id:/functions_instances:
+  /edge_firewall/{edge_firewall_id}/functions_instances:
     get:
       summary: List all user Edge Functions Instances
       parameters:
+      - explode: false
+        in: path
+        name: edge_firewall_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
       - name: page
         in: query
         required: false
@@ -57,6 +65,15 @@ paths:
         "404":
           description: Not Found
     post:
+      parameters:
+      - explode: false
+        in: path
+        name: edge_firewall_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
       summary: Create an Edge Functions Instance
       requestBody:
         content:
@@ -77,17 +94,26 @@ paths:
           description: Not Found
         "500":
           description: Internal Server Error
-  /edge_firewall/:edge_firewall_id:/functions_instances/{uuid}:
+  /edge_firewall/{edge_firewall_id}/functions_instances/{edge_function_instance_id}:
     get:
       summary: Retrieve an Edge Functions Instance set by uuid
       parameters:
-      - name: uuid
+      - explode: false
+        in: path
+        name: edge_firewall_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - name: edge_function_instance_id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          type: string
+          format: int64
+          type: integer
       responses:
         "200":
           description: An Edge Functions Instance object
@@ -102,13 +128,22 @@ paths:
     put:
       summary: Overwrite some Edge Functions Instance attributes
       parameters:
-      - name: uuid
+      - explode: false
+        in: path
+        name: edge_firewall_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - name: edge_function_instance_id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          type: string
+          format: int64
+          type: integer
       requestBody:
         content:
           application/json:
@@ -131,13 +166,22 @@ paths:
     delete:
       summary: Delete an Edge Functions Instance by uuid
       parameters:
-      - name: uuid
+      - explode: false
+        in: path
+        name: edge_firewall_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - name: edge_function_instance_id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          type: string
+          format: int64
+          type: integer
       responses:
         "204":
           description: Successfully deleted
@@ -148,13 +192,22 @@ paths:
     patch:
       summary: Update some Edge Functions Instance attributes
       parameters:
-      - name: uuid
+      - explode: false
+        in: path
+        name: edge_firewall_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      - name: edge_function_instance_id
         in: path
         required: true
         style: simple
         explode: false
         schema:
-          type: string
+          format: int64
+          type: integer
       requestBody:
         content:
           application/json:
