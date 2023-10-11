@@ -197,6 +197,37 @@ paths:
                 
     get:
       summary: List all rule sets.
+      parameters:
+        - name: page
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: page_size
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: integer
+            format: int64
+        - name: sort
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: order_by
+          in: query
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
       responses:
         "200":
           description: List all rule sets.
@@ -518,12 +549,66 @@ components:
           type: boolean
 
     Behaviors:
+      type: object
       properties:
         name:
           type: string
           enum: [deny, drop, set_rate_limit, set_waf_ruleset, run_function, tag_event]
-        target:
+        argument:
+          oneOf:
+            - $ref: '#/components/schemas/SetRateLimitDetails'
+            - $ref: '#/components/schemas/SetWAFRuleSetDetails'
+        
+      example:
+        behavior_example_1:
+          name: deny
+        behavior_example_2:
+          name: set_rate_limit
+          argument:
+            type: second
+            limit_by: client_ip
+            average_rate_limit: 100
+            maximum_burst_size: 10
+        behavior_example_3:
+          name: set_waf_ruleset
+          argument:
+            waf_id: 1
+            mode: Learning
+          
+    SetRateLimitDetails:
+      type: object
+      properties:
+        type:
           type: string
+          enum: [second, minute]
+        limit_by:
+          type: string
+          enum: [client_ip, global]
+        average_rate_limit:
+          type: integer
+          minimum: 1
+        maximum_burst_size:
+          type: integer
+          minimum: 1
+      example:
+        type: "second"
+        limit_by: "client_ip"
+        average_rate_limit: 100
+        maximum_burst_size: 10
+        
+    SetWAFRuleSetDetails:
+      type: object
+      properties:
+        waf_id:
+          type: integer
+          minimum: 1
+        mode:
+          type: string
+          enum: [Learning, Blocking]
+      example:
+        waf_id: 1
+        mode: "Blocking"
+        
 
     Variables:
       type: string
