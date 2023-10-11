@@ -556,6 +556,7 @@ components:
           enum: [deny, drop, set_rate_limit, set_waf_ruleset, run_function, tag_event]
         argument:
           oneOf:
+            - $ref: '#/components/schemas/GenericBehaviorDetails'
             - $ref: '#/components/schemas/SetRateLimitDetails'
             - $ref: '#/components/schemas/SetWAFRuleSetDetails'
         
@@ -574,6 +575,12 @@ components:
           argument:
             waf_id: 1
             mode: Learning
+            
+    GenericBehaviorDetails:
+      type: object
+      properties:
+          name:
+            type: string
           
     SetRateLimitDetails:
       type: object
