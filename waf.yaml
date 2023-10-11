@@ -45,6 +45,8 @@ paths:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/WAFEvents400'
+        "403":
+          description: Forbidden
         "404":
           description: data not found
           content:
@@ -84,6 +86,8 @@ paths:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/WAFEvents400'
+        "403":
+          description: Forbidden
         "404":
           description: data not found
           content:
@@ -164,6 +168,8 @@ paths:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/WAFEvents401'
+        "403":
+          description: Forbidden
         "404":
           description: data not found
           content:
@@ -220,6 +226,8 @@ paths:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/WAFEvents400'
+        "403":
+          description: Forbidden
         "404":
           description: data not found
           content:
@@ -290,6 +298,8 @@ paths:
             application/json; version=3:
               schema:
                 $ref: '#/components/schemas/WAFEvents400'
+        "403":
+          description: Forbidden
         "404":
           description: data not found
           content:
