@@ -73,6 +73,21 @@ paths:
         required: false
         schema:
             type: string
+      - in: query
+        name: page
+        description: Identifies which page should be returned, if the return is paginated.
+        schema:
+            type: integer
+            format: int64
+            default: 1
+      - in: query
+        name: page_size
+        description: Identifies how many items should be returned per page.
+        schema:
+            type: integer
+            format: int64
+            default: 10
+      
       responses:
         "200":
           description: successful operation
