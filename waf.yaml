@@ -142,7 +142,10 @@ paths:
         description: Multiple domain's id (they must be separated by comma like 1233,1234)
         required: true
         schema:
-            type: string
+          type: array
+          items:
+            type: integer
+            format: int64
       - name: sort
         in: query
         required: false
@@ -150,20 +153,6 @@ paths:
           type: string
           enum: [asc, desc]
           default: asc
-      - name: page
-        in: query
-        required: false
-        schema:
-            type: integer
-            format: int64
-            default: 1
-      - name: page_size
-        in: query
-        required: false
-        schema:
-            type: integer
-            format: int64
-            default: 10
       responses:
         "200":
           description: successful operation
@@ -587,11 +576,17 @@ components:
               top_10_countries:
                 type: array
                 items:
-                  type: string
+                  oneOf:
+                    - type: string
+                    - type: integer
+                      format: int64
               top_10_ips:
                 type: array
                 items:
-                  type: string
+                  oneOf:
+                    - type: string
+                    - type: integer
+                      format: int64
               hit_count: 
                 type: integer
                 format: int64
