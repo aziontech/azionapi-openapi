@@ -562,6 +562,7 @@ components:
           type: string
           enum: [deny, drop]
         argument:
+          type: integer
           nullable: true
 
     SetRateLimitBehavior:
