@@ -580,11 +580,15 @@ components:
               type: string
               enum: [client_ip, global]
             average_rate_limit:
-              type: integer
-              minimum: 1
+              oneOf:
+                - type: integer
+                  minimum: 1
+                - type: string
             maximum_burst_size:
-              type: integer
-              minimum: 1
+              oneOf:
+                - type: integer
+                  minimum: 1
+                - type: string
           example:
             type: "second"
             limit_by: "client_ip"
