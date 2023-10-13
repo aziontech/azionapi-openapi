@@ -562,7 +562,7 @@ components:
           type: string
           enum: [deny, drop]
         argument:
-          type: null
+          nullable: true
 
     SetRateLimitBehavior:
       type: object
@@ -593,33 +593,33 @@ components:
 
     SetWAFRuleSetBehavior:
       type: object
-        properties:
-          name:
-            type: string
-            enum: [set_waf_ruleset]
-          argument:
-            type: object
-            properties:
-              waf_id:
-                type: integer
-                minimum: 1
-              mode:
-                type: string
-                enum: [Learning, Blocking]
-            example:
-              waf_id: 1
-              mode: "Blocking"
+      properties:
+        name:
+          type: string
+          enum: [set_waf_ruleset]
+        argument:
+          type: object
+          properties:
+            waf_id:
+              type: integer
+              minimum: 1
+            mode:
+              type: string
+              enum: [Learning, Blocking]
+          example:
+            waf_id: 1
+            mode: "Blocking"
 
     SimpleArgumentBehavior:
       type: object
-        properties:
-          name:
-            type: string
-            enum: [run_function, tag_event]
-          argument:
-            oneOf:
-              - string
-              - number
+      properties:
+        name:
+          type: string
+          enum: [run_function, tag_event]
+        argument:
+          oneOf:
+            - type: string
+            - type: number
 
     Variables:
       type: string
