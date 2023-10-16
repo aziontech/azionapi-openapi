@@ -626,19 +626,17 @@ components:
           type: object
           properties:
             status_code:
-              required: true
               oneOf:
                 - type: string
-                - type: intenger
-                  type: integer
+                - type: integer
                   minimum: 200
                   maximum: 499
             content_type:
-              required: true
               type: string
             content_body:
-              required: true
               type: string
+
+          required: [status_code, content_type, content_body]
           example:
             status_code: 200
             content_type: "application/json"
