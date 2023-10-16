@@ -615,6 +615,34 @@ components:
             waf_id: 1
             mode: "Blocking"
 
+    SetCustomResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          enum: [set_custom_response]
+        argument:
+          type: object
+          properties:
+            status_code:
+              required: true
+              oneOf:
+                - type: string
+                - type: intenger
+                  type: integer
+                  minimum: 200
+                  maximum: 499
+            content_type:
+              required: true
+              type: string
+            content_body:
+              required: true
+              type: string
+          example:
+            status_code: 200
+            content_type: "application/json"
+            content_body: "{}"
+
     SimpleArgumentBehavior:
       type: object
       properties:
