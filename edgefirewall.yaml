@@ -554,6 +554,7 @@ components:
         - $ref: '#/components/schemas/SimpleArgumentBehavior'
         - $ref: '#/components/schemas/SetRateLimitBehavior'
         - $ref: '#/components/schemas/SetWAFRuleSetBehavior'
+        - $ref: '#/components/schemas/SetWAFRuleSetAndWafModeBehavior'
         - $ref: '#/components/schemas/SetCustomResponse'
 
     NullArgumentBehavior:
@@ -611,10 +612,30 @@ components:
               minimum: 1
             mode:
               type: string
-              enum: [Learning, Blocking]
+              enum: [learning, blocking]
           example:
             waf_id: 1
-            mode: "Blocking"
+            mode: "blocking"
+
+    SetWAFRuleSetAndWafModeBehavior:
+      type: object
+      properties:
+        name:
+          type: string
+          enum: [set_waf_ruleset_and_waf_mode]
+        argument:
+          type: object
+          properties:
+            set_waf_ruleset_and_waf_mode:
+              type: integer
+              minimum: 1
+            waf_mode:
+              type: string
+              enum: [learning, blocking]
+          required: [set_waf_ruleset_and_waf_mode, waf_mode]
+          example:
+            set_waf_ruleset_and_waf_mode: 1
+            waf_mode: "blocking"
 
     SetCustomResponse:
       type: object
