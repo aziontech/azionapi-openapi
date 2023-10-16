@@ -170,7 +170,7 @@ paths:
           description: Not found
         "500":
           description: Internal Server Error
-          
+
   /edge_firewall/{edge_firewall_id}/rules_engine:
     parameters:
       - $ref: '#/components/parameters/edge_firewall_id'
@@ -194,7 +194,7 @@ paths:
           description: Forbidden
         "500":
           description: Internal Server Error
-                
+
     get:
       summary: List all rule sets.
       parameters:
@@ -243,7 +243,7 @@ paths:
           description: Not Found
         "500":
           description: Internal Server Error
-                
+
   /edge_firewall/{edge_firewall_id}/rules_engine/{rule_set_id}:
     parameters:
       - $ref: '#/components/parameters/edge_firewall_id'
@@ -270,7 +270,7 @@ paths:
           description: Not Found
         "500":
           description: Internal Server Error
-          
+
     put:
       summary: Overwrite rule set
       requestBody:
@@ -293,7 +293,7 @@ paths:
           description: Not found
         "500":
           description: Internal Server Error
-          
+
     patch:
       summary: Edit rule set.
       requestBody:
@@ -316,7 +316,7 @@ paths:
           description: Not found
         "500":
           description: Internal Server Error
-          
+
     delete:
       summary: Delete rule set.
       responses:
@@ -341,7 +341,7 @@ components:
         type: integer
         format: int64
         minimum: 1
-        
+
     rule_set_id:
       in: path
       name: rule_set_id
@@ -350,14 +350,14 @@ components:
         type: integer
         format: int64
         minimum: 1
-        
+
     order_by:
       in: query
       name: order_by
       required: false
       schema:
         type: string
-        
+
     sort:
       in: query
       name: sort
@@ -365,7 +365,7 @@ components:
       schema:
         type: string
         enum: [ASC, DESC]
-        
+
     page:
       in: query
       name: page
@@ -375,7 +375,7 @@ components:
         format: int64
         minimum: 1
         default: 1
-        
+
     page_size:
       in: query
       name: page_size
@@ -549,90 +549,99 @@ components:
           type: boolean
 
     Behaviors:
+      oneOf:
+        - $ref: '#/components/schemas/NullArgumentBehavior'
+        - $ref: '#/components/schemas/SimpleArgumentBehavior'
+        - $ref: '#/components/schemas/SetRateLimitBehavior'
+        - $ref: '#/components/schemas/SetWAFRuleSetBehavior'
+
+    NullArgumentBehavior:
       type: object
       properties:
         name:
           type: string
-          enum: [deny, drop, set_rate_limit, set_waf_ruleset, run_function, tag_event]
+          enum: [deny, drop]
         argument:
-          oneOf:
-            - $ref: '#/components/schemas/GenericBehaviorDetails'
-            - $ref: '#/components/schemas/SetRateLimitDetails'
-            - $ref: '#/components/schemas/SetWAFRuleSetDetails'
-        
-      example:
-        behavior_example_1:
-          name: deny
-        behavior_example_2:
-          name: set_rate_limit
-          argument:
-            type: second
-            limit_by: client_ip
+          type: integer
+          nullable: true
+
+    SetRateLimitBehavior:
+      type: object
+      properties:
+        name:
+          type: string
+          enum: [set_rate_limit]
+        argument:
+          type: object
+          properties:
+            type:
+              type: string
+              enum: [second, minute]
+            limit_by:
+              type: string
+              enum: [client_ip, global]
+            average_rate_limit:
+              oneOf:
+                - type: integer
+                  minimum: 1
+                - type: string
+            maximum_burst_size:
+              oneOf:
+                - type: integer
+                  minimum: 1
+                - type: string
+          example:
+            type: "second"
+            limit_by: "client_ip"
             average_rate_limit: 100
             maximum_burst_size: 10
-        behavior_example_3:
-          name: set_waf_ruleset
-          argument:
+
+    SetWAFRuleSetBehavior:
+      type: object
+      properties:
+        name:
+          type: string
+          enum: [set_waf_ruleset]
+        argument:
+          type: object
+          properties:
+            waf_id:
+              type: integer
+              minimum: 1
+            mode:
+              type: string
+              enum: [Learning, Blocking]
+          example:
             waf_id: 1
-            mode: Learning
-            
-    GenericBehaviorDetails:
+            mode: "Blocking"
+
+    SimpleArgumentBehavior:
       type: object
       properties:
-          name:
-            type: string
-          
-    SetRateLimitDetails:
-      type: object
-      properties:
-        type:
+        name:
           type: string
-          enum: [second, minute]
-        limit_by:
-          type: string
-          enum: [client_ip, global]
-        average_rate_limit:
-          type: integer
-          minimum: 1
-        maximum_burst_size:
-          type: integer
-          minimum: 1
-      example:
-        type: "second"
-        limit_by: "client_ip"
-        average_rate_limit: 100
-        maximum_burst_size: 10
-        
-    SetWAFRuleSetDetails:
-      type: object
-      properties:
-        waf_id:
-          type: integer
-          minimum: 1
-        mode:
-          type: string
-          enum: [Learning, Blocking]
-      example:
-        waf_id: 1
-        mode: "Blocking"
-        
+          enum: [run_function, tag_event]
+        argument:
+          oneOf:
+            - type: string
+            - type: number
 
     Variables:
       type: string
       enum: [header_accept, header_accept_encoding, header_accept_language, header_cookie, header_origin, header_referer, header_user_agent, host, network, request_args, request_method, request_uri, scheme, client_certificate_validation]
-          
+
     Conditionals:
       type: string
       enum: [if, and, or]
-      
+
     SSLVerificationStatusOperators:
       type: string
       enum: [is_equal, is_not_equal]
-      
+
     SSLVerificationStatusArguments:
       type: string
       enum: [SUCCESS, CERTIFICATE_VERIFICATION_ERROR, MISSING_CLIENT_CERTIFICATE]
-      
+
     SSLVerificationStatusCriteria:
       type: object
       properties:
@@ -644,7 +653,7 @@ components:
           $ref: '#/components/schemas/Conditionals'
         input_value:
           $ref: '#/components/schemas/SSLVerificationStatusArguments'
-      
+
     RuleSetResult:
       type: object
       properties:
@@ -663,7 +672,7 @@ components:
               format: date-time
             name:
               type: string
-            is_active: 
+            is_active:
               type: boolean
             description:
               type: string
@@ -683,7 +692,7 @@ components:
         schema_version:
           type: integer
           minimum: 1
-    
+
     RuleSetResultAll:
       type: object
       properties:
@@ -699,7 +708,7 @@ components:
           format: date-time
         name:
           type: string
-        is_active: 
+        is_active:
           type: boolean
         description:
           type: string
@@ -716,7 +725,7 @@ components:
         order:
           type: integer
           minimum: 0
-          
+
     CreateRuleSetRequest:
       type: object
       properties:
@@ -766,7 +775,7 @@ components:
           type: integer
           format: int64
           minimum: 1
-          
+
     RuleSetResponseAll:
       type: object
       properties:
@@ -788,7 +797,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/RuleSetResultAll'
-          
+
 
   securitySchemes:
     tokenAuth:
