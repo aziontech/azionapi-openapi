@@ -62,6 +62,8 @@ paths:
                 $ref: '#/components/schemas/ListEdgeFunctionsInstancesResponse'
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
         "404":
           description: Not Found
     post:
@@ -90,6 +92,8 @@ paths:
                 $ref: '#/components/schemas/EdgeFunctionsInstanceResponse'
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
         "404":
           description: Not Found
         "500":
@@ -123,6 +127,8 @@ paths:
                 $ref: '#/components/schemas/EdgeFunctionsInstanceResponse'
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
         "404":
           description: Not Found
     put:
@@ -159,6 +165,8 @@ paths:
                 $ref: '#/components/schemas/EdgeFunctionsInstanceResponse'
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
         "404":
           description: Not Found
         "500":
@@ -187,6 +195,8 @@ paths:
           description: Successfully deleted
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
         "404":
           description: Not Found
     patch:
@@ -223,6 +233,8 @@ paths:
                 $ref: '#/components/schemas/EdgeFunctionsInstanceResponse'
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
         "404":
           description: Not Found
         "500":

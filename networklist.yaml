@@ -36,6 +36,8 @@ paths:
             text/html:
               schema:
                 type: string
+        "403":
+          description: Forbidden
         '404':
           description: Not Found
         '500':
@@ -91,6 +93,8 @@ paths:
             text/html:
               schema:
                 type: string
+        "403":
+          description: Forbidden
         '404':
           description: Not Found
   /network_lists/{uuid}:
@@ -118,6 +122,8 @@ paths:
             text/html:
               schema:
                 type: string
+        "403":
+          description: Forbidden
         '404':
           description: Not Found
     delete:
@@ -177,6 +183,8 @@ paths:
             text/html:
               schema:
                 type: string
+        "403":
+          description: Forbidden
         '404':
           description: Not Found
         '500':
