@@ -117,7 +117,6 @@ jobs:
       - name: install gh cli
         run: |
           apk add github-cli git
-        shell: bash
 
       - name: Checkout code
         uses: actions/checkout@v3
