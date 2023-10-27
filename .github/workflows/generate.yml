@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - ci-update-pluggin-yaml
 
 jobs:
   generate_job:
+    if: false
     name: generate SDK and push to repositories
     runs-on: ubuntu-latest
     container:
