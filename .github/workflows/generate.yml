@@ -2,7 +2,7 @@ name: Generate
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   generate_job:
@@ -12,7 +12,17 @@ jobs:
       image: ubuntu:22.04
     strategy:
       matrix:
-        types: [ "go", "php", "csharp-netcore", "typescript-node", "java", "rust", "python", "javascript" ]
+        types:
+          [
+            "go",
+            "php",
+            "csharp-netcore",
+            "typescript-node",
+            "java",
+            "rust",
+            "python",
+            "javascript",
+          ]
     steps:
       - name: Setup Env
         run: apt-get update && apt-get install -y npm curl git
@@ -32,15 +42,14 @@ jobs:
         run: git config --global --add safe.directory /__w/azionapi-openapi/azionapi-openapi
         shell: bash
 
-
       - uses: actions/setup-node@v3
         with:
           node-version: 18
 
       - uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '11'
+          distribution: "temurin"
+          java-version: "11"
 
       - name: install openapi-generator
         run: npm install @openapitools/openapi-generator-cli -g
@@ -54,7 +63,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      
+
       - name: Checkout SDK repo
         uses: actions/checkout@v3
         with:
@@ -92,4 +101,67 @@ jobs:
           gh pr create --body "Auto-generated SDK" --title "Auto-generated SDK"
         env:
           GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
-        
+  update_merged_yaml:
+    name: update merged yaml file
+    runs-on: ubuntu-latest
+    container:
+      image: python:3.9-alpine3.18
+    steps:
+      - name: install gh cli
+        run: |
+          apk add github-cli git
+        shell: bash
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: merge files
+        env:
+          GH_TOKEN: ${{ secrets.GLOBAL_TOKEN }}
+          TARGET_REPO: ${{ secrets.MERGER_REPO }}
+        run: |
+          OLD_PWD=`pwd`
+          TEMP_DIR=`mktemp -d`
+          cd $TEMP_DIR
+          git clone https://$GH_TOKEN@github.com/aziontech/$TARGET_REPO.git .
+          cd openapi
+          pip install -r ./requirements.txt
+          python processor.py $OLD_PWD/idns.yaml $OLD_PWD/edgefunctions.yml
+          cp ./output/merged.yml $OLD_PWD/openapi.yml
+          cd $OLD_PWD
+      - name: create update PR
+        id: create-pull-request
+        env:
+          GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          TARGET_REPO: ${{ secrets.OPEN_API_MERGED_YAML_REPO}}
+          TARGET_MERGED_YAML_PATH: ${{ secrets.OPEN_API_MERGED_YAML_PATH }}
+        run: |
+          OLD_PWD=`pwd`
+          TEMP_DIR=`mktemp -d`
+          MERGED_YAML="$OLD_PWD/openapi.yml"
+          cd $TEMP_DIR
+          git clone https://$GH_TOKEN@github.com/aziontech/$TARGET_REPO.git .
+          git checkout -b auto-update-openapi-merged-yaml
+          cp -f $MERGED_YAML $TARGET_MERGED_YAML_PATH
+          if [ -z "`git diff`" ]; then
+            echo "merged file was not changed"
+            exit 0
+          fi
+
+          git add $TARGET_MERGED_YAML_PATH
+          git commit -m 'chore: ChatGPT pluggin - update merged OpenAPI yaml file'
+          git push --force origin auto-update-openapi-merged-yaml
+
+          PR_LINK=gh pr create --body "ChatGPT pluggin - update merged OpenAPI yaml file" --title "chore: ChatGPT pluggin - update merged OpenAPI yaml file"
+          echo "::add-mask::$PR_LINK"
+          echo "pr-link=$PR_LINK" >> "$GITHUB_OUTPUT"
+
+      - name: notify merged yaml update
+        if: ${{ steps.create-pull-request.outputs.pr-link }}
+        id: slack
+        uses: slackapi/slack-github-action@v1.24.0
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        with:
+          payload: "${{ steps.create-pull-request.outputs.pr-link }}"
