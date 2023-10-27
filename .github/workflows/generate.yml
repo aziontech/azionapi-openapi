@@ -124,13 +124,13 @@ jobs:
           fetch-depth: 0
       - name: merge files
         env:
-          GH_TOKEN: ${{ secrets.GLOBAL_TOKEN }}
+          GLOBAL_TOKEN: ${{ secrets.GLOBAL_TOKEN }}
           TARGET_REPO: ${{ secrets.MERGER_REPO }}
         run: |
           OLD_PWD=`pwd`
           TEMP_DIR=`mktemp -d`
           cd $TEMP_DIR
-          git clone https://$GH_TOKEN@github.com/aziontech/$TARGET_REPO.git .
+          git clone https://$GLOBAL_TOKEN:x-oauth-basic@github.com/aziontech/$TARGET_REPO.git .
           cd openapi
           pip install -r ./requirements.txt
           python processor.py $OLD_PWD/idns.yaml $OLD_PWD/edgefunctions.yml
@@ -147,7 +147,7 @@ jobs:
           TEMP_DIR=`mktemp -d`
           MERGED_YAML="$OLD_PWD/openapi.yml"
           cd $TEMP_DIR
-          git clone https://$GH_TOKEN@github.com/aziontech/$TARGET_REPO.git .
+          git clone https://$GLOBAL_TOKEN:x-oauth-basic@github.com/aziontech/$TARGET_REPO.git .
           git checkout -b auto-update-openapi-merged-yaml
           cp -f $MERGED_YAML $TARGET_MERGED_YAML_PATH
           if [ -z "`git diff`" ]; then
