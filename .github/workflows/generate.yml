@@ -138,7 +138,7 @@ jobs:
       - name: create update PR
         id: create-pull-request
         env:
-          GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+          GH_TOKEN: ${{ secrets.GLOBAL_TOKEN }}
           TARGET_REPO: ${{ secrets.OPEN_API_MERGED_YAML_REPO}}
           TARGET_MERGED_YAML_PATH: ${{ secrets.OPEN_API_MERGED_YAML_PATH }}
         run: |
