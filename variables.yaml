@@ -6,8 +6,8 @@ info:
     name: MIT
     url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
-- description: Stage
-  url: https://stage-api.azion.net/variables
+- description: Production
+  url: https://api.azionapi.net
 security:
 - tokenAuth: []
 paths:
