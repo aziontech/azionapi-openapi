@@ -468,6 +468,7 @@ components:
         active: true
         language: language
         json_args: ""
+        initiator_type: edge_application
       properties:
         name:
           type: string
@@ -476,6 +477,9 @@ components:
         code:
           type: string
         json_args: {}
+        initiator_type:
+          type: string
+          enum: [edge_application, edge_firewall]
         active:
           type: boolean
         is_proprietary_code:
@@ -539,6 +543,7 @@ components:
           type: boolean
         initiator_type:
           type: string
+          enum: [ edge_application, edge_firewall ]
         language:
           type: string
         is_proprietary_code:
