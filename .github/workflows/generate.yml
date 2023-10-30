@@ -133,7 +133,7 @@ jobs:
           git clone https://$TOKEN_REPO_INTEGRATION:x-oauth-basic@github.com/aziontech/$TARGET_REPO.git .
           cd openapi
           pip install -r ./requirements.txt
-          python processor.py $OLD_PWD/idns.yaml $OLD_PWD/edgefunctions.yml
+          python processor.py $OLD_PWD/edgefunctions.yml $OLD_PWD/idns.yaml
           ls -l ./output
           cp ./output/merged.yaml $OLD_PWD/openapi.yaml
           cd $OLD_PWD
@@ -163,8 +163,10 @@ jobs:
           git add $TARGET_MERGED_YAML_PATH
           git commit -m 'chore: ChatGPT pluggin - update merged OpenAPI yaml file'
           git push --force origin auto-update-openapi-merged-yaml
-
-          PR_LINK=`gh pr create --body "ChatGPT pluggin - update merged OpenAPI yaml file" --title "chore: ChatGPT pluggin - update merged OpenAPI yaml file"`
+          PR_BRANCH="auto-update-openapi-merged-yaml"
+          PR_TITLE="ChatGPT pluggin - update merged OpenAPI yaml file"
+          PR_BODY="ChatGPT pluggin - update merged OpenAPI yaml file"
+          PR_LINK=`gh pr edit "$PR_BRANCH" -b "PR_BODY" -t "$PR_TITLE"  && gh pr reopen "$PR_BRANCH" || gh pr create --fill -B main -H "$PR_BRANCH"`
           echo "::add-mask::$PR_LINK"
           echo "pr-link=$PR_LINK" >> "$GITHUB_OUTPUT"
 
