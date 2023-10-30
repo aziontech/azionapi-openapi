@@ -144,13 +144,18 @@ jobs:
           TARGET_REPO: ${{ secrets.OPEN_API_MERGED_YAML_REPO}}
           TARGET_MERGED_YAML_PATH: ${{ secrets.OPEN_API_MERGED_YAML_PATH }}
         run: |
+          echo `pwd`
+          ls -l
+          cat ./openapi.yml
           OLD_PWD=`pwd`
           TEMP_DIR=`mktemp -d`
           MERGED_YAML="$OLD_PWD/openapi.yml"
           cd $TEMP_DIR
           git clone https://$TOKEN_REPO_INTEGRATION:x-oauth-basic@github.com/aziontech/$TARGET_REPO.git .
           git checkout -b auto-update-openapi-merged-yaml
-          cp -f $MERGED_YAML $TARGET_MERGED_YAML_PATH
+          echo `pwd`
+          ls -l $echo
+          cp $MERGED_YAML $TARGET_MERGED_YAML_PATH
           if [ -z "`git diff`" ]; then
             echo "merged file was not changed"
             exit 0
