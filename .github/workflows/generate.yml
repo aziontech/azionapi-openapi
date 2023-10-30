@@ -133,7 +133,9 @@ jobs:
           git clone https://$TOKEN_REPO_INTEGRATION:x-oauth-basic@github.com/aziontech/$TARGET_REPO.git .
           cd openapi
           pip install -r ./requirements.txt
+          ls -l
           python processor.py $OLD_PWD/idns.yaml $OLD_PWD/edgefunctions.yml
+          ls -l
           cp ./output/merged.yml $OLD_PWD/openapi.yml
           cd $OLD_PWD
       - name: create update PR
