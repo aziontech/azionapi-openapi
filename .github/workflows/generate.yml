@@ -141,6 +141,7 @@ jobs:
         id: create-pull-request
         env:
           TOKEN_REPO_INTEGRATION: ${{ secrets.TOKEN_REPO_INTEGRATION }}
+          GH_TOKEN: ${{ secrets.TOKEN_REPO_INTEGRATION }}
           TARGET_REPO: ${{ secrets.OPEN_API_MERGED_YAML_REPO}}
           TARGET_MERGED_YAML_PATH: ${{ secrets.OPEN_API_MERGED_YAML_PATH }}
         run: |
