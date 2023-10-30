@@ -532,7 +532,7 @@ components:
         active: true
         json_args: ""
         language: language
-        initiator_type: initiator_type
+        initiator_type: edge_application
       properties:
         name:
           type: string
