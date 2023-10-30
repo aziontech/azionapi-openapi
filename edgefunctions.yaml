@@ -394,7 +394,6 @@ components:
           type: string
         language:
           type: string
-          enum: [javascript, lua]
         code:
           type: string
         json_args: {}
