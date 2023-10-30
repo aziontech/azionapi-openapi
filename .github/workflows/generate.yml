@@ -156,6 +156,9 @@ jobs:
           echo `pwd`
           ls -l $echo
           cp $MERGED_YAML $TARGET_MERGED_YAML_PATH
+          echo $MERGED_YAML $TARGET_MERGED_YAML_PATH
+          git status
+          git diff
           if [ -z "`git diff`" ]; then
             echo "merged file was not changed"
             exit 0
