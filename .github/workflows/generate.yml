@@ -163,7 +163,7 @@ jobs:
           git commit -m 'chore: ChatGPT pluggin - update merged OpenAPI yaml file'
           git push --force origin auto-update-openapi-merged-yaml
 
-          PR_LINK=gh pr create --body "ChatGPT pluggin - update merged OpenAPI yaml file" --title "chore: ChatGPT pluggin - update merged OpenAPI yaml file"
+          PR_LINK=`gh pr create --body "ChatGPT pluggin - update merged OpenAPI yaml file" --title "chore: ChatGPT pluggin - update merged OpenAPI yaml file"`
           echo "::add-mask::$PR_LINK"
           echo "pr-link=$PR_LINK" >> "$GITHUB_OUTPUT"
 
