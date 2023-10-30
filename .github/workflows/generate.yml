@@ -135,7 +135,7 @@ jobs:
           pip install -r ./requirements.txt
           python processor.py $OLD_PWD/idns.yaml $OLD_PWD/edgefunctions.yml
           ls -l ./output
-          cp ./output/merged.yaml $OLD_PWD/openapi.yml
+          cp ./output/merged.yaml $OLD_PWD/openapi.yaml
           cd $OLD_PWD
       - name: create update PR
         id: create-pull-request
@@ -144,21 +144,13 @@ jobs:
           TARGET_REPO: ${{ secrets.OPEN_API_MERGED_YAML_REPO}}
           TARGET_MERGED_YAML_PATH: ${{ secrets.OPEN_API_MERGED_YAML_PATH }}
         run: |
-          echo `pwd`
-          ls -l
-          cat ./openapi.yml
           OLD_PWD=`pwd`
           TEMP_DIR=`mktemp -d`
-          MERGED_YAML="$OLD_PWD/openapi.yml"
+          MERGED_YAML="$OLD_PWD/openapi.yaml"
           cd $TEMP_DIR
           git clone https://$TOKEN_REPO_INTEGRATION:x-oauth-basic@github.com/aziontech/$TARGET_REPO.git .
           git checkout -b auto-update-openapi-merged-yaml
-          echo `pwd`
-          ls -l $echo
-          cp $MERGED_YAML $TARGET_MERGED_YAML_PATH
-          echo $MERGED_YAML $TARGET_MERGED_YAML_PATH
-          git status
-          git diff
+          cp -f $MERGED_YAML $TARGET_MERGED_YAML_PATH
           if [ -z "`git diff`" ]; then
             echo "merged file was not changed"
             exit 0
