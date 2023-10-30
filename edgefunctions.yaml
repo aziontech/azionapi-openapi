@@ -543,7 +543,7 @@ components:
           type: boolean
         initiator_type:
           type: string
-          enum: [ edge_application, edge_firewall ]
+          enum: [edge_application, edge_firewall]
         language:
           type: string
         is_proprietary_code:
