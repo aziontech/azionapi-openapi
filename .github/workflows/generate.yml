@@ -156,6 +156,9 @@ jobs:
             exit 0
           fi
 
+          git config user.name "Azion Github Automation"
+          git config user.email "github.automation@azion.com"
+
           git add $TARGET_MERGED_YAML_PATH
           git commit -m 'chore: ChatGPT pluggin - update merged OpenAPI yaml file'
           git push --force origin auto-update-openapi-merged-yaml
