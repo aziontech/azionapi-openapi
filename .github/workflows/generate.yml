@@ -4,28 +4,16 @@ on:
   push:
     branches:
       - main
-      - ci-update-pluggin-yaml
 
 jobs:
   generate_job:
-    if: false
     name: generate SDK and push to repositories
     runs-on: ubuntu-latest
     container:
       image: ubuntu:22.04
     strategy:
       matrix:
-        types:
-          [
-            "go",
-            "php",
-            "csharp",
-            "typescript-node",
-            "java",
-            "rust",
-            "python",
-            "javascript",
-          ]
+        types: [ "go", "php", "csharp", "typescript-node", "java", "rust", "python", "javascript" ]
     steps:
       - name: Setup Env
         run: apt-get update && apt-get install -y npm curl git
@@ -51,8 +39,8 @@ jobs:
 
       - uses: actions/setup-java@v3
         with:
-          distribution: "temurin"
-          java-version: "11"
+          distribution: 'temurin'
+          java-version: '11'
 
       - name: install openapi-generator
         run: npm install @openapitools/openapi-generator-cli -g
@@ -108,6 +96,7 @@ jobs:
           fi
         env:
           GH_TOKEN: ${{ secrets.REPO_ACCESS_TOKEN }}
+
   update_merged_yaml:
     name: update merged yaml file
     runs-on: ubuntu-latest
@@ -134,7 +123,6 @@ jobs:
           cd openapi
           pip install -r ./requirements.txt
           python processor.py $OLD_PWD/edgefunctions.yaml $OLD_PWD/idns.yaml
-          ls -l ./output
           cp ./output/merged.yaml $OLD_PWD/openapi.yaml
           cd $OLD_PWD
       - name: create update PR
@@ -171,7 +159,8 @@ jobs:
           echo "pr-link=$PR_LINK" >> "$GITHUB_OUTPUT"
 
       - name: notify merged yaml update
-        if: ${{ steps.create-pull-request.outputs.pr-link }}
+        if: false
+        # if: ${{ steps.create-pull-request.outputs.pr-link }} - TODO: add secret for slack_webhook
         id: slack
         uses: slackapi/slack-github-action@v1.24.0
         env:
