@@ -52,6 +52,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListEdgeFirewallResponse'
+        "403":
+          description: Forbidden
         "404":
           description: Not found
     post:
@@ -71,6 +73,8 @@ paths:
                 $ref: '#/components/schemas/EdgeFirewallResponse'
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
         "500":
           description: Internal Server Error
   /edge_firewall/{uuid}:
@@ -93,6 +97,8 @@ paths:
                 $ref: '#/components/schemas/EdgeFirewallResponse'
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
         "404":
           description: Not found
     put:
@@ -120,6 +126,8 @@ paths:
                 $ref: '#/components/schemas/EdgeFirewallResponse'
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
         "404":
           description: Not found
         "500":
@@ -139,6 +147,8 @@ paths:
           description: Successfully deleted
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
         "404":
           description: Not found
     patch:
@@ -166,6 +176,8 @@ paths:
                 $ref: '#/components/schemas/EdgeFirewallResponse'
         "400":
           description: Bad Request
+        "403":
+          description: Forbidden
         "404":
           description: Not found
         "500":

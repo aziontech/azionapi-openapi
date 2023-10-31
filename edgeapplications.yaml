@@ -4282,15 +4282,15 @@ components:
           type: string
           maxLength: 1000
         criteria:
+          type: array
           items:
+            type: array
             items:
               $ref: '#/components/schemas/RulesEngineCriteria'
-            type: array
-          type: array
         behaviors:
+          type: array
           items:
             $ref: '#/components/schemas/RulesEngineBehaviorEntry'
-          type: array
       required:
       - behaviors
       - criteria
@@ -4378,11 +4378,11 @@ components:
           type: string
           maxLength: 1000
         criteria:
+          type: array
           items:
+            type: array
             items:
               $ref: '#/components/schemas/RulesEngineCriteria'
-            type: array
-          type: array
         behaviors:
           items:
             $ref: '#/components/schemas/RulesEngineBehaviorEntry'
@@ -4426,15 +4426,15 @@ components:
         phase:
           type: string
         behaviors:
+          type: array
           items:
             $ref: '#/components/schemas/RulesEngineBehaviorEntry'
-          type: array
         criteria:
+          type: array
           items:
+            type: array
             items:
               $ref: '#/components/schemas/RulesEngineCriteria'
-            type: array
-          type: array
         is_active:
           type: boolean
         order:
@@ -4494,9 +4494,12 @@ components:
         target:
           type: object
           properties:
-          - captured_array: string
-          - subject: string
-          - regex: string
+            captured_array:
+              type: string
+            subject:
+              type: string
+            regex:
+              type: string
       properties:
         name:
           type: string
