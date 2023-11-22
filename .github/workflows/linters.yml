@@ -1,0 +1,26 @@
+name: Code Linters
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  spectral:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+    
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 14 
+    
+      - name: Install Spectral
+        run: npm install -g @stoplight/spectral
+    
+      - name: Run Spectral Lint
+        run: spectral lint .
+        continue-on-error: true
