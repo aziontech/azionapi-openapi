@@ -45,6 +45,8 @@ jobs:
         with:
           files: |
             **/*.yaml
+          files_ignore: |
+            .spectral.yaml
 
       - name: Run linter for changed files
         run: |

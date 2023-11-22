@@ -19,8 +19,7 @@ jobs:
           node-version: 14 
     
       - name: Install Spectral
-        run: npm install -g @stoplight/spectral
+        run: npm install @stoplight/spectral-cli
     
       - name: Run Spectral Lint
-        run: spectral lint .
-        continue-on-error: true
+        run: npx spectral lint .
