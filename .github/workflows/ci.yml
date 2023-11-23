@@ -45,6 +45,8 @@ jobs:
         with:
           files: |
             **/*.yaml
+          files_ignore: |
+            .spectral.yaml
 
       - name: Run linter for changed files
         run: |
@@ -60,4 +62,3 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             redocly lint $file
           done 
-
