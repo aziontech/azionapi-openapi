@@ -1,5 +1,5 @@
 
-name: CI
+name: Linters
 
 on:
   push:
@@ -45,6 +45,8 @@ jobs:
         with:
           files: |
             **/*.yaml
+          files_ignore: |
+            .spectral.yaml
 
       - name: Run linter for changed files
         run: |
@@ -61,3 +63,8 @@ jobs:
             redocly lint $file
           done 
 
+      - name: Install Spectral
+        run: npm install @stoplight/spectral-cli
+      
+      - name: Run Spectral Lint
+        run: npx spectral lint .
