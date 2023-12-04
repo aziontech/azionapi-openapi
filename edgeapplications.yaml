@@ -3825,6 +3825,8 @@ components:
         origin_type: origin_type
         host_header: host_header
         hmac_authentication: true
+        bucket: bucket
+        prefix: prefix
       properties:
         name:
           type: string
@@ -3847,6 +3849,10 @@ components:
         hmac_access_key:
           type: string
         hmac_secret_key:
+          type: string
+        bucket:
+          type: string
+        prefix:
           type: string
       required:
       - addresses
@@ -3868,6 +3874,8 @@ components:
         origin_type: origin_type
         host_header: host_header
         hmac_authentication: true
+        bucket: bucket
+        prefix: prefix
       properties:
         name:
           type: string
@@ -3890,6 +3898,10 @@ components:
         hmac_access_key:
           type: string
         hmac_secret_key:
+          type: string
+        bucket:
+          type: string
+        prefix:
           type: string
       required:
       - addresses
@@ -3911,6 +3923,8 @@ components:
         origin_type: origin_type
         host_header: host_header
         hmac_authentication: true
+        bucket: bucket
+        prefix: prefix
       properties:
         name:
           type: string
@@ -3933,6 +3947,10 @@ components:
         hmac_access_key:
           type: string
         hmac_secret_key:
+          type: string
+        bucket:
+          type: string
+        prefix:
           type: string
       type: object
     OriginsResultResponse:
@@ -3962,6 +3980,8 @@ components:
         name: name
         connection_timeout: 5
         hmac_authentication: true
+        bucket: bucket
+        prefix: prefix
       properties:
         origin_id:
           format: int64
@@ -3999,6 +4019,10 @@ components:
         hmac_access_key:
           type: string
         hmac_secret_key:
+          type: string
+        bucket:
+          type: string
+        prefix:
           type: string
       required:
       - addresses
@@ -4052,6 +4076,8 @@ components:
           name: name
           connection_timeout: 5
           hmac_authentication: true
+          bucket: bucket
+          prefix: prefix
         - timeout_between_bytes: 2
           addresses:
           - address: address
@@ -4128,6 +4154,8 @@ components:
           name: name
           connection_timeout: 5
           hmac_authentication: true
+          bucket: bucket
+          prefix: prefix
       properties:
         results:
           $ref: '#/components/schemas/OriginsResultResponse'
