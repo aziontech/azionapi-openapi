@@ -1,4 +1,4 @@
-functions: [checkEndpointStatusCodes]
+functions: [checkEndpointStatusCodes, checkNumericLimits]
 extends: spectral:oas
 rules:
   my-rule:
@@ -7,3 +7,9 @@ rules:
     given: $.
     then:
       function: checkEndpointStatusCodes
+  numeric-limits-rule:
+    message: "{{error}}"
+    severity: error
+    given: $.
+    then:
+      function: checkNumericLimits
