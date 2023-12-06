@@ -3,6 +3,9 @@
 edge_api.yaml:
   no-empty-servers:
     - '#/openapi'
+  spec:
+    - '#/info'
+    - '#/components/schemas/ResponseDeleteWAFRule/properties/data/nullable'
   info-license:
     - '#/info'
   operation-summary:
@@ -12,5 +15,3 @@ edge_api.yaml:
     - '#/paths/~1edge~1api~1waf~1{wafId}~1allowed_rules~1{id}/put/summary'
     - '#/paths/~1edge~1api~1waf~1{wafId}~1allowed_rules~1{id}/delete/summary'
     - '#/paths/~1edge~1api~1waf~1{wafId}~1allowed_rules~1{id}/patch/summary'
-  spec:
-    - '#/components/schemas/ResponseDeleteWAFRule/properties/data/nullable'
