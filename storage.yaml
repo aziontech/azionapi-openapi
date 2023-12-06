@@ -3,9 +3,16 @@ info:
   title: Object Storage
   version: 1.0.0 (v1)
   description: REST API OpenAPI documentation for the Object Storage
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
+servers:
+- description: Production
+  url: https://storage-api.azion.com
 paths:
   /api/v1/storage/buckets:
     get:
+      summary: /api/v1/storage/buckets
       operationId: api_v1_storage_buckets_list
       description: ''
       parameters:
@@ -45,6 +52,7 @@ paths:
         '403':
           description: Forbidden
     post:
+      summary: /api/v1/storage/buckets
       operationId: api_v1_storage_buckets_create
       description: ''
       tags:
@@ -90,6 +98,7 @@ paths:
           description: ''
   /api/v1/storage/buckets/{name}:
     patch:
+      summary: /api/v1/storage/buckets/:name
       operationId: api_v1_storage_buckets_partial_update
       description: ''
       parameters:
@@ -139,6 +148,7 @@ paths:
                 $ref: '#/components/schemas/ResponseBucket'
           description: ''
     delete:
+      summary: /api/v1/storage/buckets/:name
       operationId: api_v1_storage_buckets_destroy
       description: ''
       parameters:
@@ -255,6 +265,7 @@ components:
         state:
           $ref: '#/components/schemas/StateEnum'
         data:
+          type: object
           allOf:
           - $ref: '#/components/schemas/Bucket'
           nullable: true
