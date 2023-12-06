@@ -1,0 +1,426 @@
+openapi: 3.0.3
+info:
+  title: edge-api
+  version: 1.0.0
+  description: REST API OpenAPI documentation for the edge-api
+paths:
+  /edge/api/waf/{wafId}/allowed_rules:
+    get:
+      operationId: edgeApiWafAllowedRulesList
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      - in: path
+        name: wafId
+        schema:
+          type: string
+        required: true
+      tags:
+      - edge
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedWAFRuleList'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      operationId: edgeApiWafAllowedRulesCreate
+      description: ''
+      parameters:
+      - in: path
+        name: wafId
+        schema:
+          type: string
+        required: true
+      tags:
+      - edge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WAFRuleRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WAFRuleRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WAFRuleRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWAFRule'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWAFRule'
+          description: ''
+  /edge/api/waf/{wafId}/allowed_rules/{id}:
+    get:
+      operationId: edgeApiWafAllowedRulesRetrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: wafId
+        schema:
+          type: string
+        required: true
+      tags:
+      - edge
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWAFRule'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    put:
+      operationId: edgeApiWafAllowedRulesUpdate
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: wafId
+        schema:
+          type: string
+        required: true
+      tags:
+      - edge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WAFRuleRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/WAFRuleRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/WAFRuleRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWAFRule'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWAFRule'
+          description: ''
+    patch:
+      operationId: edgeApiWafAllowedRulesPartialUpdate
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: wafId
+        schema:
+          type: string
+        required: true
+      tags:
+      - edge
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedWAFRuleRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedWAFRuleRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedWAFRuleRequest'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWAFRule'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWAFRule'
+          description: ''
+    delete:
+      operationId: edgeApiWafAllowedRulesDestroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: wafId
+        schema:
+          type: string
+        required: true
+      tags:
+      - edge
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDeleteWAFRule'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseWAFRule'
+          description: ''
+components:
+  schemas:
+    PaginatedWAFRuleList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/WAFRule'
+      additionalProperties: false
+    PatchedWAFRuleRequest:
+      type: object
+      properties:
+        main_rule_id:
+          type: integer
+        description:
+          type: string
+          nullable: true
+          description: Description
+          maxLength: 255
+        path:
+          type: string
+          nullable: true
+          description: Path
+          maxLength: 255
+        status:
+          type: boolean
+        use_regex:
+          type: boolean
+      additionalProperties: false
+    ResponseDeleteWAFRule:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/StateEnum'
+        data:
+          allOf:
+          - $ref: '#/components/schemas/WAFRule'
+          nullable: true
+      required:
+      - data
+      - state
+      additionalProperties: false
+    ResponseWAFRule:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/StateEnum'
+        data:
+          $ref: '#/components/schemas/WAFRule'
+      required:
+      - data
+      - state
+      additionalProperties: false
+    StateEnum:
+      enum:
+      - pending
+      - executed
+      type: string
+      additionalProperties: false
+    WAFRule:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        main_rule_id:
+          type: integer
+        description:
+          type: string
+          nullable: true
+          description: Description
+          maxLength: 255
+        path:
+          type: string
+          nullable: true
+          description: Path
+          maxLength: 255
+        last_editor:
+          type: string
+          readOnly: true
+        last_modified:
+          type: string
+          readOnly: true
+        status:
+          type: boolean
+        use_regex:
+          type: boolean
+      required:
+      - id
+      - last_editor
+      - last_modified
+      - main_rule_id
+      additionalProperties: false
+    WAFRuleRequest:
+      type: object
+      properties:
+        main_rule_id:
+          type: integer
+        description:
+          type: string
+          nullable: true
+          description: Description
+          maxLength: 255
+        path:
+          type: string
+          nullable: true
+          description: Path
+          maxLength: 255
+        status:
+          type: boolean
+        use_regex:
+          type: boolean
+      required:
+      - main_rule_id
+      additionalProperties: false
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
