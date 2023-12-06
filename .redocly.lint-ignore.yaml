@@ -1,0 +1,16 @@
+# This file instructs Redocly's linter to ignore the rules contained for specific parts of your API.
+# See https://redoc.ly/docs/cli/ for more information.
+edge_api.yaml:
+  no-empty-servers:
+    - '#/openapi'
+  info-license:
+    - '#/info'
+  operation-summary:
+    - '#/paths/~1edge~1api~1waf~1{wafId}~1allowed_rules/get/summary'
+    - '#/paths/~1edge~1api~1waf~1{wafId}~1allowed_rules/post/summary'
+    - '#/paths/~1edge~1api~1waf~1{wafId}~1allowed_rules~1{id}/get/summary'
+    - '#/paths/~1edge~1api~1waf~1{wafId}~1allowed_rules~1{id}/put/summary'
+    - '#/paths/~1edge~1api~1waf~1{wafId}~1allowed_rules~1{id}/delete/summary'
+    - '#/paths/~1edge~1api~1waf~1{wafId}~1allowed_rules~1{id}/patch/summary'
+  spec:
+    - '#/components/schemas/ResponseDeleteWAFRule/properties/data/nullable'

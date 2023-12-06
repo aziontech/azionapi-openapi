@@ -1,7 +1,6 @@
 openapi: 3.0.3
 info:
-  title: edge-api
-  version: 1.0.0
+  title: Edge API
   description: REST API OpenAPI documentation for the edge-api
 paths:
   /edge/api/waf/{wafId}/allowed_rules:
