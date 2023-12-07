@@ -1,0 +1,285 @@
+openapi: 3.0.3
+info:
+  title: Object Storage
+  version: 1.0.0 (v1)
+  description: REST API OpenAPI documentation for the Object Storage
+  license:
+    name: MIT
+    url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
+servers:
+- description: Production
+  url: https://api.azion.com
+paths:
+  /v4/storage/buckets:
+    get:
+      summary: /v4/storage/buckets
+      operationId: api_v1_storage_buckets_list
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - buckets
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBucketList'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      summary: /v4/storage/buckets
+      operationId: api_v1_storage_buckets_create
+      description: ''
+      tags:
+      - buckets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BucketCreate'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/BucketCreate'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BucketCreate'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBucket'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBucket'
+          description: ''
+  /v4/storage/buckets/{name}:
+    patch:
+      summary: /v4/storage/buckets/:name
+      operationId: api_v1_storage_buckets_partial_update
+      description: ''
+      parameters:
+      - in: path
+        name: name
+        schema:
+          type: string
+        required: true
+      tags:
+      - buckets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBucket'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedBucket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBucket'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBucket'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBucket'
+          description: ''
+    delete:
+      summary: /v4/storage/buckets/:name
+      operationId: api_v1_storage_buckets_destroy
+      description: ''
+      parameters:
+      - in: path
+        name: name
+        schema:
+          type: string
+        required: true
+      tags:
+      - buckets
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDeleteBucket'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBucket'
+          description: ''
+components:
+  schemas:
+    Bucket:
+      type: object
+      properties:
+        name:
+          type: string
+          readOnly: true
+          maxLength: 63
+          minLength: 6
+        edge_access:
+          $ref: '#/components/schemas/EdgeAccessEnum'
+      required:
+      - edge_access
+      - name
+    BucketCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 63
+          minLength: 6
+        edge_access:
+          $ref: '#/components/schemas/EdgeAccessEnum'
+      required:
+      - edge_access
+      - name
+    EdgeAccessEnum:
+      enum:
+      - read_only
+      - read_write
+      - restricted
+      type: string
+    PaginatedBucketList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bucket'
+    PatchedBucket:
+      type: object
+      properties:
+        name:
+          type: string
+          readOnly: true
+          maxLength: 63
+          minLength: 6
+        edge_access:
+          $ref: '#/components/schemas/EdgeAccessEnum'
+    ResponseBucket:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/StateEnum'
+        data:
+          $ref: '#/components/schemas/Bucket'
+      required:
+      - data
+      - state
+    ResponseDeleteBucket:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/StateEnum'
+        data:
+          type: object
+          allOf:
+          - $ref: '#/components/schemas/Bucket'
+          nullable: true
+      required:
+      - data
+      - state
+    StateEnum:
+      enum:
+      - pending
+      - executed
+      type: string
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
