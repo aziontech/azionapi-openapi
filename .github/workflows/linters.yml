@@ -10,7 +10,7 @@ on:
 
 jobs:
   spectral:
-    runs-on: [ self-hosted, stage ]
+    runs-on: ubuntu-latest
     container:
       image: node:14-alpine3.12
 
