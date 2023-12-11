@@ -1,1 +1,1 @@
-extends: azion-api-template/spectral/.spectral.yaml
+extends: spectral/.spectral.yaml

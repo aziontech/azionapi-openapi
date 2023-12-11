@@ -1,0 +1,21 @@
+functions: [checkEndpointStatusCodes, checkNumericLimits, checkStringProperties]
+extends: spectral:oas
+rules:
+  azion-mandatory-status-codes:
+    message: "{{error}}"
+    severity: error
+    given: "$.paths.*"
+    then:
+      function: checkEndpointStatusCodes
+  azion-numeric-limits-rule:
+    message: "{{error}}"
+    severity: error
+    given: $.
+    then:
+      function: checkNumericLimits
+  azion-string-properties-rule:
+    message: "{{error}}"
+    severity: error
+    given: $.
+    then:
+      function: checkStringProperties

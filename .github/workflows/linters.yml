@@ -4,9 +4,6 @@ on:
   pull_request:
     branches:
         - main
-  push:
-    branches:
-        - QA-1401
 
 jobs:
   spectral:
@@ -17,14 +14,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
-      - name: Checkout azion-api-template
-        uses: actions/checkout@v3
-        with:
-          repository: aziontech/azion-api-template
-          token: ${{ secrets.GLOBAL_TOKEN }}
-          path: azion-api-template
-          ref: QA-1322
 
       - name: Install Spectral
         run: npm install @stoplight/spectral-cli
