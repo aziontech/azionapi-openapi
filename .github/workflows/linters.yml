@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
         - main
+  push:
+    branches:
+        - QA-1401
 
 jobs:
   spectral:
