@@ -19,74 +19,73 @@ jobs:
         run: npm install @stoplight/spectral-cli
 
       - name: Run Spectral Lint on Credentials API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml credentials.yaml --display-only-failures || exit 1
-        continue-on-error: true
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-credentials.yaml credentials.yaml --display-only-failures || exit 1
         
-      - name: Run Spectral Lint on Data Streaming API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml data_streaming.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Data Streaming API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml data_streaming.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Digital Certificates API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml digital_certificates.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Digital Certificates API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml digital_certificates.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Domains API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml domains.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Domains API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml domains.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Edge Applications API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml edgeapplications.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Edge Applications API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml edgeapplications.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Edge Firewall API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml edgefirewall.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Edge Firewall API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml edgefirewall.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Edge Functions API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml edgefunctions.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Edge Functions API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml edgefunctions.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Edge Functions Instance Edge Firewall API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml edgefunctionsinstance_edgefirewall.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Edge Functions Instance Edge Firewall API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml edgefunctionsinstance_edgefirewall.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Edge Node API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml edgenode.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Edge Node API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml edgenode.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on IAM API API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml iam.yml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on IAM API API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml iam.yml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Intelligent DNS API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml idns.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Intelligent DNS API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml idns.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Network List API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml networklist.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Network List API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml networklist.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Personal Tokens API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml personal_tokens.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Personal Tokens API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml personal_tokens.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Realtime Purge API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml realtimepurge.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Realtime Purge API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml realtimepurge.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Services API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml services.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Services API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml services.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Storage API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml storage.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Storage API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml storage.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on Variables API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml variables.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on Variables API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml variables.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
-      - name: Run Spectral Lint on WAF API
-        run: npx spectral lint --verbose --ruleset .spectral.yaml waf.yaml --display-only-failures || exit 1
-        continue-on-error: true
+      # - name: Run Spectral Lint on WAF API
+      #   run: npx spectral lint --verbose --ruleset .spectral.yaml waf.yaml --display-only-failures || exit 1
+      #   continue-on-error: true
 
