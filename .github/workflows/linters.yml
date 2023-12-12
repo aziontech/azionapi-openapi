@@ -78,9 +78,8 @@ jobs:
       - name: Run Spectral Lint on Storage API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-storage.yaml storage.yaml --display-only-failures || exit 1
 
-      # - name: Run Spectral Lint on Variables API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml variables.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Variables API
+        run: npx spectral lint --verbose --ruleset .spectral.yaml variables.yaml --display-only-failures || exit 1
 
       # - name: Run Spectral Lint on WAF API
       #   run: npx spectral lint --verbose --ruleset .spectral.yaml waf.yaml --display-only-failures || exit 1
