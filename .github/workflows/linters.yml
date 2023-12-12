@@ -25,9 +25,8 @@ jobs:
       #   run: npx spectral lint --verbose --ruleset .spectral.yaml data_streaming.yaml --display-only-failures || exit 1
       #   continue-on-error: true
 
-      # - name: Run Spectral Lint on Digital Certificates API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml digital_certificates.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Digital Certificates API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-digital_certificates.yaml digital_certificates.yaml --display-only-failures || exit 1
 
       # - name: Run Spectral Lint on Domains API
       #   run: npx spectral lint --verbose --ruleset .spectral.yaml domains.yaml --display-only-failures || exit 1
