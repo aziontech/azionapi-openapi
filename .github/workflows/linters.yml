@@ -68,9 +68,8 @@ jobs:
       #   run: npx spectral lint --verbose --ruleset .spectral.yaml personal_tokens.yaml --display-only-failures || exit 1
       #   continue-on-error: true
 
-      # - name: Run Spectral Lint on Realtime Purge API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml realtimepurge.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Realtime Purge API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-realtimepurge.yaml realtimepurge.yaml --display-only-failures || exit 1
 
       # - name: Run Spectral Lint on Services API
       #   run: npx spectral lint --verbose --ruleset .spectral.yaml services.yaml --display-only-failures || exit 1
