@@ -30,9 +30,8 @@ jobs:
       - name: Run Spectral Lint on Domains API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-domains.yaml domains.yaml --display-only-failures || exit 1
 
-      # - name: Run Spectral Lint on Edge Applications API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml edgeapplications.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Edge Applications API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-edgeapplications.yaml edgeapplications.yaml --display-only-failures || exit 1
 
       - name: Run Spectral Lint on Edge Firewall API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-edgefirewall.yaml edgefirewall.yaml --display-only-failures || exit 1
