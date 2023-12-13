@@ -46,9 +46,8 @@ jobs:
       - name: Run Spectral Lint on Edge Node API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-edgenode.yaml edgenode.yaml --display-only-failures || exit 1
 
-      # - name: Run Spectral Lint on IAM API API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml iam.yml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on IAM API API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-iam.yaml iam.yml --display-only-failures || exit 1
 
       - name: Run Spectral Lint on Intelligent DNS API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-idns.yaml idns.yaml --display-only-failures || exit 1
