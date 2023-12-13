@@ -21,9 +21,8 @@ jobs:
       - name: Run Spectral Lint on Credentials API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-credentials.yaml credentials.yaml --display-only-failures || exit 1
         
-      # - name: Run Spectral Lint on Data Streaming API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml data_streaming.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Data Streaming API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-datastreaming.yaml data_streaming.yaml --display-only-failures || exit 1
 
       - name: Run Spectral Lint on Digital Certificates API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-digital_certificates.yaml digital_certificates.yaml --display-only-failures || exit 1
@@ -51,9 +50,8 @@ jobs:
       #   run: npx spectral lint --verbose --ruleset .spectral.yaml iam.yml --display-only-failures || exit 1
       #   continue-on-error: true
 
-      # - name: Run Spectral Lint on Intelligent DNS API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml idns.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Intelligent DNS API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-idns.yaml idns.yaml --display-only-failures || exit 1
 
       - name: Run Spectral Lint on Network List API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-networklist.yaml networklist.yaml --display-only-failures || exit 1
@@ -64,9 +62,8 @@ jobs:
       - name: Run Spectral Lint on Realtime Purge API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-realtimepurge.yaml realtimepurge.yaml --display-only-failures || exit 1
 
-      # - name: Run Spectral Lint on Services API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml services.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Services API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-services.yaml services.yaml --display-only-failures || exit 1
 
       - name: Run Spectral Lint on Storage API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-storage.yaml storage.yaml --display-only-failures || exit 1
