@@ -28,17 +28,15 @@ jobs:
       - name: Run Spectral Lint on Digital Certificates API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-digital_certificates.yaml digital_certificates.yaml --display-only-failures || exit 1
 
-      # - name: Run Spectral Lint on Domains API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml domains.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Domains API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-domains.yaml domains.yaml --display-only-failures || exit 1
 
       # - name: Run Spectral Lint on Edge Applications API
       #   run: npx spectral lint --verbose --ruleset .spectral.yaml edgeapplications.yaml --display-only-failures || exit 1
       #   continue-on-error: true
 
-      # - name: Run Spectral Lint on Edge Firewall API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml edgefirewall.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Edge Firewall API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-edgefirewall.yaml edgefirewall.yaml --display-only-failures || exit 1
 
       # - name: Run Spectral Lint on Edge Functions API
       #   run: npx spectral lint --verbose --ruleset .spectral.yaml edgefunctions.yaml --display-only-failures || exit 1
@@ -59,13 +57,11 @@ jobs:
       #   run: npx spectral lint --verbose --ruleset .spectral.yaml idns.yaml --display-only-failures || exit 1
       #   continue-on-error: true
 
-      # - name: Run Spectral Lint on Network List API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml networklist.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Network List API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-networklist.yaml networklist.yaml --display-only-failures || exit 1
 
-      # - name: Run Spectral Lint on Personal Tokens API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml personal_tokens.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Personal Tokens API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-personaltokens.yaml personal_tokens.yaml --display-only-failures || exit 1
 
       - name: Run Spectral Lint on Realtime Purge API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-realtimepurge.yaml realtimepurge.yaml --display-only-failures || exit 1
@@ -80,7 +76,5 @@ jobs:
       - name: Run Spectral Lint on Variables API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-variables.yaml variables.yaml --display-only-failures || exit 1
 
-      # - name: Run Spectral Lint on WAF API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml waf.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
-
+      - name: Run Spectral Lint on WAF API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-waf.yaml waf.yaml --display-only-failures || exit 1
