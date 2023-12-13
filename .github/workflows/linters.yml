@@ -38,16 +38,14 @@ jobs:
       - name: Run Spectral Lint on Edge Firewall API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-edgefirewall.yaml edgefirewall.yaml --display-only-failures || exit 1
 
-      # - name: Run Spectral Lint on Edge Functions API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml edgefunctions.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Edge Functions API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-edgefunctions.yaml edgefunctions.yaml --display-only-failures || exit 1
 
       - name: Run Spectral Lint on Edge Functions Instance Edge Firewall API
         run: npx spectral lint --verbose --ruleset spectral/.spectral-edgefuncinstedgefirewall.yaml edgefunctionsinstance_edgefirewall.yaml --display-only-failures || exit 1
 
-      # - name: Run Spectral Lint on Edge Node API
-      #   run: npx spectral lint --verbose --ruleset .spectral.yaml edgenode.yaml --display-only-failures || exit 1
-      #   continue-on-error: true
+      - name: Run Spectral Lint on Edge Node API
+        run: npx spectral lint --verbose --ruleset spectral/.spectral-edgenode.yaml edgenode.yaml --display-only-failures || exit 1
 
       # - name: Run Spectral Lint on IAM API API
       #   run: npx spectral lint --verbose --ruleset .spectral.yaml iam.yml --display-only-failures || exit 1
