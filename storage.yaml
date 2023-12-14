@@ -10,8 +10,9 @@ servers:
 - description: Production
   url: https://api.azion.com
 paths:
-  /storage/api/buckets:
+  /v4/storage/buckets:
     get:
+      summary: /v4/storage/buckets
       operationId: storage_api_buckets_list
       description: ''
       parameters:
@@ -51,6 +52,7 @@ paths:
         '403':
           description: Forbidden
     post:
+      summary: /v4/storage/buckets
       operationId: storage_api_buckets_create
       description: ''
       tags:
@@ -94,8 +96,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseBucket'
           description: ''
-  /storage/api/buckets/{bucket_name}/objects:
+  /v4/storage/buckets/{bucket_name}/objects:
     get:
+      summary: /v4/storage/buckets/:bucket_name/objects
       operationId: storage_api_buckets_objects_list
       description: ''
       parameters:
@@ -139,8 +142,9 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-  /storage/api/buckets/{bucket_name}/objects/{object_key}:
+  /v4/storage/buckets/{bucket_name}/objects/{object_key}:
     get:
+      summary: /v4/storage/buckets/:bucket_name/objects/:object_key
       operationId: storage_api_buckets_objects_retrieve
       description: Download the object file from bucket storage.
       parameters:
@@ -179,6 +183,7 @@ paths:
         '403':
           description: Forbidden
     post:
+      summary: /v4/storage/buckets/:bucket_name/objects/:object_key
       operationId: storage_api_buckets_objects_create
       description: Create a new object by uploading a new file to bucket storage.
       parameters:
@@ -223,6 +228,7 @@ paths:
         '403':
           description: Forbidden
     put:
+      summary: /v4/storage/buckets/:bucket_name/objects/:object_key
       operationId: storage_api_buckets_objects_update
       description: Update the object by uploading a new file to bucket storage.
       parameters:
@@ -267,6 +273,7 @@ paths:
         '403':
           description: Forbidden
     delete:
+      summary: /v4/storage/buckets/:bucket_name/objects/:object_key
       operationId: storage_api_buckets_objects_destroy
       description: Create a new object by uploading a new file to bucket storage.
       parameters:
@@ -303,8 +310,9 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-  /storage/api/buckets/{name}:
+  /v4/storage/buckets/{name}:
     patch:
+      summary: /v4/storage/buckets/:name
       operationId: storage_api_buckets_partial_update
       description: ''
       parameters:
@@ -354,6 +362,7 @@ paths:
                 $ref: '#/components/schemas/ResponseBucket'
           description: ''
     delete:
+      summary: /v4/storage/buckets/:name
       operationId: storage_api_buckets_destroy
       description: ''
       parameters:
@@ -511,6 +520,7 @@ components:
         state:
           $ref: '#/components/schemas/State7b9Enum'
         data:
+          type: object
           allOf:
           - $ref: '#/components/schemas/Bucket'
           nullable: true
