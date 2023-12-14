@@ -10,10 +10,9 @@ servers:
 - description: Production
   url: https://api.azion.com
 paths:
-  /v4/storage/buckets:
+  /storage/api/buckets:
     get:
-      summary: /v4/storage/buckets
-      operationId: api_v1_storage_buckets_list
+      operationId: storage_api_buckets_list
       description: ''
       parameters:
       - name: page
@@ -29,7 +28,7 @@ paths:
         schema:
           type: integer
       tags:
-      - buckets
+      - storage
       security:
       - tokenAuth: []
       responses:
@@ -52,11 +51,10 @@ paths:
         '403':
           description: Forbidden
     post:
-      summary: /v4/storage/buckets
-      operationId: api_v1_storage_buckets_create
+      operationId: storage_api_buckets_create
       description: ''
       tags:
-      - buckets
+      - storage
       requestBody:
         content:
           application/json:
@@ -96,10 +94,218 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseBucket'
           description: ''
-  /v4/storage/buckets/{name}:
+  /storage/api/buckets/{bucket_name}/objects:
+    get:
+      operationId: storage_api_buckets_objects_list
+      description: ''
+      parameters:
+      - in: path
+        name: bucket_name
+        schema:
+          type: string
+        required: true
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - storage
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedBucketObjectList'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /storage/api/buckets/{bucket_name}/objects/{object_key}:
+    get:
+      operationId: storage_api_buckets_objects_retrieve
+      description: Download the object file from bucket storage.
+      parameters:
+      - in: path
+        name: bucket_name
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: object_key
+        schema:
+          type: string
+        required: true
+      tags:
+      - storage
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      operationId: storage_api_buckets_objects_create
+      description: Create a new object by uploading a new file to bucket storage.
+      parameters:
+      - in: path
+        name: bucket_name
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: object_key
+        schema:
+          type: string
+        required: true
+      tags:
+      - storage
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: object
+              additionalProperties: {}
+              description: Unspecified request body
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success object operation'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    put:
+      operationId: storage_api_buckets_objects_update
+      description: Update the object by uploading a new file to bucket storage.
+      parameters:
+      - in: path
+        name: bucket_name
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: object_key
+        schema:
+          type: string
+        required: true
+      tags:
+      - storage
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: object
+              additionalProperties: {}
+              description: Unspecified request body
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success object operation'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    delete:
+      operationId: storage_api_buckets_objects_destroy
+      description: Create a new object by uploading a new file to bucket storage.
+      parameters:
+      - in: path
+        name: bucket_name
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: object_key
+        schema:
+          type: string
+        required: true
+      tags:
+      - storage
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success object operation'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /storage/api/buckets/{name}:
     patch:
-      summary: /v4/storage/buckets/:name
-      operationId: api_v1_storage_buckets_partial_update
+      operationId: storage_api_buckets_partial_update
       description: ''
       parameters:
       - in: path
@@ -108,7 +314,7 @@ paths:
           type: string
         required: true
       tags:
-      - buckets
+      - storage
       requestBody:
         content:
           application/json:
@@ -148,8 +354,7 @@ paths:
                 $ref: '#/components/schemas/ResponseBucket'
           description: ''
     delete:
-      summary: /v4/storage/buckets/:name
-      operationId: api_v1_storage_buckets_destroy
+      operationId: storage_api_buckets_destroy
       description: ''
       parameters:
       - in: path
@@ -158,7 +363,7 @@ paths:
           type: string
         required: true
       tags:
-      - buckets
+      - storage
       security:
       - tokenAuth: []
       responses:
@@ -213,6 +418,27 @@ components:
       required:
       - edge_access
       - name
+    BucketObject:
+      type: object
+      properties:
+        key:
+          type: string
+          readOnly: true
+        last_modified:
+          type: string
+          format: date-time
+          readOnly: true
+        size:
+          type: integer
+          readOnly: true
+        etag:
+          type: string
+          readOnly: true
+      required:
+      - etag
+      - key
+      - last_modified
+      - size
     EdgeAccessEnum:
       enum:
       - read_only
@@ -239,6 +465,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Bucket'
+    PaginatedBucketObjectList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/BucketObject'
     PatchedBucket:
       type: object
       properties:
@@ -253,7 +499,7 @@ components:
       type: object
       properties:
         state:
-          $ref: '#/components/schemas/StateEnum'
+          $ref: '#/components/schemas/State7b9Enum'
         data:
           $ref: '#/components/schemas/Bucket'
       required:
@@ -263,20 +509,41 @@ components:
       type: object
       properties:
         state:
-          $ref: '#/components/schemas/StateEnum'
+          $ref: '#/components/schemas/State7b9Enum'
         data:
-          type: object
           allOf:
           - $ref: '#/components/schemas/Bucket'
           nullable: true
       required:
       - data
       - state
-    StateEnum:
+    State7b9Enum:
       enum:
       - pending
       - executed
       type: string
+    Success object operation:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/Success object operationStateEnum'
+        data:
+          $ref: '#/components/schemas/response data'
+      required:
+      - data
+      - state
+    Success object operationStateEnum:
+      enum:
+      - executed
+      - pending
+      type: string
+    response data:
+      type: object
+      properties:
+        object_key:
+          type: string
+      required:
+      - object_key
   securitySchemes:
     tokenAuth:
       type: apiKey
