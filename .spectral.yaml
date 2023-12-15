@@ -1,9 +1,0 @@
-functions: [checkEndpointStatusCodes]
-extends: spectral:oas
-rules:
-  my-rule:
-    message: "{{error}}"
-    severity: error
-    given: $.
-    then:
-      function: checkEndpointStatusCodes

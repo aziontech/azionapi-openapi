@@ -1,0 +1,14 @@
+extends: .spectral.yaml
+overrides:
+  - files:
+      - "storage.yaml#/components/schemas/PaginatedBucketList/properties/count"
+    rules:
+      azion-number-minimum-limit-rule: "off"
+  - files:
+      - "storage.yaml#/components/schemas/PaginatedBucketList/properties/count"
+    rules:
+      azion-number-maximum-limit-rule: "off"
+  - files:
+      - "storage.yaml#/components/schemas/BucketCreate/properties/name"
+    rules:
+      azion-string-pattern-properties-rule: "off"
