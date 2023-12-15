@@ -10,7 +10,7 @@ servers:
 - description: Production
   url: https://api.azion.com
 paths:
-   /v4/storage/buckets:
+  /v4/storage/buckets:
     get:
       operationId: storage_api_buckets_list
       description: ''
@@ -142,7 +142,7 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-   /v4/storage/buckets/{bucket_name}/objects/{object_key}:
+  /v4/storage/buckets/{bucket_name}/objects/{object_key}:
     get:
       operationId: storage_api_buckets_objects_retrieve
       description: Download the object key from bucket.
@@ -310,7 +310,7 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-   /v4/storage/buckets/{name}:
+  /v4/storage/buckets/{name}:
     patch:
       operationId: storage_api_buckets_partial_update
       description: ''
