@@ -10,11 +10,11 @@ servers:
 - description: Production
   url: https://api.azion.com
 paths:
-  /v4/storage/buckets:
+   /v4/storage/buckets:
     get:
-      summary: /v4/storage/buckets
       operationId: storage_api_buckets_list
       description: ''
+      summary: List buckets
       parameters:
       - name: page
         required: false
@@ -52,9 +52,9 @@ paths:
         '403':
           description: Forbidden
     post:
-      summary: /v4/storage/buckets
       operationId: storage_api_buckets_create
       description: ''
+      summary: Create a new bucket
       tags:
       - storage
       requestBody:
@@ -98,9 +98,9 @@ paths:
           description: ''
   /v4/storage/buckets/{bucket_name}/objects:
     get:
-      summary: /v4/storage/buckets/:bucket_name/objects
       operationId: storage_api_buckets_objects_list
       description: ''
+      summary: List buckets objects
       parameters:
       - in: path
         name: bucket_name
@@ -142,11 +142,11 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-  /v4/storage/buckets/{bucket_name}/objects/{object_key}:
+   /v4/storage/buckets/{bucket_name}/objects/{object_key}:
     get:
-      summary: /v4/storage/buckets/:bucket_name/objects/:object_key
       operationId: storage_api_buckets_objects_retrieve
-      description: Download the object file from bucket storage.
+      description: Download the object key from bucket.
+      summary: Download object
       parameters:
       - in: path
         name: bucket_name
@@ -183,9 +183,9 @@ paths:
         '403':
           description: Forbidden
     post:
-      summary: /v4/storage/buckets/:bucket_name/objects/:object_key
       operationId: storage_api_buckets_objects_create
-      description: Create a new object by uploading a new file to bucket storage.
+      description: Create a new object key in the bucket.
+      summary: Create new object key
       parameters:
       - in: path
         name: bucket_name
@@ -213,7 +213,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Success object operation'
+                $ref: '#/components/schemas/SuccessObjectOperation'
           description: ''
         '400':
           description: Bad Request
@@ -228,9 +228,9 @@ paths:
         '403':
           description: Forbidden
     put:
-      summary: /v4/storage/buckets/:bucket_name/objects/:object_key
       operationId: storage_api_buckets_objects_update
-      description: Update the object by uploading a new file to bucket storage.
+      description: Update the object key from bucket.
+      summary: Update the object key
       parameters:
       - in: path
         name: bucket_name
@@ -258,7 +258,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Success object operation'
+                $ref: '#/components/schemas/SuccessObjectOperation'
           description: ''
         '400':
           description: Bad Request
@@ -273,9 +273,9 @@ paths:
         '403':
           description: Forbidden
     delete:
-      summary: /v4/storage/buckets/:bucket_name/objects/:object_key
       operationId: storage_api_buckets_objects_destroy
-      description: Create a new object by uploading a new file to bucket storage.
+      description: Delete an object key from bucket
+      summary: Delete object key
       parameters:
       - in: path
         name: bucket_name
@@ -296,7 +296,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Success object operation'
+                $ref: '#/components/schemas/SuccessObjectOperation'
           description: ''
         '400':
           description: Bad Request
@@ -310,11 +310,11 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-  /v4/storage/buckets/{name}:
+   /v4/storage/buckets/{name}:
     patch:
-      summary: /v4/storage/buckets/:name
       operationId: storage_api_buckets_partial_update
       description: ''
+      summary: Update bucket info
       parameters:
       - in: path
         name: name
@@ -323,17 +323,6 @@ paths:
         required: true
       tags:
       - storage
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedBucket'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedBucket'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedBucket'
       security:
       - tokenAuth: []
       responses:
@@ -362,9 +351,9 @@ paths:
                 $ref: '#/components/schemas/ResponseBucket'
           description: ''
     delete:
-      summary: /v4/storage/buckets/:name
       operationId: storage_api_buckets_destroy
       description: ''
+      summary: Delete a bucket
       parameters:
       - in: path
         name: name
@@ -380,7 +369,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseDeleteBucket'
+                $ref: '#/components/schemas/SuccessBucketOperation'
           description: ''
         '400':
           description: Bad Request
@@ -394,12 +383,6 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseBucket'
-          description: ''
 components:
   schemas:
     Bucket:
@@ -454,6 +437,13 @@ components:
       - read_write
       - restricted
       type: string
+    ObjectResponseData:
+      type: object
+      properties:
+        object_key:
+          type: string
+      required:
+      - object_key
     PaginatedBucketList:
       type: object
       properties:
@@ -494,69 +484,49 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/BucketObject'
-    PatchedBucket:
-      type: object
-      properties:
-        name:
-          type: string
-          readOnly: true
-          maxLength: 63
-          minLength: 6
-        edge_access:
-          $ref: '#/components/schemas/EdgeAccessEnum'
     ResponseBucket:
       type: object
       properties:
         state:
-          $ref: '#/components/schemas/State7b9Enum'
+          $ref: '#/components/schemas/StateEnum'
         data:
           $ref: '#/components/schemas/Bucket'
       required:
       - data
       - state
-    ResponseDeleteBucket:
+    StateEnum:
+      enum:
+      - pending
+      - executed
+      type: string
+    SuccessBucketOperation:
       type: object
       properties:
         state:
-          $ref: '#/components/schemas/State7b9Enum'
-        data:
-          type: object
           allOf:
-          - $ref: '#/components/schemas/Bucket'
-          nullable: true
+          - $ref: '#/components/schemas/StateEnum'
+          title: BucketStateEnum
+        data:
+          $ref: '#/components/schemas/Bucket'
       required:
       - data
       - state
-    State7b9Enum:
-      enum:
-      - pending
-      - executed
-      type: string
-    Success object operation:
+    SuccessObjectOperation:
       type: object
       properties:
         state:
-          $ref: '#/components/schemas/Success object operationStateEnum'
+          allOf:
+          - $ref: '#/components/schemas/StateEnum'
+          title: ObjectStateEnum
         data:
-          $ref: '#/components/schemas/response data'
+          $ref: '#/components/schemas/ObjectResponseData'
       required:
       - data
       - state
-    Success object operationStateEnum:
-      enum:
-      - executed
-      - pending
-      type: string
-    response data:
-      type: object
-      properties:
-        object_key:
-          type: string
-      required:
-      - object_key
   securitySchemes:
     tokenAuth:
       type: apiKey
       in: header
       name: Authorization
       description: Token-based authentication with required prefix "Token"
+      
