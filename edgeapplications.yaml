@@ -4667,8 +4667,19 @@ components:
     CreateOriginsRequest_addresses:
       example:
         address: address
+        is_active: true
+        weight: weight
+        server_role: server_role
       properties:
         address:
+          type: string
+        is_active:
+          type: boolean
+        weight:
+          nullable: true
+          type: integer
+          format: int64
+        server_role:
           type: string
       required:
       - address
@@ -4684,7 +4695,7 @@ components:
           type: string
         weight:
           nullable: true
-          type: string
+          type: integer
         server_role:
           type: string
         is_active:
