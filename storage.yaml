@@ -215,6 +215,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/SuccessObjectOperation'
           description: ''
+        '201':
+          description: Created
         '400':
           description: Bad Request
         '404':
