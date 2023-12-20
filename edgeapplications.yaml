@@ -3896,8 +3896,6 @@ components:
         prefix:
           type: string
       required:
-      - addresses
-      - host_header
       - name
       type: object
     PatchOriginsRequest:
@@ -4017,22 +4015,7 @@ components:
         prefix:
           type: string
       required:
-      - addresses
-      - connection_timeout
-      - hmac_access_key
-      - hmac_authentication
-      - hmac_region_name
-      - hmac_secret_key
-      - host_header
-      - is_origin_redirection_enabled
-      - method
       - name
-      - origin_id
-      - origin_key
-      - origin_path
-      - origin_protocol_policy
-      - origin_type
-      - timeout_between_bytes
       type: object
     OriginsResponse:
       additionalProperties: false
