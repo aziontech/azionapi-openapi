@@ -71,6 +71,8 @@ jobs:
         with:
           files: |
             **/*.yaml
+          ignore: |
+            **/*spectral*.yaml
 
       - name: Run openapi-generator for changed files
         run: |

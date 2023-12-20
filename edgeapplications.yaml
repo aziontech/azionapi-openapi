@@ -4725,3 +4725,4 @@ components:
       description: |
         You must inform a token to auth.
         Usage format: `Token <TOKEN>`
+
