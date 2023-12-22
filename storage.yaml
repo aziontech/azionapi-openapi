@@ -203,9 +203,8 @@ paths:
         content:
           application/octet-stream:
             schema:
-              type: object
-              additionalProperties: {}
-              description: Unspecified request body
+              type: string
+              format: binary
       security:
       - tokenAuth: []
       responses:
@@ -250,9 +249,8 @@ paths:
         content:
           application/octet-stream:
             schema:
-              type: object
-              additionalProperties: {}
-              description: Unspecified request body
+              type: string
+              format: binary
       security:
       - tokenAuth: []
       responses:
