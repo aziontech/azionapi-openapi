@@ -187,6 +187,13 @@ paths:
       description: Create a new object key in the bucket.
       summary: Create new object key
       parameters:
+      - in: header
+        name: Content-Type
+        required: false
+        description: "The content type of the file (Example: text/plain)."
+        schema:
+          type: string
+          default: b2/x-auto
       - in: path
         name: bucket_name
         schema:
@@ -233,6 +240,13 @@ paths:
       description: Update the object key from bucket.
       summary: Update the object key
       parameters:
+      - in: header
+        name: Content-Type
+        required: false
+        description: "The content type of the file (Example: text/plain)."
+        schema:
+          type: string
+          default: b2/x-auto
       - in: path
         name: bucket_name
         schema:
