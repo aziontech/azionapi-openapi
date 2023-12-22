@@ -193,7 +193,6 @@ paths:
         description: "The content type of the file (Example: text/plain)."
         schema:
           type: string
-          default: b2/x-auto
       - in: path
         name: bucket_name
         schema:
@@ -246,7 +245,6 @@ paths:
         description: "The content type of the file (Example: text/plain)."
         schema:
           type: string
-          default: b2/x-auto
       - in: path
         name: bucket_name
         schema:
