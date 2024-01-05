@@ -3954,8 +3954,8 @@ components:
         addresses:
         - address: address
           is_active: true
-          weight: weight
-          server_role: server_role
+          weight: 10
+          server_role: primary
         - address: address
           is_active: true
           weight: weight
@@ -4050,12 +4050,8 @@ components:
           addresses:
           - address: address
             is_active: true
-            weight: weight
-            server_role: server_role
-          - address: address
-            is_active: true
-            weight: weight
-            server_role: server_role
+            weight: 10
+            server_role: primary
           hmac_secret_key: hmac_secret_key
           method: method
           origin_path: origin_path
@@ -4128,12 +4124,8 @@ components:
           addresses:
           - address: address
             is_active: true
-            weight: weight
-            server_role: server_role
-          - address: address
-            is_active: true
-            weight: weight
-            server_role: server_role
+            weight: 10
+            server_role: primary
           hmac_secret_key: hmac_secret_key
           method: method
           origin_path: origin_path
