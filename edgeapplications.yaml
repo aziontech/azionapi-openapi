@@ -4666,10 +4666,10 @@ components:
       type: object
     CreateOriginsRequest_addresses:
       example:
-        address: address
+        address: azion.com.br
         is_active: true
-        weight: weight
-        server_role: server_role
+        weight: 10
+        server_role: primary
       properties:
         address:
           type: string
@@ -4681,15 +4681,18 @@ components:
           format: int64
         server_role:
           type: string
+          maxLength: 10
+          minLength: 1
+          pattern: '^(primary|backup)$'
       required:
       - address
       type: object
     OriginsResultResponse_addresses:
       example:
-        address: address
+        address: azion.com.br
         is_active: true
-        weight: weight
-        server_role: server_role
+        weight: 10
+        server_role: primary
       properties:
         address:
           type: string
@@ -4698,6 +4701,9 @@ components:
           type: integer
         server_role:
           type: string
+          maxLength: 10
+          minLength: 1
+          pattern: '^(primary|backup)$'
         is_active:
           type: boolean
       required:
