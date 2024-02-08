@@ -820,10 +820,6 @@ components:
           type: string
           format: date-time
           readOnly: true
-        revoked_certificates:
-          type: object
-          additionalProperties: {}
-          readOnly: true
         raw_crl:
           type: string
           pattern: .*
@@ -836,7 +832,6 @@ components:
       - name
       - next_update
       - raw_crl
-      - revoked_certificates
       additionalProperties: false
     CertificateRevocationListRequest:
       type: object
