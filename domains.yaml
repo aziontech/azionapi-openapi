@@ -299,8 +299,10 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
-          format: int64
-          type: integer
+          oneOf:
+            - type: integer
+              format: int64
+            - type: string
           nullable: true
       required:
         - name
@@ -327,9 +329,10 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
-          format: int64
-          type: integer
-          nullable: true
+          oneOf:
+            - type: integer
+              format: int64
+            - type: string
       type: object
     PutDomainRequest:
       additionalProperties: false
@@ -348,8 +351,10 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
-          format: int64
-          type: integer
+          oneOf:
+            - type: integer
+              format: int64
+            - type: string
           nullable: true
       required:
         - name
@@ -436,8 +441,10 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
-          format: int64
-          type: integer
+          oneOf:
+            - type: integer
+              format: int64
+            - type: string
           nullable: true
         domain_name:
           type: string
