@@ -299,8 +299,8 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
+          nullable: true
           oneOf:
-            - type: 'null'
             - type: string
             - type: integer
               format: int64
@@ -351,8 +351,8 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
+          nullable: true
           oneOf:
-            - type: 'null'
             - type: string
             - type: integer
               format: int64
@@ -441,8 +441,8 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
+          nullable: true
           oneOf:
-            - type: 'null'
             - type: string
             - type: integer
               format: int64
