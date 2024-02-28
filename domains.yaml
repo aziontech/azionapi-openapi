@@ -300,10 +300,10 @@ components:
           type: integer
         digital_certificate_id:
           oneOf:
+            - type: 'null'
+            - type: string
             - type: integer
               format: int64
-            - type: string
-          nullable: true
       required:
         - name
         - edge_application_id
@@ -328,11 +328,11 @@ components:
         edge_application_id:
           format: int64
           type: integer
-        digital_certificate_id:
           oneOf:
+            - type: 'null'   # Note the quotes around 'null'
+            - type: string
             - type: integer
               format: int64
-            - type: string
       type: object
     PutDomainRequest:
       additionalProperties: false
@@ -352,10 +352,10 @@ components:
           type: integer
         digital_certificate_id:
           oneOf:
+            - type: 'null'
+            - type: string
             - type: integer
               format: int64
-            - type: string
-          nullable: true
       required:
         - name
         - edge_application_id
@@ -442,10 +442,10 @@ components:
           type: integer
         digital_certificate_id:
           oneOf:
+            - type: 'null'
+            - type: string
             - type: integer
               format: int64
-            - type: string
-          nullable: true
         domain_name:
           type: string
         environment:
