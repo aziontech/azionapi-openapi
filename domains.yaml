@@ -299,9 +299,11 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
-          format: int64
-          type: integer
           nullable: true
+          oneOf:
+            - type: string
+            - type: integer
+              format: int64
       required:
         - name
         - edge_application_id
@@ -327,9 +329,11 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
-          format: int64
-          type: integer
           nullable: true
+          oneOf:
+            - type: string
+            - type: integer
+              format: int64
       type: object
     PutDomainRequest:
       additionalProperties: false
@@ -348,9 +352,11 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
-          format: int64
-          type: integer
           nullable: true
+          oneOf:
+            - type: string
+            - type: integer
+              format: int64
       required:
         - name
         - edge_application_id
@@ -436,9 +442,11 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
-          format: int64
-          type: integer
           nullable: true
+          oneOf:
+            - type: string
+            - type: integer
+              format: int64
         domain_name:
           type: string
         environment:
