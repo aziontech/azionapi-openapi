@@ -196,260 +196,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseErrorResponses'
           description: ''
-  /v4/edge/certificates/revocations:
-    get:
-      operationId: certificatesRevocationsList
-      description: ''
-      parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
-      tags:
-      - certificates
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaginatedCertificateRevocationListList'
-          description: ''
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-        '429':
-          description: Too Many Requests
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-    post:
-      operationId: certificatesRevocationsCreate
-      description: ''
-      tags:
-      - certificates
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-        '429':
-          description: Too Many Requests
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-  /v4/edge/certificates/revocations/{id}:
-    get:
-      operationId: certificatesRevocationsRetrieve
-      description: ''
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - certificates
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-        '429':
-          description: Too Many Requests
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-    put:
-      operationId: certificatesRevocationsUpdate
-      description: ''
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - certificates
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-        '429':
-          description: Too Many Requests
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-    patch:
-      operationId: certificatesRevocationsPartialUpdate
-      description: ''
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - certificates
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedCertificateRevocationListRequest'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedCertificateRevocationListRequest'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedCertificateRevocationListRequest'
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-        '429':
-          description: Too Many Requests
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-    delete:
-      operationId: certificatesRevocationsDestroy
-      description: ''
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - certificates
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseDeleteCertificateRevocationList'
-          description: ''
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-        '429':
-          description: Too Many Requests
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
   /v4/edge/purge/{purgeType}:
     post:
       operationId: purgeCreate
@@ -773,6 +519,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseDeleteWAFRule'
           description: ''
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDeleteWAFRule'
+          description: ''
         '400':
           description: Bad Request
         '404':
@@ -785,75 +537,11 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseWAFRule'
-          description: ''
 components:
   schemas:
     BlankEnum:
       enum:
       - ''
-      additionalProperties: false
-    CertificateRevocationList:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          pattern: .*
-          maxLength: 250
-          minLength: 1
-        issuer:
-          type: string
-          readOnly: true
-          minLength: 1
-        last_update:
-          type: string
-          format: date-time
-          readOnly: true
-        next_update:
-          type: string
-          format: date-time
-          readOnly: true
-        revoked_certificates:
-          type: object
-          additionalProperties: {}
-          readOnly: true
-        raw_crl:
-          type: string
-          pattern: .*
-          maxLength: 30720000
-          minLength: 1
-      required:
-      - id
-      - issuer
-      - last_update
-      - name
-      - next_update
-      - raw_crl
-      - revoked_certificates
-      additionalProperties: false
-    CertificateRevocationListRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          pattern: .*
-          maxLength: 250
-          minLength: 1
-        raw_crl:
-          type: string
-          pattern: .*
-          maxLength: 30720000
-          minLength: 1
-      required:
-      - name
-      - raw_crl
       additionalProperties: false
     CodeEnum:
       enum:
@@ -921,8 +609,8 @@ components:
       additionalProperties: false
     LayerEnum:
       enum:
-      - edge_caching
-      - l2_caching
+      - edge_cache
+      - tiered_cache
       type: string
       additionalProperties: false
     MatchZone:
@@ -1029,27 +717,6 @@ components:
       enum:
       - null
       additionalProperties: false
-    PaginatedCertificateRevocationListList:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/CertificateRevocationList'
-      additionalProperties: false
     PaginatedErrorResponsesList:
       type: object
       properties:
@@ -1091,20 +758,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WAFRule'
-      additionalProperties: false
-    PatchedCertificateRevocationListRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          pattern: .*
-          maxLength: 250
-          minLength: 1
-        raw_crl:
-          type: string
-          pattern: .*
-          maxLength: 30720000
-          minLength: 1
       additionalProperties: false
     PatchedErrorResponsesRequest:
       type: object
@@ -1221,7 +874,7 @@ components:
         layer:
           allOf:
           - $ref: '#/components/schemas/LayerEnum'
-          default: edge_caching
+          default: edge_cache
       required:
       - items
       additionalProperties: false
@@ -1236,33 +889,9 @@ components:
         layer:
           allOf:
           - $ref: '#/components/schemas/LayerEnum'
-          default: edge_caching
+          default: edge_cache
       required:
       - items
-      additionalProperties: false
-    ResponseCertificateRevocationList:
-      type: object
-      properties:
-        state:
-          $ref: '#/components/schemas/StateEnum'
-        data:
-          $ref: '#/components/schemas/CertificateRevocationList'
-      required:
-      - data
-      - state
-      additionalProperties: false
-    ResponseDeleteCertificateRevocationList:
-      type: object
-      properties:
-        state:
-          $ref: '#/components/schemas/StateEnum'
-        data:
-          allOf:
-          - $ref: '#/components/schemas/CertificateRevocationList'
-          nullable: true
-      required:
-      - data
-      - state
       additionalProperties: false
     ResponseDeleteWAFRule:
       type: object
