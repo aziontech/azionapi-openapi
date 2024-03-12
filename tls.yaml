@@ -1,0 +1,386 @@
+openapi: 3.0.3
+info:
+  title: tls-api
+  version: 1.0.0
+  description: REST API OpenAPI documentation for the tls-api
+paths:
+  /v4/tls/crl:
+    get:
+      operationId: tlsApiCrlList
+      description: ''
+      parameters:
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - name: page_size
+        required: false
+        in: query
+        description: Number of results to return per page.
+        schema:
+          type: integer
+      tags:
+      - tls
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCertificateRevocationListList'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    post:
+      operationId: tlsApiCrlCreate
+      description: ''
+      tags:
+      - tls
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CertificateRevocationListRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CertificateRevocationListRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CertificateRevocationListRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCertificateRevocationList'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCertificateRevocationList'
+          description: ''
+  /v4/tls/crl/{id}:
+    get:
+      operationId: tlsApiCrlRetrieve
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - tls
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCertificateRevocationList'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+    put:
+      operationId: tlsApiCrlUpdate
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - tls
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CertificateRevocationListRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CertificateRevocationListRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CertificateRevocationListRequest'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCertificateRevocationList'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCertificateRevocationList'
+          description: ''
+    patch:
+      operationId: tlsApiCrlPartialUpdate
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - tls
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedCertificateRevocationListRequest'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/PatchedCertificateRevocationListRequest'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedCertificateRevocationListRequest'
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCertificateRevocationList'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseCertificateRevocationList'
+          description: ''
+    delete:
+      operationId: tlsApiCrlDestroy
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - tls
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDeleteCertificateRevocationList'
+          description: ''
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDeleteCertificateRevocationList'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+components:
+  schemas:
+    CertificateRevocationList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          pattern: .*
+          maxLength: 250
+          minLength: 1
+        issuer:
+          type: string
+          readOnly: true
+          minLength: 1
+        last_update:
+          type: string
+          format: date-time
+          readOnly: true
+        next_update:
+          type: string
+          format: date-time
+          readOnly: true
+        raw_crl:
+          type: string
+          pattern: .*
+          maxLength: 30720000
+          minLength: 1
+      required:
+      - id
+      - issuer
+      - last_update
+      - name
+      - next_update
+      - raw_crl
+      additionalProperties: false
+    CertificateRevocationListRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          pattern: .*
+          maxLength: 250
+          minLength: 1
+        raw_crl:
+          type: string
+          pattern: .*
+          maxLength: 30720000
+          minLength: 1
+      required:
+      - name
+      - raw_crl
+      additionalProperties: false
+    PaginatedCertificateRevocationListList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/CertificateRevocationList'
+      additionalProperties: false
+    PatchedCertificateRevocationListRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          pattern: .*
+          maxLength: 250
+          minLength: 1
+        raw_crl:
+          type: string
+          pattern: .*
+          maxLength: 30720000
+          minLength: 1
+      additionalProperties: false
+    ResponseCertificateRevocationList:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/StateEnum'
+        data:
+          $ref: '#/components/schemas/CertificateRevocationList'
+      required:
+      - data
+      - state
+      additionalProperties: false
+    ResponseDeleteCertificateRevocationList:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/StateEnum'
+        data:
+          allOf:
+          - $ref: '#/components/schemas/CertificateRevocationList'
+          nullable: true
+      required:
+      - data
+      - state
+      additionalProperties: false
+    StateEnum:
+      enum:
+      - pending
+      - executed
+      type: string
+      additionalProperties: false
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
