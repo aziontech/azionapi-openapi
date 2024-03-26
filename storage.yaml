@@ -496,6 +496,7 @@ components:
           nullable: true
           maxLength: 200
           minLength: 10
+          pattern: '.*'
         results:
           type: array
           items:
