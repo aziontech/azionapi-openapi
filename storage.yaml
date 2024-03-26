@@ -493,8 +493,6 @@ components:
           example: http://api.example.org/accounts/?page=2
         continuation_token: 
           type: string
-          nullable: true
-          example: http://api.example.org/accounts?continuam_token=asdfasdfadsfdsfadsf
         results:
           type: array
           items:
