@@ -335,6 +335,11 @@ paths:
         required: true
       tags:
       - storage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BucketUpdate'
       security:
       - tokenAuth: []
       responses:
@@ -422,6 +427,13 @@ components:
       required:
       - edge_access
       - name
+    BucketUpdate:
+      type: object
+      properties:
+        edge_access:
+          $ref: '#/components/schemas/EdgeAccessEnum'
+      required:
+      - edge_access
     BucketObject:
       type: object
       properties:
