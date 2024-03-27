@@ -107,13 +107,13 @@ paths:
         schema:
           type: string
         required: true
-      - name: page
+      - name: continuation_token
         required: false
         in: query
-        description: A page number within the paginated result set.
+        description: Token for next page.
         schema:
-          type: integer
-      - name: page_size
+          type: string 
+      - name: max_object_count
         required: false
         in: query
         description: Number of results to return per page.
@@ -165,10 +165,19 @@ paths:
       responses:
         '200':
           content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
+            text/html: {}
+            application/json: {}
+            application/xml: {}
+            text/plain: {}
+            image/jpeg: {}
+            image/png: {}
+            image/gif: {}
+            video/mp4: {}
+            audio/mpeg: {}
+            application/pdf: {}
+            application/javascript: {}
+            text/css: {}
+            application/octet-stream: {}
           description: ''
         '400':
           description: Bad Request
@@ -335,6 +344,11 @@ paths:
         required: true
       tags:
       - storage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BucketUpdate'
       security:
       - tokenAuth: []
       responses:
@@ -422,6 +436,13 @@ components:
       required:
       - edge_access
       - name
+    BucketUpdate:
+      type: object
+      properties:
+        edge_access:
+          $ref: '#/components/schemas/EdgeAccessEnum'
+      required:
+      - edge_access
     BucketObject:
       type: object
       properties:
@@ -491,6 +512,12 @@ components:
           nullable: true
           format: uri
           example: http://api.example.org/accounts/?page=2
+        continuation_token: 
+          type: string
+          nullable: true
+          maxLength: 200
+          minLength: 10
+          pattern: '.*'
         results:
           type: array
           items:
