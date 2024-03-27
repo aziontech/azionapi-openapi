@@ -165,10 +165,19 @@ paths:
       responses:
         '200':
           content:
-            application/octet-stream:
-              schema:
-                type: string
-                format: binary
+            text/html: {}
+            application/json: {}
+            application/xml: {}
+            text/plain: {}
+            image/jpeg: {}
+            image/png: {}
+            image/gif: {}
+            video/mp4: {}
+            audio/mpeg: {}
+            application/pdf: {}
+            application/javascript: {}
+            text/css: {}
+            application/octet-stream: {}
           description: ''
         '400':
           description: Bad Request
