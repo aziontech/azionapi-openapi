@@ -299,16 +299,25 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
-          format: int64
-          type: integer
+          oneOf:
+            - type: integer
+              format: int64
+            - type: string
+              enum:
+                - lets_encrypt
           nullable: true
+        crl_list:
+          nullable: true
+          type: array
+          items:
+            type: integer
+            format: int64
       required:
         - name
         - edge_application_id
         - cname_access_only
         - cnames
         - is_active
-        - digital_certificate_id
       type: object
     UpdateDomainRequest:
       additionalProperties: false
@@ -327,9 +336,19 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
-          format: int64
-          type: integer
+          oneOf:
+            - type: integer
+              format: int64
+            - type: string
+              enum:
+                - lets_encrypt
           nullable: true
+        crl_list:
+          nullable: true
+          type: array
+          items:
+            type: integer
+            format: int64
       type: object
     PutDomainRequest:
       additionalProperties: false
@@ -348,9 +367,19 @@ components:
           format: int64
           type: integer
         digital_certificate_id:
-          format: int64
-          type: integer
+          oneOf:
+            - type: integer
+              format: int64
+            - type: string
+              enum:
+                - lets_encrypt
           nullable: true
+        crl_list:
+          nullable: true
+          type: array
+          items:
+            type: integer
+            format: int64
       required:
         - name
         - edge_application_id
