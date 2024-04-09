@@ -287,6 +287,9 @@ components:
       properties:
         name:
           type: string
+          minLength: 1
+          maxLength: 100
+          pattern: "^[$%^&*()\-+=\[\]{};:?><,|\\\\/]+$"
         cnames:
           type: array
           items:
@@ -298,6 +301,8 @@ components:
         edge_application_id:
           format: int64
           type: integer
+          minimum: 1
+          maximum: 10000000000000000000
         digital_certificate_id:
           format: int64
           type: integer
