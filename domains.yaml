@@ -289,7 +289,7 @@ components:
           type: string
           minLength: 1
           maxLength: 100
-          pattern: "^[$%^&*()\-+=\[\]{};:?><,|\\\\/]+$"
+          pattern: "^[$%^&*()-+=\[\]{};:?><,|/\\]+$"
         cnames:
           type: array
           items:
