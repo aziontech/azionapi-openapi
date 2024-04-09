@@ -480,6 +480,12 @@ components:
         mtls_verification:
           type: string
           nullable: true
+        crl_list:
+          nullable: true
+          type: array
+          items:
+            type: integer
+            format: int64
       required:
       - id
       - name
