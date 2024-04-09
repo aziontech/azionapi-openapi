@@ -302,10 +302,10 @@ components:
           oneOf:
             - type: integer
               format: int64
+              nullable: true
             - type: string
               enum:
                 - lets_encrypt
-          nullable: true
         crl_list:
           nullable: true
           type: array
@@ -339,10 +339,10 @@ components:
           oneOf:
             - type: integer
               format: int64
+              nullable: true
             - type: string
               enum:
                 - lets_encrypt
-          nullable: true
         crl_list:
           nullable: true
           type: array
@@ -370,10 +370,10 @@ components:
           oneOf:
             - type: integer
               format: int64
+              nullable: true
             - type: string
               enum:
                 - lets_encrypt
-          nullable: true
         crl_list:
           nullable: true
           type: array
