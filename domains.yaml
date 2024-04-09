@@ -285,23 +285,50 @@ components:
     CreateDomainRequest:
       additionalProperties: false
       properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: "[$%^&*()-+=\[\]{};:?><,|/]+"
         cnames:
           type: array
           items:
             type: string
         cname_access_only:
           type: boolean
-        name:
-          type: string
         is_active:
           type: boolean
         edge_application_id:
           format: int64
           type: integer
+          minimum: 1
+          maximum: 10000000000000000000
         digital_certificate_id:
           format: int64
           type: integer
           nullable: true
+        environment:
+          type: string
+          enum:
+            - production
+            - preview
+        is_mtls_enabled:
+          type: boolean
+        mtls_trusted_ca_certificate_id:
+          type: integer
+          format: int64
+          nullable: true
+        mtls_verification:
+          type: string
+          enum:
+            - enforce
+            - permissive
+        crl_list:
+          nullable: true
+          type: array
+          items:
+            type: integer
+            format: int64
       required:
         - name
         - edge_application_id
@@ -313,44 +340,98 @@ components:
     UpdateDomainRequest:
       additionalProperties: false
       properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: "[$%^&*()-+=\[\]{};:?><,|/]+"
         cnames:
           type: array
           items:
             type: string
         cname_access_only:
           type: boolean
-        name:
-          type: string
         is_active:
           type: boolean
         edge_application_id:
           format: int64
           type: integer
+          minimum: 1
+          maximum: 10000000000000000000
         digital_certificate_id:
           format: int64
           type: integer
           nullable: true
+        environment:
+          type: string
+          enum:
+            - production
+            - preview
+        is_mtls_enabled:
+          type: boolean
+        mtls_trusted_ca_certificate_id:
+          type: integer
+          format: int64
+          nullable: true
+        mtls_verification:
+          type: string
+          enum:
+            - enforce
+            - permissive
+        crl_list:
+          nullable: true
+          type: array
+          items:
+            type: integer
+            format: int64
       type: object
     PutDomainRequest:
       additionalProperties: false
       properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: "[$%^&*()-+=\[\]{};:?><,|/]+"
         cnames:
           type: array
           items:
             type: string
         cname_access_only:
           type: boolean
-        name:
-          type: string
         is_active:
           type: boolean
         edge_application_id:
           format: int64
           type: integer
+          minimum: 1
+          maximum: 10000000000000000000
         digital_certificate_id:
           format: int64
           type: integer
           nullable: true
+        environment:
+          type: string
+          enum:
+            - production
+            - preview
+        is_mtls_enabled:
+          type: boolean
+        mtls_trusted_ca_certificate_id:
+          type: integer
+          format: int64
+          nullable: true
+        mtls_verification:
+          type: string
+          enum:
+            - enforce
+            - permissive
+        crl_list:
+          nullable: true
+          type: array
+          items:
+            type: integer
+            format: int64
       required:
         - name
         - edge_application_id
@@ -422,8 +503,13 @@ components:
         id:
           format: int64
           type: integer
+        domain_name:
+          type: string
         name:
           type: string
+          minLength: 1
+          maxLength: 100
+          pattern: "[$%^&*()-+=\[\]{};:?><,|/]+"
         cnames:
           type: array
           items:
@@ -435,22 +521,34 @@ components:
         edge_application_id:
           format: int64
           type: integer
+          minimum: 1
+          maximum: 10000000000000000000
         digital_certificate_id:
           format: int64
           type: integer
           nullable: true
-        domain_name:
-          type: string
         environment:
           type: string
+          enum:
+            - production
+            - preview
         is_mtls_enabled:
           type: boolean
         mtls_trusted_ca_certificate_id:
-          type: string
+          type: integer
+          format: int64
           nullable: true
         mtls_verification:
           type: string
+          enum:
+            - enforce
+            - permissive
+        crl_list:
           nullable: true
+          type: array
+          items:
+            type: integer
+            format: int64
       required:
       - id
       - name
