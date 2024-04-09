@@ -289,6 +289,7 @@ components:
           type: string
           minLength: 1
           maxLength: 100
+          pattern: [\/a-zA-Z0-9\-_\.\*\~@:;\?><,\|\]\[\$%\^]+
         cnames:
           type: array
           items:
@@ -343,7 +344,7 @@ components:
           type: string
           minLength: 1
           maxLength: 100
-          pattern: "[$%^&*()-+=\[\]{};:?><,|/]+"
+          pattern: [\/a-zA-Z0-9\-_\.\*\~@:;\?><,\|\]\[\$%\^]+
         cnames:
           type: array
           items:
@@ -391,7 +392,7 @@ components:
           type: string
           minLength: 1
           maxLength: 100
-          pattern: "[$%^&*()-+=\[\]{};:?><,|/]+"
+          pattern: [\/a-zA-Z0-9\-_\.\*\~@:;\?><,\|\]\[\$%\^]+
         cnames:
           type: array
           items:
@@ -508,7 +509,7 @@ components:
           type: string
           minLength: 1
           maxLength: 100
-          pattern: "[$%^&*()-+=\[\]{};:?><,|/]+"
+          pattern: [\/a-zA-Z0-9\-_\.\*\~@:;\?><,\|\]\[\$%\^]+
         cnames:
           type: array
           items:
