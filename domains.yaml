@@ -58,7 +58,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/json; version=3:
+            'application/json; version=3':
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResults"
         "400":
@@ -79,7 +79,7 @@ paths:
       description: It enables you to include a new domain into an account.
       requestBody:
         content:
-          application/json; version=3:
+          'application/json; version=3':
             schema:
               $ref: "#/components/schemas/CreateDomainRequest"
       operationId: createDomain
@@ -98,7 +98,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/json; version=3:
+            'application/json; version=3':
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
@@ -136,7 +136,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/json; version=3:
+            'application/json; version=3':
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
@@ -193,7 +193,7 @@ paths:
         instead of PUT.
       requestBody:
         content:
-          application/json; version=3:
+          'application/json; version=3':
             schema:
               $ref: "#/components/schemas/PutDomainRequest"
       operationId: putDomain
@@ -217,7 +217,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/json; version=3:
+            'application/json; version=3':
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
@@ -241,7 +241,7 @@ paths:
         fields not informed.
       requestBody:
         content:
-          application/json; version=3:
+          'application/json; version=3':
             schema:
               $ref: "#/components/schemas/UpdateDomainRequest"
       operationId: updateDomain
@@ -265,7 +265,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/json; version=3:
+            'application/json; version=3':
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
