@@ -318,6 +318,10 @@ components:
           type: integer
           format: int64
           nullable: true
+        edge_firewall_id:
+          type: integer
+          format: int64
+          nullable: true
         mtls_verification:
           type: string
           enum:
