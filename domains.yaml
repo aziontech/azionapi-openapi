@@ -58,7 +58,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/json; version=3:
+            'application/json; version=3':
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResults"
         "400":
@@ -79,7 +79,7 @@ paths:
       description: It enables you to include a new domain into an account.
       requestBody:
         content:
-          application/json; version=3:
+          'application/json; version=3':
             schema:
               $ref: "#/components/schemas/CreateDomainRequest"
       operationId: createDomain
@@ -98,7 +98,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/json; version=3:
+            'application/json; version=3':
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
@@ -136,7 +136,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/json; version=3:
+            'application/json; version=3':
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
@@ -193,7 +193,7 @@ paths:
         instead of PUT.
       requestBody:
         content:
-          application/json; version=3:
+          'application/json; version=3':
             schema:
               $ref: "#/components/schemas/PutDomainRequest"
       operationId: putDomain
@@ -217,7 +217,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/json; version=3:
+            'application/json; version=3':
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
@@ -241,7 +241,7 @@ paths:
         fields not informed.
       requestBody:
         content:
-          application/json; version=3:
+          'application/json; version=3':
             schema:
               $ref: "#/components/schemas/UpdateDomainRequest"
       operationId: updateDomain
@@ -265,7 +265,7 @@ paths:
         "200":
           description: Successful response
           content:
-            application/json; version=3:
+            'application/json; version=3':
               schema:
                 $ref: "#/components/schemas/DomainResponseWithResult"
         "400":
@@ -282,83 +282,82 @@ paths:
           description: Internal Server Error
 components:
   schemas:
+    DomainData:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: "[a-zA-Z0-9$%^&*()-+=\\[\\]{};:?><,|/]+"
+        cnames:
+          type: array
+          items:
+            type: string
+        cname_access_only:
+          type: boolean
+        is_active:
+          type: boolean
+        edge_application_id:
+          format: int64
+          type: integer
+          minimum: 1
+          maximum: 10000000000000000000
+        digital_certificate_id:
+          format: int64
+          type: integer
+          nullable: true
+        environment:
+          type: string
+          enum:
+            - production
+            - preview
+        is_mtls_enabled:
+          type: boolean
+        mtls_trusted_ca_certificate_id:
+          type: integer
+          format: int64
+          nullable: true
+        mtls_verification:
+          type: string
+          enum:
+            - enforce
+            - permissive
+        crl_list:
+          nullable: true
+          type: array
+          items:
+            type: integer
+            format: int64
+    DomainEntity:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            domain_name:
+              type: string
+        - $ref: "#/components/schemas/DomainData"
     CreateDomainRequest:
+      allOf:
+        - $ref: "#/components/schemas/DomainData"
       additionalProperties: false
-      properties:
-        cnames:
-          type: array
-          items:
-            type: string
-        cname_access_only:
-          type: boolean
-        name:
-          type: string
-        is_active:
-          type: boolean
-        edge_application_id:
-          format: int64
-          type: integer
-        digital_certificate_id:
-          format: int64
-          type: integer
-          nullable: true
       required:
         - name
         - edge_application_id
-        - cname_access_only
         - cnames
-        - is_active
-        - digital_certificate_id
-      type: object
     UpdateDomainRequest:
-      additionalProperties: false
-      properties:
-        cnames:
-          type: array
-          items:
-            type: string
-        cname_access_only:
-          type: boolean
-        name:
-          type: string
-        is_active:
-          type: boolean
-        edge_application_id:
-          format: int64
-          type: integer
-        digital_certificate_id:
-          format: int64
-          type: integer
-          nullable: true
-      type: object
+      allOf:
+        - $ref: "#/components/schemas/DomainData"
     PutDomainRequest:
+      allOf:
+        - $ref: "#/components/schemas/DomainData"
       additionalProperties: false
-      properties:
-        cnames:
-          type: array
-          items:
-            type: string
-        cname_access_only:
-          type: boolean
-        name:
-          type: string
-        is_active:
-          type: boolean
-        edge_application_id:
-          format: int64
-          type: integer
-        digital_certificate_id:
-          format: int64
-          type: integer
-          nullable: true
       required:
         - name
         - edge_application_id
-        - cname_access_only
         - cnames
-        - is_active
-        - digital_certificate_id
-      type: object
     DomainLinks:
       additionalProperties: false
       properties:
@@ -388,7 +387,7 @@ components:
           $ref: "#/components/schemas/DomainLinks"
         results:
           items:
-            $ref: "#/components/schemas/DomainResults"
+            $ref: "#/components/schemas/DomainEntity"
       required:
         - count
         - total_pages
@@ -405,7 +404,7 @@ components:
         links:
           $ref: "#/components/schemas/DomainLinks"
         results:
-          $ref: "#/components/schemas/DomainResults"
+          $ref: "#/components/schemas/DomainEntity"
         total_pages:
           format: int64
           type: integer
@@ -415,54 +414,6 @@ components:
       required:
         - schema_version
         - results
-      type: object
-    DomainResults:
-      additionalProperties: false
-      properties:
-        id:
-          format: int64
-          type: integer
-        name:
-          type: string
-        cnames:
-          type: array
-          items:
-            type: string
-        cname_access_only:
-          type: boolean
-        is_active:
-          type: boolean
-        edge_application_id:
-          format: int64
-          type: integer
-        digital_certificate_id:
-          format: int64
-          type: integer
-          nullable: true
-        domain_name:
-          type: string
-        environment:
-          type: string
-        is_mtls_enabled:
-          type: boolean
-        mtls_trusted_ca_certificate_id:
-          type: string
-          nullable: true
-        mtls_verification:
-          type: string
-          nullable: true
-      required:
-      - id
-      - name
-      - cnames
-      - cname_access_only
-      - digital_certificate_id
-      - edge_application_id
-      - is_active
-      - domain_name
-      - is_mtls_enabled
-      - mtls_verification
-      - mtls_trusted_ca_certificate_id
       type: object
   securitySchemes:
     tokenAuth:
