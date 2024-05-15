@@ -307,10 +307,11 @@ components:
           anyOf:
             - type: integer
               format: int64
+              nullable: true
             - type: string
+              nullable: true
               enum:
                 - lets_encrypt
-          nullable: true
         environment:
           type: string
           enum:
