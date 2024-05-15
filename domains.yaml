@@ -304,9 +304,14 @@ components:
           minimum: 1
           maximum: 10000000000000000000
         digital_certificate_id:
-          format: int64
-          type: integer
-          nullable: true
+          anyOf:
+            - type: integer
+              format: int64
+              nullable: true
+            - type: string
+              nullable: true
+              enum:
+                - lets_encrypt
         environment:
           type: string
           enum:
