@@ -334,6 +334,58 @@ components:
           items:
             type: integer
             format: int64
+    DomainDataResponse:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: "[a-zA-Z0-9$%^&*()-+=\\[\\]{};:?><,|/]+"
+        cnames:
+          type: array
+          items:
+            type: string
+        cname_access_only:
+          type: boolean
+        is_active:
+          type: boolean
+        edge_application_id:
+          format: int64
+          type: integer
+          minimum: 1
+          maximum: 10000000000000000000
+        digital_certificate_id:
+          format: int64
+          type: integer
+          minimum: 1
+          maximum: 10000000000000000000
+        environment:
+          type: string
+          enum:
+            - production
+            - preview
+        is_mtls_enabled:
+          type: boolean
+        mtls_trusted_ca_certificate_id:
+          type: integer
+          format: int64
+          nullable: true
+        edge_firewall_id:
+          type: integer
+          format: int64
+          nullable: true
+        mtls_verification:
+          type: string
+          enum:
+            - enforce
+            - permissive
+        crl_list:
+          nullable: true
+          type: array
+          items:
+            type: integer
+            format: int64       
     DomainEntity:
       allOf:
         - type: object
@@ -344,6 +396,16 @@ components:
             domain_name:
               type: string
         - $ref: "#/components/schemas/DomainData"
+    DomainEntityResponse:
+      allOf:
+        - type: object
+          properties:
+            id:
+              type: integer
+              format: int64
+            domain_name:
+              type: string
+        - $ref: "#/components/schemas/DomainDataResponse"
     CreateDomainRequest:
       allOf:
         - $ref: "#/components/schemas/DomainData"
@@ -392,7 +454,7 @@ components:
           $ref: "#/components/schemas/DomainLinks"
         results:
           items:
-            $ref: "#/components/schemas/DomainEntity"
+            $ref: "#/components/schemas/DomainEntityResponse"
       required:
         - count
         - total_pages
@@ -409,7 +471,7 @@ components:
         links:
           $ref: "#/components/schemas/DomainLinks"
         results:
-          $ref: "#/components/schemas/DomainEntity"
+          $ref: "#/components/schemas/DomainEntityResponse"
         total_pages:
           format: int64
           type: integer
