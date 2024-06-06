@@ -7,140 +7,140 @@ info:
     name: MIT
     url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
 servers:
-- description: Production
-  url: https://api.azion.com
+  - description: Production
+    url: https://api.azion.com
 paths:
   /v4/storage/buckets:
     get:
       operationId: storage_api_buckets_list
-      description: ''
+      description: ""
       summary: List buckets
       parameters:
-      - name: page
-        required: false
-        in: query
-        description: A page number within the paginated result set.
-        schema:
-          type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+        - name: page_size
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
       tags:
-      - storage
+        - storage
       security:
-      - tokenAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedBucketList'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/PaginatedBucketList"
+          description: ""
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '406':
+        "406":
           description: Not Acceptable
-        '429':
+        "429":
           description: Too Many Requests
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
     post:
       operationId: storage_api_buckets_create
-      description: ''
+      description: ""
       summary: Create a new bucket
       tags:
-      - storage
+        - storage
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BucketCreate'
+              $ref: "#/components/schemas/BucketCreate"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/BucketCreate'
+              $ref: "#/components/schemas/BucketCreate"
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/BucketCreate'
+              $ref: "#/components/schemas/BucketCreate"
         required: true
       security:
-      - tokenAuth: []
+        - tokenAuth: []
       responses:
-        '201':
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBucket'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/ResponseBucket"
+          description: ""
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '406':
+        "406":
           description: Not Acceptable
-        '429':
+        "429":
           description: Too Many Requests
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '202':
+        "202":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBucket'
-          description: ''
+                $ref: "#/components/schemas/ResponseBucket"
+          description: ""
   /v4/storage/buckets/{bucket_name}/objects:
     get:
       operationId: storage_api_buckets_objects_list
-      description: ''
+      description: ""
       summary: List buckets objects
       parameters:
-      - in: path
-        name: bucket_name
-        schema:
-          type: string
-        required: true
-      - name: continuation_token
-        required: false
-        in: query
-        description: Token for next page.
-        schema:
-          type: string 
-      - name: max_object_count
-        required: false
-        in: query
-        description: Number of results to return per page.
-        schema:
-          type: integer
+        - in: path
+          name: bucket_name
+          schema:
+            type: string
+          required: true
+        - name: continuation_token
+          required: false
+          in: query
+          description: Token for next page.
+          schema:
+            type: string
+        - name: max_object_count
+          required: false
+          in: query
+          description: Number of results to return per page.
+          schema:
+            type: integer
       tags:
-      - storage
+        - storage
       security:
-      - tokenAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedBucketObjectList'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/PaginatedBucketObjectList"
+          description: ""
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '406':
+        "406":
           description: Not Acceptable
-        '429':
+        "429":
           description: Too Many Requests
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
   /v4/storage/buckets/{bucket_name}/objects/{object_key}:
     get:
@@ -148,22 +148,22 @@ paths:
       description: Download the object key from bucket.
       summary: Download object
       parameters:
-      - in: path
-        name: bucket_name
-        schema:
-          type: string
-        required: true
-      - in: path
-        name: object_key
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: bucket_name
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: object_key
+          schema:
+            type: string
+          required: true
       tags:
-      - storage
+        - storage
       security:
-      - tokenAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             text/html: {}
             application/json: {}
@@ -178,42 +178,44 @@ paths:
             application/javascript: {}
             text/css: {}
             application/octet-stream: {}
-          description: ''
-        '400':
+            multipart/form-data: {}
+            application/x-www-form-urlencoded: {}
+          description: ""
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '406':
+        "406":
           description: Not Acceptable
-        '429':
+        "429":
           description: Too Many Requests
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
     post:
       operationId: storage_api_buckets_objects_create
       description: Create a new object key in the bucket.
       summary: Create new object key
       parameters:
-      - in: header
-        name: Content-Type
-        required: false
-        description: "The content type of the file (Example: text/plain)."
-        schema:
-          type: string
-      - in: path
-        name: bucket_name
-        schema:
-          type: string
-        required: true
-      - in: path
-        name: object_key
-        schema:
-          type: string
-        required: true
+        - in: header
+          name: Content-Type
+          required: false
+          description: "The content type of the file (Example: text/plain)."
+          schema:
+            type: string
+        - in: path
+          name: bucket_name
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: object_key
+          schema:
+            type: string
+          required: true
       tags:
-      - storage
+        - storage
       requestBody:
         content:
           application/octet-stream:
@@ -221,51 +223,51 @@ paths:
               type: string
               format: binary
       security:
-      - tokenAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessObjectOperation'
-          description: ''
-        '201':
+                $ref: "#/components/schemas/SuccessObjectOperation"
+          description: ""
+        "201":
           description: Created
-        '400':
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '406':
+        "406":
           description: Not Acceptable
-        '429':
+        "429":
           description: Too Many Requests
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
     put:
       operationId: storage_api_buckets_objects_update
       description: Update the object key from bucket.
       summary: Update the object key
       parameters:
-      - in: header
-        name: Content-Type
-        required: false
-        description: "The content type of the file (Example: text/plain)."
-        schema:
-          type: string
-      - in: path
-        name: bucket_name
-        schema:
-          type: string
-        required: true
-      - in: path
-        name: object_key
-        schema:
-          type: string
-        required: true
+        - in: header
+          name: Content-Type
+          required: false
+          description: "The content type of the file (Example: text/plain)."
+          schema:
+            type: string
+        - in: path
+          name: bucket_name
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: object_key
+          schema:
+            type: string
+          required: true
       tags:
-      - storage
+        - storage
       requestBody:
         content:
           application/octet-stream:
@@ -273,141 +275,296 @@ paths:
               type: string
               format: binary
       security:
-      - tokenAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessObjectOperation'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/SuccessObjectOperation"
+          description: ""
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '406':
+        "406":
           description: Not Acceptable
-        '429':
+        "429":
           description: Too Many Requests
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
     delete:
       operationId: storage_api_buckets_objects_destroy
       description: Delete an object key from bucket
       summary: Delete object key
       parameters:
-      - in: path
-        name: bucket_name
-        schema:
-          type: string
-        required: true
-      - in: path
-        name: object_key
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: bucket_name
+          schema:
+            type: string
+          required: true
+        - in: path
+          name: object_key
+          schema:
+            type: string
+          required: true
       tags:
-      - storage
+        - storage
       security:
-      - tokenAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessObjectOperation'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/SuccessObjectOperation"
+          description: ""
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '406':
+        "406":
           description: Not Acceptable
-        '429':
+        "429":
           description: Too Many Requests
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
   /v4/storage/buckets/{name}:
     patch:
       operationId: storage_api_buckets_partial_update
-      description: ''
+      description: ""
       summary: Update bucket info
       parameters:
-      - in: path
-        name: name
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
       tags:
-      - storage
+        - storage
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BucketUpdate'
+              $ref: "#/components/schemas/BucketUpdate"
       security:
-      - tokenAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBucket'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/ResponseBucket"
+          description: ""
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '406':
+        "406":
           description: Not Acceptable
-        '429':
+        "429":
           description: Too Many Requests
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
           description: Forbidden
-        '202':
+        "202":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseBucket'
-          description: ''
+                $ref: "#/components/schemas/ResponseBucket"
+          description: ""
     delete:
       operationId: storage_api_buckets_destroy
-      description: ''
+      description: ""
       summary: Delete a bucket
       parameters:
-      - in: path
-        name: name
-        schema:
-          type: string
-        required: true
+        - in: path
+          name: name
+          schema:
+            type: string
+          required: true
       tags:
-      - storage
+        - storage
       security:
-      - tokenAuth: []
+        - tokenAuth: []
       responses:
-        '200':
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SuccessBucketOperation'
-          description: ''
-        '400':
+                $ref: "#/components/schemas/SuccessBucketOperation"
+          description: ""
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
-        '406':
+        "406":
           description: Not Acceptable
-        '429':
+        "429":
           description: Too Many Requests
-        '401':
+        "401":
           description: Unauthorized
-        '403':
+        "403":
+          description: Forbidden
+  /v4/storage/s3-credentials:
+    get:
+      operationId: storage_api_s3_credentials_list
+      description: ""
+      summary: List s3 credentials
+      parameters:
+        - name: key
+          required: false
+          in: query
+          description: Object key. Used to identify the object for requests. Sent in POST requests as a path variable.
+          schema:
+            type: string
+        - name: last_modified
+          required: false
+          in: query
+          description: Timestamp of the last modification to the object.
+          schema:
+            type: string
+        - name: size
+          required: false
+          in: query
+          description: Size of file in bytes.
+          schema:
+            type: integer
+        - name: continuation_token
+          required: false
+          in: query
+          description: Hash that can be added to the continuation_token query to skip list to the next page.
+          schema:
+            type: string
+      tags:
+        - storage
+      security:
+        - tokenAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PaginatedS3CredentialList"
+          description: ""
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "406":
+          description: Not Acceptable
+        "429":
+          description: Too Many Requests
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+    post:
+      operationId: storage_api_s3_credentials_create
+      description: ""
+      summary: create s3 credentials
+      tags:
+        - storage
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/S3CredentialCreate"
+        required: true
+      security:
+        - tokenAuth: []
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseS3Credential"
+          description: ""
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "406":
+          description: Not Acceptable
+        "429":
+          description: Too Many Requests
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+
+  /v4/storage/s3-credentials/{s3_credential_access_key}:
+    get:
+      operationId: storage_api_s3_credentials_by_access_key
+      description: ""
+      summary: get by s3 credentials by access key
+      parameters:
+        - in: path
+          name: s3_credential_access_key
+          schema:
+            type: string
+          required: true
+      tags:
+        - storage
+      security:
+        - tokenAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseS3Credential"
+          description: ""
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "406":
+          description: Not Acceptable
+        "429":
+          description: Too Many Requests
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
+
+    delete:
+      operationId: storage_api_s3_credentials_delete
+      description: ""
+      summary: delete by s3 credentials
+      parameters:
+        - in: path
+          name: s3_credential_access_key
+          schema:
+            type: string
+          required: true
+      tags:
+        - storage
+      security:
+        - tokenAuth: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseS3Credential"
+          description: ""
+        "400":
+          description: Bad Request
+        "404":
+          description: Not Found
+        "406":
+          description: Not Acceptable
+        "429":
+          description: Too Many Requests
+        "401":
+          description: Unauthorized
+        "403":
           description: Forbidden
 components:
   schemas:
@@ -420,10 +577,10 @@ components:
           maxLength: 63
           minLength: 6
         edge_access:
-          $ref: '#/components/schemas/EdgeAccessEnum'
+          $ref: "#/components/schemas/EdgeAccessEnum"
       required:
-      - edge_access
-      - name
+        - edge_access
+        - name
     BucketCreate:
       type: object
       properties:
@@ -432,17 +589,17 @@ components:
           maxLength: 63
           minLength: 6
         edge_access:
-          $ref: '#/components/schemas/EdgeAccessEnum'
+          $ref: "#/components/schemas/EdgeAccessEnum"
       required:
-      - edge_access
-      - name
+        - edge_access
+        - name
     BucketUpdate:
       type: object
       properties:
         edge_access:
-          $ref: '#/components/schemas/EdgeAccessEnum'
+          $ref: "#/components/schemas/EdgeAccessEnum"
       required:
-      - edge_access
+        - edge_access
     BucketObject:
       type: object
       properties:
@@ -460,14 +617,76 @@ components:
           type: string
           readOnly: true
       required:
-      - key
-      - last_modified
-      - size
+        - key
+        - last_modified
+        - size
+    S3Credential:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "my-s3-credential-all-permissions"
+        access_key:
+          type: string
+          example: "s3_credential_access_key"
+        secret_key:
+          type: string
+          example: "s3_credential_secret_key"
+        capabilities:
+          type: array
+          items:
+            type: string
+          example:
+            [
+              "listAllBucketNames",
+              "listBuckets",
+              "listFiles",
+              "readFiles",
+              "writeFiles",
+              "deleteFiles",
+            ]
+        bucket:
+          type: string
+          example: "s3-credentials-bucket"
+        expiration_date:
+          type: string
+          format: date-time
+          example: "2025-01-31T10:57:00Z"
+        created_at:
+          type: string
+          format: date-time
+          example: "2024-03-04T16:54:14.782211Z"
+    S3CredentialCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "my-s3-credential-all-permissions"
+        capabilities:
+          type: array
+          items:
+            type: string
+          example:
+            [
+              "listAllBucketNames",
+              "listBuckets",
+              "listFiles",
+              "readFiles",
+              "writeFiles",
+              "deleteFiles",
+            ]
+        bucket:
+          type: string
+          example: "s3-credentials-bucket"
+        expiration_date:
+          type: string
+          format: date-time
+          example: "2025-01-31T10:57:00Z"
     EdgeAccessEnum:
       enum:
-      - read_only
-      - read_write
-      - restricted
+        - read_only
+        - read_write
+        - restricted
       type: string
     ObjectResponseData:
       type: object
@@ -475,7 +694,7 @@ components:
         object_key:
           type: string
       required:
-      - object_key
+        - object_key
     PaginatedBucketList:
       type: object
       properties:
@@ -495,7 +714,7 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/Bucket'
+            $ref: "#/components/schemas/Bucket"
     PaginatedBucketObjectList:
       type: object
       properties:
@@ -512,59 +731,86 @@ components:
           nullable: true
           format: uri
           example: http://api.example.org/accounts/?page=2
-        continuation_token: 
+        continuation_token:
           type: string
           nullable: true
           maxLength: 200
           minLength: 10
-          pattern: '.*'
+          pattern: ".*"
         results:
           type: array
           items:
-            $ref: '#/components/schemas/BucketObject'
+            $ref: "#/components/schemas/BucketObject"
+    PaginatedS3CredentialList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: "#/components/schemas/S3Credential"
+    ResponseS3Credential:
+      type: object
+      properties:
+        state:
+          type: string
+          example: "executed"
+        data:
+          $ref: "#/components/schemas/S3Credential"
     ResponseBucket:
       type: object
       properties:
         state:
-          $ref: '#/components/schemas/StateEnum'
+          $ref: "#/components/schemas/StateEnum"
         data:
-          $ref: '#/components/schemas/Bucket'
+          $ref: "#/components/schemas/Bucket"
       required:
-      - data
-      - state
+        - data
+        - state
     StateEnum:
       enum:
-      - pending
-      - executed
+        - pending
+        - executed
       type: string
     SuccessBucketOperation:
       type: object
       properties:
         state:
           allOf:
-          - $ref: '#/components/schemas/StateEnum'
+            - $ref: "#/components/schemas/StateEnum"
           title: BucketStateEnum
         data:
-          $ref: '#/components/schemas/Bucket'
+          $ref: "#/components/schemas/Bucket"
       required:
-      - data
-      - state
+        - data
+        - state
     SuccessObjectOperation:
       type: object
       properties:
         state:
           allOf:
-          - $ref: '#/components/schemas/StateEnum'
+            - $ref: "#/components/schemas/StateEnum"
           title: ObjectStateEnum
         data:
-          $ref: '#/components/schemas/ObjectResponseData'
+          $ref: "#/components/schemas/ObjectResponseData"
       required:
-      - data
-      - state
+        - data
+        - state
   securitySchemes:
     tokenAuth:
       type: apiKey
       in: header
       name: Authorization
       description: Token-based authentication with required prefix "Token"
-      
