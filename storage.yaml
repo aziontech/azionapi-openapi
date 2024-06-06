@@ -626,12 +626,21 @@ components:
         name:
           type: string
           example: "my-s3-credential-all-permissions"
+          maxLength: 200
+          minLength: 1
+          pattern: ".*"
         access_key:
           type: string
           example: "s3_credential_access_key"
+          maxLength: 200
+          minLength: 1
+          pattern: ".*"
         secret_key:
           type: string
           example: "s3_credential_secret_key"
+          maxLength: 200
+          minLength: 1
+          pattern: ".*"
         capabilities:
           type: array
           items:
@@ -648,20 +657,32 @@ components:
         bucket:
           type: string
           example: "s3-credentials-bucket"
+          maxLength: 200
+          minLength: 1
+          pattern: ".*"
         expiration_date:
           type: string
           format: date-time
           example: "2025-01-31T10:57:00Z"
+          maxLength: 30
+          minLength: 10
+          pattern: ".*"
         created_at:
           type: string
           format: date-time
           example: "2024-03-04T16:54:14.782211Z"
+          maxLength: 30
+          minLength: 10
+          pattern: ".*"
     S3CredentialCreate:
       type: object
       properties:
         name:
           type: string
           example: "my-s3-credential-all-permissions"
+          maxLength: 200
+          minLength: 1
+          pattern: ".*"
         capabilities:
           type: array
           items:
@@ -678,10 +699,16 @@ components:
         bucket:
           type: string
           example: "s3-credentials-bucket"
+          maxLength: 200
+          minLength: 1
+          pattern: ".*"
         expiration_date:
           type: string
           format: date-time
           example: "2025-01-31T10:57:00Z"
+          maxLength: 30
+          minLength: 10
+          pattern: ".*"
     EdgeAccessEnum:
       enum:
         - read_only
@@ -747,6 +774,8 @@ components:
         count:
           type: integer
           example: 123
+          minimum: 0
+          maximum: 1000
         next:
           type: string
           nullable: true
