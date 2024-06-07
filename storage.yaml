@@ -796,6 +796,9 @@ components:
         state:
           type: string
           example: "executed"
+          maxLength: 30
+          minLength: 1
+          pattern: ".*"
         data:
           $ref: "#/components/schemas/S3Credential"
     ResponseBucket:
