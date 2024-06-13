@@ -4281,6 +4281,13 @@ components:
       properties:
         name:
           type: string
+        order:
+          format: int64
+          type: integer
+          maximum: 10000
+          minimum: 1
+        is_active:
+          type: boolean
         description:
           type: string
           maxLength: 1000
@@ -4329,6 +4336,13 @@ components:
       properties:
         name:
           type: string
+        order:
+          format: int64
+          type: integer
+          maximum: 10000
+          minimum: 1
+        is_active:
+          type: boolean
         description:
           type: string
           maxLength: 1000
@@ -4377,6 +4391,13 @@ components:
       properties:
         name:
           type: string
+        order:
+          format: int64
+          type: integer
+          maximum: 10000
+          minimum: 1
+        is_active:
+          type: boolean
         description:
           type: string
           maxLength: 1000
