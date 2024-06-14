@@ -2383,6 +2383,8 @@ components:
           type: boolean
         web_application_firewall:
           type: boolean
+        websocket:
+          type: boolean
       required:
       - active
       - debug_rules
@@ -2561,6 +2563,8 @@ components:
           type: boolean
         l2_caching:
           type: boolean
+        websocket:
+          type: boolean
       required:
       - active
       - debug_rules
@@ -2738,6 +2742,8 @@ components:
         raw_logs:
           type: boolean
         web_application_firewall:
+          type: boolean
+        websocket:
           type: boolean
       required:
       - active
