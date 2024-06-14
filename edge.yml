@@ -14,18 +14,28 @@ paths:
         schema:
           type: string
         required: true
+      - in: query
+        name: order_by
+        schema:
+          type: string
+        description: A string value that indicates which field will be ordened.
       - name: page
         required: false
         in: query
         description: A page number within the paginated result set.
         schema:
           type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
+      - in: query
+        name: page_size
         schema:
           type: integer
+        description: A numeric value that indicates the number of items per page.
+      - in: query
+        name: sort
+        schema:
+          type: string
+        description: A string value that indicates ascending and descending values
+          sorted.
       tags:
       - applications
       security:
@@ -196,25 +206,35 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseErrorResponses'
           description: ''
-  /v4/edge/certificates/revocations:
+  /v4/edge/firewall:
     get:
-      operationId: certificatesRevocationsList
+      operationId: firewallList
       description: ''
       parameters:
+      - in: query
+        name: order_by
+        schema:
+          type: string
+        description: A string value that indicates which field will be ordened.
       - name: page
         required: false
         in: query
         description: A page number within the paginated result set.
         schema:
           type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
+      - in: query
+        name: page_size
         schema:
           type: integer
+        description: A numeric value that indicates the number of items per page.
+      - in: query
+        name: sort
+        schema:
+          type: string
+        description: A string value that indicates ascending and descending values
+          sorted.
       tags:
-      - certificates
+      - firewall
       security:
       - tokenAuth: []
       responses:
@@ -222,7 +242,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PaginatedCertificateRevocationListList'
+                $ref: '#/components/schemas/PaginatedEdgeFirewallList'
           description: ''
         '400':
           description: Bad Request
@@ -236,22 +256,62 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-    post:
-      operationId: certificatesRevocationsCreate
+  /v4/edge/firewall/{id}:
+    get:
+      operationId: firewallRetrieve
       description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
       tags:
-      - certificates
+      - firewall
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseEdgeFirewall'
+          description: ''
+        '400':
+          description: Bad Request
+        '404':
+          description: Not Found
+        '406':
+          description: Not Acceptable
+        '429':
+          description: Too Many Requests
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /v4/edge/firewall/{id}/clone:
+    post:
+      operationId: firewallCloneCreate
+      description: ''
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        required: true
+      tags:
+      - firewall
       requestBody:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
+              $ref: '#/components/schemas/EdgeFirewallRequest'
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
+              $ref: '#/components/schemas/EdgeFirewallRequest'
           multipart/form-data:
             schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
+              $ref: '#/components/schemas/EdgeFirewallRequest'
         required: true
       security:
       - tokenAuth: []
@@ -260,7 +320,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
+                $ref: '#/components/schemas/ResponseEdgeFirewall'
           description: ''
         '400':
           description: Bad Request
@@ -278,177 +338,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-  /v4/edge/certificates/revocations/{id}:
-    get:
-      operationId: certificatesRevocationsRetrieve
-      description: ''
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - certificates
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-        '429':
-          description: Too Many Requests
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-    put:
-      operationId: certificatesRevocationsUpdate
-      description: ''
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - certificates
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/CertificateRevocationListRequest'
-        required: true
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-        '429':
-          description: Too Many Requests
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-    patch:
-      operationId: certificatesRevocationsPartialUpdate
-      description: ''
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - certificates
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PatchedCertificateRevocationListRequest'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/PatchedCertificateRevocationListRequest'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/PatchedCertificateRevocationListRequest'
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-        '429':
-          description: Too Many Requests
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
-    delete:
-      operationId: certificatesRevocationsDestroy
-      description: ''
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        required: true
-      tags:
-      - certificates
-      security:
-      - tokenAuth: []
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseDeleteCertificateRevocationList'
-          description: ''
-        '400':
-          description: Bad Request
-        '404':
-          description: Not Found
-        '406':
-          description: Not Acceptable
-        '429':
-          description: Too Many Requests
-        '401':
-          description: Unauthorized
-        '403':
-          description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
+                $ref: '#/components/schemas/ResponseEdgeFirewall'
           description: ''
   /v4/edge/purge/{purgeType}:
     post:
@@ -511,18 +401,28 @@ paths:
       operationId: wafAllowedRulesList
       description: ''
       parameters:
+      - in: query
+        name: order_by
+        schema:
+          type: string
+        description: A string value that indicates which field will be ordened.
       - name: page
         required: false
         in: query
         description: A page number within the paginated result set.
         schema:
           type: integer
-      - name: page_size
-        required: false
-        in: query
-        description: Number of results to return per page.
+      - in: query
+        name: page_size
         schema:
           type: integer
+        description: A numeric value that indicates the number of items per page.
+      - in: query
+        name: sort
+        schema:
+          type: string
+        description: A string value that indicates ascending and descending values
+          sorted.
       - in: path
         name: wafId
         schema:
@@ -773,6 +673,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseDeleteWAFRule'
           description: ''
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDeleteWAFRule'
+          description: ''
         '400':
           description: Bad Request
         '404':
@@ -785,75 +691,11 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseWAFRule'
-          description: ''
 components:
   schemas:
     BlankEnum:
       enum:
       - ''
-      additionalProperties: false
-    CertificateRevocationList:
-      type: object
-      properties:
-        id:
-          type: integer
-          readOnly: true
-        name:
-          type: string
-          pattern: .*
-          maxLength: 250
-          minLength: 1
-        issuer:
-          type: string
-          readOnly: true
-          minLength: 1
-        last_update:
-          type: string
-          format: date-time
-          readOnly: true
-        next_update:
-          type: string
-          format: date-time
-          readOnly: true
-        revoked_certificates:
-          type: object
-          additionalProperties: {}
-          readOnly: true
-        raw_crl:
-          type: string
-          pattern: .*
-          maxLength: 30720000
-          minLength: 1
-      required:
-      - id
-      - issuer
-      - last_update
-      - name
-      - next_update
-      - raw_crl
-      - revoked_certificates
-      additionalProperties: false
-    CertificateRevocationListRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          pattern: .*
-          maxLength: 250
-          minLength: 1
-        raw_crl:
-          type: string
-          pattern: .*
-          maxLength: 30720000
-          minLength: 1
-      required:
-      - name
-      - raw_crl
       additionalProperties: false
     CodeEnum:
       enum:
@@ -880,6 +722,73 @@ components:
       - 504
       - 505
       - any
+      additionalProperties: false
+    EdgeFirewall:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          pattern: .*
+          maxLength: 250
+          minLength: 1
+        edge_functions_enabled:
+          type: boolean
+          default: false
+        network_protection_enabled:
+          type: boolean
+          default: true
+        waf_enabled:
+          type: boolean
+          default: false
+        debug_rules:
+          type: boolean
+          default: false
+        is_active:
+          type: boolean
+          default: true
+        last_editor:
+          type: string
+          readOnly: true
+          pattern: .*
+          maxLength: 250
+        last_modified:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - id
+      - last_editor
+      - last_modified
+      - name
+      additionalProperties: false
+    EdgeFirewallRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          pattern: .*
+          maxLength: 250
+          minLength: 1
+        edge_functions_enabled:
+          type: boolean
+          default: false
+        network_protection_enabled:
+          type: boolean
+          default: true
+        waf_enabled:
+          type: boolean
+          default: false
+        debug_rules:
+          type: boolean
+          default: false
+        is_active:
+          type: boolean
+          default: true
+      required:
+      - name
       additionalProperties: false
     ErrorResponses:
       type: object
@@ -921,8 +830,8 @@ components:
       additionalProperties: false
     LayerEnum:
       enum:
-      - edge_caching
-      - l2_caching
+      - edge_cache
+      - tiered_cache
       type: string
       additionalProperties: false
     MatchZone:
@@ -1029,7 +938,7 @@ components:
       enum:
       - null
       additionalProperties: false
-    PaginatedCertificateRevocationListList:
+    PaginatedEdgeFirewallList:
       type: object
       properties:
         count:
@@ -1048,7 +957,7 @@ components:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/CertificateRevocationList'
+            $ref: '#/components/schemas/EdgeFirewall'
       additionalProperties: false
     PaginatedErrorResponsesList:
       type: object
@@ -1091,20 +1000,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WAFRule'
-      additionalProperties: false
-    PatchedCertificateRevocationListRequest:
-      type: object
-      properties:
-        name:
-          type: string
-          pattern: .*
-          maxLength: 250
-          minLength: 1
-        raw_crl:
-          type: string
-          pattern: .*
-          maxLength: 30720000
-          minLength: 1
       additionalProperties: false
     PatchedErrorResponsesRequest:
       type: object
@@ -1221,7 +1116,7 @@ components:
         layer:
           allOf:
           - $ref: '#/components/schemas/LayerEnum'
-          default: edge_caching
+          default: edge_cache
       required:
       - items
       additionalProperties: false
@@ -1236,33 +1131,9 @@ components:
         layer:
           allOf:
           - $ref: '#/components/schemas/LayerEnum'
-          default: edge_caching
+          default: edge_cache
       required:
       - items
-      additionalProperties: false
-    ResponseCertificateRevocationList:
-      type: object
-      properties:
-        state:
-          $ref: '#/components/schemas/StateEnum'
-        data:
-          $ref: '#/components/schemas/CertificateRevocationList'
-      required:
-      - data
-      - state
-      additionalProperties: false
-    ResponseDeleteCertificateRevocationList:
-      type: object
-      properties:
-        state:
-          $ref: '#/components/schemas/StateEnum'
-        data:
-          allOf:
-          - $ref: '#/components/schemas/CertificateRevocationList'
-          nullable: true
-      required:
-      - data
-      - state
       additionalProperties: false
     ResponseDeleteWAFRule:
       type: object
@@ -1273,6 +1144,17 @@ components:
           allOf:
           - $ref: '#/components/schemas/WAFRule'
           nullable: true
+      required:
+      - data
+      - state
+      additionalProperties: false
+    ResponseEdgeFirewall:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/StateEnum'
+        data:
+          $ref: '#/components/schemas/EdgeFirewall'
       required:
       - data
       - state
