@@ -3956,12 +3956,8 @@ components:
         addresses:
         - address: address
           is_active: true
-          weight: weight
-          server_role: server_role
-        - address: address
-          is_active: true
-          weight: weight
-          server_role: server_role
+          weight: 10
+          server_role: primary
         hmac_secret_key: hmac_secret_key
         method: method
         origin_path: origin_path
@@ -4037,12 +4033,8 @@ components:
           addresses:
           - address: address
             is_active: true
-            weight: weight
-            server_role: server_role
-          - address: address
-            is_active: true
-            weight: weight
-            server_role: server_role
+            weight: 10
+            server_role: primary
           hmac_secret_key: hmac_secret_key
           method: method
           origin_path: origin_path
@@ -4063,12 +4055,8 @@ components:
           addresses:
           - address: address
             is_active: true
-            weight: weight
-            server_role: server_role
-          - address: address
-            is_active: true
-            weight: weight
-            server_role: server_role
+            weight: 10
+            server_role: primary
           hmac_secret_key: hmac_secret_key
           method: method
           origin_path: origin_path
@@ -4115,12 +4103,8 @@ components:
           addresses:
           - address: address
             is_active: true
-            weight: weight
-            server_role: server_role
-          - address: address
-            is_active: true
-            weight: weight
-            server_role: server_role
+            weight: 10
+            server_role: primary
           hmac_secret_key: hmac_secret_key
           method: method
           origin_path: origin_path
@@ -4674,27 +4658,44 @@ components:
       type: object
     CreateOriginsRequest_addresses:
       example:
-        address: address
+        address: azion.com.br
+        is_active: true
+        weight: 10
+        server_role: primary
       properties:
         address:
           type: string
+        is_active:
+          type: boolean
+        weight:
+          nullable: true
+          type: integer
+          format: int64
+        server_role:
+          type: string
+          maxLength: 10
+          minLength: 1
+          pattern: '^(primary|backup)$'
       required:
       - address
       type: object
     OriginsResultResponse_addresses:
       example:
-        address: address
+        address: azion.com.br
         is_active: true
-        weight: weight
-        server_role: server_role
+        weight: 10
+        server_role: primary
       properties:
         address:
           type: string
         weight:
           nullable: true
-          type: string
+          type: integer
         server_role:
           type: string
+          maxLength: 10
+          minLength: 1
+          pattern: '^(primary|backup)$'
         is_active:
           type: boolean
       required:
