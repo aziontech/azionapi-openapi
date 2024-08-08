@@ -3816,8 +3816,6 @@ components:
         addresses:
         - address: address
           weight:  weight 
-        - address: address
-          weight:  weight
         hmac_secret_key: hmac_secret_key
         origin_path: origin_path
         origin_protocol_policy: origin_protocol_policy
@@ -4681,8 +4679,10 @@ components:
       properties:
         address:
           type: string
+          example: ""
         weight:
           type: integer
+          example: 10
       required:
       - address
       type: object
