@@ -4686,6 +4686,8 @@ components:
         weight:
           type: integer
           format: int64
+          minimum: 1
+          maximum: 100
         server_role:
           type: string
           maxLength: 10
@@ -4704,9 +4706,10 @@ components:
         address:
           type: string
         weight:
-          nullable: true
           type: integer
           format: int64
+          minimum: 1
+          maximum: 100
         server_role:
           type: string
         is_active:
