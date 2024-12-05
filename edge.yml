@@ -432,6 +432,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseDeleteCertificateRevocationList'
           description: ''
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDeleteCertificateRevocationList'
+          description: ''
         '400':
           description: Bad Request
         '404':
@@ -444,12 +450,6 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseCertificateRevocationList'
-          description: ''
   /v4/edge/purge/{purgeType}:
     post:
       operationId: purgeCreate
@@ -773,6 +773,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseDeleteWAFRule'
           description: ''
+        '202':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseDeleteWAFRule'
+          description: ''
         '400':
           description: Bad Request
         '404':
@@ -785,12 +791,6 @@ paths:
           description: Unauthorized
         '403':
           description: Forbidden
-        '202':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseWAFRule'
-          description: ''
 components:
   schemas:
     BlankEnum:
@@ -820,10 +820,6 @@ components:
           type: string
           format: date-time
           readOnly: true
-        revoked_certificates:
-          type: object
-          additionalProperties: {}
-          readOnly: true
         raw_crl:
           type: string
           pattern: .*
@@ -836,7 +832,6 @@ components:
       - name
       - next_update
       - raw_crl
-      - revoked_certificates
       additionalProperties: false
     CertificateRevocationListRequest:
       type: object
