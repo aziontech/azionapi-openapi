@@ -476,7 +476,10 @@ components:
           type: string
         code:
           type: string
-        json_args: {}
+        json_args:
+          oneOf:
+            - type: object
+            - type: array
         initiator_type:
           type: string
           enum: [edge_application, edge_firewall]
@@ -538,7 +541,10 @@ components:
           type: string
         code:
           type: string
-        json_args: {}
+        json_args:
+          oneOf:
+            - type: object
+            - type: array
         active:
           type: boolean
         initiator_type:
@@ -560,7 +566,10 @@ components:
           type: string
         code:
           type: string
-        json_args: {}
+        json_args:
+          oneOf:
+            - type: object
+            - type: array
         active:
           type: boolean
         is_proprietary_code:
