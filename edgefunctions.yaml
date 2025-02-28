@@ -480,6 +480,8 @@ components:
           oneOf:
             - type: object
             - type: array
+              items:
+                type: object
         initiator_type:
           type: string
           enum: [edge_application, edge_firewall]
@@ -545,6 +547,8 @@ components:
           oneOf:
             - type: object
             - type: array
+              items:
+                type: object
         active:
           type: boolean
         initiator_type:
@@ -570,6 +574,8 @@ components:
           oneOf:
             - type: object
             - type: array
+              items:
+                type: object
         active:
           type: boolean
         is_proprietary_code:
