@@ -467,7 +467,7 @@ components:
         name: name
         active: true
         language: language
-        json_args: ""
+        json_args: {}
         initiator_type: edge_application
       properties:
         name:
@@ -535,7 +535,7 @@ components:
         code: code
         name: name
         active: true
-        json_args: ""
+        json_args: {}
         language: language
         initiator_type: edge_application
       properties:
@@ -564,7 +564,7 @@ components:
         code: code
         name: name
         active: true
-        json_args: ""
+        json_args: {}
       properties:
         name:
           type: string
