@@ -467,7 +467,7 @@ components:
         name: name
         active: true
         language: language
-        json_args: {}
+        json_args: ""
         initiator_type: edge_application
       properties:
         name:
@@ -476,12 +476,7 @@ components:
           type: string
         code:
           type: string
-        json_args:
-          oneOf:
-            - type: object
-            - type: array
-              items:
-                type: object
+        json_args: {}
         initiator_type:
           type: string
           enum: [edge_application, edge_firewall]
@@ -535,7 +530,7 @@ components:
         code: code
         name: name
         active: true
-        json_args: {}
+        json_args: ""
         language: language
         initiator_type: edge_application
       properties:
@@ -543,12 +538,7 @@ components:
           type: string
         code:
           type: string
-        json_args:
-          oneOf:
-            - type: object
-            - type: array
-              items:
-                type: object
+        json_args: {}
         active:
           type: boolean
         initiator_type:
@@ -564,18 +554,13 @@ components:
         code: code
         name: name
         active: true
-        json_args: {}
+        json_args: ""
       properties:
         name:
           type: string
         code:
           type: string
-        json_args:
-          oneOf:
-            - type: object
-            - type: array
-              items:
-                type: object
+        json_args: {}
         active:
           type: boolean
         is_proprietary_code:
