@@ -3673,11 +3673,11 @@ components:
           previous: previous
         total_pages: 6
         results:
-        - args: ""
+        - args: {}
           edge_function_id: 5
           name: name
           id: 5
-        - args: ""
+        - args: {}
           edge_function_id: 5
           name: name
           id: 5
@@ -3709,7 +3709,7 @@ components:
       example:
         schema_version: 0
         results:
-          args: ""
+          args: {}
           edge_function_id: 5
           name: name
           id: 5
@@ -3725,7 +3725,7 @@ components:
       type: object
     ApplicationInstancesResults:
       example:
-        args: ""
+        args: {}
         edge_function_id: 5
         name: name
         id: 5
@@ -3746,7 +3746,7 @@ components:
       - name
     ApplicationCreateInstanceRequest:
       example:
-        args: ""
+        args: {}
         edge_function_id: 0
         name: name
       properties:
@@ -3755,14 +3755,19 @@ components:
         edge_function_id:
           format: int64
           type: integer
-        args: {}
+        args:
+          oneOf:
+            - type: object
+            - type: array
+              items:
+                type: object
       required:
       - args
       - edge_function_id
       - name
     ApplicationPutInstanceRequest:
       example:
-        args: ""
+        args: {}
         edge_function_id: 0
         name: name
       properties:
@@ -3771,14 +3776,19 @@ components:
         edge_function_id:
           format: int64
           type: integer
-        args: {}
+        args:
+          oneOf:
+            - type: object
+            - type: array
+              items:
+                type: object
       required:
       - args
       - edge_function_id
       - name
     ApplicationUpdateInstanceRequest:
       example:
-        args: ""
+        args: {}
         edge_function_id: 0
         name: name
       properties:
@@ -3789,7 +3799,12 @@ components:
           format: int64
           nullable: true
           type: integer
-        args: {}
+        args:
+          oneOf:
+            - type: object
+            - type: array
+              items:
+                type: object
       required:
       - args
       - edge_function_id
@@ -3799,7 +3814,7 @@ components:
       example:
         schema_version: 0
         results:
-          args: ""
+          args: {}
           edge_function_id: 5
           name: name
           id: 5
