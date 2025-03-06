@@ -3738,7 +3738,12 @@ components:
           type: integer
         name:
           type: string
-        args: {}
+        args:
+          oneOf:
+            - type: object
+            - type: array
+              items:
+                type: object
       required:
       - args
       - edge_function_id

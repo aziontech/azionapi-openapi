@@ -263,7 +263,12 @@ components:
           type: string
         last_modified:
           type: string
-        json_args: {}
+        json_args:
+          oneOf:
+            - type: object
+            - type: array
+              items:
+                type: object
         edge_function:
           type: integer
           format: int64
@@ -315,7 +320,12 @@ components:
         edge_function:
           type: integer
           format: int64
-        json_args: {}
+        json_args:
+          oneOf:
+            - type: object
+            - type: array
+              items:
+                type: object
     EdgeFunctionsInstanceResponse:
       type: object
       properties:
