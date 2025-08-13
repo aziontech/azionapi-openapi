@@ -1,221 +1,620 @@
 openapi: 3.0.3
 info:
-  title: Object Storage
+  title: object-storage-api
   version: 1.0.0 (v1)
   description: REST API OpenAPI documentation for the Object Storage
   license:
     name: MIT
     url: https://github.com/aziontech/azionapi-openapi/blob/main/LICENSE.md
-servers:
-  - description: Production
-    url: https://api.azion.com
 paths:
-  /v4/storage/buckets:
+  /edge_storage/buckets:
     get:
-      operationId: storage_api_buckets_list
-      description: ""
+      operationId: list buckets
+      description: List all buckets.
       summary: List buckets
       parameters:
-        - name: page
-          required: false
-          in: query
-          description: A page number within the paginated result set.
-          schema:
-            type: integer
-        - name: page_size
-          required: false
-          in: query
-          description: Number of results to return per page.
-          schema:
-            type: integer
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: Comma-separated list of field names to include in the response.
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+        description: A numeric value that indicates the number of items per page.
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
       tags:
-        - storage
+      - Edge Storage - Buckets
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaginatedBucketList"
-          description: ""
-        "400":
-          description: Bad Request
-        "404":
+                $ref: '#/components/schemas/PaginatedBucketList'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10000:
+                  value:
+                    errors:
+                    - status: '400'
+                      code: '10000'
+                      title: Validation Error
+                      detail: Invalid data provided in the request.
+                  summary: Validation Error
+                  description: Invalid data provided in the request.
+          description: Validation Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10004:
+                  value:
+                    errors:
+                    - status: '404'
+                      code: '10004'
+                      title: Not Found
+                      detail: Not found.
+                  summary: Not Found
+                  description: Not found.
           description: Not Found
-        "406":
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10007:
+                  value:
+                    errors:
+                    - status: '405'
+                      code: '10007'
+                      title: Method Not Allowed
+                      detail: Method "{method}" not allowed.
+                  summary: Method Not Allowed
+                  description: Method "{method}" not allowed.
+          description: Method Not Allowed
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10005:
+                  value:
+                    errors:
+                    - status: '406'
+                      code: '10005'
+                      title: Not Acceptable
+                      detail: Could not satisfy the request Accept header.
+                  summary: Not Acceptable
+                  description: Could not satisfy the request Accept header.
           description: Not Acceptable
-        "429":
-          description: Too Many Requests
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10010:
+                  value:
+                    errors:
+                    - status: '429'
+                      code: '10010'
+                      title: Throttled
+                      detail: Request was throttled.
+                  summary: Throttled
+                  description: Request was throttled.
+          description: Throttled
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10001:
+                  value:
+                    errors:
+                    - status: '401'
+                      code: '10001'
+                      title: Authentication Failed
+                      detail: Invalid authentication credentials.
+                  summary: Authentication Failed
+                  description: Invalid authentication credentials.
+          description: Authentication Failed
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10003:
+                  value:
+                    errors:
+                    - status: '403'
+                      code: '10003'
+                      title: Permission Denied
+                      detail: You do not have permission to perform this action.
+                  summary: Permission Denied
+                  description: You do not have permission to perform this action.
+          description: Permission Denied
     post:
-      operationId: storage_api_buckets_create
-      description: ""
+      operationId: create bucket
+      description: Create a new bucket.
       summary: Create a new bucket
       tags:
-        - storage
+      - Edge Storage - Buckets
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BucketCreate"
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: "#/components/schemas/BucketCreate"
-          multipart/form-data:
-            schema:
-              $ref: "#/components/schemas/BucketCreate"
+              $ref: '#/components/schemas/BucketCreateRequest'
         required: true
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "201":
+        '201':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ResponseBucket"
-          description: ""
-        "400":
-          description: Bad Request
-        "404":
+                $ref: '#/components/schemas/SuccessBucketOperation'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10000:
+                  value:
+                    errors:
+                    - status: '400'
+                      code: '10000'
+                      title: Validation Error
+                      detail: Invalid data provided in the request.
+                  summary: Validation Error
+                  description: Invalid data provided in the request.
+          description: Validation Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10004:
+                  value:
+                    errors:
+                    - status: '404'
+                      code: '10004'
+                      title: Not Found
+                      detail: Not found.
+                  summary: Not Found
+                  description: Not found.
           description: Not Found
-        "406":
-          description: Not Acceptable
-        "429":
-          description: Too Many Requests
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "202":
+        '405':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ResponseBucket"
-          description: ""
-  /v4/storage/buckets/{bucket_name}/objects:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10007:
+                  value:
+                    errors:
+                    - status: '405'
+                      code: '10007'
+                      title: Method Not Allowed
+                      detail: Method "{method}" not allowed.
+                  summary: Method Not Allowed
+                  description: Method "{method}" not allowed.
+          description: Method Not Allowed
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10005:
+                  value:
+                    errors:
+                    - status: '406'
+                      code: '10005'
+                      title: Not Acceptable
+                      detail: Could not satisfy the request Accept header.
+                  summary: Not Acceptable
+                  description: Could not satisfy the request Accept header.
+          description: Not Acceptable
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10010:
+                  value:
+                    errors:
+                    - status: '429'
+                      code: '10010'
+                      title: Throttled
+                      detail: Request was throttled.
+                  summary: Throttled
+                  description: Request was throttled.
+          description: Throttled
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10001:
+                  value:
+                    errors:
+                    - status: '401'
+                      code: '10001'
+                      title: Authentication Failed
+                      detail: Invalid authentication credentials.
+                  summary: Authentication Failed
+                  description: Invalid authentication credentials.
+          description: Authentication Failed
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10003:
+                  value:
+                    errors:
+                    - status: '403'
+                      code: '10003'
+                      title: Permission Denied
+                      detail: You do not have permission to perform this action.
+                  summary: Permission Denied
+                  description: You do not have permission to perform this action.
+          description: Permission Denied
+  /edge_storage/buckets/{bucketName}/objects:
     get:
-      operationId: storage_api_buckets_objects_list
-      description: ""
+      operationId: list object keys
+      description: List buckets objects
       summary: List buckets objects
       parameters:
-        - in: path
-          name: bucket_name
-          schema:
-            type: string
-          required: true
-        - name: continuation_token
-          required: false
-          in: query
-          description: Token for next page.
-          schema:
-            type: string
-        - name: max_object_count
-          required: false
-          in: query
-          description: Number of results to return per page.
-          schema:
-            type: integer
+      - in: path
+        name: bucketName
+        schema:
+          type: string
+        required: true
+      - name: continuation_token
+        required: false
+        in: query
+        description: A continuation token for the next page of records.
+        schema:
+          type: string
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: Comma-separated list of field names to include in the response.
+      - name: max_object_count
+        required: false
+        in: query
+        description: Number of results to be returned on the page. Limited to 1000
+          objects.
+        schema:
+          type: integer
       tags:
-        - storage
+      - Edge Storage - Objects
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaginatedBucketObjectList"
-          description: ""
-        "400":
-          description: Bad Request
-        "404":
+                $ref: '#/components/schemas/PaginatedResponseBucketObjectList'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10000:
+                  value:
+                    errors:
+                    - status: '400'
+                      code: '10000'
+                      title: Validation Error
+                      detail: Invalid data provided in the request.
+                  summary: Validation Error
+                  description: Invalid data provided in the request.
+          description: Validation Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10004:
+                  value:
+                    errors:
+                    - status: '404'
+                      code: '10004'
+                      title: Not Found
+                      detail: Not found.
+                  summary: Not Found
+                  description: Not found.
           description: Not Found
-        "406":
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10007:
+                  value:
+                    errors:
+                    - status: '405'
+                      code: '10007'
+                      title: Method Not Allowed
+                      detail: Method "{method}" not allowed.
+                  summary: Method Not Allowed
+                  description: Method "{method}" not allowed.
+          description: Method Not Allowed
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10005:
+                  value:
+                    errors:
+                    - status: '406'
+                      code: '10005'
+                      title: Not Acceptable
+                      detail: Could not satisfy the request Accept header.
+                  summary: Not Acceptable
+                  description: Could not satisfy the request Accept header.
           description: Not Acceptable
-        "429":
-          description: Too Many Requests
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-  /v4/storage/buckets/{bucket_name}/objects/{object_key}:
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10010:
+                  value:
+                    errors:
+                    - status: '429'
+                      code: '10010'
+                      title: Throttled
+                      detail: Request was throttled.
+                  summary: Throttled
+                  description: Request was throttled.
+          description: Throttled
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10001:
+                  value:
+                    errors:
+                    - status: '401'
+                      code: '10001'
+                      title: Authentication Failed
+                      detail: Invalid authentication credentials.
+                  summary: Authentication Failed
+                  description: Invalid authentication credentials.
+          description: Authentication Failed
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10003:
+                  value:
+                    errors:
+                    - status: '403'
+                      code: '10003'
+                      title: Permission Denied
+                      detail: You do not have permission to perform this action.
+                  summary: Permission Denied
+                  description: You do not have permission to perform this action.
+          description: Permission Denied
+  /edge_storage/buckets/{bucketName}/objects/{objectKey}:
     get:
-      operationId: storage_api_buckets_objects_retrieve
+      operationId: download object
       description: Download the object key from bucket.
       summary: Download object
       parameters:
-        - in: path
-          name: bucket_name
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: object_key
-          schema:
-            type: string
-          required: true
+      - in: path
+        name: bucketName
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: Comma-separated list of field names to include in the response.
+      - in: path
+        name: objectKey
+        schema:
+          type: string
+        required: true
       tags:
-        - storage
+      - Edge Storage - Objects
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "200":
+        '200':
           content:
-            text/html: {}
-            application/json: {}
-            application/xml: {}
-            text/plain: {}
-            image/jpeg: {}
-            image/png: {}
-            image/gif: {}
-            video/mp4: {}
-            audio/mpeg: {}
-            application/pdf: {}
-            application/javascript: {}
-            text/css: {}
-            application/octet-stream: {}
-            multipart/form-data: {}
-            application/x-www-form-urlencoded: {}
-          description: ""
-        "400":
-          description: Bad Request
-        "404":
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10000:
+                  value:
+                    errors:
+                    - status: '400'
+                      code: '10000'
+                      title: Validation Error
+                      detail: Invalid data provided in the request.
+                  summary: Validation Error
+                  description: Invalid data provided in the request.
+          description: Validation Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10004:
+                  value:
+                    errors:
+                    - status: '404'
+                      code: '10004'
+                      title: Not Found
+                      detail: Not found.
+                  summary: Not Found
+                  description: Not found.
           description: Not Found
-        "406":
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10007:
+                  value:
+                    errors:
+                    - status: '405'
+                      code: '10007'
+                      title: Method Not Allowed
+                      detail: Method "{method}" not allowed.
+                  summary: Method Not Allowed
+                  description: Method "{method}" not allowed.
+          description: Method Not Allowed
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10005:
+                  value:
+                    errors:
+                    - status: '406'
+                      code: '10005'
+                      title: Not Acceptable
+                      detail: Could not satisfy the request Accept header.
+                  summary: Not Acceptable
+                  description: Could not satisfy the request Accept header.
           description: Not Acceptable
-        "429":
-          description: Too Many Requests
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10010:
+                  value:
+                    errors:
+                    - status: '429'
+                      code: '10010'
+                      title: Throttled
+                      detail: Request was throttled.
+                  summary: Throttled
+                  description: Request was throttled.
+          description: Throttled
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10001:
+                  value:
+                    errors:
+                    - status: '401'
+                      code: '10001'
+                      title: Authentication Failed
+                      detail: Invalid authentication credentials.
+                  summary: Authentication Failed
+                  description: Invalid authentication credentials.
+          description: Authentication Failed
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10003:
+                  value:
+                    errors:
+                    - status: '403'
+                      code: '10003'
+                      title: Permission Denied
+                      detail: You do not have permission to perform this action.
+                  summary: Permission Denied
+                  description: You do not have permission to perform this action.
+          description: Permission Denied
     post:
-      operationId: storage_api_buckets_objects_create
+      operationId: create object key
       description: Create a new object key in the bucket.
       summary: Create new object key
       parameters:
-        - in: header
-          name: Content-Type
-          required: false
-          description: "The content type of the file (Example: text/plain)."
-          schema:
-            type: string
-        - in: path
-          name: bucket_name
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: object_key
-          schema:
-            type: string
-          required: true
+      - in: path
+        name: bucketName
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: objectKey
+        schema:
+          type: string
+        required: true
       tags:
-        - storage
+      - Edge Storage - Objects
       requestBody:
         content:
           application/octet-stream:
@@ -223,51 +622,144 @@ paths:
               type: string
               format: binary
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "200":
+        '201':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SuccessObjectOperation"
-          description: ""
-        "201":
-          description: Created
-        "400":
-          description: Bad Request
-        "404":
+                $ref: '#/components/schemas/SuccessObjectOperation'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10000:
+                  value:
+                    errors:
+                    - status: '400'
+                      code: '10000'
+                      title: Validation Error
+                      detail: Invalid data provided in the request.
+                  summary: Validation Error
+                  description: Invalid data provided in the request.
+          description: Validation Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10004:
+                  value:
+                    errors:
+                    - status: '404'
+                      code: '10004'
+                      title: Not Found
+                      detail: Not found.
+                  summary: Not Found
+                  description: Not found.
           description: Not Found
-        "406":
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10007:
+                  value:
+                    errors:
+                    - status: '405'
+                      code: '10007'
+                      title: Method Not Allowed
+                      detail: Method "{method}" not allowed.
+                  summary: Method Not Allowed
+                  description: Method "{method}" not allowed.
+          description: Method Not Allowed
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10005:
+                  value:
+                    errors:
+                    - status: '406'
+                      code: '10005'
+                      title: Not Acceptable
+                      detail: Could not satisfy the request Accept header.
+                  summary: Not Acceptable
+                  description: Could not satisfy the request Accept header.
           description: Not Acceptable
-        "429":
-          description: Too Many Requests
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10010:
+                  value:
+                    errors:
+                    - status: '429'
+                      code: '10010'
+                      title: Throttled
+                      detail: Request was throttled.
+                  summary: Throttled
+                  description: Request was throttled.
+          description: Throttled
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10001:
+                  value:
+                    errors:
+                    - status: '401'
+                      code: '10001'
+                      title: Authentication Failed
+                      detail: Invalid authentication credentials.
+                  summary: Authentication Failed
+                  description: Invalid authentication credentials.
+          description: Authentication Failed
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10003:
+                  value:
+                    errors:
+                    - status: '403'
+                      code: '10003'
+                      title: Permission Denied
+                      detail: You do not have permission to perform this action.
+                  summary: Permission Denied
+                  description: You do not have permission to perform this action.
+          description: Permission Denied
     put:
-      operationId: storage_api_buckets_objects_update
+      operationId: update object key
       description: Update the object key from bucket.
       summary: Update the object key
       parameters:
-        - in: header
-          name: Content-Type
-          required: false
-          description: "The content type of the file (Example: text/plain)."
-          schema:
-            type: string
-        - in: path
-          name: bucket_name
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: object_key
-          schema:
-            type: string
-          required: true
+      - in: path
+        name: bucketName
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: objectKey
+        schema:
+          type: string
+        required: true
       tags:
-        - storage
+      - Edge Storage - Objects
       requestBody:
         content:
           application/octet-stream:
@@ -275,297 +767,959 @@ paths:
               type: string
               format: binary
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SuccessObjectOperation"
-          description: ""
-        "400":
-          description: Bad Request
-        "404":
+                $ref: '#/components/schemas/SuccessObjectOperation'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10000:
+                  value:
+                    errors:
+                    - status: '400'
+                      code: '10000'
+                      title: Validation Error
+                      detail: Invalid data provided in the request.
+                  summary: Validation Error
+                  description: Invalid data provided in the request.
+          description: Validation Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10004:
+                  value:
+                    errors:
+                    - status: '404'
+                      code: '10004'
+                      title: Not Found
+                      detail: Not found.
+                  summary: Not Found
+                  description: Not found.
           description: Not Found
-        "406":
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10007:
+                  value:
+                    errors:
+                    - status: '405'
+                      code: '10007'
+                      title: Method Not Allowed
+                      detail: Method "{method}" not allowed.
+                  summary: Method Not Allowed
+                  description: Method "{method}" not allowed.
+          description: Method Not Allowed
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10005:
+                  value:
+                    errors:
+                    - status: '406'
+                      code: '10005'
+                      title: Not Acceptable
+                      detail: Could not satisfy the request Accept header.
+                  summary: Not Acceptable
+                  description: Could not satisfy the request Accept header.
           description: Not Acceptable
-        "429":
-          description: Too Many Requests
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10010:
+                  value:
+                    errors:
+                    - status: '429'
+                      code: '10010'
+                      title: Throttled
+                      detail: Request was throttled.
+                  summary: Throttled
+                  description: Request was throttled.
+          description: Throttled
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10001:
+                  value:
+                    errors:
+                    - status: '401'
+                      code: '10001'
+                      title: Authentication Failed
+                      detail: Invalid authentication credentials.
+                  summary: Authentication Failed
+                  description: Invalid authentication credentials.
+          description: Authentication Failed
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10003:
+                  value:
+                    errors:
+                    - status: '403'
+                      code: '10003'
+                      title: Permission Denied
+                      detail: You do not have permission to perform this action.
+                  summary: Permission Denied
+                  description: You do not have permission to perform this action.
+          description: Permission Denied
     delete:
-      operationId: storage_api_buckets_objects_destroy
+      operationId: delete object key
       description: Delete an object key from bucket
       summary: Delete object key
       parameters:
-        - in: path
-          name: bucket_name
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: object_key
-          schema:
-            type: string
-          required: true
+      - in: path
+        name: bucketName
+        schema:
+          type: string
+        required: true
+      - in: path
+        name: objectKey
+        schema:
+          type: string
+        required: true
       tags:
-        - storage
+      - Edge Storage - Objects
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SuccessObjectOperation"
-          description: ""
-        "400":
-          description: Bad Request
-        "404":
+                $ref: '#/components/schemas/SuccessObjectOperation'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10000:
+                  value:
+                    errors:
+                    - status: '400'
+                      code: '10000'
+                      title: Validation Error
+                      detail: Invalid data provided in the request.
+                  summary: Validation Error
+                  description: Invalid data provided in the request.
+          description: Validation Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10004:
+                  value:
+                    errors:
+                    - status: '404'
+                      code: '10004'
+                      title: Not Found
+                      detail: Not found.
+                  summary: Not Found
+                  description: Not found.
           description: Not Found
-        "406":
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10007:
+                  value:
+                    errors:
+                    - status: '405'
+                      code: '10007'
+                      title: Method Not Allowed
+                      detail: Method "{method}" not allowed.
+                  summary: Method Not Allowed
+                  description: Method "{method}" not allowed.
+          description: Method Not Allowed
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10005:
+                  value:
+                    errors:
+                    - status: '406'
+                      code: '10005'
+                      title: Not Acceptable
+                      detail: Could not satisfy the request Accept header.
+                  summary: Not Acceptable
+                  description: Could not satisfy the request Accept header.
           description: Not Acceptable
-        "429":
-          description: Too Many Requests
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-  /v4/storage/buckets/{name}:
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10010:
+                  value:
+                    errors:
+                    - status: '429'
+                      code: '10010'
+                      title: Throttled
+                      detail: Request was throttled.
+                  summary: Throttled
+                  description: Request was throttled.
+          description: Throttled
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10001:
+                  value:
+                    errors:
+                    - status: '401'
+                      code: '10001'
+                      title: Authentication Failed
+                      detail: Invalid authentication credentials.
+                  summary: Authentication Failed
+                  description: Invalid authentication credentials.
+          description: Authentication Failed
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10003:
+                  value:
+                    errors:
+                    - status: '403'
+                      code: '10003'
+                      title: Permission Denied
+                      detail: You do not have permission to perform this action.
+                  summary: Permission Denied
+                  description: You do not have permission to perform this action.
+          description: Permission Denied
+  /edge_storage/buckets/{name}:
     patch:
-      operationId: storage_api_buckets_partial_update
-      description: ""
+      operationId: update bucket
+      description: Update bucket information (bucket name cannot be changed)
       summary: Update bucket info
       parameters:
-        - in: path
-          name: name
-          schema:
-            type: string
-          required: true
+      - in: path
+        name: name
+        schema:
+          type: string
+        required: true
       tags:
-        - storage
+      - Edge Storage - Buckets
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BucketUpdate"
+              $ref: '#/components/schemas/PatchedBucketRequest'
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ResponseBucket"
-          description: ""
-        "400":
-          description: Bad Request
-        "404":
+                $ref: '#/components/schemas/SuccessBucketOperation'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10000:
+                  value:
+                    errors:
+                    - status: '400'
+                      code: '10000'
+                      title: Validation Error
+                      detail: Invalid data provided in the request.
+                  summary: Validation Error
+                  description: Invalid data provided in the request.
+          description: Validation Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10004:
+                  value:
+                    errors:
+                    - status: '404'
+                      code: '10004'
+                      title: Not Found
+                      detail: Not found.
+                  summary: Not Found
+                  description: Not found.
           description: Not Found
-        "406":
-          description: Not Acceptable
-        "429":
-          description: Too Many Requests
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-        "202":
+        '405':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ResponseBucket"
-          description: ""
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10007:
+                  value:
+                    errors:
+                    - status: '405'
+                      code: '10007'
+                      title: Method Not Allowed
+                      detail: Method "{method}" not allowed.
+                  summary: Method Not Allowed
+                  description: Method "{method}" not allowed.
+          description: Method Not Allowed
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10005:
+                  value:
+                    errors:
+                    - status: '406'
+                      code: '10005'
+                      title: Not Acceptable
+                      detail: Could not satisfy the request Accept header.
+                  summary: Not Acceptable
+                  description: Could not satisfy the request Accept header.
+          description: Not Acceptable
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10010:
+                  value:
+                    errors:
+                    - status: '429'
+                      code: '10010'
+                      title: Throttled
+                      detail: Request was throttled.
+                  summary: Throttled
+                  description: Request was throttled.
+          description: Throttled
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10001:
+                  value:
+                    errors:
+                    - status: '401'
+                      code: '10001'
+                      title: Authentication Failed
+                      detail: Invalid authentication credentials.
+                  summary: Authentication Failed
+                  description: Invalid authentication credentials.
+          description: Authentication Failed
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10003:
+                  value:
+                    errors:
+                    - status: '403'
+                      code: '10003'
+                      title: Permission Denied
+                      detail: You do not have permission to perform this action.
+                  summary: Permission Denied
+                  description: You do not have permission to perform this action.
+          description: Permission Denied
     delete:
-      operationId: storage_api_buckets_destroy
-      description: ""
+      operationId: delete bucket
+      description: Delete a specific bucket.
       summary: Delete a bucket
       parameters:
-        - in: path
-          name: name
-          schema:
-            type: string
-          required: true
+      - in: path
+        name: name
+        schema:
+          type: string
+        required: true
       tags:
-        - storage
+      - Edge Storage - Buckets
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/SuccessBucketOperation"
-          description: ""
-        "400":
-          description: Bad Request
-        "404":
+                $ref: '#/components/schemas/SuccessBucketOperation'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10000:
+                  value:
+                    errors:
+                    - status: '400'
+                      code: '10000'
+                      title: Validation Error
+                      detail: Invalid data provided in the request.
+                  summary: Validation Error
+                  description: Invalid data provided in the request.
+          description: Validation Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10004:
+                  value:
+                    errors:
+                    - status: '404'
+                      code: '10004'
+                      title: Not Found
+                      detail: Not found.
+                  summary: Not Found
+                  description: Not found.
           description: Not Found
-        "406":
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10007:
+                  value:
+                    errors:
+                    - status: '405'
+                      code: '10007'
+                      title: Method Not Allowed
+                      detail: Method "{method}" not allowed.
+                  summary: Method Not Allowed
+                  description: Method "{method}" not allowed.
+          description: Method Not Allowed
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10005:
+                  value:
+                    errors:
+                    - status: '406'
+                      code: '10005'
+                      title: Not Acceptable
+                      detail: Could not satisfy the request Accept header.
+                  summary: Not Acceptable
+                  description: Could not satisfy the request Accept header.
           description: Not Acceptable
-        "429":
-          description: Too Many Requests
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-  /v4/storage/s3-credentials:
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10010:
+                  value:
+                    errors:
+                    - status: '429'
+                      code: '10010'
+                      title: Throttled
+                      detail: Request was throttled.
+                  summary: Throttled
+                  description: Request was throttled.
+          description: Throttled
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10001:
+                  value:
+                    errors:
+                    - status: '401'
+                      code: '10001'
+                      title: Authentication Failed
+                      detail: Invalid authentication credentials.
+                  summary: Authentication Failed
+                  description: Invalid authentication credentials.
+          description: Authentication Failed
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10003:
+                  value:
+                    errors:
+                    - status: '403'
+                      code: '10003'
+                      title: Permission Denied
+                      detail: You do not have permission to perform this action.
+                  summary: Permission Denied
+                  description: You do not have permission to perform this action.
+          description: Permission Denied
+  /edge_storage/s3-credentials:
     get:
-      operationId: storage_api_s3_credentials_list
-      description: ""
-      summary: List s3 credentials
+      operationId: list credentials
+      description: List all credentials.
+      summary: List credentials
       parameters:
-        - name: key
-          required: false
-          in: query
-          description: Object key. Used to identify the object for requests. Sent in POST requests as a path variable.
-          schema:
-            type: string
-        - name: last_modified
-          required: false
-          in: query
-          description: Timestamp of the last modification to the object.
-          schema:
-            type: string
-        - name: size
-          required: false
-          in: query
-          description: Size of file in bytes.
-          schema:
-            type: integer
-        - name: continuation_token
-          required: false
-          in: query
-          description: Hash that can be added to the continuation_token query to skip list to the next page.
-          schema:
-            type: string
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: Comma-separated list of field names to include in the response.
+      - name: ordering
+        required: false
+        in: query
+        description: Which field to use when ordering the results.
+        schema:
+          type: string
+      - name: page
+        required: false
+        in: query
+        description: A page number within the paginated result set.
+        schema:
+          type: integer
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+        description: A numeric value that indicates the number of items per page.
+      - name: search
+        required: false
+        in: query
+        description: A search term.
+        schema:
+          type: string
       tags:
-        - storage
+      - Edge Storage - Credentials
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/PaginatedS3CredentialList"
-          description: ""
-        "400":
+                $ref: '#/components/schemas/PaginatedResponseListCredentialList'
+          description: Ok
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBadRequestCredential'
           description: Bad Request
-        "404":
+        '404':
           description: Not Found
-        "406":
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+          description: Not Found
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
           description: Not Acceptable
-        "429":
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
           description: Too Many Requests
-        "401":
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
           description: Unauthorized
-        "403":
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
           description: Forbidden
     post:
-      operationId: storage_api_s3_credentials_create
-      description: ""
-      summary: create s3 credentials
+      operationId: create credential
+      description: Create a new credential.
+      summary: Create a new credential
       tags:
-        - storage
+      - Edge Storage - Credentials
       requestBody:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/S3CredentialCreate"
+              $ref: '#/components/schemas/CredentialCreateRequest'
         required: true
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "201":
+        '201':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ResponseS3Credential"
-          description: ""
-        "400":
-          description: Bad Request
-        "404":
+                $ref: '#/components/schemas/CredentialCreate'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10000:
+                  value:
+                    errors:
+                    - status: '400'
+                      code: '10000'
+                      title: Validation Error
+                      detail: Invalid data provided in the request.
+                  summary: Validation Error
+                  description: Invalid data provided in the request.
+          description: Validation Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10004:
+                  value:
+                    errors:
+                    - status: '404'
+                      code: '10004'
+                      title: Not Found
+                      detail: Not found.
+                  summary: Not Found
+                  description: Not found.
           description: Not Found
-        "406":
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10007:
+                  value:
+                    errors:
+                    - status: '405'
+                      code: '10007'
+                      title: Method Not Allowed
+                      detail: Method "{method}" not allowed.
+                  summary: Method Not Allowed
+                  description: Method "{method}" not allowed.
+          description: Method Not Allowed
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10005:
+                  value:
+                    errors:
+                    - status: '406'
+                      code: '10005'
+                      title: Not Acceptable
+                      detail: Could not satisfy the request Accept header.
+                  summary: Not Acceptable
+                  description: Could not satisfy the request Accept header.
           description: Not Acceptable
-        "429":
-          description: Too Many Requests
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
-
-  /v4/storage/s3-credentials/{s3_credential_access_key}:
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10010:
+                  value:
+                    errors:
+                    - status: '429'
+                      code: '10010'
+                      title: Throttled
+                      detail: Request was throttled.
+                  summary: Throttled
+                  description: Request was throttled.
+          description: Throttled
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10001:
+                  value:
+                    errors:
+                    - status: '401'
+                      code: '10001'
+                      title: Authentication Failed
+                      detail: Invalid authentication credentials.
+                  summary: Authentication Failed
+                  description: Invalid authentication credentials.
+          description: Authentication Failed
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10003:
+                  value:
+                    errors:
+                    - status: '403'
+                      code: '10003'
+                      title: Permission Denied
+                      detail: You do not have permission to perform this action.
+                  summary: Permission Denied
+                  description: You do not have permission to perform this action.
+          description: Permission Denied
+  /edge_storage/s3-credentials/{accessKey}:
     get:
-      operationId: storage_api_s3_credentials_by_access_key
-      description: ""
-      summary: get by s3 credentials by access key
+      operationId: retrive credential
+      description: Retrieve details from a specific credential.
+      summary: Retrieve details from a credential
       parameters:
-        - in: path
-          name: s3_credential_access_key
-          schema:
-            type: string
-          required: true
+      - in: path
+        name: accessKey
+        schema:
+          type: string
+        required: true
+      - in: query
+        name: fields
+        schema:
+          type: string
+        description: Comma-separated list of field names to include in the response.
       tags:
-        - storage
+      - Edge Storage - Credentials
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ResponseS3Credential"
-          description: ""
-        "400":
+                $ref: '#/components/schemas/ResponseRetrieveCredential'
+          description: Ok
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseBadRequestCredential'
           description: Bad Request
-        "404":
+        '404':
           description: Not Found
-        "406":
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
+          description: Not Found
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
           description: Not Acceptable
-        "429":
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
           description: Too Many Requests
-        "401":
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
           description: Unauthorized
-        "403":
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DefaultErrorResponse'
           description: Forbidden
-
     delete:
-      operationId: storage_api_s3_credentials_delete
-      description: ""
-      summary: delete by s3 credentials
+      operationId: delete credential
+      description: Delete a specific credential.
+      summary: Delete a Credential
       parameters:
-        - in: path
-          name: s3_credential_access_key
-          schema:
-            type: string
-          required: true
+      - in: path
+        name: accessKey
+        schema:
+          type: string
+        description: The credential access key
+        required: true
       tags:
-        - storage
+      - Edge Storage - Credentials
       security:
-        - tokenAuth: []
+      - TokenAuth: []
+      - BearerAuth: []
       responses:
-        "200":
+        '200':
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ResponseS3Credential"
-          description: ""
-        "400":
-          description: Bad Request
-        "404":
+                $ref: '#/components/schemas/Credential'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10000:
+                  value:
+                    errors:
+                    - status: '400'
+                      code: '10000'
+                      title: Validation Error
+                      detail: Invalid data provided in the request.
+                  summary: Validation Error
+                  description: Invalid data provided in the request.
+          description: Validation Error
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10004:
+                  value:
+                    errors:
+                    - status: '404'
+                      code: '10004'
+                      title: Not Found
+                      detail: Not found.
+                  summary: Not Found
+                  description: Not found.
           description: Not Found
-        "406":
+        '405':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10007:
+                  value:
+                    errors:
+                    - status: '405'
+                      code: '10007'
+                      title: Method Not Allowed
+                      detail: Method "{method}" not allowed.
+                  summary: Method Not Allowed
+                  description: Method "{method}" not allowed.
+          description: Method Not Allowed
+        '406':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10005:
+                  value:
+                    errors:
+                    - status: '406'
+                      code: '10005'
+                      title: Not Acceptable
+                      detail: Could not satisfy the request Accept header.
+                  summary: Not Acceptable
+                  description: Could not satisfy the request Accept header.
           description: Not Acceptable
-        "429":
-          description: Too Many Requests
-        "401":
-          description: Unauthorized
-        "403":
-          description: Forbidden
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10010:
+                  value:
+                    errors:
+                    - status: '429'
+                      code: '10010'
+                      title: Throttled
+                      detail: Request was throttled.
+                  summary: Throttled
+                  description: Request was throttled.
+          description: Throttled
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10001:
+                  value:
+                    errors:
+                    - status: '401'
+                      code: '10001'
+                      title: Authentication Failed
+                      detail: Invalid authentication credentials.
+                  summary: Authentication Failed
+                  description: Invalid authentication credentials.
+          description: Authentication Failed
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JSONAPIErrorResponse'
+              examples:
+                Error-10003:
+                  value:
+                    errors:
+                    - status: '403'
+                      code: '10003'
+                      title: Permission Denied
+                      detail: You do not have permission to perform this action.
+                  summary: Permission Denied
+                  description: You do not have permission to perform this action.
+          description: Permission Denied
 components:
   schemas:
     Bucket:
@@ -577,29 +1731,27 @@ components:
           maxLength: 63
           minLength: 6
         edge_access:
-          $ref: "#/components/schemas/EdgeAccessEnum"
+          $ref: '#/components/schemas/EdgeAccessEnum'
       required:
-        - edge_access
-        - name
-    BucketCreate:
+      - edge_access
+      - name
+      title: Bucket
+      additionalProperties: false
+    BucketCreateRequest:
       type: object
       properties:
         name:
           type: string
-          maxLength: 63
           minLength: 6
+          pattern: .{6,63}
+          maxLength: 63
         edge_access:
-          $ref: "#/components/schemas/EdgeAccessEnum"
+          $ref: '#/components/schemas/EdgeAccessEnum'
       required:
-        - edge_access
-        - name
-    BucketUpdate:
-      type: object
-      properties:
-        edge_access:
-          $ref: "#/components/schemas/EdgeAccessEnum"
-      required:
-        - edge_access
+      - edge_access
+      - name
+      title: BucketCreateRequest
+      additionalProperties: false
     BucketObject:
       type: object
       properties:
@@ -613,235 +1765,393 @@ components:
         size:
           type: integer
           readOnly: true
-        etag:
-          type: string
-          readOnly: true
       required:
-        - key
-        - last_modified
-        - size
-    S3Credential:
+      - key
+      - last_modified
+      - size
+      title: BucketObject
+      additionalProperties: false
+    Credential:
       type: object
       properties:
         name:
           type: string
-          example: "my-s3-credential-all-permissions"
-          maxLength: 200
+          pattern: ^[a-zA-Z0-9\-]+$
+          maxLength: 100
           minLength: 1
-          pattern: ".*"
         access_key:
           type: string
-          example: "s3_credential_access_key"
-          maxLength: 200
-          minLength: 1
-          pattern: ".*"
+          readOnly: true
         secret_key:
           type: string
-          example: "s3_credential_secret_key"
-          maxLength: 200
-          minLength: 1
-          pattern: ".*"
+          readOnly: true
         capabilities:
           type: array
           items:
             type: string
-          example:
-            [
-              "listAllBucketNames",
-              "listBuckets",
-              "listFiles",
-              "readFiles",
-              "writeFiles",
-              "deleteFiles",
-            ]
         bucket:
           type: string
-          example: "s3-credentials-bucket"
-          maxLength: 200
+          pattern: .{0,63}
+          maxLength: 63
           minLength: 1
-          pattern: ".*"
         expiration_date:
           type: string
           format: date-time
-          example: "2025-01-31T10:57:00Z"
-          maxLength: 30
-          minLength: 10
-          pattern: ".*"
         created_at:
           type: string
           format: date-time
-          example: "2024-03-04T16:54:14.782211Z"
-          maxLength: 30
-          minLength: 10
-          pattern: ".*"
-    S3CredentialCreate:
+      required:
+      - access_key
+      - capabilities
+      - created_at
+      - name
+      - secret_key
+      title: Credential
+      additionalProperties: false
+    CredentialCreate:
       type: object
       properties:
         name:
           type: string
-          example: "my-s3-credential-all-permissions"
-          maxLength: 200
+          pattern: ^[a-zA-Z0-9\-]+$
+          maxLength: 100
           minLength: 1
-          pattern: ".*"
         capabilities:
           type: array
           items:
             type: string
-          example:
-            [
-              "listAllBucketNames",
-              "listBuckets",
-              "listFiles",
-              "readFiles",
-              "writeFiles",
-              "deleteFiles",
-            ]
         bucket:
           type: string
-          example: "s3-credentials-bucket"
-          maxLength: 200
+          pattern: .{0,63}
+          maxLength: 63
           minLength: 1
-          pattern: ".*"
         expiration_date:
           type: string
           format: date-time
-          example: "2025-01-31T10:57:00Z"
-          maxLength: 30
-          minLength: 10
-          pattern: ".*"
+      required:
+      - capabilities
+      - name
+      title: CredentialCreate
+      additionalProperties: false
+    CredentialCreateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 1
+          pattern: ^[a-zA-Z0-9\-]+$
+          maxLength: 100
+        capabilities:
+          type: array
+          items:
+            type: string
+            minLength: 1
+        bucket:
+          type: string
+          minLength: 1
+          pattern: .{0,63}
+          maxLength: 63
+        expiration_date:
+          type: string
+          format: date-time
+      required:
+      - capabilities
+      - name
+      title: CredentialCreateRequest
+      additionalProperties: false
+    DefaultErrorResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          pattern: .*
+          maxLength: 4096
+          minLength: 1
+      title: DefaultErrorResponse
+      additionalProperties: false
     EdgeAccessEnum:
       enum:
-        - read_only
-        - read_write
-        - restricted
+      - read_only
+      - read_write
+      - restricted
       type: string
+      description: |-
+        * `read_only` - read_only
+        * `read_write` - read_write
+        * `restricted` - restricted
+      title: EdgeAccessEnum
+      additionalProperties: false
+    JSONAPIErrorObject:
+      type: object
+      description: Serializer for a single JSON:API error object.
+      properties:
+        status:
+          type: string
+          description: The HTTP status code applicable to this problem
+          pattern: ^\d{3}$
+          maxLength: 3
+          minLength: 3
+        code:
+          type: string
+          description: An application-specific error code
+          pattern: ^\d{5}$
+          maxLength: 5
+          minLength: 5
+        title:
+          type: string
+          description: A short, human-readable summary of the problem
+          pattern: ^.*$
+          maxLength: 4096
+          minLength: 1
+        detail:
+          type: string
+          description: A human-readable explanation specific to this occurrence of
+            the problem
+          pattern: ^.*$
+          maxLength: 4096
+          minLength: 1
+        source:
+          allOf:
+          - $ref: '#/components/schemas/JSONAPIErrorSource'
+          description: References to the primary source of the error
+        meta:
+          description: Non-standard meta-information about the error
+      title: JSONAPIErrorObject
+      additionalProperties: false
+    JSONAPIErrorResponse:
+      type: object
+      description: Serializer for a JSON:API error response.
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/JSONAPIErrorObject'
+          description: Array of error objects
+      required:
+      - errors
+      title: JSONAPIErrorResponse
+      additionalProperties: false
+    JSONAPIErrorSource:
+      type: object
+      description: Serializer for the 'source' object in a JSON:API error.
+      properties:
+        pointer:
+          type: string
+          description: JSON Pointer to the value in the request document that caused
+            the error
+          pattern: ^(/[^/]+)+$
+          maxLength: 4096
+          minLength: 1
+        parameter:
+          type: string
+          description: URI query parameter that caused the error
+          pattern: ^.*$
+          maxLength: 4096
+          minLength: 1
+        header:
+          type: string
+          description: Request header name that caused the error
+          pattern: ^.*$
+          maxLength: 4096
+          minLength: 1
+      title: JSONAPIErrorSource
+      additionalProperties: false
     ObjectResponseData:
       type: object
       properties:
         object_key:
           type: string
+          pattern: ^[0-9a-zA-Z!\"\~\-\_\.\*\'\(\)\&\$\@\=\;\/\:\+\,\\\{\}\^\`\[\]\>\<\|\
+            \%\u00c0\u00c1\u00c2\u00c3\u00c4\u00c7\u00c8\u00c9\u00ca\u00cb\u00cc\u00cd\u00ce\u00cf\u00d1\u00d2\u00d3\u00d4\u00d5\u00d6\u00d9\u00da\u00db\u00dc\u00dd\u00e0\u00e1\u00e2\u00e3\u00e4\u00e7\u00e8\u00e9\u00ea\u00ec\u00ed\u00ee\u00f1\u00f2\u00f3\u00f4\u00f5\u00f6\u00f9\u00fa\u00fb\u00fc\u00fd\u00eb\u00ef]+$
+          maxLength: 1024
+          minLength: 1
       required:
-        - object_key
+      - object_key
+      title: ObjectResponseData
+      additionalProperties: false
     PaginatedBucketList:
       type: object
       properties:
         count:
           type: integer
+          minimum: 0
+          maximum: 2147483647
           example: 123
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
         results:
           type: array
           items:
-            $ref: "#/components/schemas/Bucket"
-    PaginatedBucketObjectList:
+            $ref: '#/components/schemas/Bucket'
+      title: PaginatedBucketList
+      additionalProperties: false
+    PaginatedResponseBucketObjectList:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResponseBucketObject'
+      title: PaginatedResponseBucketObjectList
+      additionalProperties: false
+    PaginatedResponseListCredentialList:
       type: object
       properties:
         count:
           type: integer
+          minimum: 0
+          maximum: 2147483647
           example: 123
-        next:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResponseListCredential'
+      title: PaginatedResponseListCredentialList
+      additionalProperties: false
+    PatchedBucketRequest:
+      type: object
+      properties:
+        edge_access:
+          $ref: '#/components/schemas/EdgeAccessEnum'
+      title: PatchedBucketRequest
+      additionalProperties: false
+    ResponseBadRequestCredential:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            type: string
+        expiration_date:
+          type: array
+          items:
+            type: string
+        created_at:
+          type: array
+          items:
+            type: string
+        capabilities:
+          oneOf:
+          - type: array
+            items:
+              type: string
+          - type: object
+            additionalProperties:
+              type: array
+              items:
+                type: string
+        bucket:
+          type: array
+          items:
+            type: string
+        detail:
           type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
+          pattern: .*
+          maxLength: 4096
+          minLength: 1
+      title: ResponseBadRequestCredential
+      additionalProperties: false
+    ResponseBucketObject:
+      type: object
+      properties:
         continuation_token:
           type: string
-          nullable: true
-          maxLength: 200
-          minLength: 10
-          pattern: ".*"
+          pattern: .{0,255}
+          maxLength: 255
+          minLength: 0
         results:
           type: array
           items:
-            $ref: "#/components/schemas/BucketObject"
-    PaginatedS3CredentialList:
-      type: object
-      properties:
-        count:
-          type: integer
-          example: 123
-          minimum: 0
-          maximum: 1000
-        next:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=4
-        previous:
-          type: string
-          nullable: true
-          format: uri
-          example: http://api.example.org/accounts/?page=2
-        results:
-          type: array
-          items:
-            $ref: "#/components/schemas/S3Credential"
-    ResponseS3Credential:
-      type: object
-      properties:
-        state:
-          type: string
-          example: "executed"
-          maxLength: 30
-          minLength: 1
-          pattern: ".*"
-        data:
-          $ref: "#/components/schemas/S3Credential"
-    ResponseBucket:
-      type: object
-      properties:
-        state:
-          $ref: "#/components/schemas/StateEnum"
-        data:
-          $ref: "#/components/schemas/Bucket"
+            $ref: '#/components/schemas/BucketObject'
       required:
-        - data
-        - state
+      - continuation_token
+      - results
+      title: ResponseBucketObject
+      additionalProperties: false
+    ResponseListCredential:
+      type: object
+      properties:
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9\-]+$
+          maxLength: 100
+          minLength: 1
+        access_key:
+          type: string
+          readOnly: true
+        secret_key:
+          type: string
+          readOnly: true
+        capabilities:
+          type: array
+          items:
+            type: string
+        bucket:
+          type: string
+          pattern: .{0,63}
+          maxLength: 63
+          minLength: 1
+        expiration_date:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+      required:
+      - access_key
+      - capabilities
+      - created_at
+      - name
+      - secret_key
+      title: ResponseListCredential
+      additionalProperties: false
+    ResponseRetrieveCredential:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Credential'
+      required:
+      - data
+      title: ResponseRetrieveCredential
+      additionalProperties: false
     StateEnum:
       enum:
-        - pending
-        - executed
+      - pending
+      - executed
       type: string
+      description: |-
+        * `pending` - pending
+        * `executed` - executed
+      title: StateEnum
+      additionalProperties: false
     SuccessBucketOperation:
       type: object
       properties:
         state:
           allOf:
-            - $ref: "#/components/schemas/StateEnum"
+          - $ref: '#/components/schemas/StateEnum'
           title: BucketStateEnum
         data:
-          $ref: "#/components/schemas/Bucket"
+          $ref: '#/components/schemas/Bucket'
       required:
-        - data
-        - state
+      - data
+      - state
+      title: SuccessBucketOperation
+      additionalProperties: false
     SuccessObjectOperation:
       type: object
       properties:
         state:
           allOf:
-            - $ref: "#/components/schemas/StateEnum"
+          - $ref: '#/components/schemas/StateEnum'
           title: ObjectStateEnum
         data:
-          $ref: "#/components/schemas/ObjectResponseData"
+          $ref: '#/components/schemas/ObjectResponseData'
       required:
-        - data
-        - state
+      - data
+      - state
+      title: SuccessObjectOperation
+      additionalProperties: false
   securitySchemes:
-    tokenAuth:
+    BearerAuth:
+      type: http
+      scheme: bearer
+    TokenAuth:
       type: apiKey
       in: header
       name: Authorization
