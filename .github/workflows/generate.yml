@@ -67,17 +67,15 @@ jobs:
       #get all .yaml files which were added/modified
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v35
-        with:
-          files: |
-            **/*.yaml
-          ignore: |
-            **/*spectral*.yaml
+        run: |
+          YAML_FILES=$(git diff --name-only origin/main HEAD | grep -E '\.yaml$' | grep -v '/api/openapi.yaml' | grep -v "publish-config.yaml" | grep -v "openapi.yaml" || echo "")
+          echo "YAML_FILES=$YAML_FILES" >> $GITHUB_ENV
+        shell: bash
 
       - name: Run openapi-generator for changed files
         run: |
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            removed=$(echo ${file} | cut -d. -f1);
+          for file in ${{ env.YAML_FILES }}; do
+            removed=$(echo ${file} | cut -d. -f1 | sed 's|^./||');
             npx @openapitools/openapi-generator-cli generate -i $file -g ${{ matrix.types }} -o ./${{ matrix.types }}/${removed} --package-name ${removed};\
             echo 'go.mod' >> ./${{ matrix.types }}/${removed}/.gitignore
             echo 'go.sum' >> ./${{ matrix.types }}/${removed}/.gitignore
