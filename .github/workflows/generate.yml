@@ -67,12 +67,24 @@ jobs:
       #get all .yaml files which were added/modified
       - name: Get changed files
         id: changed-files
-        uses: tj-actions/changed-files@v35
-        with:
-          files: |
-            **/*.yaml
-          ignore: |
-            **/*spectral*.yaml
+        run: |
+          # Find modified YAML files that do NOT include '/api/openapi.yaml' in the path
+          YAML_FILES=$(git diff --name-only origin/main HEAD | grep -E '\.yaml$' | grep -v '/api/openapi.yaml' || echo "")
+          if [ -z "$YAML_FILES" ]; then
+            echo "::warning::No YAML files modified (excluding /api/openapi.yaml). Skipping SDK generation."
+            echo "all_changed_files=" >> $GITHUB_OUTPUT
+            echo "changed_files=" >> $GITHUB_ENV
+          else
+            echo "Modified YAML files (excluding /api/openapi.yaml): $YAML_FILES"
+            echo "all_changed_files=$YAML_FILES" >> $GITHUB_OUTPUT
+            echo "changed_files=$YAML_FILES" >> $GITHUB_ENV
+          fi
+
+      - name: Run linter for changed files
+        run: |
+          for file in ${{ env.changed_files }}; do
+            oal lint $file -f yaml
+          done
 
       - name: Run openapi-generator for changed files
         run: |
